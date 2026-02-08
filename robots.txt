@@ -50,3 +50,9 @@ Disallow: /postcss.config.*
 
 # Sitemap (deve estar no final)
 Sitemap: https://flowoff.xyz/sitemap.xml
+Sitemap: https://www.flowoff.xyz/sitemap.xml
+Sitemap: https://lp.flowoff.xyz/sitemap.xml
+
+# Bloquear indexação de páginas de sucesso (Ads)
+Disallow: /*?checkout=success
+
