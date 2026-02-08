@@ -164,13 +164,14 @@
 
     <!-- Analytics Ready - Placeholder for GTM/GA4 -->
     <!-- Google Tag Manager -->
-    <!-- <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src='https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);})(window,document,'script','dataLayer','GTM-XXXXXXX');</script> -->
+    <script>(function (w, d, s, l, i) { w[l] = w[l] || []; w[l].push({ 'gtm.start': new Date().getTime(), event: 'gtm.js' }); var f = d.getElementsByTagName(s)[0], j = d.createElement(s), dl = l != 'dataLayer' ? '&l=' + l : ''; j.async = true; j.src = 'https://www.googletagmanager.com/gtm.js?id=' + i + dl; f.parentNode.insertBefore(j, f); })(window, document, 'script', 'dataLayer', 'GTM-W9JKSGW5');</script>
     <!-- End Google Tag Manager -->
 </head>
 
 <body>
     <!-- Google Tag Manager (noscript) -->
-    <!-- <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-XXXXXXX" height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript> -->
+    <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-W9JKSGW5" height="0" width="0"
+            style="display:none;visibility:hidden"></iframe></noscript>
     <!-- End Google Tag Manager (noscript) -->
 
     <div class="bg-glow"></div>
@@ -429,7 +430,8 @@
 
             <div class="flowpay-footer">
                 <span style="font-size: 0.7rem; color: #9aa0aa;">Pagamento processado por</span>
-                <img src="public/flowpay-horizontal-logo.png" alt="FlowPay" style="height: 18px; opacity: 0.6; margin-left: 6px; vertical-align: middle;">
+                <img src="public/flowpay-horizontal-logo.png" alt="FlowPay"
+                    style="height: 18px; opacity: 0.6; margin-left: 6px; vertical-align: middle;">
             </div>
         </div>
     </div>
@@ -451,6 +453,16 @@
             document.getElementById('flowpay-error').style.display = 'none';
 
             document.getElementById('flowpay-modal').classList.add('active');
+
+            // Tracking: Início do checkout
+            if (window.dataLayer) {
+                window.dataLayer.push({
+                    'event': 'begin_checkout',
+                    'item_name': name,
+                    'price': price
+                });
+            }
+
             if (typeof lucide !== 'undefined' && lucide.createIcons) {
                 lucide.createIcons();
             }
@@ -511,6 +523,15 @@
                     document.getElementById('flowpay-step-1').style.display = 'none';
                     document.getElementById('flowpay-step-2').style.display = 'flex';
 
+                    // Tracking: PIX gerado (meio do funil)
+                    if (window.dataLayer) {
+                        window.dataLayer.push({
+                            'event': 'add_payment_info',
+                            'item_name': currentProduct.name,
+                            'price': currentProduct.price
+                        });
+                    }
+
                     startStatusCheck();
                 } else {
                     throw new Error(data.message || 'Erro desconhecido');
@@ -518,7 +539,7 @@
             } catch (error) {
                 console.error('FlowPay Error:', error);
                 let errorMessage = 'Erro ao gerar PIX. Tente novamente.';
-                
+
                 if (error.message) {
                     if (error.message.includes('JSON')) {
                         errorMessage = 'Erro de comunicação com a API. Verifique se o serviço está disponível.';
@@ -530,7 +551,7 @@
                         errorMessage = error.message;
                     }
                 }
-                
+
                 errorEl.innerText = errorMessage;
                 errorEl.style.display = 'block';
             } finally {
@@ -555,7 +576,7 @@
             statusInterval = setInterval(async () => {
                 try {
                     const response = await fetch(`${FLOWPAY_API}/api/charge/${chargeId}`);
-                    
+
                     // Verifica se a resposta é OK
                     if (!response.ok) {
                         console.warn(`Status check: ${response.status} ${response.statusText}`);
@@ -586,6 +607,22 @@
         function showSuccess() {
             document.getElementById('flowpay-step-2').style.display = 'none';
             document.getElementById('flowpay-step-3').style.display = 'flex';
+
+            // Atualiza URL com parâmetro de sucesso para rastreamento (Google Ads)
+            const url = new URL(window.location);
+            url.searchParams.set('checkout', 'success');
+            window.history.pushState({}, '', url);
+
+            // Dispara evento para DataLayer (GTM/GA4)
+            if (window.dataLayer) {
+                window.dataLayer.push({
+                    'event': 'purchase_complete',
+                    'product_name': currentProduct.name,
+                    'value': currentProduct.price,
+                    'currency': 'BRL'
+                });
+            }
+
             if (typeof lucide !== 'undefined' && lucide.createIcons) {
                 lucide.createIcons();
             }
@@ -601,7 +638,7 @@
                 setTimeout(initLucideIcons, 100);
             }
         }
-        
+
         // Inicializa quando DOM estiver pronto
         if (document.readyState === 'loading') {
             document.addEventListener('DOMContentLoaded', initLucideIcons);
