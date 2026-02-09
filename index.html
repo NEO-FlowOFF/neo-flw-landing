@@ -28,6 +28,15 @@
 
     <!-- Canonical URL -->
     <link rel="canonical" href="https://flowoff.xyz/">
+    <link rel="alternate" hreflang="pt-BR" href="https://flowoff.xyz/">
+    <link rel="alternate" hreflang="x-default" href="https://flowoff.xyz/">
+
+    <!-- Geo-Targeting & Localization (Advanced Brazil SEO) -->
+    <meta name="geo.region" content="BR" />
+    <meta name="geo.placename" content="Brasil" />
+    <meta name="geo.position" content="-15.793889;-47.882778" />
+    <meta name="ICBM" content="-15.793889, -47.882778" />
+    <meta name="DC.title" content="NEØ.FLOWOFF - Estratégia Digital no Brasil" />
 
     <!-- Open Graph / Facebook - Complete Set -->
     <meta property="og:type" content="website">
@@ -148,17 +157,64 @@
         "url": "https://flowoff.xyz",
         "logo": "https://flowoff.xyz/public/neoflowoff_logo.png",
         "description": "Marketing como infraestrutura. Sites que convertem, automação que escala e sistemas que não quebram.",
+        "address": {
+            "@type": "PostalAddress",
+            "addressCountry": "BR",
+            "addressRegion": "GO",
+            "addressLocality": "Goiânia"
+        },
         "sameAs": [
-            "https://www.instagram.com/neoflowoff.eth"
+            "https://www.instagram.com/neoflowoff.eth",
+            "https://zora.co/@neoprotocol"
         ],
         "contactPoint": {
             "@type": "ContactPoint",
             "telephone": "+55-62-98323-1110",
             "contactType": "customer service",
-            "availableLanguage": ["Portuguese", "English"]
+            "availableLanguage": ["Portuguese", "English"],
+            "areaServed": "BR"
         },
-        "areaServed": "BR",
-        "knowsAbout": ["Marketing Digital", "Automação", "Web3", "Tokenização", "IA", "CRM"]
+        "areaServed": {
+            "@type": "Country",
+            "name": "Brazil"
+        },
+        "knowsAbout": ["Marketing Digital", "Automação", "Web3", "Tokenização", "IA", "CRM", "Blockchain"]
+    }
+    </script>
+
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      "itemListElement": [{
+        "@type": "ListItem",
+        "position": 1,
+        "name": "Home",
+        "item": "https://flowoff.xyz"
+      },
+      {
+        "@type": "ListItem",
+        "position": 2,
+        "name": "Pacotes",
+        "item": "https://flowoff.xyz/#pricing"
+      }]
+    }
+    </script>
+
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Service",
+      "serviceType": "Marketing Digital e Automação",
+      "provider": {
+        "@type": "Organization",
+        "name": "NEØ.FLOWOFF"
+      },
+      "areaServed": {
+        "@type": "Country",
+        "name": "Brazil"
+      },
+      "description": "Desenvolvimento de ecossistemas digitais com foco em conversão e infraestrutura Web3."
     }
     </script>
 
