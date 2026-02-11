@@ -1,58 +1,50 @@
-# robots.txt para flowoff.xyz
-# Seguindo as diretrizes do Google: https://developers.google.com/search/docs/crawling-indexing/robots/create-robots-txt
+# robots.txt for flowoff.xyz
+# Premium SEO Configuration - NEØ Protocol
 
-# Permitir todos os crawlers
 User-agent: *
+
+# Global Permissions
 Allow: /
-
-# Permitir acesso a recursos estáticos importantes
-Allow: /public/
-Allow: /css/
-Allow: /js/
-Allow: /images/
-Allow: /icons/
-
-# Permitir acesso a páginas HTML
 Allow: /index.html
-Allow: /desktop.html
-Allow: /miniapp.html
-Allow: /terms.html
-Allow: /privacy.html
+Allow: /privacy
+Allow: /legal
 
-# Permitir acesso a arquivos PWA e recursos essenciais
-Allow: /manifest.webmanifest
-Allow: /sw.js
+# Assets & Resources
+Allow: /public/
+Allow: /landing_v2.css
 Allow: /favicon.ico
+Allow: /manifest.webmanifest
 Allow: /apple-touch-icon.png
 Allow: /robots.txt
 Allow: /sitemap.xml
 
-# Bloquear arquivos e diretórios desnecessários para SEO
-Disallow: /node_modules/
-Disallow: /dist/
-Disallow: /build/
-Disallow: /*.log$
-Disallow: /*.json$
-Disallow: /api/
-Disallow: /api/functions/
-Disallow: /pages/
+# Security & Privacy - Block sensitive files
 Disallow: /.git/
 Disallow: /.env
 Disallow: /.env.*
-
-# Bloquear arquivos de configuração e desenvolvimento
+Disallow: /.vercel/
+Disallow: /node_modules/
 Disallow: /package.json
 Disallow: /package-lock.json
-Disallow: /tsconfig.json
+Disallow: /vercel.json
+Disallow: /Makefile
+Disallow: /README.md
+Disallow: /scripts/
+Disallow: /docs/
+
+# Block Technical/Development Files
+Disallow: /*.log$
+Disallow: /*.json$
 Disallow: /vite.config.*
 Disallow: /tailwind.config.*
 Disallow: /postcss.config.*
 
-# Sitemap (deve estar no final)
+# Block Ad Conversion/Internal Parameters
+Disallow: /*?checkout=success
+Disallow: /*?utm_*
+Disallow: /api/
+
+# Sitemaps
 Sitemap: https://flowoff.xyz/sitemap.xml
 Sitemap: https://www.flowoff.xyz/sitemap.xml
 Sitemap: https://lp.flowoff.xyz/sitemap.xml
-
-# Bloquear indexação de páginas de sucesso (Ads)
-Disallow: /*?checkout=success
-
