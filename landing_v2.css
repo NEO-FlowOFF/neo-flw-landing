@@ -43,6 +43,8 @@ html {
     /* Smooth momentum scrolling */
     -webkit-scroll-behavior: smooth;
     scroll-behavior: smooth;
+    /* scroll-padding no html (onde o scroll acontece de fato) */
+    scroll-padding-top: 80px;
 }
 
 body {
@@ -2254,9 +2256,9 @@ footer a:focus-visible {
         margin-bottom: 40px;
     }
 
-    /* Aspect ratio menor no mobile para não inflar a seção */
+    /* Aspect ratio compacto no mobile */
     .portfolio-img-wrap {
-        aspect-ratio: 4 / 3;
+        aspect-ratio: 16 / 9;
     }
 
     .portfolio-overlay {
