@@ -2123,7 +2123,7 @@ footer a:focus-visible {
     width: 100%;
     height: 100%;
     object-fit: cover;
-    object-position: top center;
+    object-position: center 15%;
     transition: transform 0.5s cubic-bezier(0.23, 1, 0.32, 1);
     display: block;
 }
@@ -2254,12 +2254,23 @@ footer a:focus-visible {
         margin-bottom: 40px;
     }
 
+    /* Aspect ratio menor no mobile para não inflar a seção */
+    .portfolio-img-wrap {
+        aspect-ratio: 4 / 3;
+    }
+
     .portfolio-overlay {
         opacity: 1;
-        background: rgba(5, 5, 8, 0.5);
+        background: rgba(5, 5, 8, 0.45);
+    }
+
+    .portfolio-link-btn {
+        padding: 10px 20px;
+        font-size: 0.82rem;
     }
 
     .portfolio-img-wrap img {
         transform: none !important;
+        object-position: center 20%;
     }
 }
