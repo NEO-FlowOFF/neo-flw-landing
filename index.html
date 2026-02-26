@@ -595,7 +595,35 @@
         let currentProduct = { name: '', price: 0 };
         let chargeId = null;
         let statusInterval = null;
-        const FLOWPAY_API = 'https://flowpay-production-10d8.up.railway.app';
+        const FLOWPAY_API_CANDIDATES = [
+            window.__FLOWPAY_API__ || 'https://flowpay.cash',
+            'https://flowpay-production-10d8.up.railway.app'
+        ];
+        let activeFlowPayApi = FLOWPAY_API_CANDIDATES[0];
+
+        async function fetchFlowPay(path, options = {}) {
+            const orderedApis = [activeFlowPayApi, ...FLOWPAY_API_CANDIDATES.filter(api => api !== activeFlowPayApi)];
+            let lastError = null;
+
+            for (const apiBase of orderedApis) {
+                try {
+                    const response = await fetch(`${apiBase}${path}`, options);
+
+                    // 404 normalmente indica endpoint ausente neste host, tentamos o próximo.
+                    if (response.status === 404) {
+                        lastError = new Error(`Erro 404 em ${apiBase}${path}`);
+                        continue;
+                    }
+
+                    activeFlowPayApi = apiBase;
+                    return response;
+                } catch (error) {
+                    lastError = error;
+                }
+            }
+
+            throw lastError || new Error('Falha ao conectar com FlowPay API.');
+        }
 
         function openFlowPay(name, price) {
             currentProduct = { name, price };
@@ -644,7 +672,7 @@
             errorEl.style.display = 'none';
 
             try {
-                const response = await fetch(`${FLOWPAY_API}/api/create-charge-landing`, {
+                const response = await fetchFlowPay('/api/create-charge-landing', {
                     method: 'POST',
                     headers: { 'Content-Type': 'application/json' },
                     body: JSON.stringify({
@@ -730,7 +758,7 @@
             if (statusInterval) clearInterval(statusInterval);
             statusInterval = setInterval(async () => {
                 try {
-                    const response = await fetch(`${FLOWPAY_API}/api/charge/${chargeId}`);
+                    const response = await fetchFlowPay(`/api/charge/${chargeId}`);
 
                     // Verifica se a resposta é OK
                     if (!response.ok) {

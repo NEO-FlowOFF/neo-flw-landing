@@ -1,0 +1,18 @@
+{
+  "name": "FlowPay-Core Genesis",
+  "description": "Genesis NFT of FlowPay-Core — visual identity approved on 2026-02-21. Originated and registered by NEØ SMART FACTORY. Soulbound to nsfactory.eth. This token is non-transferable and serves as permanent on-chain proof of origin.",
+  "image": "ipfs://QmNUyPhMzngYHL7KVMPf6A7vP5gDrtVh2jJLQPJJ9jS73K",
+  "external_url": "https://github.com/FlowPay-Core",
+  "attributes": [
+    { "trait_type": "Project",      "value": "FlowPay-Core" },
+    { "trait_type": "Event",        "value": "Visual Identity Approved" },
+    { "trait_type": "Date",         "value": "2026-02-21" },
+    { "trait_type": "Repository",   "value": "github.com/FlowPay-Core" },
+    { "trait_type": "Origin",       "value": "NEØ SMART FACTORY" },
+    { "trait_type": "PoE Hash",     "value": "0xc326ec80ec0b0f3f0b6884aea8233e2e0b7b523a29952790c210cb70df1756b8" },
+    { "trait_type": "PoE Registry", "value": "0xd537619325676045d30667EABC617F4f9c8B8c03" },
+    { "trait_type": "Network",      "value": "Base" },
+    { "trait_type": "Soulbound",    "value": "true" },
+    { "trait_type": "Standard",     "value": "ERC-5192" }
+  ]
+}
