@@ -1,3 +1,5 @@
+<!-- markdownlint-disable MD003 MD007 MD011 MD013 MD022 MD023 MD025 MD029 MD032 MD033 MD034 -->
+
 # NEØ.FLOWOFF Landing Page (v2.0)
 
 Esta é a vitrine comercial independente da agência **FlowOFF**. O objetivo deste repositório é fornecer uma experiência de pouso (landing page) ultrarrápida, premium e focada em conversão para tráfego pago.
@@ -29,3 +31,23 @@ Esta é a vitrine comercial independente da agência **FlowOFF**. O objetivo des
 
 ---
 *Desenvolvido pela equipe do NEØ Protocol.*
+
+────────────────────────────────────────
+
+▓▓▓ NΞØ MELLØ
+────────────────────────────────────────
+Core Architect · NΞØ Protocol
+neo@neoprotocol.space
+
+"Code is law. Expand until
+silence becomes structure."
+────────────────────────────────────────
+```
+ █████ █         
+██╔═══██╗       
+██║ █ ██║  
+██ █  ██║      
+╚██████╔╝   
+█ ╚═══╝     
+
+```
