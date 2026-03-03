@@ -22,3 +22,4 @@ pnpm-lock.yaml
 !.env.example
 .vercel
 .env*.local
+.claude/
