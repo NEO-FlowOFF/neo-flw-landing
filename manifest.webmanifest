@@ -10,7 +10,10 @@
   "scope": "/",
   "lang": "pt-BR",
   "dir": "ltr",
-  "categories": ["business", "productivity"],
+  "categories": [
+    "business",
+    "productivity"
+  ],
   "icons": [
     {
       "src": "/public/icons/icon-192x192.webp",
@@ -45,6 +48,6 @@
   ],
   "screenshots": [],
   "shortcuts": [],
-  "version": "1.0.0",
-  "version_name": "1.0.0"
+  "version": "202603100351",
+  "version_name": "2026.03.10"
 }
