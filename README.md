@@ -26,7 +26,7 @@ Esta é a vitrine comercial independente da agência **FlowOFF**. O objetivo des
 
 ## 🔗 Links Úteis
 
-- **Plataforma (PWA)**: [https://www.flowoff.xyz/desktop](https://www.flowoff.xyz/desktop)
+- **Plataforma (PWA)**: [https://www.neoflowoff.agency/desktop](https://www.neoflowoff.agency/desktop)
 - **Instagram**: [@neoflowoff.eth](https://www.instagram.com/neoflowoff.eth)
 
 ---

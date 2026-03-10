@@ -28,6 +28,10 @@
       "dest": "/legal/index.html"
     },
     {
+      "src": "/excluir-dados",
+      "dest": "/excluir-dados/index.html"
+    },
+    {
       "src": "/(.*)",
       "dest": "/$1"
     }

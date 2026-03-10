@@ -1,4 +1,4 @@
-# robots.txt for flowoff.xyz
+# robots.txt for neoflowoff.agency
 # Premium SEO Configuration - NEØ Protocol
 
 User-agent: *
@@ -45,6 +45,6 @@ Disallow: /*?utm_*
 Disallow: /api/
 
 # Sitemaps
-Sitemap: https://flowoff.xyz/sitemap.xml
-Sitemap: https://www.flowoff.xyz/sitemap.xml
-Sitemap: https://lp.flowoff.xyz/sitemap.xml
+Sitemap: https://neoflowoff.agency/sitemap.xml
+Sitemap: https://www.neoflowoff.agency/sitemap.xml
+Sitemap: https://lp.neoflowoff.agency/sitemap.xml
