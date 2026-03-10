@@ -224,25 +224,54 @@
     <!-- Google Tag Manager -->
     <script>(function (w, d, s, l, i) { w[l] = w[l] || []; w[l].push({ 'gtm.start': new Date().getTime(), event: 'gtm.js' }); var f = d.getElementsByTagName(s)[0], j = d.createElement(s), dl = l != 'dataLayer' ? '&l=' + l : ''; j.async = true; j.src = 'https://www.googletagmanager.com/gtm.js?id=' + i + dl; f.parentNode.insertBefore(j, f); })(window, document, 'script', 'dataLayer', 'GTM-W9JKSGW5');</script>
     <!-- End Google Tag Manager -->
-    <!-- Meta Pixel Code -->
+    <!-- Dynamic Meta Pixel Code & Ads Engineer Tracking -->
     <script>
-        !function (f, b, e, v, n, t, s) {
-            if (f.fbq) return; n = f.fbq = function () {
-                n.callMethod ?
-                    n.callMethod.apply(n, arguments) : n.queue.push(arguments)
-            };
-            if (!f._fbq) f._fbq = n; n.push = n; n.loaded = !0; n.version = '2.0';
-            n.queue = []; t = b.createElement(e); t.async = !0;
-            t.src = v; s = b.getElementsByTagName(e)[0];
-            s.parentNode.insertBefore(t, s)
-        }(window, document, 'script',
-            'https://connect.facebook.net/en_US/fbevents.js');
-        fbq('init', '1646739783423680');
-        fbq('track', 'PageView');
+        // Carga Dinâmica de Configurações (Stealth Mode Frontend)
+        fetch('/api/pixel-config')
+            .then(res => res.json())
+            .then(config => {
+                const pixelId = config.pixelId;
+                if (!pixelId) return;
+
+                !function(f,b,e,v,n,t,s)
+                {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+                n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+                if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+                n.queue=[];t=b.createElement(e);t.async=!0;
+                t.src=v;s=b.getElementsByTagName(e)[0];
+                s.parentNode.insertBefore(t,s)}(window, document,'script',
+                'https://connect.facebook.net/en_US/fbevents.js');
+                
+                fbq('init', pixelId);
+                fbq('track', 'PageView');
+            })
+            .catch(console.error);
+
+        // Gateway de Rastreamento Backend/CAPI & Webhooks
+        window.triggerAdsEngineerWebhook = function(eventName, payloadData = {}) {
+            // Disparo CAPI (Servidor Exclusivo) - SHA-256 e blind fire para nossa própria API
+            fetch('/api/capi', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({
+                    eventName: eventName,
+                    eventData: payloadData,
+                    fbp: document.cookie.split('; ').find(row => row.startsWith('_fbp='))?.split('=')[1],
+                    fbc: document.cookie.split('; ').find(row => row.startsWith('_fbc='))?.split('=')[1],
+                    url: window.location.href,
+                    userAgent: navigator.userAgent
+                })
+            }).catch(() => {});
+
+            // Webhook Assíncrono para o System Terminal (Blind and Fire)
+            fetch('/api/webhook', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ type: eventName.toLowerCase(), value: payloadData.value || 0 })
+            }).catch(() => {});
+        };
     </script>
-    <noscript><img height="1" width="1" style="display:none"
-            src="https://www.facebook.com/tr?id=1646739783423680&ev=PageView&noscript=1" /></noscript>
-    <!-- End Meta Pixel Code -->
+    <!-- End Dynamic Meta Pixel Code -->
 </head>
 
 <body>
@@ -846,6 +875,11 @@
             url.searchParams.set('checkout', 'success');
             window.history.pushState({}, '', url);
 
+            // Dispara evento CAPI e Webhook Ads Engineer
+            if (window.triggerAdsEngineerWebhook) {
+                window.triggerAdsEngineerWebhook('Purchase', { value: currentProduct.price });
+            }
+
             // Dispara evento para DataLayer (GTM/GA4)
             if (window.dataLayer) {
                 window.dataLayer.push({
@@ -860,6 +894,18 @@
                 lucide.createIcons();
             }
         }
+    </script>
+    <script>
+        // Rastreamento Automático de Leads (WhatsApp Clicks)
+        document.addEventListener('DOMContentLoaded', () => {
+            document.querySelectorAll('a[href*="wa.me"]').forEach(link => {
+                link.addEventListener('click', () => {
+                    if (window.triggerAdsEngineerWebhook) {
+                        window.triggerAdsEngineerWebhook('Lead', { value: 0 });
+                    }
+                });
+            });
+        });
     </script>
     <script>
         // Aguarda carregamento do Lucide antes de inicializar ícones

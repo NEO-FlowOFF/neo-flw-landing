@@ -3,28 +3,23 @@
   --fp-brand-violet: #7A1CFF;
   --fp-brand-electric-blue: #2DE2FF;
   --fp-brand-neon-pink: #FF4DE3;
-
   --fp-dark-abyss: #050007;
   --fp-dark-deep-violet: #120018;
   --fp-dark-night-purple: #1A0A2B;
-
   --fp-light-off-white: #F7F4FB;
   --fp-light-lilac-fog: #EEE6FF;
   --fp-light-soft-violet: #C9B6FF;
-
   --fp-success: #00F5A0;
-  --fp-warning: #FFCC00;
+  --fp-warning: #FC0;
   --fp-danger: #FF3B3B;
   --fp-info: #6EE7FF;
-
   --fp-gradient-primary-neon: linear-gradient(135deg, #FF2BD6 0%, #7A1CFF 55%, #2DE2FF 100%);
-  --fp-gradient-deep-glow: radial-gradient(circle at 50% 40%, rgba(255,43,214,0.40), rgba(5,0,7,0.95) 65%);
-  --fp-gradient-night-glass: linear-gradient(180deg, rgba(255,255,255,0.06), rgba(255,255,255,0.02));
-
+  --fp-gradient-deep-glow: radial-gradient(circle at 50% 40%, rgb(255 43 214 / 40%), rgb(5 0 7 / 95%) 65%);
+  --fp-gradient-night-glass: linear-gradient(180deg, rgb(255 255 255 / 6%), rgb(255 255 255 / 2%));
   --fp-cta-radius: 16px;
-  --fp-primary-glow: rgba(255,43,214,0.35);
-  --fp-glass-bg: rgba(18,0,24,0.58);
-  --fp-glass-border: rgba(255,255,255,0.10);
+  --fp-primary-glow: rgb(255 43 214 / 35%);
+  --fp-glass-bg: rgb(18 0 24 / 58%);
+  --fp-glass-border: rgb(255 255 255 / 10%);
   --fp-glass-blur: 18px;
 }
 
@@ -49,9 +44,9 @@
 }
 
 .fp-btn-secondary {
-  background: rgba(255, 255, 255, 0.06);
-  border: 1px solid rgba(255, 255, 255, 0.14);
-  color: #ffffff;
+  background: rgb(255 255 255 / 6%);
+  border: 1px solid rgb(255 255 255 / 14%);
+  color: #fff;
   border-radius: var(--fp-cta-radius);
 }
 
