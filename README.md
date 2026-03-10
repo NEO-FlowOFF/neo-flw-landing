@@ -32,16 +32,18 @@ Esta é a vitrine comercial independente da agência **FlowOFF**. O objetivo des
 ---
 *Desenvolvido pela equipe do NEØ Protocol.*
 
-────────────────────────────────────────
+───────────────────────
+```
 
 ▓▓▓ NΞØ MELLØ
-────────────────────────────────────────
+─────────────────────────
 Core Architect · NΞØ Protocol
 neo@neoprotocol.space
 
 "Code is law. Expand until
 silence becomes structure."
-────────────────────────────────────────
+───────────────────────────────
+```
 ```
  █████ █         
 ██╔═══██╗       
