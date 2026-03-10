@@ -3,10 +3,16 @@
     "version": "2026.03.10",
     "description": "Premium Landing Page for FlowOFF Agency",
     "scripts": {
-        "dev": "npx -y browser-sync start --server --files '*.html, *.css'",
+        "dev": "browser-sync start --server --files '*.html, *.css'",
         "build": "echo 'Static site - no build needed'",
-        "lint": "npx -y htmlhint *.html && npx -y stylelint *.css",
+        "lint": "htmlhint *.html && stylelint *.css",
         "push": "git add . && git commit -m 'chore: update landing page assets' && git push origin main"
+    },
+    "devDependencies": {
+        "browser-sync": "^3.0.0",
+        "htmlhint": "^1.1.4",
+        "stylelint": "^16.12.0",
+        "stylelint-config-standard": "^36.0.0"
     },
     "keywords": [],
     "author": "NE\u00d8 Protocol",

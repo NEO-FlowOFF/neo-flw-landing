@@ -229,7 +229,7 @@
         !function (f, b, e, v, n, t, s) {
             if (f.fbq) return; n = f.fbq = function () {
                 n.callMethod ?
-                n.callMethod.apply(n, arguments) : n.queue.push(arguments)
+                    n.callMethod.apply(n, arguments) : n.queue.push(arguments)
             };
             if (!f._fbq) f._fbq = n; n.push = n; n.loaded = !0; n.version = '2.0';
             n.queue = []; t = b.createElement(e); t.async = !0;
@@ -593,8 +593,12 @@
             </div>
 
             <div id="flowpay-step-2" class="flowpay-pix-container">
-                <div class="flowpay-qr-code">
-                    <img id="flowpay-qr-img" src="" alt="QR Code PIX">
+                <div class="flowpay-qr-code" id="flowpay-qr-wrapper">
+                    <div class="flowpay-skeleton" id="flowpay-qr-skeleton"></div>
+                    <img id="flowpay-qr-img"
+                        src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7"
+                        alt="QR Code PIX" style="display: none;"
+                        onload="this.style.display='block'; document.getElementById('flowpay-qr-skeleton').style.display='none';">
                 </div>
                 <div class="flowpay-pix-copy">
                     <p style="font-size: 0.8rem; margin-bottom: 8px;">Copia e Cola:</p>
@@ -669,6 +673,17 @@
             document.getElementById('flowpay-step-2').style.display = 'none';
             document.getElementById('flowpay-step-3').style.display = 'none';
             document.getElementById('flowpay-error').style.display = 'none';
+
+            // Reset QR Code and Skeleton
+            const qrImg = document.getElementById('flowpay-qr-img');
+            const qrSkeleton = document.getElementById('flowpay-qr-skeleton');
+            if (qrImg) {
+                qrImg.src = 'data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7';
+                qrImg.style.display = 'none';
+            }
+            if (qrSkeleton) {
+                qrSkeleton.style.display = 'block';
+            }
 
             document.getElementById('flowpay-modal').classList.add('active');
 

@@ -27,11 +27,11 @@ serve: ## Inicia servidor HTTP local na porta 8000
 
 dev: ## Inicia desenvolvimento com hot-reload (browser-sync)
 	@echo "$(GREEN)🔥 Modo desenvolvimento com hot-reload$(NC)"
-	@npm run dev || echo "$(YELLOW)⚠️  browser-sync não encontrado. Execute: make install$(NC)"
+	@pnpm run dev || echo "$(YELLOW)⚠️  browser-sync não encontrado. Execute: make install$(NC)"
 
 install: ## Instala dependências do projeto
 	@echo "$(GREEN)📦 Instalando dependências...$(NC)"
-	@npm install || echo "$(YELLOW)⚠️  npm não encontrado$(NC)"
+	@pnpm install || echo "$(YELLOW)⚠️  pnpm não encontrado$(NC)"
 
 ##@ Validação
 
@@ -39,15 +39,22 @@ check: lint validate ## Executa todas as verificações (lint + validate)
 
 lint: ## Valida HTML e CSS (htmlhint + stylelint)
 	@echo "$(GREEN)🔍 Validando HTML e CSS...$(NC)"
-	@npm run lint || echo "$(YELLOW)⚠️  Ferramentas de lint não encontradas. Execute: make install$(NC)"
+	@pnpm run lint || echo "$(YELLOW)⚠️  Ferramentas de lint não encontradas. Execute: make install$(NC)"
 
 validate: ## Valida HTML usando validador W3C (requer curl)
 	@echo "$(GREEN)✅ Validando HTML com W3C...$(NC)"
 	@curl -s "https://validator.w3.org/nu/?out=text" -F "file=@index.html" | head -20 || echo "$(YELLOW)⚠️  Validador W3C não disponível$(NC)"
 
 check-links: ## Verifica links quebrados (requer curl)
-	@echo "$(GREEN)🔗 Verificando links...$(NC)"
-	@echo "$(YELLOW)⚠️  Implementação manual necessária$(NC)"
+	@echo "$(GREEN)🔗 Verificando links (isso pode levar alguns segundos)...$(NC)"
+	@grep -Eo 'href="https?://[^"]+"' index.html | awk -F'"' '{print $$2}' | grep -Ev "wa.me|facebook|googletagmanager|instagram|canva.com" | sort -u | while read url; do \
+		status=$$(curl -s -o /dev/null -w "%{http_code}" -L "$$url" -A "Mozilla/5.0"); \
+		if [ "$$status" = "200" ]; then \
+			echo "$(GREEN)✓ [$$status] $$url$(NC)"; \
+		else \
+			echo "$(YELLOW)⚠️  [$$status] $$url$(NC)"; \
+		fi; \
+	done
 
 ##@ Otimização
 
@@ -57,7 +64,7 @@ optimize: ## Otimiza imagens e minifica CSS (requer ferramentas externas)
 
 minify-css: ## Minifica CSS (requer cssnano)
 	@echo "$(GREEN)📦 Minificando CSS...$(NC)"
-	@npx cssnano landing_v2.css landing_v2.min.css || echo "$(YELLOW)⚠️  cssnano não encontrado$(NC)"
+	@pnpm dlx cssnano-cli landing_v2.css landing_v2.min.css || echo "$(YELLOW)⚠️  cssnano não encontrado$(NC)"
 
 ##@ Build
 
@@ -114,7 +121,6 @@ deploy: build ## Faz deploy (ajuste conforme sua plataforma)
 	@echo "$(YELLOW)⚠️  Configure seu método de deploy$(NC)"
 	@echo "Opções:"
 	@echo "  - Vercel: vercel --prod"
-	@echo "  - Netlify: netlify deploy --prod"
 	@echo "  - GitHub Pages: git push origin main"
 
 preview: ## Preview antes do deploy
