@@ -47,4 +47,3 @@ Disallow: /api/
 # Sitemaps
 Sitemap: https://neoflowoff.agency/sitemap.xml
 Sitemap: https://www.neoflowoff.agency/sitemap.xml
-Sitemap: https://lp.neoflowoff.agency/sitemap.xml
