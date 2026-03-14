@@ -23,7 +23,7 @@ export default async function handler(req, res) {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
-        ...(FLOWPAY_API_KEY ? { Authorization: `Bearer ${FLOWPAY_API_KEY}` } : {}),
+        ...(FLOWPAY_API_KEY ? { "x-api-key": FLOWPAY_API_KEY } : {}),
       },
       body: JSON.stringify(upstreamPayload),
     });
