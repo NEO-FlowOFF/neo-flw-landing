@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <title>Checkout PACK // PROFISSIONAL | NEØ.FLOWOFF</title>
+    <meta name="description" content="Finalize seu pedido para o Pacote Profissional. Site intermediário com mais recursos e automações.">
+    
+    <!-- Meta Tags SEO & Theme -->
+    <meta name="theme-color" content="#050508">
+    <link rel="icon" type="image/x-icon" href="/favicon.ico">
+    
+    <!-- Stylesheets -->
+    <link rel="stylesheet" href="/landing_v2.css">
+    <style>
+        :root {
+            --checkout-bg: #050508;
+        }
+        
+        body {
+            background-color: var(--checkout-bg);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .checkout-container {
+            flex: 1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 40px 20px;
+            margin-top: 80px;
+        }
+
+        .checkout-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 60px;
+            max-width: 1100px;
+            width: 100%;
+            align-items: start;
+        }
+
+        .product-info h1 {
+            font-size: 3rem;
+            font-weight: 900;
+            margin-bottom: 20px;
+            text-transform: uppercase;
+        }
+
+        .product-info .price {
+            font-size: 2.5rem;
+            font-weight: 800;
+            color: var(--primary);
+            margin-bottom: 30px;
+            display: block;
+        }
+
+        .product-features {
+            list-style: none;
+            padding: 0;
+            margin-bottom: 40px;
+        }
+
+        .product-features li {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 16px;
+            color: var(--text-muted);
+            font-size: 1.1rem;
+        }
+
+        .product-features li i {
+            color: var(--neon-green);
+        }
+
+        .checkout-card-wrap {
+            position: relative;
+        }
+
+        /* Override modal fixed position for inline use */
+        .flowpay-card {
+            position: static;
+            transform: none !important;
+            box-shadow: 0 40px 100px rgba(0,0,0,0.5), var(--glow-green);
+            margin: 0 auto;
+            border-color: var(--neon-green);
+        }
+
+        .flowpay-close {
+            display: none;
+        }
+
+        .checkout-footer {
+            padding: 40px 0;
+            text-align: center;
+            border-top: 1px solid rgba(255,255,255,0.05);
+            background: rgba(0,0,0,0.2);
+            font-size: 0.9rem;
+            color: var(--text-muted);
+        }
+
+        @media (max-width: 900px) {
+            .checkout-grid {
+                grid-template-columns: 1fr;
+                gap: 40px;
+                text-align: center;
+            }
+            .product-features li {
+                justify-content: center;
+            }
+            .product-info h1 {
+                font-size: 2.2rem;
+            }
+        }
+    </style>
+
+    <!-- Scripts -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+</head>
+<body>
+
+    <header class="scrolled" style="position: fixed; top: 0; width: 100%; z-index: 1000;">
+        <div class="container">
+            <nav style="justify-content: center;">
+                <div class="logo">
+                    <a href="/"><img src="/public/neoflowoff_logo.png" alt="NEØ.FLOWOFF" class="logo-img"></a>
+                </div>
+            </nav>
+        </div>
+    </header>
+
+    <main class="checkout-container">
+        <div class="checkout-grid">
+            <!-- Coluna 1: Informações do Produto -->
+            <div class="product-info">
+                <span class="portfolio-label">// CHECKOUT SEGURO</span>
+                <h1>Pacote <span class="neon-text" style="color: var(--neon-green); text-shadow: var(--glow-green);">Profissional</span></h1>
+                <span class="price" style="color: var(--neon-green);">R$ 2.500</span>
+                
+                <p style="margin-bottom: 30px; font-size: 1.1rem; line-height: 1.6;">
+                    A solução completa para negócios que buscam <strong>presença digital autoritária</strong> e ferramentas integradas de venda.
+                </p>
+
+                <ul class="product-features">
+                    <li><i data-lucide="check-circle"></i> Tudo do Pacote Start</li>
+                    <li><i data-lucide="check-circle"></i> Multi-páginas & Blog</li>
+                    <li><i data-lucide="check-circle"></i> Automações de Lead Avançadas</li>
+                    <li><i data-lucide="check-circle"></i> Integração com Gateway de Pagamento</li>
+                    <li><i data-lucide="check-circle"></i> Suporte Prioritário</li>
+                    <li><i data-lucide="clock"></i> Entrega em 7-20 dias úteis</li>
+                </ul>
+
+                <div class="guarantee-box" style="background: rgba(220, 255, 0, 0.05); border: 1px solid rgba(220, 255, 0, 0.1); padding: 20px; border-radius: 16px; display: flex; align-items: center; gap: 15px;">
+                    <i data-lucide="shield-check" style="color: var(--neon-green); width: 32px; height: 32px;"></i>
+                    <p style="font-size: 0.9rem; margin: 0;"><strong>Garantia de Entrega NEØ.</strong><br>Processamento seguro via FlowPay e infraestrutura de alta disponibilidade.</p>
+                </div>
+            </div>
+
+            <!-- Coluna 2: Formulário de Pagamento -->
+            <div class="checkout-card-wrap">
+                <div id="flowpay-card-inline" class="flowpay-card">
+                    <div class="flowpay-header">
+                        <img src="/public/neoflowoff_logo.png" alt="NEØ.FLOWOFF" class="flowpay-logo-img">
+                        <h3 id="flowpay-product-name">Pacote Profissional</h3>
+                        <p id="flowpay-product-price">R$ 2.500,00</p>
+                    </div>
+
+                    <div id="flowpay-step-1" class="flowpay-form">
+                        <div class="flowpay-input-group">
+                            <label for="flowpay-cpf">CPF / CNPJ</label>
+                            <input type="text" id="flowpay-cpf" name="tax_id" class="flowpay-input" placeholder="000.000.000-00" autocomplete="off">
+                        </div>
+                        <div class="flowpay-input-group">
+                            <label for="flowpay-email">E-mail para recepção</label>
+                            <input type="email" id="flowpay-email" name="customer_email" class="flowpay-input" placeholder="seu@email.com" autocomplete="email">
+                        </div>
+                        <button onclick="generatePix()" class="btn btn-primary btn-flowpay" id="btn-generate-pix" style="background: var(--neon-green); color: #000; border-color: var(--neon-green); box-shadow: var(--glow-green);">
+                            <span>Gerar PIX</span>
+                        </button>
+                        <div id="flowpay-error" class="flowpay-error">Erro ao gerar PIX. Tente novamente.</div>
+                    </div>
+
+                    <div id="flowpay-step-2" class="flowpay-pix-container">
+                        <div class="flowpay-qr-code" id="flowpay-qr-wrapper">
+                            <div class="flowpay-skeleton" id="flowpay-qr-skeleton"></div>
+                            <img id="flowpay-qr-img" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt="QR Code PIX" style="display: none" onload="this.style.display = 'block'; document.getElementById('flowpay-qr-skeleton').style.display='none';">
+                        </div>
+                        <div class="flowpay-pix-copy">
+                            <p style="font-size: 0.8rem; margin-bottom: 8px">Copia e Cola:</p>
+                            <div class="pix-copy-box" onclick="copyPixCode()" id="flowpay-copy-code">Clique para copiar o código...</div>
+                        </div>
+                        <div class="flowpay-status">
+                            <div class="status-dot"></div>
+                            <span>Aguardando pagamento...</span>
+                        </div>
+                    </div>
+
+                    <div id="flowpay-step-3" class="flowpay-success">
+                        <div class="success-icon" style="background: var(--neon-green);"><i data-lucide="check"></i></div>
+                        <h3>Pagamento Confirmado!</h3>
+                        <p>Obrigado! Em instantes nossa equipe entrará em contato para iniciar seu projeto.</p>
+                        <a href="/" class="btn btn-primary" style="margin-top: 20px; text-decoration: none; display: inline-block; background: var(--neon-green); color: #000;">Voltar para Home</a>
+                    </div>
+
+                    <div class="flowpay-footer">
+                        <span style="font-size: 0.7rem; color: #9aa0aa">Pagamento processado por</span>
+                        <img src="/public/flowpay-horizontal-logo.png" alt="FlowPay" style="height: 18px; opacity: 0.6; margin-left: 6px; vertical-align: middle;">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <footer class="checkout-footer">
+        <div class="container">
+            <p>© 2026 FlowOFF Agency - Arquitetura NΞØ Protocol</p>
+        </div>
+    </footer>
+
+    <!-- Logic -->
+    <script src="/js/payment.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            if (typeof initPayment === 'function') {
+                initPayment('Profissional', 2500);
+            }
+            if (typeof lucide !== 'undefined') {
+                lucide.createIcons();
+            }
+        });
+    </script>
+</body>
+</html>

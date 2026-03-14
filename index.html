@@ -860,12 +860,12 @@
                 Prazo: <strong>7-20 dias úteis</strong>
               </p>
               <div style="display: flex; flex-direction: column; gap: 10px">
-                <button
-                  onclick="openFlowPay('Start', 1500)"
+                <a
+                  href="/planos/start/"
                   class="btn btn-primary btn-flowpay-trigger"
                 >
-                  Pagar via PIX
-                </button>
+                  Assinar Plano
+                </a>
                 <a
                   href="https://wa.me/+5562983231110?text=Oi!%20Quero%20saber%20mais%20sobre%20o%20pacote%20Start"
                   target="_blank"
@@ -885,8 +885,8 @@
                 Prazo: <strong>7-20 dias úteis</strong>
               </p>
               <div style="display: flex; flex-direction: column; gap: 10px">
-                <button
-                  onclick="openFlowPay('Profissional', 2500)"
+                <a
+                  href="/planos/profissional/"
                   class="btn btn-primary btn-flowpay-trigger"
                   style="
                     background: var(--neon-green);
@@ -895,8 +895,8 @@
                     box-shadow: var(--glow-green);
                   "
                 >
-                  Pagar via PIX
-                </button>
+                  Assinar Plano
+                </a>
                 <a
                   href="https://wa.me/+5562983231110?text=Oi!%20Quero%20saber%20mais%20sobre%20o%20pacote%20Profissional"
                   target="_blank"
@@ -916,12 +916,12 @@
                 Prazo: <strong>7-20 dias úteis</strong>
               </p>
               <div style="display: flex; flex-direction: column; gap: 10px">
-                <button
-                  onclick="openFlowPay('Premium', 4000)"
+                <a
+                  href="/planos/premium/"
                   class="btn btn-primary btn-flowpay-trigger"
                 >
-                  Pagar via PIX
-                </button>
+                  Assinar Plano
+                </a>
                 <a
                   href="https://wa.me/+5562983231110?text=Oi!%20Quero%20saber%20mais%20sobre%20o%20pacote%20Premium"
                   target="_blank"
@@ -1037,375 +1037,10 @@
       </div>
     </footer>
 
-    <!-- FlowPay Payment Modal -->
-    <div id="flowpay-modal" class="flowpay-modal">
-      <div class="flowpay-card">
-        <button class="flowpay-close" onclick="closeFlowPay()">
-          <i data-lucide="x"></i>
-        </button>
-        <div class="flowpay-header">
-          <img
-            src="public/neoflowoff_logo.png"
-            alt="NEØ.FLOWOFF"
-            class="flowpay-logo-img"
-          />
-          <h3 id="flowpay-product-name">Pacote Start</h3>
-          <p id="flowpay-product-price">R$ 1.500,00</p>
-        </div>
 
-        <div id="flowpay-step-1" class="flowpay-form">
-          <div class="flowpay-input-group">
-            <label for="flowpay-cpf">CPF / CNPJ</label>
-            <input
-              type="text"
-              id="flowpay-cpf"
-              class="flowpay-input"
-              placeholder="000.000.000-00"
-            />
-          </div>
-          <div class="flowpay-input-group">
-            <label for="flowpay-email">E-mail para recepção</label>
-            <input
-              type="email"
-              id="flowpay-email"
-              class="flowpay-input"
-              placeholder="seu@email.com"
-            />
-          </div>
-          <button
-            onclick="generatePix()"
-            class="btn btn-primary btn-flowpay"
-            id="btn-generate-pix"
-          >
-            <span>Gerar PIX</span>
-          </button>
-          <div id="flowpay-error" class="flowpay-error">
-            Erro ao gerar PIX. Tente novamente.
-          </div>
-        </div>
 
-        <div id="flowpay-step-2" class="flowpay-pix-container">
-          <div class="flowpay-qr-code" id="flowpay-qr-wrapper">
-            <div class="flowpay-skeleton" id="flowpay-qr-skeleton"></div>
-            <img
-              id="flowpay-qr-img"
-              src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7"
-              alt="QR Code PIX"
-              style="display: none"
-              onload="
-                this.style.display = 'block';
-                document.getElementById('flowpay-qr-skeleton').style.display =
-                  'none';
-              "
-            />
-          </div>
-          <div class="flowpay-pix-copy">
-            <p style="font-size: 0.8rem; margin-bottom: 8px">Copia e Cola:</p>
-            <div
-              class="pix-copy-box"
-              onclick="copyPixCode()"
-              id="flowpay-copy-code"
-            >
-              Clique para copiar o código...
-            </div>
-          </div>
-          <div class="flowpay-status">
-            <div class="status-dot"></div>
-            <span>Aguardando pagamento...</span>
-          </div>
-        </div>
-
-        <div id="flowpay-step-3" class="flowpay-success">
-          <div class="success-icon">
-            <i data-lucide="check"></i>
-          </div>
-          <h3>Pagamento Confirmado!</h3>
-          <p>
-            Obrigado! Em instantes nossa equipe entrará em contato via
-            WhatsApp/Email para iniciar seu projeto.
-          </p>
-          <button
-            onclick="closeFlowPay()"
-            class="btn btn-primary"
-            style="margin-top: 20px"
-          >
-            Fechar
-          </button>
-        </div>
-
-        <div class="flowpay-footer">
-          <span style="font-size: 0.7rem; color: #9aa0aa"
-            >Pagamento processado por</span
-          >
-          <img
-            src="public/flowpay-horizontal-logo.png"
-            alt="FlowPay"
-            style="
-              height: 18px;
-              opacity: 0.6;
-              margin-left: 6px;
-              vertical-align: middle;
-            "
-          />
-        </div>
-      </div>
-    </div>
-
-    <script>
-      let currentProduct = { name: "", price: 0 };
-      let chargeId = null;
-      let statusInterval = null;
-      const FLOWPAY_API_CANDIDATES = [
-        window.location.origin,
-        window.__FLOWPAY_API__ || "https://api.flowpay.cash",
-        "https://flowpay-api.flowpay-system.workers.dev",
-      ];
-      let activeFlowPayApi = FLOWPAY_API_CANDIDATES[0];
-
-      async function fetchFlowPay(path, options = {}) {
-        const orderedApis = [
-          activeFlowPayApi,
-          ...FLOWPAY_API_CANDIDATES.filter((api) => api !== activeFlowPayApi),
-        ];
-        let lastError = null;
-
-        for (const apiBase of orderedApis) {
-          try {
-            const response = await fetch(`${apiBase}${path}`, options);
-
-            // 404 normalmente indica endpoint ausente neste host, tentamos o próximo.
-            if (response.status === 404) {
-              lastError = new Error(`Erro 404 em ${apiBase}${path}`);
-              continue;
-            }
-
-            activeFlowPayApi = apiBase;
-            return response;
-          } catch (error) {
-            lastError = error;
-          }
-        }
-
-        throw lastError || new Error("Falha ao conectar com FlowPay API.");
-      }
-
-      function openFlowPay(name, price) {
-        currentProduct = { name, price };
-        document.getElementById("flowpay-product-name").innerText =
-          `Pacote ${name}`;
-        document.getElementById("flowpay-product-price").innerText =
-          `R$ ${price.toLocaleString("pt-BR", { minimumFractionDigits: 2 })}`;
-
-        document.getElementById("flowpay-step-1").style.display = "flex";
-        document.getElementById("flowpay-step-2").style.display = "none";
-        document.getElementById("flowpay-step-3").style.display = "none";
-        document.getElementById("flowpay-error").style.display = "none";
-
-        // Reset QR Code and Skeleton
-        const qrImg = document.getElementById("flowpay-qr-img");
-        const qrSkeleton = document.getElementById("flowpay-qr-skeleton");
-        if (qrImg) {
-          qrImg.src =
-            "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7";
-          qrImg.style.display = "none";
-        }
-        if (qrSkeleton) {
-          qrSkeleton.style.display = "block";
-        }
-
-        document.getElementById("flowpay-modal").classList.add("active");
-
-        // Tracking: Início do checkout
-        window.pushNeoDataLayerEvent("begin_checkout", {
-          item_name: name,
-          price: price,
-        });
-
-        if (typeof lucide !== "undefined" && lucide.createIcons) {
-          lucide.createIcons();
-        }
-      }
-
-      function closeFlowPay() {
-        document.getElementById("flowpay-modal").classList.remove("active");
-        if (statusInterval) clearInterval(statusInterval);
-      }
-
-      async function generatePix() {
-        const cpf = document
-          .getElementById("flowpay-cpf")
-          .value.replace(/\D/g, "");
-        const email = document.getElementById("flowpay-email").value;
-        const btn = document.getElementById("btn-generate-pix");
-        const errorEl = document.getElementById("flowpay-error");
-
-        if (!cpf || cpf.length < 11) {
-          alert("Por favor, insira um CPF/CNPJ válido.");
-          return;
-        }
-
-        btn.disabled = true;
-        btn.innerHTML = "<span>Gerando...</span>";
-        errorEl.style.display = "none";
-
-        try {
-          const response = await fetchFlowPay("/api/create-charge-landing", {
-            method: "POST",
-            headers: { "Content-Type": "application/json" },
-            body: JSON.stringify({
-              amount_brl: currentProduct.price,
-              product_ref: `landing-${currentProduct.name.toLowerCase()}`,
-              customer_cpf: cpf,
-              customer_email: email,
-            }),
-          });
-
-          // Verifica se a resposta é OK
-          if (!response.ok) {
-            const errorText = await response.text();
-            throw new Error(
-              `Erro ${response.status}: ${response.statusText}. ${errorText.substring(0, 100)}`,
-            );
-          }
-
-          // Verifica se o conteúdo é JSON
-          const contentType = response.headers.get("content-type");
-          if (!contentType || !contentType.includes("application/json")) {
-            const text = await response.text();
-            throw new Error(
-              `Resposta inválida da API. Esperado JSON, recebido: ${contentType || "text/html"}`,
-            );
-          }
-
-          const data = await response.json();
-
-          if (data.success) {
-            chargeId = data.charge.charge_id;
-            document.getElementById("flowpay-qr-img").src = data.charge.qr_code;
-            document.getElementById("flowpay-copy-code").innerText =
-              data.charge.pix_copy_paste;
-
-            document.getElementById("flowpay-step-1").style.display = "none";
-            document.getElementById("flowpay-step-2").style.display = "flex";
-
-            // Tracking: PIX gerado (meio do funil)
-            window.pushNeoDataLayerEvent("add_payment_info", {
-              item_name: currentProduct.name,
-              price: currentProduct.price,
-            });
-
-            startStatusCheck();
-          } else {
-            throw new Error(data.message || "Erro desconhecido");
-          }
-        } catch (error) {
-          console.error("FlowPay Error:", error);
-          let errorMessage = "Erro ao gerar PIX. Tente novamente.";
-
-          if (error.message) {
-            if (error.message.includes("JSON")) {
-              errorMessage =
-                "Erro de comunicação com a API. Verifique se o serviço está disponível.";
-            } else if (error.message.includes("404")) {
-              errorMessage =
-                "Endpoint da API não encontrado. Verifique a configuração.";
-            } else if (error.message.includes("500")) {
-              errorMessage =
-                "Erro interno do servidor. Tente novamente em alguns instantes.";
-            } else {
-              errorMessage = error.message;
-            }
-          }
-
-          errorEl.innerText = errorMessage;
-          errorEl.style.display = "block";
-        } finally {
-          btn.disabled = false;
-          btn.innerHTML = "<span>Gerar PIX</span>";
-        }
-      }
-
-      function copyPixCode() {
-        const code = document.getElementById("flowpay-copy-code").innerText;
-        navigator.clipboard.writeText(code).then(() => {
-          const originalText =
-            document.getElementById("flowpay-copy-code").innerText;
-          document.getElementById("flowpay-copy-code").innerText = "Copiado!";
-          setTimeout(() => {
-            document.getElementById("flowpay-copy-code").innerText = code;
-          }, 2000);
-        });
-      }
-
-      function startStatusCheck() {
-        if (statusInterval) clearInterval(statusInterval);
-        statusInterval = setInterval(async () => {
-          try {
-            const response = await fetchFlowPay(`/api/charge/${chargeId}`);
-
-            // Verifica se a resposta é OK
-            if (!response.ok) {
-              console.warn(
-                `Status check: ${response.status} ${response.statusText}`,
-              );
-              return; // Continua tentando
-            }
-
-            // Verifica se o conteúdo é JSON
-            const contentType = response.headers.get("content-type");
-            if (!contentType || !contentType.includes("application/json")) {
-              console.warn("Status check: resposta não é JSON, ignorando");
-              return; // Continua tentando
-            }
-
-            const data = await response.json();
-
-            const paidStatuses = [
-              "PIX_PAID",
-              "PENDING_REVIEW",
-              "APPROVED",
-              "SETTLED",
-              "COMPLETED",
-            ];
-            if (data.success && paidStatuses.includes(data.status)) {
-              clearInterval(statusInterval);
-              showSuccess();
-            }
-          } catch (e) {
-            // Erros de rede ou parsing são silenciosos para não interromper o polling
-            console.error("Status check error:", e);
-          }
-        }, 5000);
-      }
-
-      function showSuccess() {
-        document.getElementById("flowpay-step-2").style.display = "none";
-        document.getElementById("flowpay-step-3").style.display = "flex";
-
-        // Atualiza URL com parâmetro de sucesso para rastreamento (Google Ads)
-        const url = new URL(window.location);
-        url.searchParams.set("checkout", "success");
-        window.history.pushState({}, "", url);
-
-        // Dispara evento CAPI e Webhook Ads Engineer
-        if (window.triggerAdsEngineerWebhook) {
-          window.triggerAdsEngineerWebhook("Purchase", {
-            value: currentProduct.price,
-          });
-        }
-
-        // Dispara evento para DataLayer (GTM/GA4)
-        window.pushNeoDataLayerEvent("purchase_complete", {
-          product_name: currentProduct.name,
-          value: currentProduct.price,
-          currency: "BRL",
-        });
-
-        if (typeof lucide !== "undefined" && lucide.createIcons) {
-          lucide.createIcons();
-        }
-      }
-    </script>
+    <!-- FlowPay Logic -->
+    <script src="/js/payment.js"></script>
     <script>
       // Rastreamento Automático de Leads (WhatsApp Clicks)
       document.addEventListener("DOMContentLoaded", () => {

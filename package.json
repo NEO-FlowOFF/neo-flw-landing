@@ -1,6 +1,6 @@
 {
     "name": "neo-flowoff-landing",
-    "version": "2026.03.10",
+    "version": "2026.03.14",
     "description": "Premium Landing Page for FlowOFF Agency",
     "scripts": {
         "dev": "browser-sync start --server --files '*.html, *.css'",

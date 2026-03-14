@@ -11,7 +11,7 @@
     --neon-yellow: #cf0;
     --success: #dcff00;
     --text-main: #f0f0f5;
-    --text-muted: #9aa0aa;
+    --text-muted: #b0b5bd; /* Lighter for better contrast (WCAG AAA) */
     --border-glass: rgb(255 255 255 / 10%);
     --border-neon-green: rgb(220 255 0 / 50%);
     --grad-hero: linear-gradient(135deg, var(--primary), var(--secondary));
