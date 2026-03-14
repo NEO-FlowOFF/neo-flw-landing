@@ -123,10 +123,14 @@
 
     <header class="scrolled" style="position: fixed; top: 0; width: 100%; z-index: 1000;">
         <div class="container">
-            <nav style="justify-content: center;">
+            <nav style="justify-content: space-between; align-items: center;">
                 <div class="logo">
                     <a href="/"><img src="/public/neoflowoff_logo.png" alt="NEØ.FLOWOFF" class="logo-img"></a>
                 </div>
+                <a href="/" class="btn btn-outline" style="padding: 8px 16px; font-size: 0.9rem; display: flex; align-items: center; gap: 8px; border-color: rgba(255,255,255,0.1);">
+                    <i data-lucide="chevron-left" style="width: 16px; height: 16px;"></i>
+                    Voltar
+                </a>
             </nav>
         </div>
     </header>
@@ -212,9 +216,27 @@
         </div>
     </main>
 
-    <footer class="checkout-footer">
+    <footer class="checkout-footer" style="padding: 60px 0;">
         <div class="container">
-            <p>© 2026 FlowOFF Agency - Arquitetura NΞØ Protocol</p>
+            <div class="footer-grid" style="display: grid; grid-template-columns: 1fr auto; align-items: center; gap: 40px;">
+                <div class="footer-left" style="text-align: left;">
+                    <p class="footer-copy" style="margin-bottom: 8px;">
+                        © 2026 FlowOFF Agency - 
+                        <a href="https://zora.co/@neoprotocol" target="_blank" rel="noopener noreferrer" style="color: var(--primary); text-decoration: none;">Architecture NΞØ Protocol</a>
+                    </p>
+                    <p class="footer-cnpj" style="font-size: 0.75rem; color: rgba(255,255,255,0.3); margin-bottom: 12px;">
+                        Flowoff Marketing e Assessoria Digital LTDA - 43.376.355/0001-92
+                    </p>
+                    <p class="footer-links" style="font-size: 0.75rem; text-transform: uppercase; letter-spacing: 1px;">
+                        <a href="/privacy" style="color: var(--text-muted); text-decoration: none;">POLÍTICA DE PRIVACIDADE</a> · 
+                        <a href="/legal" style="color: var(--text-muted); text-decoration: none;">TERMOS DE SERVIÇO</a> · 
+                        <a href="/excluir-dados" style="color: var(--text-muted); text-decoration: none;">EXCLUSÃO DE DADOS</a>
+                    </p>
+                </div>
+                <div class="footer-right">
+                    <img src="/public/flowpay-horizontal-logo.png" alt="FlowPay" style="height: 24px; opacity: 0.4;">
+                </div>
+            </div>
         </div>
     </footer>
 
