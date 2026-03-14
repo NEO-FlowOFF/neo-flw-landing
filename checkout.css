@@ -1,0 +1,311 @@
+.checkout-page {
+    background-color: #050508;
+}
+
+.checkout-page .checkout-container {
+    position: relative;
+    z-index: 2;
+}
+
+.checkout-page .checkout-card-wrap {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+}
+
+.checkout-page .flowpay-card {
+    width: min(100%, 520px);
+    background:
+        linear-gradient(180deg, rgb(255 255 255 / 0.04) 0%, rgb(255 255 255 / 0.02) 100%),
+        #0a0a12;
+    border: 1px solid rgb(255 255 255 / 0.12);
+    border-radius: 28px;
+    overflow: hidden;
+    backdrop-filter: blur(24px);
+}
+
+.checkout-page .flowpay-header {
+    padding: 32px 28px 24px;
+    text-align: center;
+    border-bottom: 1px solid rgb(255 255 255 / 0.08);
+    background:
+        radial-gradient(circle at top, rgb(255 47 179 / 0.16), transparent 58%),
+        linear-gradient(180deg, rgb(255 255 255 / 0.03), transparent);
+}
+
+.checkout-page .flowpay-logo-img {
+    width: 72px;
+    height: auto;
+    display: block;
+    margin: 0 auto 16px;
+}
+
+.checkout-page .flowpay-header h3 {
+    margin: 0;
+    font-size: 1.6rem;
+    font-weight: 800;
+    color: var(--text-main);
+}
+
+.checkout-page .flowpay-header p {
+    margin: 8px 0 0;
+    font-size: 1rem;
+    color: var(--text-muted);
+}
+
+.checkout-page .flowpay-form {
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+    padding: 28px;
+}
+
+.checkout-page .flowpay-input-group {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.checkout-page .flowpay-input-group label {
+    font-size: 0.9rem;
+    font-weight: 700;
+    color: var(--text-main);
+}
+
+.checkout-page .flowpay-input {
+    width: 100%;
+    min-height: 52px;
+    padding: 14px 16px;
+    border: 1px solid rgb(255 255 255 / 0.12);
+    border-radius: 14px;
+    background: #111622;
+    color: var(--text-main);
+    font-size: 1rem;
+    transition: border-color 0.2s ease, box-shadow 0.2s ease, background 0.2s ease;
+}
+
+.checkout-page .flowpay-input::placeholder {
+    color: rgb(255 255 255 / 0.35);
+}
+
+.checkout-page .flowpay-input:focus {
+    outline: none;
+    border-color: var(--primary);
+    box-shadow: 0 0 0 4px rgb(255 47 179 / 0.12);
+    background: #141a28;
+}
+
+.checkout-page .btn-flowpay {
+    width: 100%;
+    justify-content: center;
+}
+
+.checkout-page .flowpay-error {
+    display: none;
+    padding: 12px 14px;
+    border: 1px solid rgb(255 87 87 / 0.28);
+    border-radius: 14px;
+    background: rgb(255 87 87 / 0.08);
+    color: #ff9a9a;
+    font-size: 0.92rem;
+    line-height: 1.5;
+}
+
+.checkout-page .flowpay-pix-container {
+    display: none;
+    flex-direction: column;
+    gap: 18px;
+    padding: 28px;
+}
+
+.checkout-page .flowpay-qr-code {
+    width: min(100%, 280px);
+    aspect-ratio: 1;
+    margin: 0 auto;
+    border-radius: 22px;
+    border: 1px solid rgb(255 255 255 / 0.12);
+    background: #fff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 16px;
+}
+
+.checkout-page .flowpay-qr-code img {
+    width: 100%;
+    height: auto;
+}
+
+.checkout-page .flowpay-skeleton {
+    width: 100%;
+    height: 100%;
+    border-radius: 14px;
+    background:
+        linear-gradient(90deg, rgb(0 0 0 / 0.08), rgb(0 0 0 / 0.16), rgb(0 0 0 / 0.08));
+    background-size: 200% 100%;
+    animation: checkout-skeleton 1.2s linear infinite;
+}
+
+@keyframes checkout-skeleton {
+    0% {
+        background-position: 200% 0;
+    }
+
+    100% {
+        background-position: -200% 0;
+    }
+}
+
+.checkout-page .flowpay-pix-copy {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.checkout-page .pix-copy-box {
+    width: 100%;
+    padding: 16px;
+    border-radius: 16px;
+    border: 1px solid rgb(255 255 255 / 0.1);
+    background: #111622;
+    color: var(--text-main);
+    font-size: 0.92rem;
+    line-height: 1.55;
+    word-break: break-all;
+    cursor: pointer;
+    transition: border-color 0.2s ease, transform 0.2s ease;
+}
+
+.checkout-page .pix-copy-box:hover {
+    border-color: rgb(255 255 255 / 0.22);
+    transform: translateY(-1px);
+}
+
+.checkout-page .flowpay-status {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    align-self: center;
+    padding: 10px 14px;
+    border-radius: 999px;
+    background: rgb(220 255 0 / 0.08);
+    color: var(--neon-green);
+    font-size: 0.9rem;
+}
+
+.checkout-page .status-dot {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background: var(--neon-green);
+    box-shadow: 0 0 0 0 rgb(220 255 0 / 0.5);
+    animation: checkout-pulse 1.6s infinite;
+}
+
+@keyframes checkout-pulse {
+    0% {
+        box-shadow: 0 0 0 0 rgb(220 255 0 / 0.5);
+    }
+
+    70% {
+        box-shadow: 0 0 0 10px rgb(220 255 0 / 0);
+    }
+
+    100% {
+        box-shadow: 0 0 0 0 rgb(220 255 0 / 0);
+    }
+}
+
+.checkout-page .flowpay-success {
+    display: none;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    gap: 14px;
+    padding: 32px 28px;
+}
+
+.checkout-page .success-icon {
+    width: 72px;
+    height: 72px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: rgb(255 47 179 / 0.14);
+    color: var(--primary);
+    box-shadow: var(--glow-pink);
+}
+
+.checkout-page .success-icon i {
+    width: 30px;
+    height: 30px;
+}
+
+.checkout-page .flowpay-success h3 {
+    margin: 0;
+    font-size: 1.75rem;
+}
+
+.checkout-page .flowpay-success p {
+    margin: 0;
+    color: var(--text-muted);
+    line-height: 1.7;
+}
+
+.checkout-page .flowpay-footer {
+    padding: 18px 28px 24px;
+    border-top: 1px solid rgb(255 255 255 / 0.08);
+    text-align: center;
+}
+
+.checkout-page .flowpay-footer img {
+    max-width: 140px;
+    width: 100%;
+    height: auto;
+}
+
+@media (max-width: 900px) {
+    .checkout-page .checkout-container {
+        padding: 32px 16px 48px;
+    }
+
+    .checkout-page .guarantee-box {
+        justify-content: flex-start;
+        text-align: left;
+    }
+}
+
+@media (max-width: 640px) {
+    .checkout-page .flowpay-header,
+    .checkout-page .flowpay-form,
+    .checkout-page .flowpay-pix-container,
+    .checkout-page .flowpay-success,
+    .checkout-page .flowpay-footer {
+        padding-left: 20px;
+        padding-right: 20px;
+    }
+
+    .checkout-page .flowpay-header h3 {
+        font-size: 1.35rem;
+    }
+
+    .checkout-page .flowpay-success h3 {
+        font-size: 1.5rem;
+    }
+
+    .checkout-page .footer-grid {
+        grid-template-columns: 1fr !important;
+    }
+
+    .checkout-page .footer-left,
+    .checkout-page .footer-right {
+        text-align: center !important;
+    }
+
+    .checkout-page .guarantee-box {
+        flex-direction: column;
+        text-align: center;
+    }
+}
