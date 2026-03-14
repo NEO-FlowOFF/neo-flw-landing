@@ -11,7 +11,9 @@
     --neon-yellow: #cf0;
     --success: #dcff00;
     --text-main: #f0f0f5;
-    --text-muted: #b0b5bd; /* Lighter for better contrast (WCAG AAA) */
+    --text-muted: #b0b5bd;
+
+    /* Lighter for better contrast (WCAG AAA) */
     --border-glass: rgb(255 255 255 / 10%);
     --border-neon-green: rgb(220 255 0 / 50%);
     --grad-hero: linear-gradient(135deg, var(--primary), var(--secondary));
@@ -33,16 +35,10 @@
 html {
     margin: 0;
     padding: 0;
-
-    /* iOS Aqua Scroll - Momentum Scrolling */
     -webkit-overflow-scrolling: touch;
     overscroll-behavior-y: contain;
-
-    /* Smooth momentum scrolling */
     -webkit-scroll-behavior: smooth;
     scroll-behavior: smooth;
-
-    /* scroll-padding no html (onde o scroll acontece de fato) */
     scroll-padding-top: 80px;
 }
 
@@ -51,23 +47,15 @@ body {
     color: var(--text-main);
     font-family: Inter, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
     overflow: hidden auto;
-
-    /* iOS Aqua Scroll - Momentum Scrolling Premium */
     -webkit-overflow-scrolling: touch;
     -webkit-scroll-behavior: smooth;
     scroll-behavior: smooth;
     overscroll-behavior-y: contain;
-
-    /* Smooth scrolling com momentum */
     scroll-padding-top: 80px;
-
-    /* Performance */
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
     margin: 0;
     padding: 0;
-
-    /* iOS-like touch behavior */
     -webkit-tap-highlight-color: transparent;
     touch-action: pan-y;
 }
@@ -80,8 +68,6 @@ body {
     background:
         radial-gradient(circle at 10% 20%, rgb(255 47 179 / 5%) 0%, transparent 50%),
         radial-gradient(circle at 90% 80%, rgb(0 208 255 / 5%) 0%, transparent 50%);
-
-    /* Padrão de pontos sutil (inspirado no Canva) */
     background-image:
         radial-gradient(circle at 1px 1px, rgb(255 255 255 / 3%) 1px, transparent 0);
     background-size: 40px 40px;
@@ -97,20 +83,6 @@ body {
    HEADER 2030 - ADVANCED WEB3 DESIGN SYSTEM
    ============================================ */
 
-header .container {
-    width: 100%;
-    height: 100%;
-    display: flex;
-    align-items: center;
-    position: relative;
-    z-index: 2;
-}
-
-/* Quando scrolled, container permite overflow para botão sair */
-header.scrolled .container {
-    overflow: visible;
-}
-
 header {
     --header-height: 80px;
     --header-padding: 0;
@@ -125,67 +97,60 @@ header {
     z-index: 9999 !important;
     margin: 0;
     padding: var(--header-padding);
-
-    /* Garantir visibilidade */
     visibility: visible !important;
     opacity: 1 !important;
     display: flex !important;
     transform: translateY(0) !important;
-
-    /* Glassmorphism Premium 2030 */
     background:
         linear-gradient(135deg, rgb(255 47 179 / 8%) 0%, rgb(122 44 255 / 8%) 100%),
         rgb(5 5 8 / var(--header-opacity));
     backdrop-filter: blur(var(--header-blur)) saturate(180%);
-
-    /* Borders Multi-layer */
     border-bottom: 1px solid rgb(255 255 255 / 8%);
     border-top: 1px solid rgb(255 255 255 / 3%);
-
-    /* Shadows Advanced */
     box-shadow:
         0 8px 32px rgb(0 0 0 / 40%),
         0 1px 0 rgb(255 255 255 / 5%) inset,
         0 -1px 0 rgb(0 0 0 / 20%) inset;
-
-    /* Performance & Animations */
     transition:
         background 0.5s cubic-bezier(0.4, 0, 0.2, 1),
         backdrop-filter 0.5s cubic-bezier(0.4, 0, 0.2, 1),
         box-shadow 0.5s ease;
     will-change: background, backdrop-filter;
     contain: layout style paint;
-
-    /* Layout */
     align-items: center;
-
-    /* Web3 Glow Effect */
     overflow: hidden;
 }
 
-/* Scrolled State - Enhanced Transparent Glassmorphism */
+header .container {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    position: relative;
+    z-index: 2;
+}
+
+/* Scrolled State */
 header.scrolled {
     --header-opacity: 0.4;
     --header-blur: 40px;
 
-    /* Glassmorphism mais transparente durante scroll - elementos visíveis abaixo */
     background:
         linear-gradient(135deg, rgb(255 47 179 / 5%) 0%, rgb(122 44 255 / 5%) 100%),
         rgb(5 5 8 / var(--header-opacity));
     backdrop-filter: blur(var(--header-blur)) saturate(150%);
-
-    /* Sombras mais sutis para manter profundidade */
     box-shadow:
         0 4px 24px rgb(0 0 0 / 30%),
         0 1px 0 rgb(255 255 255 / 6%) inset,
         0 -1px 0 rgb(0 0 0 / 15%) inset;
-
-    /* Borda mais sutil */
     border-bottom-color: rgb(255 255 255 / 6%);
     border-top-color: rgb(255 255 255 / 2%);
 }
 
-/* Animated Gradient Overlay */
+header.scrolled .container {
+    overflow: visible;
+}
+
 header::before {
     content: '';
     position: absolute;
@@ -208,10 +173,8 @@ header::before {
 header:hover::before {
     opacity: 1;
     left: 100%;
-    transition: opacity 0.6s ease, left 8s linear;
 }
 
-/* Neon Border Bottom - Web3 Style */
 header::after {
     content: '';
     position: absolute;
@@ -229,11 +192,11 @@ header::after {
     box-shadow:
         0 0 10px rgb(220 255 0 / 40%),
         0 0 20px rgb(255 47 179 / 20%);
-    animation: neonPulse 3s ease-in-out infinite;
+    animation: neon-pulse 3s ease-in-out infinite;
     z-index: 1;
 }
 
-@keyframes neonPulse {
+@keyframes neon-pulse {
     0%,
     100% {
         opacity: 0.6;
@@ -250,7 +213,37 @@ header::after {
     }
 }
 
-/* Navigation Container */
+/* Base Link Styles - Order matters for specificity */
+footer a {
+    color: inherit;
+    text-decoration: none;
+}
+
+.footer-links a {
+    color: inherit;
+}
+
+.nav-links a {
+    color: var(--text-muted);
+    text-decoration: none;
+    font-size: 0.9rem;
+    transition: var(--transition);
+    display: flex;
+    align-items: center;
+    height: 100%;
+    padding: 0 4px;
+}
+
+footer a:hover,
+footer a:focus-visible {
+    color: #f0f0f5;
+    text-decoration: none;
+}
+
+.nav-links a:hover {
+    color: #fff;
+}
+
 nav {
     display: flex;
     align-items: center;
@@ -263,20 +256,43 @@ nav {
     padding: 0;
 }
 
-/* Quando scrolled, nav precisa ser relative para botão absoluto funcionar */
 header.scrolled nav {
     position: relative;
     overflow: visible;
 }
 
+/* Button Foundation */
+.btn {
+    padding: 14px 28px;
+    border-radius: 50px;
+    font-weight: 700;
+    text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    transition: all 0.4s cubic-bezier(0.23, 1, 0.32, 1);
+    cursor: pointer;
+    border: none;
+    height: fit-content;
+    min-height: 48px;
+    line-height: 1.2;
+    position: relative;
+    overflow: hidden;
+    isolation: isolate;
+    font-size: 0.95rem;
+    letter-spacing: 0.3px;
+    will-change: transform, box-shadow, filter;
+    backface-visibility: hidden;
+    -webkit-font-smoothing: antialiased;
+}
+
 nav .btn {
     margin: 0;
     align-self: center;
-    position: relative;
-    overflow: hidden;
 }
 
-/* Logo Container - Advanced */
+/* Logo */
 .logo {
     display: flex;
     align-items: center;
@@ -305,17 +321,13 @@ nav .btn {
     height: 42px;
     width: auto;
     object-fit: contain;
-    filter:
-        drop-shadow(0 2px 8px rgb(255 47 179 / 40%)) drop-shadow(0 0 20px rgb(255 47 179 / 20%));
-    transition:
-        filter 0.4s cubic-bezier(0.4, 0, 0.2, 1),
-        transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    filter: drop-shadow(0 2px 8px rgb(255 47 179 / 40%)) drop-shadow(0 0 20px rgb(255 47 179 / 20%));
+    transition: filter 0.4s cubic-bezier(0.4, 0, 0.2, 1), transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
     will-change: filter, transform;
 }
 
 .logo:hover .logo-img {
-    filter:
-        drop-shadow(0 4px 12px rgb(255 47 179 / 60%)) drop-shadow(0 0 30px rgb(255 47 179 / 40%));
+    filter: drop-shadow(0 4px 12px rgb(255 47 179 / 60%)) drop-shadow(0 0 30px rgb(255 47 179 / 40%));
     transform: scale(1.02);
 }
 
@@ -327,26 +339,9 @@ nav .btn {
     justify-content: center;
 }
 
-.nav-links a {
-    color: var(--text-muted);
-    text-decoration: none;
-    font-size: 0.9rem;
-    transition: var(--transition);
-    display: flex;
-    align-items: center;
-    height: 100%;
-    padding: 0 4px;
-}
-
-.nav-links a:hover {
-    color: #fff;
-}
-
 /* Main */
 main {
     margin-top: 80px;
-
-    /* iOS Aqua Scroll - Smooth momentum */
     -webkit-overflow-scrolling: touch;
     scroll-behavior: smooth;
     overscroll-behavior-y: contain;
@@ -381,6 +376,7 @@ main {
     z-index: 10;
 }
 
+/* Text Stylings */
 .neon-text {
     background: var(--grad-neon);
     background-clip: text;
@@ -401,10 +397,8 @@ h1 {
 
 h1 .neon-text {
     display: inline-block;
-    position: relative;
     font-weight: 900;
-
-    /* Mantém bold para o texto neon */
+    position: relative;
 }
 
 h1 .neon-text::after {
@@ -419,6 +413,7 @@ h1 .neon-text::after {
     border-radius: 2px;
 }
 
+/* Base p and specific p overrides */
 p {
     font-size: 1.1rem;
     color: var(--text-muted);
@@ -428,6 +423,13 @@ p {
 .hero-content p {
     color: var(--text-main);
     font-weight: 500;
+}
+
+/* RoadMap & Pricing Strongs - Order matters for specificity */
+.roadmap-desc strong,
+.pricing-subtitle strong {
+    color: var(--neon-green);
+    font-weight: 700;
 }
 
 .hero-content p strong {
@@ -443,10 +445,10 @@ p {
     display: inline-block;
     opacity: 0;
     transform: translateY(20px);
-    animation: slideUp 0.8s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+    animation: slide-up 0.8s cubic-bezier(0.4, 0, 0.2, 1) forwards;
 }
 
-@keyframes slideUp {
+@keyframes slide-up {
     from {
         opacity: 0;
         transform: translateY(20px);
@@ -458,50 +460,17 @@ p {
     }
 }
 
-/* ============================================
-   BUTTON SYSTEM 2030 - ADVANCED WEB3
-   ============================================ */
-
-.btn {
-    padding: 14px 28px;
-    border-radius: 50px;
-    font-weight: 700;
-    text-decoration: none;
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    gap: 10px;
-    transition: all 0.4s cubic-bezier(0.23, 1, 0.32, 1);
-    cursor: pointer;
-    border: none;
-    height: fit-content;
-    min-height: 48px;
-    line-height: 1.2;
-    position: relative;
-    overflow: hidden;
-    isolation: isolate;
-    font-size: 0.95rem;
-    letter-spacing: 0.3px;
-    will-change: transform, box-shadow, filter;
-    backface-visibility: hidden;
-    -webkit-font-smoothing: antialiased;
-}
-
+/* Button Variants */
 .btn-primary {
     background: var(--grad-hero);
     color: white;
-    box-shadow:
-        0 4px 20px rgb(255 47 179 / 30%),
-        0 0 40px rgb(255 47 179 / 10%),
-        inset 0 1px 0 rgb(255 255 255 / 20%);
+    box-shadow: 0 4px 20px rgb(255 47 179 / 30%), 0 0 40px rgb(255 47 179 / 10%), inset 0 1px 0 rgb(255 255 255 / 20%);
     border: 1px solid rgb(255 47 179 / 40%);
     flex-shrink: 0;
     white-space: nowrap;
     align-self: center;
-    position: relative;
 }
 
-/* Shine Effect on Button */
 .btn-primary::before {
     content: '';
     position: absolute;
@@ -509,10 +478,7 @@ p {
     left: -100%;
     width: 100%;
     height: 100%;
-    background: linear-gradient(90deg,
-            transparent,
-            rgb(255 255 255 / 30%),
-            transparent);
+    background: linear-gradient(90deg, transparent, rgb(255 255 255 / 30%), transparent);
     transition: left 0.6s ease;
     z-index: 1;
 }
@@ -521,14 +487,10 @@ p {
     left: 100%;
 }
 
-/* Glow Effect on Hover */
 .btn-primary:hover {
     transform: translateY(-2px) scale(1.02);
-    box-shadow:
-        0 8px 30px rgb(255 47 179 / 50%),
-        0 0 60px rgb(255 47 179 / 30%),
-        inset 0 1px 0 rgb(255 255 255 / 30%);
-    border-color: rgb(255 47 179 / 60%);
+    box-shadow: var(--glow-pink), 0 15px 30px rgb(255 47 179 / 40%);
+    border-color: var(--primary);
     filter: brightness(1.1);
 }
 
@@ -537,38 +499,52 @@ p {
     transition: transform 0.1s ease;
 }
 
-/* Button Text - Above Shine */
 .btn-primary>* {
     position: relative;
     z-index: 2;
 }
 
-.btn-primary:hover {
-    transform: translateY(-2px);
-    box-shadow: var(--glow-pink), 0 15px 30px rgb(255 47 179 / 40%);
-    border-color: var(--primary);
-}
-
-/* ============================================
-   BUTTON HEADER - Estilo exclusivo para header
-   ============================================ */
+/* Header Button */
 .btn-header {
     background: rgb(255 255 255 / 5%);
     color: white;
-    box-shadow:
-        0 2px 12px rgb(0 0 0 / 20%),
-        inset 0 1px 0 rgb(255 255 255 / 10%);
+    box-shadow: 0 2px 12px rgb(0 0 0 / 20%), inset 0 1px 0 rgb(255 255 255 / 10%);
     border: 1px solid rgb(255 255 255 / 15%);
     flex-shrink: 0;
     white-space: nowrap;
     align-self: center;
-    position: relative;
     backdrop-filter: blur(10px);
     transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
-    overflow: hidden;
 }
 
-/* Estado quando header está scrolled - botão move para direita */
+.btn-header::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgb(255 255 255 / 10%), transparent);
+    transition: left 0.5s ease;
+    z-index: 1;
+}
+
+.btn-header:hover {
+    background: rgb(255 255 255 / 10%);
+    border-color: rgb(255 255 255 / 25%);
+    box-shadow: 0 4px 20px rgb(0 0 0 / 30%), inset 0 1px 0 rgb(255 255 255 / 15%);
+    transform: translateY(-1px);
+}
+
+.btn-header:hover::before {
+    left: 100%;
+}
+
+.btn-header:active {
+    transform: translateY(0) scale(0.98);
+    transition: transform 0.1s ease;
+}
+
 header.scrolled .btn-header {
     white-space: nowrap;
     text-overflow: ellipsis;
@@ -583,50 +559,16 @@ header.scrolled .btn-header {
     font-size: 0.9rem;
 }
 
-.btn-header::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: -100%;
-    width: 100%;
-    height: 100%;
-    background: linear-gradient(90deg,
-            transparent,
-            rgb(255 255 255 / 10%),
-            transparent);
-    transition: left 0.5s ease;
-    z-index: 1;
-}
-
-.btn-header:hover {
-    background: rgb(255 255 255 / 10%);
-    border-color: rgb(255 255 255 / 25%);
-    box-shadow:
-        0 4px 20px rgb(0 0 0 / 30%),
-        inset 0 1px 0 rgb(255 255 255 / 15%);
-    transform: translateY(-1px);
-}
-
-.btn-header:hover::before {
-    left: 100%;
-}
-
-.btn-header:active {
-    transform: translateY(0) scale(0.98);
-    transition: transform 0.1s ease;
-}
-
 .btn-header>* {
     position: relative;
     z-index: 2;
 }
 
+/* Outline Button */
 .btn-outline {
     border: 2px solid var(--border-glass);
     color: white;
     background: transparent;
-    position: relative;
-    overflow: hidden;
 }
 
 .btn-outline::before {
@@ -651,6 +593,7 @@ header.scrolled .btn-header {
     left: 0;
 }
 
+/* Hero Visual */
 .hero-visual {
     position: absolute;
     right: -5%;
@@ -673,7 +616,7 @@ header.scrolled .btn-header {
 }
 
 /* ============================================
-   ROADMAP SECTION - Sales Presentation Style
+   ROADMAP SECTION
    ============================================ */
 .services.roadmap-section {
     padding: 120px 0;
@@ -682,13 +625,11 @@ header.scrolled .btn-header {
     overflow: hidden;
 }
 
-/* Background dots pattern */
 .services.roadmap-section::before {
     content: '';
     position: absolute;
     inset: 0;
-    background-image:
-        radial-gradient(circle at 1px 1px, rgb(255 255 255 / 10%) 1px, transparent 0);
+    background-image: radial-gradient(circle at 1px 1px, rgb(255 255 255 / 10%) 1px, transparent 0);
     background-size: 30px 30px;
     opacity: 0.3;
     pointer-events: none;
@@ -700,7 +641,6 @@ header.scrolled .btn-header {
     min-height: 400px;
 }
 
-/* Horizontal connecting line */
 .roadmap-line {
     position: absolute;
     top: 50%;
@@ -730,8 +670,7 @@ header.scrolled .btn-header {
     position: relative;
     opacity: 1;
     transform: translateY(0);
-    transition: opacity 0.8s cubic-bezier(0.4, 0, 0.2, 1),
-        transform 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+    transition: opacity 0.8s cubic-bezier(0.4, 0, 0.2, 1), transform 0.8s cubic-bezier(0.4, 0, 0.2, 1);
     will-change: opacity, transform;
 }
 
@@ -751,26 +690,7 @@ header.scrolled .btn-header {
     border-radius: 16px;
 }
 
-.roadmap-link:hover .roadmap-box {
-    border-color: var(--neon-green);
-    box-shadow: 0 0 20px rgb(220 255 0 / 25%);
-}
-
-/* Circular node on the line */
-.roadmap-node {
-    width: 16px;
-    height: 16px;
-    border-radius: 50%;
-    background: var(--neon-green);
-    box-shadow:
-        0 0 10px rgb(220 255 0 / 60%),
-        0 0 20px rgb(220 255 0 / 40%);
-    position: relative;
-    z-index: 3;
-    margin-bottom: 20px;
-}
-
-/* Angular box with neon green border */
+/* Roadmap Elements */
 .roadmap-box {
     width: 100%;
     max-width: 220px;
@@ -778,38 +698,43 @@ header.scrolled .btn-header {
     background: #000;
     border: 2px solid var(--neon-green);
     position: relative;
-    clip-path: polygon(0% 0%,
-            95% 0%,
-            100% 8%,
-            100% 100%,
-            5% 100%,
-            0% 92%);
+    clip-path: polygon(0% 0%, 95% 0%, 100% 8%, 100% 100%, 5% 100%, 0% 92%);
     margin-bottom: 16px;
 }
 
-/* Stripe pattern top-left */
+.roadmap-link:hover .roadmap-box {
+    border-color: var(--neon-green);
+    box-shadow: 0 0 20px rgb(220 255 0 / 25%);
+}
+
+.roadmap-node {
+    width: 16px;
+    height: 16px;
+    border-radius: 50%;
+    background: var(--neon-green);
+    box-shadow: 0 0 10px rgb(220 255 0 / 60%), 0 0 20px rgb(220 255 0 / 40%);
+    position: relative;
+    z-index: 3;
+    margin-bottom: 20px;
+}
+
 .roadmap-stripe {
     position: absolute;
     top: 8px;
     left: 8px;
     width: 40px;
     height: 8px;
-    background: repeating-linear-gradient(45deg,
-            var(--neon-green),
-            var(--neon-green) 3px,
-            transparent 3px,
-            transparent 6px);
+    background: repeating-linear-gradient(45deg, var(--neon-green), var(--neon-green) 3px, transparent 3px, transparent 6px);
     opacity: 0.8;
 }
 
-.roadmap-box h3 {
+.roadmap-box h2 {
     font-size: 1rem;
     font-weight: 800;
     text-transform: uppercase;
     letter-spacing: 1px;
     color: white;
     margin: 0;
-    text-align: center;
     line-height: 1.3;
 }
 
@@ -822,13 +747,8 @@ header.scrolled .btn-header {
     max-width: 240px;
 }
 
-.roadmap-desc strong {
-    color: var(--neon-green);
-    font-weight: 700;
-}
-
-/* Mobile: Vertical scroll with fade out */
-@media (width <= 768px) {
+/* Mobile Roadmap */
+@media (width <=768px) {
     .services.roadmap-section {
         padding: 80px 0;
     }
@@ -850,11 +770,6 @@ header.scrolled .btn-header {
 
     .roadmap-step {
         width: 100%;
-        opacity: 1;
-        transform: translateY(0);
-        transition: opacity 1s cubic-bezier(0.25, 0.46, 0.45, 0.94),
-            transform 1s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-        will-change: opacity, transform;
     }
 
     .roadmap-node {
@@ -867,7 +782,7 @@ header.scrolled .btn-header {
         padding: 20px 16px;
     }
 
-    .roadmap-box h3 {
+    .roadmap-box h2 {
         font-size: 0.9rem;
     }
 
@@ -878,7 +793,7 @@ header.scrolled .btn-header {
 }
 
 /* ============================================
-   ABOUT CREATOR - MELLØ Section
+   ABOUT CREATOR - MELLØ
    ============================================ */
 .about-creator {
     padding: 100px 0;
@@ -948,9 +863,7 @@ header.scrolled .btn-header {
     object-fit: cover;
     border-radius: 50%;
     border: 3px solid var(--neon-green);
-    box-shadow:
-        0 0 30px rgb(220 255 0 / 40%),
-        0 0 60px rgb(220 255 0 / 20%);
+    box-shadow: 0 0 30px rgb(220 255 0 / 40%), 0 0 60px rgb(220 255 0 / 20%);
     position: relative;
     z-index: 2;
     transition: var(--transition);
@@ -958,9 +871,7 @@ header.scrolled .btn-header {
 
 .creator-card:hover .creator-image {
     transform: scale(1.05);
-    box-shadow:
-        0 0 40px rgb(220 255 0 / 60%),
-        0 0 80px rgb(220 255 0 / 30%);
+    box-shadow: 0 0 40px rgb(220 255 0 / 60%), 0 0 80px rgb(220 255 0 / 30%);
 }
 
 .creator-glow {
@@ -974,10 +885,10 @@ header.scrolled .btn-header {
     background: radial-gradient(circle, rgb(220 255 0 / 30%) 0%, transparent 70%);
     filter: blur(20px);
     z-index: 1;
-    animation: pulseGlow 3s ease-in-out infinite;
+    animation: pulse-glow 3s ease-in-out infinite;
 }
 
-@keyframes pulseGlow {
+@keyframes pulse-glow {
     0%,
     100% {
         opacity: 0.5;
@@ -1026,8 +937,7 @@ header.scrolled .btn-header {
     margin: 0;
 }
 
-/* Mobile Creator Section */
-@media (width <= 768px) {
+@media (width <=768px) {
     .about-creator {
         padding: 60px 0;
     }
@@ -1058,7 +968,9 @@ header.scrolled .btn-header {
     }
 }
 
-/* Pricing */
+/* ============================================
+   PRICING
+   ============================================ */
 .pricing {
     padding: 80px 0;
     background: var(--bg-deep);
@@ -1104,22 +1016,6 @@ header.scrolled .btn-header {
     background: var(--grad-neon);
     border-radius: 2px;
     box-shadow: var(--glow-green);
-}
-
-.pricing-header p,
-.pricing-subtitle {
-    font-size: 1.1rem;
-    color: var(--text-main);
-    font-weight: 500;
-    max-width: 600px;
-    margin: 0 auto;
-}
-
-.pricing-header p strong,
-.pricing-subtitle strong {
-    color: var(--neon-green);
-    font-weight: 700;
-    text-shadow: 0 0 10px rgb(220 255 0 / 50%);
 }
 
 .grid-pricing {
@@ -1178,18 +1074,6 @@ header.scrolled .btn-header {
     text-shadow: 0 0 20px rgb(220 255 0 / 30%);
 }
 
-.pricing-desc {
-    margin-bottom: 24px;
-    color: var(--text-muted);
-    font-size: 1rem;
-}
-
-.pricing-time {
-    font-size: 0.9rem;
-    color: var(--text-muted);
-    margin-bottom: 24px;
-}
-
 .pricing-featured {
     border-color: var(--neon-green);
     background: linear-gradient(135deg, rgb(220 255 0 / 5%), rgb(122 44 255 / 5%));
@@ -1209,13 +1093,13 @@ header.scrolled .btn-header {
     font-size: 0.95rem;
 }
 
-/* Footer FlowPay */
-.footer-flowpay-link {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    margin-top: 14px;
-    text-decoration: none;
+/* ============================================
+   FOOTER
+   ============================================ */
+footer {
+    padding: 80px 0;
+    background: var(--bg-deep);
+    border-top: 1px solid rgb(255 255 255 / 5%);
 }
 
 .footer-grid {
@@ -1240,27 +1124,81 @@ header.scrolled .btn-header {
     margin: 0;
 }
 
-footer a {
-    color: inherit;
-    text-decoration: none;
-}
-
-footer a:hover,
-footer a:focus-visible {
-    color: #f0f0f5;
-    text-decoration: none;
-}
-
 .footer-links {
     margin-top: 2px;
     color: #9aa0aa;
     font-size: 0.85rem;
 }
 
-.footer-links a {
-    color: inherit;
+.footer-flowpay-link {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 14px;
+    text-decoration: none;
 }
 
+.footer-flowpay-link:focus-visible {
+    outline: 2px solid var(--neon-green);
+    outline-offset: 6px;
+    border-radius: 12px;
+}
+
+.footer-flowpay-logo {
+    max-width: 160px;
+    width: 100%;
+    height: auto;
+    display: block;
+    opacity: 0.85;
+    filter: grayscale(100%) brightness(0.25);
+    transition: filter 0.25s ease, transform 0.25s ease, opacity 0.25s ease;
+}
+
+.footer-flowpay-link:hover .footer-flowpay-logo,
+.footer-flowpay-link:focus-visible .footer-flowpay-logo {
+    filter: grayscale(0%);
+    opacity: 1;
+    transform: translateY(-1px);
+}
+
+.footer-cnpj {
+    margin-top: 0;
+    color: #7b7f88;
+    font-size: 0.85rem;
+}
+
+@media (width <=768px) {
+    .footer-grid {
+        flex-direction: column;
+        align-items: center;
+        gap: 12px;
+    }
+
+    .footer-left {
+        text-align: center;
+    }
+
+    .footer-right {
+        text-align: center;
+        order: 4;
+    }
+
+    .footer-links {
+        order: 1;
+    }
+
+    .footer-cnpj {
+        order: 2;
+    }
+
+    .footer-copy {
+        order: 3;
+    }
+}
+
+/* ============================================
+   LEGAL
+   ============================================ */
 .legal {
     padding: 80px 0;
     border-top: 1px solid rgb(255 255 255 / 8%);
@@ -1303,65 +1241,9 @@ footer a:focus-visible {
     text-decoration: none;
 }
 
-.footer-flowpay-link:focus-visible {
-    outline: 2px solid var(--neon-green);
-    outline-offset: 6px;
-    border-radius: 12px;
-}
-
-.footer-flowpay-logo {
-    max-width: 160px;
-    width: 100%;
-    height: auto;
-    display: block;
-    opacity: 0.85;
-    filter: grayscale(100%) brightness(0.25);
-    transition: filter 0.25s ease, transform 0.25s ease, opacity 0.25s ease;
-}
-
-.footer-flowpay-link:hover .footer-flowpay-logo,
-.footer-flowpay-link:focus-visible .footer-flowpay-logo {
-    filter: grayscale(0%);
-    opacity: 1;
-    transform: translateY(-1px);
-}
-
-.footer-cnpj {
-    margin-top: 0;
-    color: #7b7f88;
-    font-size: 0.85rem;
-}
-
-@media (width <= 768px) {
-    .footer-grid {
-        flex-direction: column;
-        align-items: center;
-        gap: 12px;
-    }
-
-    .footer-left,
-    .footer-right {
-        text-align: center;
-    }
-
-    .footer-links {
-        order: 1;
-    }
-
-    .footer-cnpj {
-        order: 2;
-    }
-
-    .footer-copy {
-        order: 3;
-    }
-
-    .footer-right {
-        order: 4;
-    }
-}
-
-/* CTA */
+/* ============================================
+   CTA
+   ============================================ */
 .cta {
     padding: 120px 0;
 }
@@ -1382,9 +1264,7 @@ footer a:focus-visible {
     content: '';
     position: absolute;
     inset: 0;
-    background:
-        radial-gradient(circle at 20% 30%, rgb(255 255 255 / 10%) 0%, transparent 50%),
-        radial-gradient(circle at 80% 70%, rgb(220 255 0 / 10%) 0%, transparent 50%);
+    background: radial-gradient(circle at 20% 30%, rgb(255 255 255 / 10%) 0%, transparent 50%), radial-gradient(circle at 80% 70%, rgb(220 255 0 / 10%) 0%, transparent 50%);
     opacity: 0.5;
     pointer-events: none;
 }
@@ -1426,48 +1306,30 @@ footer a:focus-visible {
     box-shadow: 0 15px 40px rgb(255 255 255 / 40%), 0 0 30px rgb(255 255 255 / 20%);
 }
 
-/* Responsive - Mobile First (iOS-like) */
-@media (width <= 768px) {
-    /* Header Mobile 2030 - Advanced iOS Style */
+/* Responsive - Mobile First */
+@media (width <=768px) {
     header {
         --header-height: 70px;
         --header-blur: 60px;
         --header-opacity: 0.9;
 
         height: var(--header-height);
-        margin: 0;
-        padding: 0;
         backdrop-filter: blur(var(--header-blur)) saturate(180%);
-        background:
-            linear-gradient(135deg, rgb(255 47 179 / 10%) 0%, rgb(122 44 255 / 10%) 100%),
-            rgb(5 5 8 / var(--header-opacity));
-        -webkit-touch-callout: none;
-        user-select: none;
-        box-shadow:
-            0 8px 32px rgb(0 0 0 / 50%),
-            0 1px 0 rgb(255 255 255 / 8%) inset;
+        background: linear-gradient(135deg, rgb(255 47 179 / 10%) 0%, rgb(122 44 255 / 10%) 100%), rgb(5 5 8 / var(--header-opacity));
+        box-shadow: 0 8px 32px rgb(0 0 0 / 50%), 0 1px 0 rgb(255 255 255 / 8%) inset;
     }
 
     main {
         margin-top: 70px;
     }
 
-    .hero {
-        min-height: calc(50vh - 70px);
-    }
-
     header.scrolled {
         --header-opacity: 0.35;
         --header-blur: 35px;
 
-        /* Glassmorphism transparente durante scroll - mobile */
-        background:
-            linear-gradient(135deg, rgb(255 47 179 / 4%) 0%, rgb(122 44 255 / 4%) 100%),
-            rgb(5 5 8 / var(--header-opacity));
+        background: linear-gradient(135deg, rgb(255 47 179 / 4%) 0%, rgb(122 44 255 / 4%) 100%), rgb(5 5 8 / var(--header-opacity));
         backdrop-filter: blur(var(--header-blur)) saturate(140%);
-        box-shadow:
-            0 4px 20px rgb(0 0 0 / 25%),
-            0 1px 0 rgb(255 255 255 / 5%) inset;
+        box-shadow: 0 4px 20px rgb(0 0 0 / 25%), 0 1px 0 rgb(255 255 255 / 5%) inset;
     }
 
     .nav-links {
@@ -1480,302 +1342,114 @@ footer a:focus-visible {
 
     .logo-img {
         height: 34px;
-        transition:
-            transform 0.3s cubic-bezier(0.4, 0, 0.2, 1),
-            filter 0.3s ease;
-    }
-
-    .logo-img:active {
-        transform: scale(0.95);
     }
 
     .btn-primary {
         font-size: 0.85rem;
         padding: 12px 22px;
         min-height: 44px;
-        -webkit-tap-highlight-color: transparent;
-        touch-action: manipulation;
-        box-shadow:
-            0 3px 15px rgb(255 47 179 / 40%),
-            0 0 30px rgb(255 47 179 / 15%);
-    }
-
-    .btn-primary:active {
-        transform: translateY(0) scale(0.96);
-        transition: transform 0.1s ease;
-    }
-
-    .btn-primary:hover {
-        transform: translateY(-1px) scale(1.01);
-        box-shadow:
-            0 6px 25px rgb(255 47 179 / 50%),
-            0 0 50px rgb(255 47 179 / 25%);
+        box-shadow: 0 3px 15px rgb(255 47 179 / 40%), 0 0 30px rgb(255 47 179 / 15%);
     }
 
     .btn-header {
         font-size: 0.85rem;
         padding: 10px 18px;
         min-height: 40px;
-        -webkit-tap-highlight-color: transparent;
-        touch-action: manipulation;
-        box-shadow:
-            0 2px 8px rgb(0 0 0 / 20%),
-            inset 0 1px 0 rgb(255 255 255 / 8%);
+        box-shadow: 0 2px 8px rgb(0 0 0 / 20%), inset 0 1px 0 rgb(255 255 255 / 8%);
     }
 
-    .btn-header:hover {
-        transform: translateY(-1px);
-        box-shadow:
-            0 3px 12px rgb(0 0 0 / 25%),
-            inset 0 1px 0 rgb(255 255 255 / 12%);
-    }
-
-    .btn-header:active {
-        transform: translateY(0) scale(0.97);
-    }
-
-    /* Hero Mobile - Rule of Thirds Applied */
     .hero {
-        min-height: auto;
         padding: 72px 0 20px;
-        -webkit-overflow-scrolling: touch;
-        display: flex;
-        flex-direction: column;
-        justify-content: space-between;
-        position: relative;
-        overflow: hidden;
     }
 
     .hero-visual {
-        display: block;
         position: absolute;
         right: -18%;
         top: 55%;
-        transform: translateY(-50%);
         width: 85%;
         height: 55%;
-        border-radius: 28px;
         opacity: 0.5;
         pointer-events: none;
         z-index: 1;
     }
 
-    .hero-visual img {
-        opacity: 0.45;
-    }
-
     .hero-content {
-        max-width: 100%;
         text-align: center;
         padding: 0 20px;
-
-        /* Rule of Thirds: Content in upper third (33.33% from top) */
-        flex: 0 0 auto;
-        margin-top: 0;
-        margin-bottom: auto;
     }
 
     h1 {
         font-size: 1.75rem;
-        line-height: 1.2;
-        margin-bottom: 20px;
-        letter-spacing: -0.5px;
-    }
-
-    .hero-content p {
-        font-size: 0.95rem;
-        margin-bottom: 32px;
-        line-height: 1.6;
-        padding: 0 8px;
     }
 
     .hero-btns {
-        display: flex;
         flex-direction: column;
         gap: 12px;
-        align-items: stretch;
         padding: 0 20px;
-
-        /* Rule of Thirds: Buttons in lower third (33.33% from bottom) */
-        flex: 0 0 auto;
-        margin-top: auto;
-        margin-bottom: 12px;
     }
 
     .btn {
         width: 100%;
-        justify-content: center;
-        padding: 16px 24px;
-        font-size: 0.95rem;
-        -webkit-tap-highlight-color: transparent;
-        touch-action: manipulation;
         border-radius: 50px;
     }
 
-    .btn:active {
-        transform: scale(0.98);
-    }
-
-    /* Roadmap Mobile - iOS Style */
     .services.roadmap-section {
         padding: 60px 0;
-        -webkit-overflow-scrolling: touch;
     }
 
-    .service-card p strong,
+    .roadmap-desc strong,
+    .pricing-subtitle strong {
+        color: var(--neon-green);
+        font-weight: 700;
+    }
+
     .pricing-desc strong,
-    .pricing-time strong {
+    .pricing-time strong,
+    .service-card p strong {
         color: var(--neon-green);
         font-weight: 700;
         text-shadow: 0 0 10px rgb(220 255 0 / 50%);
     }
 
-    /* Pricing Mobile - iOS Style */
     .pricing {
         padding: 50px 0;
-        -webkit-overflow-scrolling: touch;
-    }
-
-    .pricing-header {
-        margin-bottom: 40px;
-        padding: 0 4px;
     }
 
     .pricing-header h2 {
         font-size: 1.75rem;
-        margin-bottom: 12px;
-    }
-
-    .pricing-header p {
-        font-size: 0.9rem;
-        padding: 0 12px;
-        line-height: 1.5;
-    }
-
-    .grid-pricing {
-        grid-template-columns: 1fr;
-        gap: 20px;
     }
 
     .pricing-card {
         padding: 28px 20px;
-        border-radius: 20px;
-        -webkit-tap-highlight-color: transparent;
-        touch-action: manipulation;
-    }
-
-    .pricing-card:active {
-        transform: scale(0.98);
     }
 
     .pricing-value {
         font-size: 1.75rem;
     }
 
-    .pricing-card h3 {
-        font-size: 1.3rem;
-    }
-
-    .pricing-desc {
-        font-size: 0.9rem;
-    }
-
-    .pricing-time {
-        font-size: 0.85rem;
-    }
-
-    /* CTA Mobile - iOS Style */
     .cta {
         padding: 50px 0;
-        -webkit-overflow-scrolling: touch;
     }
 
     .cta-box {
         padding: 40px 20px;
         border-radius: 24px;
-        margin: 0 4px;
     }
 
     .cta-box h2 {
         font-size: 1.5rem;
-        margin-bottom: 16px;
-        letter-spacing: 1px;
-    }
-
-    .cta-box p {
-        font-size: 0.9rem;
-        margin-bottom: 28px;
-        line-height: 1.5;
-        padding: 0 4px;
     }
 
     .btn-cta {
         width: 100%;
-        padding: 16px 32px;
-        font-size: 0.95rem;
-        -webkit-tap-highlight-color: transparent;
-        touch-action: manipulation;
     }
 
-    .btn-cta:active {
-        transform: scale(0.97);
-    }
-
-    /* Footer Mobile - iOS Style */
     footer {
         padding: 40px 0;
-        font-size: 0.85rem;
-        -webkit-overflow-scrolling: touch;
-    }
-
-    .container {
-        padding: 0 20px;
-    }
-
-    /* Smooth scrolling iOS - Aqua Effect Premium */
-    html {
-        -webkit-overflow-scrolling: touch;
-        -webkit-scroll-behavior: smooth;
-        scroll-behavior: smooth;
-        overscroll-behavior-y: contain;
-    }
-
-    body {
-        -webkit-overflow-scrolling: touch;
-        -webkit-scroll-behavior: smooth;
-        scroll-behavior: smooth;
-        overscroll-behavior-y: contain;
-        scroll-padding-top: 70px;
-        touch-action: pan-y;
-    }
-
-    main {
-        -webkit-overflow-scrolling: touch;
-        scroll-behavior: smooth;
-        overscroll-behavior-y: contain;
-    }
-
-    /* Remove tap highlight em todos os elementos interativos */
-    a,
-    button {
-        -webkit-tap-highlight-color: transparent;
-        touch-action: manipulation;
-    }
-
-    /* Melhor performance em mobile */
-    * {
-        -webkit-font-smoothing: antialiased;
-        -moz-osx-font-smoothing: grayscale;
-    }
-
-    /* Ajustes de toque iOS */
-    .btn-outline:active,
-    .btn-link:active {
-        transform: scale(0.97);
     }
 }
 
-@media (width <= 1024px) and (width >= 769px) {
+@media (width <=1024px) and (width >=769px) {
     .hero-visual {
         display: none;
     }
@@ -1795,270 +1469,8 @@ footer a:focus-visible {
 }
 
 /* ============================================
-   FLOWPAY PAYMENT MODAL - Premium Web3
+   PORTFOLIO
    ============================================ */
-.flowpay-modal {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: rgb(5 5 8 / 90%);
-    backdrop-filter: blur(20px);
-    display: none;
-    align-items: center;
-    justify-content: center;
-    z-index: 100000;
-    padding: 20px;
-    opacity: 0;
-    transition: opacity 0.5s ease;
-}
-
-.flowpay-modal.active {
-    display: flex;
-    opacity: 1;
-}
-
-.flowpay-card {
-    background: var(--bg-surface);
-    border: 1px solid var(--border-glass);
-    border-radius: 32px;
-    width: 100%;
-    max-width: 480px;
-    padding: 40px;
-    position: relative;
-    box-shadow: 0 40px 100px rgb(0 0 0 / 80%), var(--glow-pink);
-    transform: translateY(20px);
-    transition: transform 0.5s cubic-bezier(0.23, 1, 0.32, 1);
-}
-
-.flowpay-modal.active .flowpay-card {
-    transform: translateY(0);
-}
-
-.flowpay-close {
-    position: absolute;
-    top: 24px;
-    right: 24px;
-    background: none;
-    border: none;
-    color: var(--text-muted);
-    cursor: pointer;
-    padding: 8px;
-    transition: var(--transition);
-}
-
-.flowpay-close:hover {
-    color: white;
-    transform: rotate(90deg);
-}
-
-.flowpay-header {
-    text-align: center;
-    margin-bottom: 30px;
-}
-
-.flowpay-logo-img {
-    height: 32px;
-    margin-bottom: 15px;
-}
-
-.flowpay-header h3 {
-    font-size: 1.5rem;
-    font-weight: 700;
-    margin-bottom: 8px;
-}
-
-.flowpay-header p {
-    font-size: 0.9rem;
-    margin-bottom: 0;
-    color: var(--text-muted);
-}
-
-.flowpay-form {
-    display: flex;
-    flex-direction: column;
-    gap: 20px;
-}
-
-.flowpay-input-group {
-    display: flex;
-    flex-direction: column;
-    gap: 8px;
-}
-
-.flowpay-input-group label {
-    font-size: 0.8rem;
-    font-weight: 600;
-    color: var(--text-muted);
-    text-transform: uppercase;
-    letter-spacing: 1px;
-}
-
-.flowpay-input {
-    background: rgb(255 255 255 / 5%);
-    border: 1px solid rgb(255 255 255 / 10%);
-    border-radius: 12px;
-    padding: 14px 18px;
-    color: white;
-    font-family: inherit;
-    font-size: 1rem;
-    transition: var(--transition);
-}
-
-.flowpay-input:focus {
-    outline: none;
-    border-color: var(--primary);
-    background: rgb(255 255 255 / 8%);
-}
-
-.flowpay-pix-container {
-    display: none;
-    flex-direction: column;
-    align-items: center;
-    text-align: center;
-}
-
-.flowpay-qr-code {
-    width: 200px;
-    height: 200px;
-    background: white;
-    padding: 10px;
-    border-radius: 16px;
-    margin-bottom: 24px;
-    box-shadow: 0 0 30px rgb(255 255 255 / 10%);
-    position: relative;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    overflow: hidden;
-}
-
-.flowpay-skeleton {
-    width: 100%;
-    height: 100%;
-    background: linear-gradient(90deg, #f0f0f0 25%, #e0e0e0 50%, #f0f0f0 75%);
-    background-size: 200% 100%;
-    animation: skeletonPulse 1.5s infinite linear;
-    border-radius: 8px;
-}
-
-@keyframes skeletonPulse {
-    0% {
-        background-position: 200% 0;
-    }
-
-    100% {
-        background-position: -200% 0;
-    }
-}
-
-.flowpay-qr-code img {
-    width: 100%;
-    height: 100%;
-    position: relative;
-    z-index: 2;
-}
-
-.flowpay-pix-copy {
-    width: 100%;
-    margin-bottom: 24px;
-}
-
-.pix-copy-box {
-    background: rgb(255 255 255 / 5%);
-    border: 1px dashed rgb(255 255 255 / 20%);
-    border-radius: 12px;
-    padding: 12px;
-    font-family: monospace;
-    font-size: 0.8rem;
-    word-break: break-all;
-    margin-bottom: 12px;
-    cursor: pointer;
-    transition: var(--transition);
-    color: var(--text-muted);
-}
-
-.pix-copy-box:hover {
-    background: rgb(255 255 255 / 8%);
-    border-color: var(--primary);
-    color: white;
-}
-
-.flowpay-status {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 10px;
-    font-size: 0.9rem;
-    color: var(--text-muted);
-}
-
-.status-dot {
-    width: 8px;
-    height: 8px;
-    border-radius: 50%;
-    background: #dcff00;
-    box-shadow: 0 0 10px #dcff00;
-    animation: blink 1.5s infinite;
-}
-
-@keyframes blink {
-    0%,
-    100% {
-        opacity: 0.4;
-    }
-
-    50% {
-        opacity: 1;
-    }
-}
-
-.btn-flowpay {
-    margin-top: 10px;
-    width: 100%;
-}
-
-.flowpay-success {
-    display: none;
-    flex-direction: column;
-    align-items: center;
-    text-align: center;
-}
-
-.success-icon {
-    width: 64px;
-    height: 64px;
-    background: var(--success);
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    color: #000;
-    margin-bottom: 20px;
-}
-
-.flowpay-error {
-    color: #ff4d4d;
-    font-size: 0.85rem;
-    margin-top: 10px;
-    text-align: center;
-    display: none;
-}
-
-.flowpay-footer {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    margin-top: 24px;
-    padding-top: 16px;
-    border-top: 1px solid rgb(255 255 255 / 8%);
-}
-
-/* =============================================
-   SEÇÃO PORTFÓLIO / PROOF OF WORK
-   ============================================= */
-
 .portfolio {
     padding: 100px 0 80px;
     position: relative;
@@ -2093,7 +1505,6 @@ footer a:focus-visible {
     line-height: 1.6;
 }
 
-/* Grid 2x2 */
 .portfolio-grid {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
@@ -2101,7 +1512,6 @@ footer a:focus-visible {
     margin-bottom: 56px;
 }
 
-/* Card */
 .portfolio-card {
     background: var(--bg-glass);
     border: 1px solid var(--border-glass);
@@ -2114,10 +1524,10 @@ footer a:focus-visible {
 .portfolio-card:hover {
     border-color: rgb(255 47 179 / 30%);
     transform: translateY(-4px);
-    box-shadow: 0 20px 60px rgb(0 0 0 / 40%), 0 0 30px rgb(255 47 179 / 8%);
+    box-shadow: 0 20px 60px rgb(0 0 0 / 40%),
+        0 0 30px rgb(255 47 179 / 8%);
 }
 
-/* Imagem com overlay */
 .portfolio-img-wrap {
     position: relative;
     width: 100%;
@@ -2176,12 +1586,6 @@ footer a:focus-visible {
     color: var(--primary);
 }
 
-.portfolio-link-btn i {
-    width: 16px;
-    height: 16px;
-}
-
-/* Info do card */
 .portfolio-info {
     padding: 20px 22px 24px;
 }
@@ -2198,86 +1602,47 @@ footer a:focus-visible {
     font-weight: 700;
     letter-spacing: 0.08em;
     text-transform: uppercase;
-    padding: 4px 10px;
-    border-radius: 20px;
-    background: rgb(255 47 179 / 10%);
-    border: 1px solid rgb(255 47 179 / 25%);
-    color: var(--primary);
+    border-radius: 4px;
+    padding: 4px 8px;
+    background: rgb(255 255 255 / 5%);
+    color: var(--text-muted);
+    border: 1px solid rgb(255 255 255 / 10%);
 }
 
 .portfolio-info h3 {
-    font-size: 1.05rem;
+    font-size: 1.25rem;
     font-weight: 800;
+    color: white;
     margin-bottom: 8px;
-    color: var(--text-main);
+    transition: var(--transition);
+}
+
+.portfolio-card:hover .portfolio-info h3 {
+    color: var(--primary);
 }
 
 .portfolio-info p {
-    font-size: 0.88rem;
-    color: var(--text-muted);
-    line-height: 1.6;
-    margin: 0;
-}
-
-/* Footer da seção */
-.portfolio-footer {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 20px;
-    text-align: center;
-    padding-top: 8px;
-}
-
-.portfolio-footer p {
-    font-size: 1rem;
+    font-size: 0.92rem;
+    line-height: 1.5;
     color: var(--text-muted);
     margin: 0;
 }
 
-.portfolio-footer .btn {
-    display: inline-flex;
-    align-items: center;
-    gap: 8px;
-}
-
-.portfolio-footer .btn i {
-    width: 16px;
-    height: 16px;
-}
-
-/* Responsivo — mobile: 1 coluna */
-@media (width <= 768px) {
-    .portfolio {
-        padding: 70px 0 60px;
-    }
-
+@media (width <=640px) {
     .portfolio-grid {
         grid-template-columns: 1fr;
-        gap: 20px;
+    }
+}
+
+/* ============================================
+   ANIMATIONS & PULSES
+   ============================================ */
+@keyframes skeleton-pulse {
+    0% {
+        background-position: 200% 0;
     }
 
-    .portfolio-header {
-        margin-bottom: 40px;
-    }
-
-    /* Aspect ratio compacto no mobile */
-    .portfolio-img-wrap {
-        aspect-ratio: 16 / 9;
-    }
-
-    .portfolio-overlay {
-        opacity: 1;
-        background: rgb(5 5 8 / 45%);
-    }
-
-    .portfolio-link-btn {
-        padding: 10px 20px;
-        font-size: 0.82rem;
-    }
-
-    .portfolio-img-wrap img {
-        transform: none !important;
-        object-position: center 30%;
+    100% {
+        background-position: -200% 0;
     }
 }

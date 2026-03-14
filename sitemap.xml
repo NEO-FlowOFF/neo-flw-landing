@@ -1,4 +1,4 @@
-<?xml version="2.0" encoding="UTF-8"?>
+<?xml version="1.1" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
         xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9
@@ -7,137 +7,121 @@
   <!-- Página Principal -->
   <url>
     <loc>https://neoflowoff.agency/</loc>
-    <lastmod>2026-01-22</lastmod>
+    <lastmod>2026-03-14</lastmod>
     <changefreq>weekly</changefreq>
     <priority>1.0</priority>
+  </url>
+
+  <!-- Páginas de Planos (NΞØ Protocol Exclusive) -->
+  <url>
+    <loc>https://neoflowoff.agency/planos/start/</loc>
+    <lastmod>2026-03-14</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.9</priority>
+  </url>
+
+  <url>
+    <loc>https://neoflowoff.agency/planos/profissional/</loc>
+    <lastmod>2026-03-14</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.9</priority>
+  </url>
+
+  <url>
+    <loc>https://neoflowoff.agency/planos/premium/</loc>
+    <lastmod>2026-03-14</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.9</priority>
   </url>
 
   <!-- Experiência Desktop -->
   <url>
     <loc>https://neoflowoff.agency/desktop</loc>
-    <lastmod>2026-01-22</lastmod>
+    <lastmod>2026-03-14</lastmod>
     <changefreq>weekly</changefreq>
-    <priority>0.9</priority>
+    <priority>0.8</priority>
   </url>
 
   <!-- Miniapp Console Project -->
   <url>
     <loc>https://neoflowoff.agency/miniapp</loc>
-    <lastmod>2026-01-22</lastmod>
+    <lastmod>2026-03-14</lastmod>
     <changefreq>weekly</changefreq>
-    <priority>0.9</priority>
+    <priority>0.8</priority>
   </url>
 
   <!-- Rotas SPA (Single Page Application) -->
   <url>
     <loc>https://neoflowoff.agency/#home</loc>
-    <lastmod>2026-01-14</lastmod>
+    <lastmod>2026-03-14</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
   </url>
 
   <url>
     <loc>https://neoflowoff.agency/#projects</loc>
-    <lastmod>2026-01-14</lastmod>
+    <lastmod>2026-03-14</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
 
   <url>
-    <loc>https://neoflowoff.agency/#start</loc>
-    <lastmod>2026-01-14</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
-  </url>
-
-
-  <url>
     <loc>https://neoflowoff.agency/#ecosystem</loc>
-    <lastmod>2026-01-14</lastmod>
+    <lastmod>2026-03-14</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
 
-
-  <!-- GPTs MELLØ -->
+  <!-- Ecossistema FlowOFF & Dominíos Vercel -->
   <url>
-    <loc>https://chatgpt.com/g/g-68537da11ef081919947baedc3f00ad4-pai-do-marketing-v-2050</loc>
-    <lastmod>2026-01-14</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-
-  <url>
-    <loc>https://chatgpt.com/g/g-6854ff9169948191aad36d7f6ae02e8d-designer-v-2050-mello-tm-pro</loc>
-    <lastmod>2026-01-14</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-
-  <!-- Ecossistema FlowOFF -->
-  <url>
-    <loc>https://flowpaycash.netlify.app/</loc>
-    <lastmod>2026-01-14</lastmod>
+    <loc>https://lp.neoflowoff.agency/</loc>
+    <lastmod>2026-03-14</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
   </url>
 
-  <!-- Token $NEOFLW na Polygon -->
   <url>
-    <loc>https://polygonscan.com/token/0x59aa4EaE743d608FBDd4205ebA59b38DCA755Dd2</loc>
-    <lastmod>2026-01-14</lastmod>
+    <loc>https://www.neoflowoff.agency/</loc>
+    <lastmod>2026-03-14</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+  </url>
+
+  <url>
+    <loc>https://neo-flowoff-pwa.vercel.app/</loc>
+    <lastmod>2026-03-14</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+  </url>
+
+  <!-- Token $NEOFLW na BASE -->
+  <url>
+    <loc>https://basescan.org/token/0x41F4ff3d45DED9C1332e4908F637B75fe83F5d6B</loc>
+    <lastmod>2026-03-14</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.8</priority>
-  </url>
-
-  <url>
-    <loc>https://polygonscan.com/address/0x59aa4EaE743d608FBDd4205ebA59b38DCA755Dd2</loc>
-    <lastmod>2026-01-14</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>0.7</priority>
-  </url>
-
-  <url>
-    <loc>https://dexscreener.com/polygon/0x59aa4EaE743d608FBDd4205ebA59b38DCA755Dd2</loc>
-    <lastmod>2026-01-14</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>0.7</priority>
-  </url>
-
-  <url>
-    <loc>https://app.uniswap.org/tokens/polygon/0x59aa4EaE743d608FBDd4205ebA59b38DCA755Dd2</loc>
-    <lastmod>2026-01-14</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.6</priority>
   </url>
 
 
   <!-- Recursos PWA -->
   <url>
     <loc>https://neoflowoff.agency/manifest.webmanifest</loc>
-    <lastmod>2026-01-14</lastmod>
+    <lastmod>2026-03-14</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.3</priority>
   </url>
 
-  <url>
-    <loc>https://neoflowoff.agency/sw.js</loc>
-    <lastmod>2026-01-14</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.2</priority>
-  </url>
-
   <!-- Termos e Políticas -->
   <url>
-    <loc>https://neoflowoff.agency/terms.html</loc>
-    <lastmod>2026-01-14</lastmod>
+    <loc>https://neoflowoff.agency/legal/</loc>
+    <lastmod>2026-03-14</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
 
   <url>
-    <loc>https://neoflowoff.agency/privacy.html</loc>
-    <lastmod>2026-01-14</lastmod>
+    <loc>https://neoflowoff.agency/privacy/</loc>
+    <lastmod>2026-03-14</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
