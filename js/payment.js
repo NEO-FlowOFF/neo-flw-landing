@@ -6,6 +6,7 @@
 let currentProduct = { name: "", price: 0 };
 let chargeId = null;
 let statusInterval = null;
+let currentCustomerEmail = "";
 
 const FLOWPAY_API_CANDIDATES = [
     window.location.origin,
@@ -48,6 +49,7 @@ async function fetchFlowPay(path, options = {}) {
  */
 function initPayment(name, price) {
     currentProduct = { name, price };
+    currentCustomerEmail = "";
     
     const nameEl = document.getElementById("flowpay-product-name");
     const priceEl = document.getElementById("flowpay-product-price");
@@ -98,7 +100,7 @@ async function generatePix() {
     if (!cpfEl || !emailEl) return;
 
     const cpf = cpfEl.value.replace(/\D/g, "");
-    const email = emailEl.value;
+    const email = emailEl.value.trim();
 
     const isValidCPF = (cpf) => {
         if (cpf.length !== 11 || !!cpf.match(/(\d)\1{10}/)) return false;
@@ -159,6 +161,7 @@ async function generatePix() {
     if (errorEl) errorEl.style.display = "none";
 
     try {
+        currentCustomerEmail = email.toLowerCase();
         const response = await fetchFlowPay("/api/create-charge-landing", {
             method: "POST",
             headers: { "Content-Type": "application/json" },
@@ -288,6 +291,10 @@ function showSuccess() {
         });
     }
 
+    notifyPurchaseConfirmation().catch((error) => {
+        console.error("Purchase confirmation email error:", error);
+    });
+
     if (typeof lucide !== "undefined" && lucide.createIcons) {
         lucide.createIcons();
     }
@@ -331,3 +338,17 @@ document.addEventListener("input", (e) => {
 window.generatePix = generatePix;
 window.copyPixCode = copyPixCode;
 
+async function notifyPurchaseConfirmation() {
+    if (!chargeId) return;
+
+    await fetchFlowPay("/api/payment-confirmation", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+            chargeId,
+            customerEmail: currentCustomerEmail,
+            productName: `Pacote ${currentProduct.name}`,
+            amountBrl: currentProduct.price,
+        }),
+    });
+}
