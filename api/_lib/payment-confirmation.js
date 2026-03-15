@@ -1,7 +1,18 @@
 import crypto from "crypto";
 
-const FLOWPAY_API_URL = process.env.FLOWPAY_API_URL || "https://api.flowpay.cash";
-const FLOWPAY_API_KEY = process.env.FLOWPAY_API_KEY || "";
+function readEnv(...names) {
+  for (const name of names) {
+    const value = process.env[name];
+    if (typeof value === "string" && value.trim()) {
+      return value.trim();
+    }
+  }
+
+  return "";
+}
+
+const FLOWPAY_API_URL = readEnv("FLOWPAY_API_URL") || "https://api.flowpay.cash";
+const FLOWPAY_API_KEY = readEnv("FLOWPAY_INTERNAL_API_KEY", "FLOWPAY_API_KEY");
 const RESEND_API_URL = "https://api.resend.com/emails";
 const PAID_STATUSES = new Set([
   "PIX_PAID",
@@ -201,7 +212,7 @@ export async function fetchChargeDetails(chargeId) {
     `${FLOWPAY_API_URL}/api/charge/${encodeURIComponent(chargeId)}`,
     {
       headers: {
-        ...(FLOWPAY_API_KEY ? { Authorization: `Bearer ${FLOWPAY_API_KEY}` } : {}),
+        ...(FLOWPAY_API_KEY ? { "x-api-key": FLOWPAY_API_KEY } : {}),
       },
     },
   );

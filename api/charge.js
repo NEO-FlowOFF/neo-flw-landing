@@ -1,5 +1,16 @@
-const FLOWPAY_API_URL = process.env.FLOWPAY_API_URL || "https://api.flowpay.cash";
-const FLOWPAY_API_KEY = process.env.FLOWPAY_API_KEY || "";
+function readEnv(...names) {
+  for (const name of names) {
+    const value = process.env[name];
+    if (typeof value === "string" && value.trim()) {
+      return value.trim();
+    }
+  }
+
+  return "";
+}
+
+const FLOWPAY_API_URL = readEnv("FLOWPAY_API_URL") || "https://api.flowpay.cash";
+const FLOWPAY_API_KEY = readEnv("FLOWPAY_INTERNAL_API_KEY", "FLOWPAY_API_KEY");
 
 export default async function handler(req, res) {
   if (req.method !== "GET") {
@@ -14,10 +25,10 @@ export default async function handler(req, res) {
 
   try {
     const response = await fetch(
-      `${FLOWPAY_API_URL}/api/charge/${encodeURIComponent(chargeId)}`,
+        `${FLOWPAY_API_URL}/api/charge/${encodeURIComponent(chargeId)}`,
       {
         headers: {
-          ...(FLOWPAY_API_KEY ? { Authorization: `Bearer ${FLOWPAY_API_KEY}` } : {}),
+          ...(FLOWPAY_API_KEY ? { "x-api-key": FLOWPAY_API_KEY } : {}),
         },
       },
     );
