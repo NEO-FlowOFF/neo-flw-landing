@@ -13,7 +13,7 @@ export default async function handler(req, res) {
   }
 
   try {
-    const { eventName, eventData, fbp, fbc, url, userAgent, ip } = req.body;
+    const { eventName, eventData, fbp, fbc, url, userAgent, ip, testEventCode } = req.body;
     
     // Puxando dinamicamente das variáveis de ambiente
     const pixelId = process.env.NEXT_PUBLIC_META_PIXEL || process.env.META_PIXEL_ID;
@@ -42,6 +42,7 @@ export default async function handler(req, res) {
       data: [
         {
           event_name: eventName,
+          event_id: eventData?.eventId || Math.floor(Date.now() / 1000).toString(),
           event_time: Math.floor(Date.now() / 1000),
           action_source: 'website',
           event_source_url: url || req.headers.referer || '',
@@ -49,6 +50,11 @@ export default async function handler(req, res) {
         }
       ]
     };
+
+    // Adiciona o código de teste se fornecido (para depuração no Event Manager)
+    if (testEventCode || process.env.META_TEST_EVENT_CODE) {
+      payload.test_event_code = testEventCode || process.env.META_TEST_EVENT_CODE;
+    }
 
     const graphUrl = `https://graph.facebook.com/v23.0/${pixelId}/events?access_token=${accessToken}`;
     
