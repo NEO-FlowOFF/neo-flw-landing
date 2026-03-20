@@ -15,6 +15,9 @@
         "stylelint-config-standard": "^36.0.0"
     },
     "keywords": [],
-    "author": "NE\u00d8 Protocol",
-    "license": "MIT"
+    "author": "NEØ Protocol",
+    "license": "MIT",
+    "dependencies": {
+        "vercel": "^50.32.5"
+    }
 }
