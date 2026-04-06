@@ -16,9 +16,9 @@
 .checkout-page .flowpay-card {
     width: min(100%, 520px);
     background:
-        linear-gradient(180deg, rgb(255 255 255 / 0.04) 0%, rgb(255 255 255 / 0.02) 100%),
+        linear-gradient(180deg, rgb(255 255 255 / 4%) 0%, rgb(255 255 255 / 2%) 100%),
         #0a0a12;
-    border: 1px solid rgb(255 255 255 / 0.12);
+    border: 1px solid rgb(255 255 255 / 12%);
     border-radius: 28px;
     overflow: hidden;
     backdrop-filter: blur(24px);
@@ -27,10 +27,10 @@
 .checkout-page .flowpay-header {
     padding: 32px 28px 24px;
     text-align: center;
-    border-bottom: 1px solid rgb(255 255 255 / 0.08);
+    border-bottom: 1px solid rgb(255 255 255 / 8%);
     background:
-        radial-gradient(circle at top, rgb(255 47 179 / 0.16), transparent 58%),
-        linear-gradient(180deg, rgb(255 255 255 / 0.03), transparent);
+        radial-gradient(circle at top, rgb(255 47 179 / 16%), transparent 58%),
+        linear-gradient(180deg, rgb(255 255 255 / 3%), transparent);
 }
 
 .checkout-page .flowpay-logo-img {
@@ -76,7 +76,7 @@
     width: 100%;
     min-height: 52px;
     padding: 14px 16px;
-    border: 1px solid rgb(255 255 255 / 0.12);
+    border: 1px solid rgb(255 255 255 / 12%);
     border-radius: 14px;
     background: #111622;
     color: var(--text-main);
@@ -85,13 +85,13 @@
 }
 
 .checkout-page .flowpay-input::placeholder {
-    color: rgb(255 255 255 / 0.35);
+    color: rgb(255 255 255 / 35%);
 }
 
 .checkout-page .flowpay-input:focus {
     outline: none;
     border-color: var(--primary);
-    box-shadow: 0 0 0 4px rgb(255 47 179 / 0.12);
+    box-shadow: 0 0 0 4px rgb(255 47 179 / 12%);
     background: #141a28;
 }
 
@@ -103,9 +103,9 @@
 .checkout-page .flowpay-error {
     display: none;
     padding: 12px 14px;
-    border: 1px solid rgb(255 87 87 / 0.28);
+    border: 1px solid rgb(255 87 87 / 28%);
     border-radius: 14px;
-    background: rgb(255 87 87 / 0.08);
+    background: rgb(255 87 87 / 8%);
     color: #ff9a9a;
     font-size: 0.92rem;
     line-height: 1.5;
@@ -123,7 +123,7 @@
     aspect-ratio: 1;
     margin: 0 auto;
     border-radius: 22px;
-    border: 1px solid rgb(255 255 255 / 0.12);
+    border: 1px solid rgb(255 255 255 / 12%);
     background: #fff;
     display: flex;
     align-items: center;
@@ -141,7 +141,7 @@
     height: 100%;
     border-radius: 14px;
     background:
-        linear-gradient(90deg, rgb(0 0 0 / 0.08), rgb(0 0 0 / 0.16), rgb(0 0 0 / 0.08));
+        linear-gradient(90deg, rgb(0 0 0 / 8%), rgb(0 0 0 / 16%), rgb(0 0 0 / 8%));
     background-size: 200% 100%;
     animation: checkout-skeleton 1.2s linear infinite;
 }
@@ -166,7 +166,7 @@
     width: 100%;
     padding: 16px;
     border-radius: 16px;
-    border: 1px solid rgb(255 255 255 / 0.1);
+    border: 1px solid rgb(255 255 255 / 10%);
     background: #111622;
     color: var(--text-main);
     font-size: 0.92rem;
@@ -177,7 +177,7 @@
 }
 
 .checkout-page .pix-copy-box:hover {
-    border-color: rgb(255 255 255 / 0.22);
+    border-color: rgb(255 255 255 / 22%);
     transform: translateY(-1px);
 }
 
@@ -189,7 +189,7 @@
     align-self: center;
     padding: 10px 14px;
     border-radius: 999px;
-    background: rgb(220 255 0 / 0.08);
+    background: rgb(220 255 0 / 8%);
     color: var(--neon-green);
     font-size: 0.9rem;
 }
@@ -199,21 +199,21 @@
     height: 10px;
     border-radius: 50%;
     background: var(--neon-green);
-    box-shadow: 0 0 0 0 rgb(220 255 0 / 0.5);
+    box-shadow: 0 0 0 0 rgb(220 255 0 / 50%);
     animation: checkout-pulse 1.6s infinite;
 }
 
 @keyframes checkout-pulse {
     0% {
-        box-shadow: 0 0 0 0 rgb(220 255 0 / 0.5);
+        box-shadow: 0 0 0 0 rgb(220 255 0 / 50%);
     }
 
     70% {
-        box-shadow: 0 0 0 10px rgb(220 255 0 / 0);
+        box-shadow: 0 0 0 10px rgb(220 255 0 / 0%);
     }
 
     100% {
-        box-shadow: 0 0 0 0 rgb(220 255 0 / 0);
+        box-shadow: 0 0 0 0 rgb(220 255 0 / 0%);
     }
 }
 
@@ -233,7 +233,7 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    background: rgb(255 47 179 / 0.14);
+    background: rgb(255 47 179 / 14%);
     color: var(--primary);
     box-shadow: var(--glow-pink);
 }
@@ -256,7 +256,7 @@
 
 .checkout-page .flowpay-footer {
     padding: 18px 28px 24px;
-    border-top: 1px solid rgb(255 255 255 / 0.08);
+    border-top: 1px solid rgb(255 255 255 / 8%);
     text-align: center;
 }
 
@@ -267,7 +267,7 @@
     object-fit: contain;
 }
 
-@media (max-width: 900px) {
+@media (width <= 900px) {
     .checkout-page .checkout-container {
         padding: 32px 16px 48px;
     }
@@ -278,7 +278,7 @@
     }
 }
 
-@media (max-width: 640px) {
+@media (width <= 640px) {
     .checkout-page .flowpay-header,
     .checkout-page .flowpay-form,
     .checkout-page .flowpay-pix-container,
