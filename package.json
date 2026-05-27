@@ -18,22 +18,7 @@
   "author": "NEØ Protocol",
   "license": "MIT",
   "dependencies": {
-    "vercel": "^50.39.0"
-  },
-  "pnpm": {
-    "overrides": {
-      "tar": "^7.5.4",
-      "minimatch": "^9.0.5",
-      "undici": "^6.24.0",
-      "picomatch": "^2.3.2",
-      "path-to-regexp": "^8.4.0",
-      "lodash": "^4.18.0",
-      "flatted": "^3.4.2",
-      "socket.io-parser": "^4.2.6"
-    },
-    "onlyBuiltDependencies": [
-      "esbuild"
-    ]
+    "vercel": "^51.7.0"
   },
   "packageManager": "pnpm@10.33.0"
 }
