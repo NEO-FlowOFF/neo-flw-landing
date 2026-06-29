@@ -1104,7 +1104,7 @@ footer {
 
 .simple-footer {
     padding: 60px 0;
-    border-top: 1px solid rgba(255, 255, 255, 0.1);
+    border-top: 1px solid rgb(255 255 255 / 10%);
     text-align: center;
     color: #9aa0aa;
     font-size: 0.9rem;
