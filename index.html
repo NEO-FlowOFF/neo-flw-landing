@@ -316,6 +316,7 @@
 
     <!-- Analytics Ready - Google Tag (gtag.js) -->
     <!-- Google tag (gtag.js) -->
+    <!-- 
     <script
       async
       src="https://www.googletagmanager.com/gtag/js?id=AW-17941034750"
@@ -329,6 +330,7 @@
 
       gtag("config", "AW-17941034750");
     </script>
+    -->
     <!-- Google Tag Manager -->
     <script>
       (function (w, d, s, l, i) {
@@ -529,6 +531,77 @@
       };
     </script>
     <!-- End Dynamic Meta Pixel Code -->
+
+    <!-- ◬ NΞØ.TRACKING · GHOST MODE -->
+    <script>
+      (function () {
+        // Ocultação do Pixel ID
+        const _id = atob("MTcwMzc0OTYwNjg1NDQxOQ==");
+
+        function init_ghost() {
+          !(function (f, b, e, v, n, t, s) {
+            if (f.fbq) return;
+            n = f.fbq = function () {
+              n.callMethod
+                ? n.callMethod.apply(n, arguments)
+                : n.queue.push(arguments);
+            };
+            if (!f._fbq) f._fbq = n;
+            n.push = n;
+            n.loaded = !0;
+            n.version = "2.0";
+            n.queue = [];
+            t = b.createElement(e);
+            t.async = !0;
+            t.src = v;
+            s = b.getElementsByTagName(e)[0];
+            s.parentNode.insertBefore(t, s);
+          })(
+            window,
+            document,
+            "script",
+            "https://connect.facebook.net/en_US/fbevents.js",
+          );
+
+          fbq("init", _id);
+          fbq("track", "PageView");
+
+          // Segredinhos NEØ: Track de Scroll (50%) e Time on Page (30s) para qualificação
+          let scrollFired = false;
+          window.addEventListener(
+            "scroll",
+            () => {
+              if (
+                !scrollFired &&
+                window.scrollY + window.innerHeight >=
+                  document.body.scrollHeight * 0.5
+              ) {
+                fbq("trackCustom", "Scroll50Percent");
+                scrollFired = true;
+              }
+            },
+            { passive: true },
+          );
+
+          setTimeout(() => fbq("trackCustom", "TimeOnPage_30s"), 30000);
+        }
+
+        // Anti-bot: init apenas em Idle ou atraso de 1.5s
+        if (window.requestIdleCallback) {
+          requestIdleCallback(init_ghost);
+        } else {
+          setTimeout(init_ghost, 1500);
+        }
+      })();
+    </script>
+    <noscript
+      ><img
+        height="1"
+        width="1"
+        style="display: none"
+        src="https://www.facebook.com/tr?id=1703749606854419&ev=PageView&noscript=1"
+    /></noscript>
+    <!-- ◬ END GHOST TRACKING -->
   </head>
 
   <body>
@@ -1042,8 +1115,6 @@
         </div>
       </div>
     </footer>
-
-
 
     <!-- FlowPay Logic -->
     <script src="/js/payment.js"></script>
