@@ -1,6 +1,6 @@
 /**
  * FlowPay Shared Payment Logic
- * NEØ.FLOWOFF Agency
+ * neoflowoff.agency Agency
  */
 
 let currentProduct = { name: "", price: 0 };

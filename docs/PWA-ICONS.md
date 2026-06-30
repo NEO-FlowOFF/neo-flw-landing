@@ -1,4 +1,4 @@
-# 📱 Guia de Ícones PWA - NEØ.FLOWOFF
+# 📱 Guia de Ícones PWA - neoflowoff.agency
 
 ## 📂 Estrutura Recomendada
 

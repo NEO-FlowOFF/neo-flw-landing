@@ -1,7 +1,7 @@
 {
-  "name": "NEØ.FLOWOFF - Estratégia, automação, Web3 e tokenização",
-  "short_name": "NEØ.FLOWOFF",
-  "description": "Marketing como infraestrutura. Sites que convertem, automação que escala e sistemas que não quebram.",
+  "name": "neoflowoff.agency - Agentes de IA, páginas e CRM",
+  "short_name": "neoflowoff.agency",
+  "description": "Agentes de IA, páginas, CRM e fluxos comerciais para empresas. Marketing com infraestrutura.",
   "start_url": "/",
   "display": "standalone",
   "background_color": "#050508",
@@ -48,6 +48,6 @@
   ],
   "screenshots": [],
   "shortcuts": [],
-  "version": "202606291109",
-  "version_name": "2026.06.29"
+  "version": "202606300241",
+  "version_name": "2026.06.30"
 }

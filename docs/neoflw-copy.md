@@ -1,4 +1,4 @@
-# NEØ.FLOWOFF — Copy Base para Landing de Ativação Rápida
+# neoflowoff.agency — Copy Base para Landing de Ativação Rápida
 
 ## OBJETIVO DA PÁGINA
 
@@ -7,7 +7,7 @@ A página NÃO é institucional.
 
 Ela existe para:
 
-- Explicar rapidamente o que a NEØ.FLOWOFF faz
+- Explicar rapidamente o que a neoflowoff.agency faz
 - Qualificar o visitante
 - Levar para uma ação direta (conversa / diagnóstico / início de projeto)
 
@@ -19,7 +19,7 @@ Sem linguagem de agência tradicional.
 
 ## POSICIONAMENTO CENTRAL
 
-A NEØ.FLOWOFF não vende campanhas.
+A neoflowoff.agency não vende campanhas.
 Constrói infraestrutura de crescimento.
 
 Estratégia, automação, Web3 e tokenização como **sistema operacional de negócio**.
@@ -30,7 +30,7 @@ Estratégia, automação, Web3 e tokenização como **sistema operacional de neg
 
 ### Headline Principal
 
-**NEØ.FLOWOFF**  
+**neoflowoff.agency**  
 **da Estratégia ao Token**
 
 ### Subheadline
@@ -141,7 +141,7 @@ Pronto para sair do improviso?
 ### Texto
 
 Se você entende que crescimento é sistema,  
-a NEØ.FLOWOFF é o próximo passo.
+a neoflowoff.agency é o próximo passo.
 
 ### CTA
 
@@ -157,7 +157,7 @@ a NEØ.FLOWOFF é o próximo passo.
 
 ## FOOTER (SIMPLES)
 
-NEØ.FLOWOFF  
+neoflowoff.agency  
 Arquitetura digital · Automação · Web3
 
 Sem slogans extras.
