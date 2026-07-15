@@ -35,7 +35,7 @@ install: ## Instala dependências do projeto
 
 ##@ Validação
 
-check: lint validate ## Executa todas as verificações (lint + validate)
+check: lint validate audit ## Executa todas as verificações (lint + validate + audit)
 
 lint: ## Valida HTML e CSS (htmlhint + stylelint)
 	@echo "$(GREEN)🔍 Validando HTML e CSS...$(NC)"
@@ -44,6 +44,10 @@ lint: ## Valida HTML e CSS (htmlhint + stylelint)
 validate: ## Valida HTML usando validador W3C (requer curl)
 	@echo "$(GREEN)✅ Validando HTML com W3C...$(NC)"
 	@curl -s "https://validator.w3.org/nu/?out=text" -F "file=@index.html" | head -20 || echo "$(YELLOW)⚠️  Validador W3C não disponível$(NC)"
+
+audit: ## Audita dependências do projeto por vulnerabilidades (requer pnpm)
+	@echo "$(GREEN)🚨 Auditando dependências do projeto...$(NC)"
+	@pnpm audit --prod || echo "$(YELLOW)⚠️  pnpm audit encontrou vulnerabilidades ou não está disponível. Execute: make install$(NC)"
 
 check-links: ## Verifica links quebrados (requer curl)
 	@echo "$(GREEN)🔗 Verificando links (isso pode levar alguns segundos)...$(NC)"
