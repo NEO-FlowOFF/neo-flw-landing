@@ -1165,7 +1165,7 @@ header.scrolled .btn-header {
 }
 
 .pricing-actions .btn-outline {
-  border-color: rgba(255, 255, 255, 0.3);
+  border-color: rgb(255 255 255 / 30%);
 }
 
 .pricing-actions .btn-featured-green {
@@ -1195,7 +1195,7 @@ header.scrolled .btn-header {
   font-weight: 800;
   margin-bottom: 40px;
   color: #fff;
-  text-shadow: 0 0 10px rgba(255, 255, 255, 0.1);
+  text-shadow: 0 0 10px rgb(255 255 255 / 10%);
 }
 
 .other-services-grid {
@@ -1211,7 +1211,7 @@ header.scrolled .btn-header {
   background: var(--bg-glass);
   backdrop-filter: blur(12px);
   -webkit-backdrop-filter: blur(12px);
-  border: 1px solid rgba(255, 255, 255, 0.05);
+  border: 1px solid rgb(255 255 255 / 5%);
   border-radius: 16px;
   padding: 30px;
   text-align: left;
@@ -1229,8 +1229,8 @@ header.scrolled .btn-header {
   height: 100%;
   background: linear-gradient(
     135deg,
-    rgba(255, 35, 255, 0.05),
-    rgba(110, 72, 255, 0.05)
+    rgb(255 35 255 / 5%),
+    rgb(110 72 255 / 5%)
   );
   opacity: 0;
   transition: opacity 0.3s ease;
@@ -1239,8 +1239,8 @@ header.scrolled .btn-header {
 
 .service-card:hover {
   transform: translateY(-5px);
-  border-color: rgba(110, 72, 255, 0.3);
-  box-shadow: 0 10px 30px rgba(110, 72, 255, 0.1);
+  border-color: rgb(110 72 255 / 30%);
+  box-shadow: 0 10px 30px rgb(110 72, 255 / 10%);
 }
 
 .service-card:hover::before {
@@ -1251,8 +1251,8 @@ header.scrolled .btn-header {
   width: 50px;
   height: 50px;
   border-radius: 12px;
-  background: rgba(110, 72, 255, 0.1);
-  border: 1px solid rgba(110, 72, 255, 0.2);
+  background: rgb(110 72 255 / 10%);
+  border: 1px solid rgb(110 72 255 / 20%);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -1302,7 +1302,7 @@ header.scrolled .btn-header {
 
 .service-card:hover .service-link {
   color: #fff;
-  text-shadow: 0 0 8px rgba(255, 255, 255, 0.5);
+  text-shadow: 0 0 8px rgb(255 255 255 / 50%);
 }
 
 .service-link i {
@@ -1771,8 +1771,12 @@ footer {
 }
 
 @keyframes roulette {
-  0% { transform: translateX(0); }
-  100% { transform: translateX(-50%); }
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-50%);
+  }
 }
 
 .marquee-container {
@@ -1780,8 +1784,20 @@ footer {
   white-space: nowrap;
   display: flex;
   margin-bottom: 56px;
-  mask-image: linear-gradient(to right, transparent, black 5%, black 95%, transparent);
-  -webkit-mask-image: linear-gradient(to right, transparent, black 5%, black 95%, transparent);
+  mask-image: linear-gradient(
+    to right,
+    transparent,
+    black 5%,
+    black 95%,
+    transparent
+  );
+  -webkit-mask-image: linear-gradient(
+    to right,
+    transparent,
+    black 5%,
+    black 95%,
+    transparent
+  );
 }
 
 .marquee-track {
