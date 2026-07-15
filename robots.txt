@@ -43,7 +43,7 @@ Disallow: /postcss.config.*
 Disallow: /*?checkout=success
 Disallow: /*?utm_*
 Disallow: /api/
+Disallow: /checkout/
 
 # Sitemaps
-Sitemap: https://neoflowoff.agency/sitemap.xml
-Sitemap: https://www.neoflowoff.agency/sitemap.xml
+Sitemap: https://lp.neoflowoff.agency/sitemap.xml

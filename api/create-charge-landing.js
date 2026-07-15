@@ -28,6 +28,7 @@ export default async function handler(req, res) {
       customer_email: body.customer_email || "",
       customer_name: body.customer_name || "",
       wallet: "",
+      utm_data: body.utm_data || {},
     };
 
     const response = await fetch(`${FLOWPAY_API_URL}/api/create-charge`, {

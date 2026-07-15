@@ -44,6 +44,42 @@ async function fetchFlowPay(path, options = {}) {
 }
 
 /**
+ * Captura e armazena os parâmetros UTM na URL e fallback no sessionStorage
+ */
+function getUtmParams() {
+    const params = new URLSearchParams(window.location.search);
+    const utmKeys = ["utm_source", "utm_medium", "utm_campaign", "utm_content", "utm_term", "fbclid", "gclid"];
+    const utmData = {};
+
+    let hasNewUtm = false;
+    utmKeys.forEach((key) => {
+        const val = params.get(key);
+        if (val) {
+            utmData[key] = val;
+            hasNewUtm = true;
+        }
+    });
+
+    if (hasNewUtm) {
+        try {
+            sessionStorage.setItem("neo_utm_data", JSON.stringify(utmData));
+        } catch (e) {
+            console.warn("sessionStorage indisponível para gravar UTMs:", e);
+        }
+    } else {
+        try {
+            const saved = sessionStorage.getItem("neo_utm_data");
+            if (saved) {
+                Object.assign(utmData, JSON.parse(saved));
+            }
+        } catch (e) {
+            console.warn("sessionStorage indisponível para ler UTMs:", e);
+        }
+    }
+    return utmData;
+}
+
+/**
  * Initializes payment for a specific product
  * Used both in modal (landing) and inline (product pages)
  */
@@ -78,11 +114,13 @@ function initPayment(name, price) {
         qrSkeleton.style.display = "block";
     }
 
-    // Tracking: Begin checkout
+    // Tracking: Begin checkout com UTMs
+    const utmData = getUtmParams();
     if (window.pushNeoDataLayerEvent) {
         window.pushNeoDataLayerEvent("begin_checkout", {
             item_name: name,
             price: price,
+            ...utmData,
         });
     }
 
@@ -162,14 +200,16 @@ async function generatePix() {
 
     try {
         currentCustomerEmail = email.toLowerCase();
+        const utmData = getUtmParams();
         const response = await fetchFlowPay("/api/create-charge-landing", {
             method: "POST",
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify({
                 amount_brl: currentProduct.price,
-                product_ref: `landing-${currentProduct.name.toLowerCase()}`,
+                product_ref: `landing-${currentProduct.name.toLowerCase().replace(/\s+/g, "-")}`,
                 customer_cpf: cpf,
                 customer_email: email,
+                utm_data: utmData,
             }),
         });
 
@@ -199,11 +239,12 @@ async function generatePix() {
             if (step1) step1.style.display = "none";
             if (step2) step2.style.display = "flex";
 
-            // Tracking: PIX generated
+            // Tracking: PIX gerado com UTMs
             if (window.pushNeoDataLayerEvent) {
                 window.pushNeoDataLayerEvent("add_payment_info", {
                     item_name: currentProduct.name,
                     price: currentProduct.price,
+                    ...utmData,
                 });
             }
 

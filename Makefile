@@ -31,7 +31,7 @@ dev: ## Inicia desenvolvimento com hot-reload (browser-sync)
 
 install: ## Instala dependências do projeto
 	@echo "$(GREEN)📦 Instalando dependências...$(NC)"
-	@pnpm install || echo "$(YELLOW)⚠️  pnpm não encontrado$(NC)"
+	@pnpm install --filter . || echo "$(YELLOW)⚠️  pnpm não encontrado$(NC)"
 
 ##@ Validação
 

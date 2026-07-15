@@ -34,18 +34,18 @@ Criar um endpoint público, rápido (baixo tempo de resposta) e não-autenticado
 
 ## 2. Meta Pixel + Conversions API (CAPI)
 
-### Preocupação Técnica
+> Preocupação Técnica
 
 Pixel baseado em navegador (Client-side) tem baixa taxa de correspondência devido a AdBlockers e Safari (ITP). Precisamos de redundância através do servidor (Server-side) para atingir os 94%+ de match rate que o protocolo exige.
 
-### O que implementar no Target (Front-End)
+> O que implementar no Target (Front-End)
 
 Injetar o Meta Pixel base (Page View) no `<head>` de todas as rotas visíveis.
 
 - O Pixel ID deve ser puxado dinamicamente das variáveis de ambiente (`process.env.NEXT_PUBLIC_META_PIXEL` em React, ou `META_PIXEL_ID` no [.env](file:///Users/nettomello/CODIGOS/ads-engineer/.env) padrão).
 - Nunca expor parâmetros pesados como "Purchase" no client-side para evitar scraping de concorrentes e auditorias prematuras do Meta.
 
-### O que implementar no Target (Back-End / API CAPI)
+> O que implementar no Target (Back-End / API CAPI)
 
 Os eventos de alto valor (Lead, InitiateCheckout, Purchase) devem ser disparados **exclusivamente** pelo servidor.
 
@@ -59,11 +59,11 @@ Os eventos de alto valor (Lead, InitiateCheckout, Purchase) devem ser disparados
 
 ## 3. Stealth Protocol & Redirecionamento (Opcional, nichos moderados/black)
 
-### Preocupação Técnica
+> Preocupação Técnica
 
 Se a oferta for agressiva, robôs e revisores humanos da Meta/Google (crawlers) farão auditorias manuais no site, resultando em bloqueios (Bans).
 
-### O que implementar no Target (Middleware/Edge)
+> O que implementar no Target (Middleware/Edge)
 
 Adicionar um *fingerprinter* ou filtro no Edge/Middleware (ex: Cloudflare Workers, Next.js Middleware ou Nginx).
 
@@ -79,11 +79,11 @@ Adicionar um *fingerprinter* ou filtro no Edge/Middleware (ex: Cloudflare Worker
 
 ## 4. Webhook de Operação (Callback)
 
-### Preocupação Técnica
+> Preocupação Técnica
 
 Queremos que o System Terminal do Ads Engineer reporte as vendas e leads em tempo real para a equipe de Growth.
 
-### O que implementar no Target
+> O que implementar no Target
 
 Quando um usuário concluir o funil principal (ex: sucesso no checkout ou formulário):
 
@@ -93,6 +93,6 @@ Quando um usuário concluir o funil principal (ex: sucesso no checkout ou formul
 
 ---
 
-### -> Missão para o Agent
+> Missão para o Agent
 
 Implemente estes requisitos na arquitetura da outra aplicação. Retorne com um **Report de Integração** atestando que o `/api/health` está respondendo em <100ms e que a lógica CAPI está preparada usando as variáveis corretas.
