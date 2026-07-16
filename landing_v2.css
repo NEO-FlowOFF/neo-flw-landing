@@ -973,10 +973,10 @@ header.scrolled .btn-header {
 
 .creator-name {
   font-size: 2.5rem;
-  font-weight: 900;
+  font-weight: 200;
   margin-bottom: 8px;
   color: white;
-  text-transform: uppercase;
+  text-transform: none;
   letter-spacing: 2px;
 }
 
@@ -2082,4 +2082,87 @@ footer {
   body {
     padding-bottom: 90px;
   }
+}
+
+/* Meta Tech Provider Badge (B2B trust stamp) */
+.meta-tech-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 16px;
+  padding: 10px 20px;
+  background-color: #fff;
+  border: 1px solid #e4e4e7;
+  border-radius: 9999px;
+  box-shadow:
+    0 1px 3px 0 rgb(0 0 0 / 10%),
+    0 1px 2px 0 rgb(0 0 0 / 6%);
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  user-select: none;
+  width: fit-content;
+  text-decoration: none;
+  vertical-align: middle;
+}
+
+.meta-tech-badge:hover {
+  box-shadow:
+    0 4px 6px -1px rgb(0 0 0 / 10%),
+    0 2px 4px -2px rgb(0 0 0 / 10%);
+  border-color: #d4d4d8;
+  transform: translateY(-1px);
+}
+
+.meta-tech-badge-logo {
+  width: 28px;
+  height: 28px;
+  color: #0668e1;
+  flex-shrink: 0;
+  display: block;
+}
+
+.meta-tech-badge-divider {
+  width: 1px;
+  height: 28px;
+  background-color: #e4e4e7;
+  flex-shrink: 0;
+}
+
+.meta-tech-badge-content {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  text-align: left;
+}
+
+.meta-tech-badge-title {
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  color: #18181b;
+  line-height: 1;
+  margin-bottom: 3px;
+  font-family:
+    system-ui,
+    -apple-system,
+    sans-serif;
+}
+
+.meta-tech-badge-subtitle {
+  font-size: 9px;
+  font-weight: 500;
+  letter-spacing: 0.1em;
+  color: #71717a;
+  line-height: 1;
+  font-family:
+    system-ui,
+    -apple-system,
+    sans-serif;
+}
+
+/* Flexbox wrapper to align CTA and Badge in Hero */
+.hero-btns {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  margin-top: 32px;
+  flex-wrap: wrap;
 }

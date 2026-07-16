@@ -1,7 +1,7 @@
 {
-  "name": "neoflowoff.agency - Agentes de IA, páginas e CRM",
+  "name": "neoflowoff.agency - Agentes de IA, sites e CRM",
   "short_name": "neoflowoff.agency",
-  "description": "Agentes de IA, páginas, CRM e fluxos comerciais para empresas. Marketing com infraestrutura.",
+  "description": "Agentes de IA, sites, CRM e fluxos comerciais para empresas. Marketing com infraestrutura.",
   "start_url": "/",
   "display": "standalone",
   "background_color": "#050508",
@@ -48,6 +48,6 @@
   ],
   "screenshots": [],
   "shortcuts": [],
-  "version": "202607150249",
-  "version_name": "2026.07.15"
+  "version": "202607161709",
+  "version_name": "2026.07.16"
 }

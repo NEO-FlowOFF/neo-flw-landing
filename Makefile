@@ -46,8 +46,30 @@ validate: ## Valida HTML usando validador W3C (requer curl)
 	@curl -s "https://validator.w3.org/nu/?out=text" -F "file=@index.html" | head -20 || echo "$(YELLOW)⚠️  Validador W3C não disponível$(NC)"
 
 audit: ## Audita dependências do projeto por vulnerabilidades (requer pnpm)
-	@echo "$(GREEN)🚨 Auditando dependências do projeto...$(NC)"
-	@pnpm audit --prod || echo "$(YELLOW)⚠️  pnpm audit encontrou vulnerabilidades ou não está disponível. Execute: make install$(NC)"
+	@echo "$(GREEN)🚨 Auditando dependências do projeto (neo-flw-landing)...$(NC)"
+	@pnpm audit --json 2>/dev/null | node -e " \
+		const data = JSON.parse(require('fs').readFileSync('/dev/stdin','utf8')); \
+		const pkg = 'neo-flw-landing'; \
+		let found = 0; \
+		const sevCount = {low:0, moderate:0, high:0, critical:0}; \
+		(data.advisories ? Object.values(data.advisories) : []).forEach(a => { \
+			const paths = (a.findings || []).flatMap(f => f.paths || []); \
+			const mine = paths.filter(p => p.startsWith(pkg + '>')); \
+			if (mine.length) { \
+				found++; \
+				sevCount[a.severity] = (sevCount[a.severity]||0) + 1; \
+				console.log('[' + a.severity.toUpperCase() + '] ' + a.title); \
+				console.log('  Package: ' + a.module_name + ' ' + a.vulnerable_versions); \
+				console.log('  Fix: ' + a.patched_versions); \
+				mine.forEach(p => console.log('  Path: ' + p)); \
+				console.log(''); \
+			} \
+		}); \
+		if (!found) { console.log('✅ Nenhuma vulnerabilidade encontrada para ' + pkg); process.exit(0); } \
+		const summary = Object.entries(sevCount).filter(([,v])=>v>0).map(([k,v])=>v+' '+k).join(' | '); \
+		console.log(found + ' vulnerabilidades encontradas: ' + summary); \
+		process.exit(1); \
+	" || echo "$(YELLOW)⚠️  pnpm audit encontrou vulnerabilidades ou não está disponível. Execute: make install$(NC)"
 
 check-links: ## Verifica links quebrados (requer curl)
 	@echo "$(GREEN)🔗 Verificando links (isso pode levar alguns segundos)...$(NC)"
