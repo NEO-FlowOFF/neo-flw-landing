@@ -86,6 +86,14 @@ build: ## Compila o build de produção Astro
 	@pnpm run build
 	@printf "$(GREEN)  ✓ Build estático concluído (./dist).$(RESET)\n"
 
+deploy: build ## Publica na Cloudflare Pages via Wrangler
+	@printf "$(MAGENTA)╭──────────────────────────────────────────╮$(RESET)\n"
+	@printf "$(MAGENTA)│$(RESET)  $(WHITE)🚀  DEPLOY$(RESET)%-32s$(MAGENTA)│$(RESET)\n" ""
+	@printf "$(MAGENTA)│$(RESET)  $(DIM)Deploy para Cloudflare Pages$(RESET)%-13s$(MAGENTA)│$(RESET)\n" ""
+	@printf "$(MAGENTA)╰──────────────────────────────────────────╯$(RESET)\n"
+	@npx wrangler pages deploy dist --project-name=neoflowoff-agency
+	@printf "$(GREEN)  ✓ Deploy concluído na Cloudflare Pages!$(RESET)\n"
+
 preview: ## Inicia preview do build
 	@printf "$(CYAN)╭──────────────────────────────────────────╮$(RESET)\n"
 	@printf "$(CYAN)│$(RESET)  $(WHITE)◎  PREVIEW$(RESET)%-31s$(CYAN)│$(RESET)\n" ""

@@ -8,6 +8,7 @@
     "build": "astro build",
     "preview": "astro preview",
     "lint": "stylelint --fix 'src/styles/**/*.css'",
+    "deploy": "wrangler pages deploy dist --project-name=neoflowoff-agency",
     "push": "git add . && git commit -m 'chore: update landing page assets' && git push origin main"
   },
   "devDependencies": {
