@@ -91,7 +91,7 @@ deploy: build ## Publica na Cloudflare Pages via Wrangler
 	@printf "$(MAGENTA)│$(RESET)  $(WHITE)🚀  DEPLOY$(RESET)%-32s$(MAGENTA)│$(RESET)\n" ""
 	@printf "$(MAGENTA)│$(RESET)  $(DIM)Deploy para Cloudflare Pages$(RESET)%-13s$(MAGENTA)│$(RESET)\n" ""
 	@printf "$(MAGENTA)╰──────────────────────────────────────────╯$(RESET)\n"
-	@npx wrangler pages deploy dist --project-name=neoflowoff-agency
+	@pnpm exec wrangler pages deploy dist --project-name=neoflowoff-agency
 	@printf "$(GREEN)  ✓ Deploy concluído na Cloudflare Pages!$(RESET)\n"
 
 preview: ## Inicia preview do build
