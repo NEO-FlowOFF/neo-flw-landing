@@ -8,11 +8,11 @@ A neoflowoff.agency não deve ser apresentada como um “e-commerce de serviços
 
 ---
 
-## Hero
+> Hero
 
-**MARKETING COM INFRAESTRUTURA**
+**MARKETING COM INFRAESTRUTURA*
 
-# Sistemas para vender, atender e operar.
+## Sistemas para vender, atender e operar
 
 Agentes de IA, páginas, CRM, WhatsApp, mídia, dados e automações conectados à operação comercial da sua empresa.
 
@@ -35,11 +35,11 @@ Combine agentes, canais, dados e automações em uma estrutura comercial implant
 
 ---
 
-## Sobre nós
+> Sobre nós
 
-**SOBRE A NEOFLOWOFF.AGENCY**
+**SOBRE A NEOFLOWOFF.AGENCY*
 
-# Não entregamos ferramentas soltas. Construímos a operação entre elas.
+## Não entregamos ferramentas soltas. Construímos a operação entre elas
 
 Somos uma agência de infraestrutura comercial. Unimos estratégia, software, dados e automação para transformar ferramentas dispersas em uma operação que responde, registra, encaminha e aprende.
 
@@ -56,11 +56,11 @@ Nosso trabalho é fazer tudo circular com contexto, rastreabilidade e controle h
 
 ---
 
-## Como trabalhamos
+> Como trabalhamos
 
-**COMO TRABALHAMOS**
+**COMO TRABALHAMOS*
 
-# Começamos pelo fluxo. Depois escolhemos a tecnologia.
+## Começamos pelo fluxo. Depois escolhemos a tecnologia
 
 ### 1. Diagnosticar
 
@@ -76,11 +76,11 @@ Implantamos, testamos, documentamos e acompanhamos os sinais necessários para a
 
 ---
 
-## Fechamento
+> Fechamento
 
-**PRÓXIMA CAMADA**
+**PRÓXIMA CAMADA*
 
-# Sua empresa não precisa de mais uma ferramenta. Precisa que as ferramentas trabalhem juntas.
+## Sua empresa não precisa de mais uma ferramenta. Precisa que as ferramentas trabalhem juntas
 
 Conte onde a operação trava. A partir disso, desenhamos a implantação certa — sem empilhar tecnologia por esporte.
 

@@ -1,0 +1,62 @@
+---
+interface Props {
+  label: string;
+  color?: "pink" | "acid" | "neon" | "blue" | "mono";
+  pulse?: boolean;
+}
+
+const { label, color = "acid", pulse = false } = Astro.props;
+---
+
+<span class:list={["badge", color, { live: pulse }]}>{label}</span>
+
+<style>
+  .badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    padding: 2px 8px;
+    border-radius: 4px;
+    font-family: var(--mono);
+    font-size: 0.65rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    border: 1px solid var(--border);
+  }
+
+  .badge.pink,
+  .badge.acid,
+  .badge.neon {
+    background: rgba(200, 212, 26, 0.12);
+    color: var(--acid);
+    border-color: rgba(200, 212, 26, 0.3);
+  }
+
+  .badge.blue {
+    background: rgba(0, 242, 255, 0.1);
+    color: var(--acqua);
+    border-color: rgba(0, 242, 255, 0.25);
+  }
+
+  .badge.mono {
+    background: rgba(255, 255, 255, 0.05);
+    color: var(--text-2);
+    border-color: rgba(255, 255, 255, 0.1);
+  }
+
+  .badge.live::before {
+    content: "";
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: currentColor;
+    box-shadow: 0 0 8px currentColor;
+    animation: pulse 1.5s infinite ease-in-out;
+  }
+
+  @keyframes pulse {
+    0%, 100% { opacity: 1; transform: scale(1); }
+    50% { opacity: 0.4; transform: scale(0.85); }
+  }
+</style>

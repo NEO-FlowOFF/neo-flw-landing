@@ -1,39 +1,98 @@
 ---
-const { id, slug, title, sub, description, link, price, price_label, category, display_category, featured, isSoon, features } = Astro.props;
+import BadgeChip from './BadgeChip.astro';
+
+const { id, slug, title, short_title, sub, description, link, price, price_label, category, display_category, featured, fullWidth, isSoon, features, isLightSection } = Astro.props;
 
 const targetHref = slug 
   ? (category === 'Serviço' ? `/checkout/${slug}` : `/planos/${slug}`) 
   : link;
 const href = isSoon ? '#' : targetHref;
-const cardClass = featured ? 'lc lc-featured' : (isSoon ? 'lc section-soon' : 'lc');
+
+const isFullRow = featured || fullWidth || slug === 'trafego-meta';
+const baseCardClass = featured ? 'lc lc-featured' : (isFullRow ? 'lc lc-fullwidth' : (isSoon ? 'lc section-soon' : 'lc'));
+
+const getIcon = (itemSlug: string, itemCategory: string) => {
+  if (itemSlug?.includes('whatsapp')) return 'message-square';
+  if (itemSlug?.includes('meta') && itemSlug?.includes('app')) return 'layers';
+  if (itemSlug?.includes('dashboard')) return 'bar-chart-3';
+  if (itemSlug?.includes('webapp') || itemSlug?.includes('landing')) return 'layout';
+  if (itemSlug?.includes('a2m') || itemSlug?.includes('poi')) return 'shield-check';
+  if (itemSlug?.includes('sdr')) return 'bot';
+  if (itemSlug?.includes('agents')) return 'cpu';
+  if (itemSlug?.includes('crm')) return 'git-branch';
+  if (itemSlug?.includes('fluxo') || itemSlug?.includes('automacao')) return 'zap';
+  if (itemSlug?.includes('google')) return 'search';
+  if (itemSlug?.includes('meta')) return 'share-2';
+  return itemCategory === 'Serviço' ? 'terminal' : 'box';
+};
+
+const iconName = getIcon(slug, category);
+const isMetaCard = slug?.includes('meta') || slug?.includes('whatsapp');
+const accentColor = isMetaCard ? '#0072FF' : 'var(--acid)';
+
+const lightStyle = isLightSection ? "background: #ffffff; border: 1px solid rgba(0, 0, 0, 0.08); box-shadow: 0 4px 16px rgba(0, 0, 0, 0.06);" : "";
+const titleStyle = isLightSection ? "color: #0b0b0d;" : "";
+const subStyle = isLightSection ? "color: #555560;" : "";
 ---
-<a href={href} class={cardClass}>
-  {featured && (
-    <div style="background: var(--pink-s); color: #fff; font-family: var(--mono); font-size: 0.7rem; font-weight: 700; padding: 4px 10px; border-radius: 4px; display: inline-block; margin-bottom: 0.8rem; text-transform: uppercase; letter-spacing: 0.05em;">
-      ⭐ OPERAÇÃO PRINCIPAL
+<a href={href} class={baseCardClass} style={lightStyle}>
+  {featured ? (
+    <div style="display: flex; align-items: center; gap: 0.85rem; width: 100%;">
+      <div class="lc-icon" style="margin-bottom: 0;">
+        <i data-lucide={iconName} style="width: 20px; height: 20px; color: #000;"></i>
+      </div>
+      <div class="lc-body" style="flex: 1;">
+        <div style="margin-bottom: 0.2rem;">
+          <BadgeChip label="OPERAÇÃO PRINCIPAL" color="acid" pulse={true} />
+        </div>
+        <div class="lc-title" style="font-size: 0.95rem;">{short_title || title}</div>
+        <div class="lc-sub">{display_category || category}</div>
+      </div>
+      <div style="text-align: right; flex-shrink: 0;">
+        <!-- SDR CARD BUTTON 100% BLACK -->
+        <span style="font-size: 0.65rem; color: #ffffff; background: #000000; font-family: var(--mono); font-weight: 800; text-transform: uppercase; letter-spacing: 0.05em; display: inline-flex; align-items: center; gap: 3px; padding: 6px 12px; border-radius: 8px; box-shadow: 0 4px 12px rgba(0, 0, 0, 0.25);">
+          Ver detalhes <i data-lucide="chevron-right" style={`width: 12px; height: 12px; color: ${accentColor};`}></i>
+        </span>
+      </div>
     </div>
-  )}
-  {display_category && !featured && (
-    <div style="color: var(--text-2); font-family: var(--mono); font-size: 0.75rem; text-transform: uppercase; margin-bottom: 0.5rem; letter-spacing: 0.05em;">
-      {display_category}
+  ) : isFullRow ? (
+    <div style="display: flex; align-items: center; gap: 0.85rem; width: 100%;">
+      <div class="lc-icon" style="margin-bottom: 0;">
+        <i data-lucide={iconName} style={`width: 18px; height: 18px; color: ${accentColor};`}></i>
+      </div>
+      <div class="lc-body" style="flex: 1;">
+        <div class="lc-title" style={`font-size: 0.82rem; ${titleStyle}`}>{short_title || title}</div>
+        <div class="lc-sub" style={subStyle}>{display_category || category}</div>
+      </div>
+      <div style="text-align: right; flex-shrink: 0;">
+        <span style="font-size: 0.6rem; color: #ffffff; background: #000000; border: 1px solid rgba(0, 0, 0, 0.1); font-family: var(--mono); font-weight: 700; text-transform: uppercase; letter-spacing: 0.05em; display: inline-flex; align-items: center; gap: 3px; padding: 5px 10px; border-radius: 6px;">
+          Ver detalhes <i data-lucide="chevron-right" style={`width: 11px; height: 11px; color: ${accentColor};`}></i>
+        </span>
+      </div>
     </div>
+  ) : (
+    <>
+      <div style="display: flex; justify-content: space-between; align-items: flex-start; width: 100%;">
+        <div class="lc-icon">
+          <i data-lucide={iconName} style={`width: 18px; height: 18px; color: ${accentColor};`}></i>
+        </div>
+        {display_category && (
+          <span style={`font-family: var(--mono); font-size: 0.52rem; text-transform: uppercase; letter-spacing: 0.05em; text-align: right; max-width: 50%; ${isLightSection ? 'color: #777780;' : 'color: var(--text-3);'}`}>
+            {display_category.replace('Implementação ', '').replace('Operação ', '')}
+          </span>
+        )}
+      </div>
+
+      <div class="lc-body" style="margin-top: 0.4rem;">
+        <div class="lc-title" style={titleStyle}>{short_title || title}</div>
+        <div class="lc-sub" style={subStyle}>{sub || category}</div>
+      </div>
+      
+      <div style="display: flex; justify-content: flex-end; align-items: center; margin-top: 0.4rem;">
+        <!-- REGULAR CARD BUTTON 100% BLACK -->
+        <span style="font-size: 0.58rem; color: #ffffff; background: #000000; border: 1px solid rgba(0, 0, 0, 0.1); font-family: var(--mono); font-weight: 700; text-transform: uppercase; letter-spacing: 0.05em; display: inline-flex; align-items: center; gap: 2px; padding: 4px 8px; border-radius: 6px;">
+          Ver detalhes <i data-lucide="chevron-right" style={`width: 11px; height: 11px; color: ${accentColor};`}></i>
+        </span>
+      </div>
+    </>
   )}
-  <div class="lc-body">
-    <div class="lc-title">{title}</div>
-    {sub && <div class="lc-sub">{sub}</div>}
-    <div class="lc-desc">{description}</div>
-  </div>
-  
-  <div class="lc-price" style="margin-top: 1rem;">
-    {price_label && <span style="font-size: 0.8rem; color: var(--text-2); font-weight: 400; display: block; margin-bottom: 2px;">{price_label}</span>}
-    R$ {price.value.toLocaleString('pt-BR', { minimumFractionDigits: 2 })}
-  </div>
-  
-  <ul style="margin-top: 1rem; list-style: none; padding: 0;">
-    {features && features.map((feature: unknown) => (
-      <li style="display: flex; gap: 8px; align-items: center; color: var(--text-2); font-size: 0.8rem; margin-bottom: 6px;">
-        <i data-lucide="check-circle" style="width: 14px; height: 14px; color: var(--acqua);"></i> {feature}
-      </li>
-    ))}
-  </ul>
 </a>

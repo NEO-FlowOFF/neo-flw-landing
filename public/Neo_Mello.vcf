@@ -1,0 +1,16 @@
+BEGIN:VCARD
+VERSION:3.0
+PRODID:-//neoflowoff.agency//NONSGML Version 1//EN
+REV:2026-07-08 00:37:08
+FN:Neo Mello
+N:Mello;Neo;;;
+NICKNAME:Neo Mello
+
+EMAIL;TYPE=internet,pref:neo@neoprotocol.space
+URL;TYPE=work:https://neomello.pro
+NOTE:agents · payments · data · automation · identity · protocols
+X-SOCIALPROFILE;type=Threads:https://www.threads.net/@neomello.pro
+X-SOCIALPROFILE;type=LinkedIn:https://www.linkedin.com/in/neomello
+X-SOCIALPROFILE;type=GitHub:https://github.com/neomello
+TZ:+0000
+END:VCARD

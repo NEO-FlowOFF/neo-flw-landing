@@ -1,9 +1,9 @@
 ---
-import Base from '../../layouts/Base.astro';
-import catalogData from '../../data/catalog.json';
-import uiTexts from '../../data/ui_texts.json';
 import { Image } from 'astro:assets';
 import metaBadge from '../../assets/images/badge_meta_tech_provider.png';
+import catalogData from '../../data/catalog.json';
+import uiTexts from '../../data/ui_texts.json';
+import Base from '../../layouts/Base.astro';
 
 export function getStaticPaths() {
   const planos = catalogData.products.filter(p => p.category === 'Plano');
@@ -27,7 +27,7 @@ const { plano } = Astro.props;
       <div class="lc-body">
         {plano.featured && (
           <div style="background: var(--pink-s); color: #fff; font-family: var(--mono); font-size: 0.75rem; font-weight: 700; padding: 4px 10px; border-radius: 4px; display: inline-block; margin-bottom: 0.8rem; text-transform: uppercase;">
-            ⭐ OPERAÇÃO PRINCIPAL
+            OPERAÇÃO PRINCIPAL
           </div>
         )}
         <div class="section-label" style="margin-bottom: 0.5rem;">{plano.display_category || uiTexts.product_page.plan_label}</div>

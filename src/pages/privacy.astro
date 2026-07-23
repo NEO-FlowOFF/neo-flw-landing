@@ -1,0 +1,99 @@
+---
+import Base from '../layouts/Base.astro';
+import logoImage from '../assets/logos/neoflowoff-logo26-2.png';
+---
+
+<Base title="Política de Privacidade — neoflowoff.agency" description="Política de Privacidade da neoflowoff.agency referente ao uso de APIs da Meta, WhatsApp Cloud API e governança de dados.">
+  <div class="page" style="max-width: 680px; margin: 0 auto; padding: 2rem 1rem 4rem;">
+    
+    <!-- HEADER BRANDING -->
+    <header style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 2rem; padding-bottom: 1rem; border-bottom: 1px solid rgba(255, 255, 255, 0.1);">
+      <a href="/" style="display: flex; align-items: center; text-decoration: none;">
+        <img src={logoImage.src} alt="neoflowoff.agency" style="height: 26px; width: auto; filter: drop-shadow(0 0 10px rgba(200, 212, 26, 0.3));" />
+      </a>
+      <a href="/" style="font-family: var(--mono); font-size: 0.72rem; color: var(--acid); text-decoration: none; font-weight: 700; text-transform: uppercase;">
+        ← Voltar ao site
+      </a>
+    </header>
+
+    <!-- CONTENT CARD -->
+    <article style="background: rgba(255, 255, 255, 0.03); backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px); border: 1px solid rgba(255, 255, 255, 0.1); border-radius: 20px; padding: 2rem 1.4rem; box-shadow: 0 16px 40px rgba(0,0,0,0.6);">
+      <div style="font-family: var(--mono); font-size: 0.65rem; color: var(--acid); text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 0.4rem; font-weight: 700;">
+        GOVERNANÇA E SEGURANÇA DA INFORMAÇÃO
+      </div>
+      <h1 style="font-size: 1.6rem; font-weight: 900; color: #fff; margin-bottom: 0.3rem; letter-spacing: -0.01em;">
+        Política de Privacidade
+      </h1>
+      <p style="font-family: var(--mono); font-size: 0.7rem; color: var(--text-3); margin-bottom: 1.8rem;">
+        Última atualização: Julho de 2026 · v2026.3
+      </p>
+
+      <div style="display: flex; flex-direction: column; gap: 1.5rem; color: var(--text-2); font-size: 0.9rem; line-height: 1.65;">
+        
+        <section>
+          <h2 style="font-size: 1.05rem; font-weight: 800; color: #fff; margin-bottom: 0.4rem;">
+            1. Visão Geral
+          </h2>
+          <p>
+            A <strong>neoflowoff.agency</strong> opera como Plataforma de Tecnologia (<em>Tech Provider</em>) fornecendo soluções de automação comercial, integração de APIs e gestão de atendimento via <strong>WhatsApp Cloud API</strong> e ecossistema Meta. Esta Política de Privacidade descreve como coletamos, usamos, armazenamos e protegemos os dados dos nossos clientes e usuários finais.
+          </p>
+        </section>
+
+        <section>
+          <h2 style="font-size: 1.05rem; font-weight: 800; color: #fff; margin-bottom: 0.4rem;">
+            2. Dados Coletados e Uso de APIs da Meta
+          </h2>
+          <p>
+            Para prestar nossos serviços, processamos dados estritamente necessários através da integração com as APIs Oficiais da Meta:
+          </p>
+          <ul style="padding-left: 1.2rem; margin-top: 0.5rem; display: flex; flex-direction: column; gap: 0.4rem;">
+            <li><strong>Informações de Conta Business (WABA):</strong> IDs de conta de negócios, números de telefone cadastrados e status de verificação.</li>
+            <li><strong>Mensagens e Interações:</strong> Mensagens recebidas e enviadas via WhatsApp Cloud API para execução dos fluxos automatizados e atendimento por Agentes de IA.</li>
+            <li><strong>Dados de Perfil:</strong> Nome e número de telefone informados pelo usuário final ao iniciar conversas com os números integrados de nossos clientes.</li>
+          </ul>
+        </section>
+
+        <section>
+          <h2 style="font-size: 1.05rem; font-weight: 800; color: #fff; margin-bottom: 0.4rem;">
+            3. Armazenamento e Segurança
+          </h2>
+          <p>
+            Todos os tokens de acesso (<em>Access Tokens</em>), segredos e payloads de Webhook são criptografados em repouso via padrão <strong>AES-256</strong> e transmitidos exclusivamente via protocolos seguros <strong>TLS/HTTPS</strong>.
+          </p>
+          <p style="margin-top: 0.5rem;">
+            Não vendemos, alugamos nem compartilhamos dados de usuários ou de conversas com terceiros.
+          </p>
+        </section>
+
+        <section>
+          <h2 style="font-size: 1.05rem; font-weight: 800; color: #fff; margin-bottom: 0.4rem;">
+            4. Retenção e Exclusão de Dados
+          </h2>
+          <p>
+            Os dados são mantidos apenas durante a vigência do contrato de prestação de serviços ou até que o cliente solicite a exclusão. Para solicitar a exclusão imediata de dados, consulte nossa página de <a href="/excluir-dados" style="color: var(--acid); font-weight: 700; text-decoration: underline;">Instruções de Exclusão de Dados</a> ou envie um e-mail para <a href="mailto:suporte@neoflowoff.agency" style="color: var(--acid); font-weight: 700;">suporte@neoflowoff.agency</a>.
+          </p>
+        </section>
+
+        <section>
+          <h2 style="font-size: 1.05rem; font-weight: 800; color: #fff; margin-bottom: 0.4rem;">
+            5. Conformidade Legal (LGPD / GDPR)
+          </h2>
+          <p>
+            Atendemos integralmente à Lei Geral de Proteção de Dados (<strong>LGPD - Lei nº 13.709/2018</strong>). Os usuários têm direito de solicitar confirmação de tratamento, acesso, correção ou eliminação de seus dados pessoais a qualquer momento.
+          </p>
+        </section>
+
+      </div>
+    </article>
+
+    <!-- FOOTER NAV -->
+    <footer style="margin-top: 2rem; display: flex; gap: 1rem; justify-content: center; font-family: var(--mono); font-size: 0.7rem;">
+      <a href="/privacy" style="color: var(--acid); text-decoration: none; font-weight: 700;">Privacidade</a>
+      <span style="color: rgba(255,255,255,0.2);">•</span>
+      <a href="/legal" style="color: var(--text-2); text-decoration: none;">Termos de Serviço</a>
+      <span style="color: rgba(255,255,255,0.2);">•</span>
+      <a href="/excluir-dados" style="color: var(--text-2); text-decoration: none;">Exclusão de Dados</a>
+    </footer>
+
+  </div>
+</Base>

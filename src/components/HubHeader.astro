@@ -1,0 +1,219 @@
+---
+import logoImage from '../assets/logos/neoflowoff-logo26-2.png';
+import uiTexts from '../data/ui_texts.json';
+---
+<header class="hub-header">
+  <!-- FLOATING STICKY GLASSBAR -->
+  <div class="glass-navbar">
+    <a href="#" class="nav-brand">
+      <img src={logoImage.src} alt="neoflowoff.agency" class="nav-logo" />
+    </a>
+
+    <div class="nav-right">
+      <button id="menu-toggle" class="hamburger-btn" aria-label="Abrir menu">
+        <i data-lucide="menu" id="menu-icon-open" style="width: 18px; height: 18px; color: var(--acid);"></i>
+        <i data-lucide="x" id="menu-icon-close" style="width: 18px; height: 18px; color: var(--acid); display: none;"></i>
+      </button>
+    </div>
+  </div>
+
+  <!-- GLASSMORPHIC HAMBURGER DROPDOWN MENU -->
+  <div id="mobile-menu" class="glass-menu">
+    <nav class="menu-nav">
+      <a href="#" class="menu-item">
+        <i data-lucide="home" style="width: 16px; height: 16px; color: var(--acid);"></i>
+        <span>Início</span>
+      </a>
+      <a href="#solucoes" class="menu-item">
+        <i data-lucide="grid" style="width: 16px; height: 16px; color: var(--acid);"></i>
+        <span>Soluções & Implementações</span>
+      </a>
+      <a href="#sobre" class="menu-item">
+        <i data-lucide="shield" style="width: 16px; height: 16px; color: var(--acid);"></i>
+        <span>Sobre a Agência</span>
+      </a>
+      <a href="https://wa.me/556294789032" target="_blank" rel="noopener noreferrer" class="menu-item cta-item">
+        <i data-lucide="message-circle" style="width: 16px; height: 16px; color: #000;"></i>
+        <span>Atendimento WhatsApp</span>
+      </a>
+    </nav>
+  </div>
+</header>
+
+<style>
+  .hub-header {
+    position: sticky;
+    top: 10px;
+    z-index: 100;
+    margin-bottom: 2rem;
+    width: 100%;
+  }
+
+  /* FLOATING GLASSBAR */
+  .glass-navbar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0.55rem 0.95rem;
+    background: rgba(22, 22, 26, 0.78);
+    backdrop-filter: blur(16px) saturate(180%);
+    -webkit-backdrop-filter: blur(16px) saturate(180%);
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    border-radius: 999px;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.6), inset 0 1px 0 rgba(255, 255, 255, 0.12);
+  }
+
+  .nav-brand {
+    display: flex;
+    align-items: center;
+    text-decoration: none;
+  }
+
+  .nav-logo {
+    height: 24px;
+    width: auto;
+    object-fit: contain;
+    filter: drop-shadow(0 0 12px rgba(200, 212, 26, 0.4));
+  }
+
+  .nav-right {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .header-status {
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    padding: 3px 9px;
+    border-radius: 999px;
+    background: rgba(200, 212, 26, 0.1);
+    border: 1px solid rgba(200, 212, 26, 0.3);
+  }
+
+  .status-dot {
+    width: 5px;
+    height: 5px;
+    border-radius: 50%;
+    background: var(--acid);
+    box-shadow: 0 0 6px var(--acid);
+    animation: status-pulse 1.8s infinite ease-in-out;
+  }
+
+  .status-text {
+    font-family: var(--mono);
+    font-size: 0.6rem;
+    font-weight: 700;
+    color: var(--acid);
+    letter-spacing: 0.05em;
+  }
+
+  .hamburger-btn {
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.06);
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: background 0.2s ease, transform 0.15s ease;
+  }
+
+  .hamburger-btn:active {
+    transform: scale(0.92);
+    background: rgba(255, 255, 255, 0.12);
+  }
+
+  /* GLASSMORPHIC DROPDOWN MENU */
+  .glass-menu {
+    position: absolute;
+    top: calc(100% + 8px);
+    left: 0;
+    right: 0;
+    background: rgba(18, 18, 22, 0.94);
+    backdrop-filter: blur(24px) saturate(180%);
+    -webkit-backdrop-filter: blur(24px) saturate(180%);
+    border: 1px solid rgba(200, 212, 26, 0.3);
+    border-radius: 20px;
+    padding: 0.8rem;
+    box-shadow: 0 16px 40px rgba(0, 0, 0, 0.8), inset 0 1px 0 rgba(255, 255, 255, 0.1);
+    opacity: 0;
+    transform: translateY(-10px) scale(0.97);
+    pointer-events: none;
+    transition: opacity 0.25s ease, transform 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+
+  .glass-menu.active {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+    pointer-events: auto;
+  }
+
+  .menu-nav {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+  }
+
+  .menu-item {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 0.75rem 1rem;
+    border-radius: 12px;
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    color: var(--text);
+    text-decoration: none;
+    font-size: 0.85rem;
+    font-weight: 700;
+    transition: background 0.2s ease, transform 0.15s ease;
+  }
+
+  .menu-item:active {
+    transform: scale(0.98);
+    background: rgba(255, 255, 255, 0.08);
+  }
+
+  .menu-item.cta-item {
+    background: var(--acid);
+    color: #0b0b0d;
+    border: none;
+    margin-top: 4px;
+    font-weight: 800;
+    box-shadow: 0 4px 15px rgba(200, 212, 26, 0.35);
+  }
+
+  @keyframes status-pulse {
+    0%, 100% { opacity: 1; transform: scale(1); }
+    50% { opacity: 0.4; transform: scale(0.8); }
+  }
+</style>
+
+<script>
+  const toggleBtn = document.getElementById('menu-toggle');
+  const menu = document.getElementById('mobile-menu');
+  const iconOpen = document.getElementById('menu-icon-open');
+  const iconClose = document.getElementById('menu-icon-close');
+
+  toggleBtn?.addEventListener('click', () => {
+    const isOpen = menu?.classList.toggle('active');
+    if (iconOpen && iconClose) {
+      iconOpen.style.display = isOpen ? 'none' : 'block';
+      iconClose.style.display = isOpen ? 'block' : 'none';
+    }
+  });
+
+  document.querySelectorAll('.menu-item').forEach(item => {
+    item.addEventListener('click', () => {
+      menu?.classList.remove('active');
+      if (iconOpen && iconClose) {
+        iconOpen.style.display = 'block';
+        iconClose.style.display = 'none';
+      }
+    });
+  });
+</script>

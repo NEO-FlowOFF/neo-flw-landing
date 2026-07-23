@@ -1,80 +1,94 @@
 ---
 import Base from '../layouts/Base.astro';
 import ProductCard from '../components/ProductCard.astro';
+import HubHeader from '../components/HubHeader.astro';
 import catalogData from '../data/catalog.json';
 import uiTexts from '../data/ui_texts.json';
 import { Image } from 'astro:assets';
-import logoImage from '../assets/logos/neoflowoff_logo.png';
+import nodeneoImage from '../assets/images/nodeneo.png';
+import bolhaImage from '../assets/images/bolha.png';
 import metaBadge from '../assets/images/badge_meta_tech_provider.png';
 
-const planos = catalogData.products.filter(p => p.category === 'Plano');
-const servicos = catalogData.products.filter(p => p.category === 'Serviço');
+const isMeta = (slug: string) => slug?.includes('meta') || slug?.includes('whatsapp');
+
+const metaProdutos = catalogData.products.filter(p => isMeta(p.slug));
+const planos = catalogData.products.filter(p => p.category === 'Plano' && !isMeta(p.slug));
+const servicos = catalogData.products.filter(p => p.category === 'Serviço' && !isMeta(p.slug));
 ---
 <Base>
-  <div class="page" style="max-width: 1100px; margin: 0 auto; padding: 2rem 1.5rem;">
-    <!-- HEADER -->
-    <header style="text-align: center; margin-bottom: 4rem; padding-top: 2rem;">
-      <Image src={logoImage} alt="neoflowoff.agency" style="width: 130px; height: auto; margin-bottom: 1.5rem;" />
-      
-      <div style="font-family: var(--mono); font-size: 0.8rem; color: var(--pink-s); letter-spacing: 0.1em; text-transform: uppercase; margin-bottom: 0.75rem; font-weight: 700;">
-        {uiTexts.header.eyebrow}
+  <!-- TOP TELENOTÍCIAS TICKER BAR (Mídia & Infraestrutura) -->
+  <div class="top-telenoticias-bar" style="width: 100vw; position: relative; left: 50%; right: 50%; margin-left: -50vw; margin-right: -50vw; background: #0b0b0e; color: #ffffff; padding: 7px 0; border-bottom: 1px solid rgba(255, 255, 255, 0.12); overflow: hidden; z-index: 1000;">
+    <div class="digital-ticker-portal" style="position: relative; width: 100%; overflow: hidden; -webkit-mask-image: linear-gradient(90deg, transparent 0px, transparent 1px, #000 2px, #000 calc(100% - 2px), transparent calc(100% - 1px), transparent 100%); mask-image: linear-gradient(90deg, transparent 0px, transparent 1px, #000 2px, #000 calc(100% - 2px), transparent calc(100% - 1px), transparent 100%);">
+      <div class="ticker-track" style="display: flex; width: max-content; animation: ticker-loop 24s linear infinite; gap: 2.5rem;">
+        <span style="font-family: var(--mono); font-size: 0.72rem; font-weight: 800; color: #ffffff; text-transform: uppercase; letter-spacing: 0.05em; white-space: nowrap; display: inline-flex; align-items: center; gap: 0.7rem;">
+          <span style="background: var(--acid); color: #000; font-size: 0.58rem; padding: 2px 6px; border-radius: 4px; font-weight: 900; letter-spacing: 0.08em;">LATEST</span>
+          <span>Agentes de IA, páginas, CRM e fluxos comerciais para empresas. Marketing com infraestrutura.</span>
+          <span style="color: #0072FF; font-size: 0.6rem;">◆</span>
+        </span>
+        <span style="font-family: var(--mono); font-size: 0.72rem; font-weight: 800; color: #ffffff; text-transform: uppercase; letter-spacing: 0.05em; white-space: nowrap; display: inline-flex; align-items: center; gap: 0.7rem;">
+          <span style="background: var(--acid); color: #000; font-size: 0.58rem; padding: 2px 6px; border-radius: 4px; font-weight: 900; letter-spacing: 0.08em;">LATEST</span>
+          <span>Agentes de IA, páginas, CRM e fluxos comerciais para empresas. Marketing com infraestrutura.</span>
+          <span style="color: #0072FF; font-size: 0.6rem;">◆</span>
+        </span>
       </div>
+    </div>
+  </div>
 
-      <h1 style="font-weight: 900; font-size: clamp(2rem, 5vw, 3.2rem); letter-spacing: -0.02em; line-height: 1.15; max-width: 800px; margin: 0 auto 1.2rem auto;">
-        {uiTexts.header.title_part1}<span style="color: var(--pink-s);">{uiTexts.header.title_highlight}</span>
-      </h1>
-
-      <p style="color: var(--text); font-size: 1.15rem; max-width: 720px; margin: 0 auto 1rem auto; line-height: 1.6;">
-        {uiTexts.header.subtitle}
-      </p>
-
-      <p style="color: var(--text-2); font-size: 0.95rem; max-width: 680px; margin: 0 auto 2rem auto; line-height: 1.6;">
-        {uiTexts.header.body}
-      </p>
-
-      <div style="display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap;">
-        <a href="#solucoes" class="lc" style="padding: 0.8rem 1.8rem; background: var(--pink-s); color: #fff; text-decoration: none; font-weight: 700; font-size: 0.95rem; border-radius: 6px;">
-          {uiTexts.header.primary_cta}
-        </a>
-        <a href="https://wa.me/556294789032" target="_blank" rel="noopener noreferrer" class="lc" style="padding: 0.8rem 1.8rem; background: transparent; border: 1px solid var(--border); color: var(--text); text-decoration: none; font-size: 0.95rem; border-radius: 6px; display: inline-flex; align-items: center; gap: 8px;">
-          <i data-lucide="message-circle" style="width: 18px; height: 18px; color: var(--acqua);"></i>
-          {uiTexts.header.secondary_cta}
-        </a>
-      </div>
-    </header>
+  <div class="page" style="max-width: 420px; margin: 0 auto; padding: 1.2rem 0.85rem 4rem;">
+    <!-- HUB HEADER -->
+    <HubHeader />
 
     <!-- SOLUÇÕES (GRID) -->
     <div id="solucoes">
-      <!-- SERVIÇOS UNITÁRIOS -->
-      <section class="section" style="margin-bottom: 4rem;">
-        <div style="margin-bottom: 1.5rem;">
-          <div class="section-label">{uiTexts.home.services_label}</div>
-          <p style="color: var(--text-2); font-size: 0.9rem; margin-top: 0.25rem;">{uiTexts.home.services_description}</p>
-        </div>
-        <div class="link-grid">
-          {servicos.map((servico) => (
-            <ProductCard 
-              id={servico.id}
-              slug={servico.slug}
-              title={servico.title}
-              description={servico.description}
-              link={servico.link}
-              price={servico.price}
-              price_label={servico.price_label}
-              category={servico.category}
-              display_category={servico.display_category}
-              featured={servico.featured}
-              features={servico.features.slice(0, 3)} 
+      <!-- ECOSSISTEMA & TECNOLOGIA META (Fundo Claro Full-Bleed do Topo ao Badge Meta com Bordas Inferiores Arredondadas) -->
+      <section class="section" style="position: relative; z-index: 1; width: 100vw; left: 50%; right: 50%; margin-left: -50vw; margin-right: -50vw; margin-top: -6.4rem; padding: 7.6rem 0 2.8rem; background: #e2e4e8; color: #0b0b0d; margin-bottom: 2.5rem; border-radius: 0 0 54px 54px; border-bottom: 1px solid rgba(0, 0, 0, 0.12); box-shadow: 0 12px 40px rgba(0, 0, 0, 0.4);">
+        <!-- CONTAINER INTERNO ALINHADO AO MOBILE -->
+        <div style="max-width: 420px; margin: 0 auto; padding: 0 0.85rem;">
+
+          <div style="margin-bottom: 1.4rem;">
+            <!-- CRISP ULTRA-CLEAN GLASS CAPSULE BADGE -->
+            <div style="display: inline-flex; align-items: center; gap: 6px; font-family: var(--mono); font-size: 0.68rem; font-weight: 900; text-transform: uppercase; letter-spacing: 0.1em; color: #0b0b10; background: rgba(255, 255, 255, 0.75); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px); border: 1.5px solid rgba(255, 255, 255, 0.95); padding: 6px 14px; border-radius: 999px; box-shadow: 0 4px 14px rgba(0, 0, 0, 0.06); margin-bottom: 0.4rem;">
+              <span style="width: 6px; height: 6px; border-radius: 50%; background: #0072FF;"></span>
+              <span>ECOSSISTEMA & TECNOLOGIA META</span>
+            </div>
+
+            <p style="color: #42424a; font-size: 0.85rem; margin-top: 0.3rem; font-weight: 500;">Infraestrutura oficial da Meta para WhatsApp, APIs, webhooks e Meta Ads com Conversions API (CAPI).</p>
+          </div>
+          <div class="link-grid">
+            {metaProdutos.map((produto) => (
+              <ProductCard 
+                id={produto.id}
+                slug={produto.slug}
+                title={produto.title}
+                short_title={produto.short_title}
+                description={produto.description}
+                link={produto.link}
+                price={produto.price}
+                price_label={produto.price_label}
+                category={produto.category}
+                display_category={produto.display_category}
+                featured={produto.featured}
+                features={produto.features.slice(0, 4)} 
+              />
+            ))}
+          </div>
+
+          <!-- BADGE META TECH PROVIDER -->
+          <div style="display: flex; justify-content: center; align-items: center; margin-top: 1.8rem; margin-bottom: 0.5rem;">
+            <Image 
+              src={metaBadge} 
+              alt="Meta Tech Provider — Official Partner" 
+              style="height: 68px; width: auto; max-width: 92%; object-fit: contain; opacity: 1;" 
             />
-          ))}
+          </div>
         </div>
       </section>
 
-      <!-- PACOTES COMPLETOS / OPERAÇÕES CONECTADAS -->
-      <section class="section" style="margin-bottom: 5rem;">
-        <div style="margin-bottom: 1.5rem;">
+      <!-- PLANOS (OPERAÇÕES CONECTADAS) -->
+      <section class="section" style="position: relative; z-index: 2; margin-bottom: 3.5rem;">
+        <div style="margin-bottom: 1.2rem;">
           <div class="section-label">{uiTexts.home.plans_label}</div>
-          <p style="color: var(--text-2); font-size: 0.9rem; margin-top: 0.25rem;">{uiTexts.home.plans_description}</p>
+          <p style="color: var(--text-2); font-size: 0.85rem; margin-top: 0.2rem;">{uiTexts.home.plans_description}</p>
         </div>
         <div class="link-grid">
           {planos.map((plano) => (
@@ -82,6 +96,7 @@ const servicos = catalogData.products.filter(p => p.category === 'Serviço');
               id={plano.id}
               slug={plano.slug}
               title={plano.title}
+              short_title={plano.short_title}
               description={plano.description}
               link={plano.link}
               price={plano.price}
@@ -94,66 +109,132 @@ const servicos = catalogData.products.filter(p => p.category === 'Serviço');
           ))}
         </div>
       </section>
+
+      <!-- SERVIÇOS (IMPLEMENTAÇÕES À LA CARTE - SEÇÃO CLARA FULL-BLEED) -->
+      <section class="section" style="position: relative; z-index: 1; width: 100vw; left: 50%; right: 50%; margin-left: -50vw; margin-right: -50vw; padding: 3.5rem 0; background: #e2e4e8; color: #0b0b0d; margin-bottom: 3.5rem; border-radius: 54px; border-top: 1px solid rgba(0, 0, 0, 0.1); border-bottom: 1px solid rgba(0, 0, 0, 0.12); box-shadow: 0 12px 40px rgba(0, 0, 0, 0.35);">
+        <div style="max-width: 420px; margin: 0 auto; padding: 0 0.85rem;">
+          <div style="margin-bottom: 1.2rem;">
+            <div class="section-label" style="color: #0072FF; border-color: rgba(0, 114, 255, 0.3); background: rgba(0, 114, 255, 0.08);">{uiTexts.home.services_label}</div>
+            <p style="color: #42424a; font-size: 0.85rem; margin-top: 0.3rem; font-weight: 500;">{uiTexts.home.services_description}</p>
+          </div>
+          <div class="link-grid">
+            {servicos.map((servico) => (
+              <ProductCard 
+                id={servico.id}
+                slug={servico.slug}
+                title={servico.title}
+                short_title={servico.short_title}
+                description={servico.description}
+                link={servico.link}
+                price={servico.price}
+                price_label={servico.price_label}
+                category={servico.category}
+                display_category={servico.display_category}
+                featured={servico.featured}
+                features={servico.features.slice(0, 3)} 
+                isLightSection={true}
+              />
+            ))}
+          </div>
+        </div>
+      </section>
     </div>
 
-    <!-- SEÇÃO SOBRE -->
-    <section style="margin-bottom: 5rem; padding: 3rem 2rem; background: rgba(255, 255, 255, 0.02); border: 1px solid var(--border); border-radius: 12px;">
-      <div class="section-label" style="margin-bottom: 0.5rem;">{uiTexts.home.about.eyebrow}</div>
-      <h2 style="font-size: 1.8rem; font-weight: 800; margin-bottom: 1.5rem; letter-spacing: -0.01em;">{uiTexts.home.about.title}</h2>
-      
-      <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 2rem; margin-bottom: 2rem;">
-        <div>
-          {uiTexts.home.about.paragraphs.map(p => (
-            <p style="color: var(--text-2); font-size: 0.95rem; line-height: 1.7; margin-bottom: 1rem;">{p}</p>
-          ))}
-        </div>
-        <div>
-          <div style="font-family: var(--mono); font-size: 0.85rem; color: var(--pink-s); text-transform: uppercase; margin-bottom: 1rem; font-weight: 700;">Princípios da Operação:</div>
-          <ul style="list-style: none; padding: 0;">
-            {uiTexts.home.about.principles.map(principle => (
-              <li style="display: flex; align-items: center; gap: 10px; color: var(--text); font-size: 0.95rem; margin-bottom: 0.8rem;">
-                <i data-lucide="check" style="width: 16px; height: 16px; color: var(--acqua);"></i>
-                {principle}
-              </li>
-            ))}
-          </ul>
-        </div>
-      </div>
-    </section>
-
-    <!-- SEÇÃO MÉTODO -->
-    <section style="margin-bottom: 5rem;">
-      <div class="section-label" style="margin-bottom: 0.5rem;">{uiTexts.home.method.eyebrow}</div>
-      <h2 style="font-size: 1.8rem; font-weight: 800; margin-bottom: 2rem; letter-spacing: -0.01em;">{uiTexts.home.method.title}</h2>
-
-      <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 1.5rem;">
-        {uiTexts.home.method.steps.map((step, index) => (
-          <div class="lc" style="padding: 1.8rem; border-radius: 8px;">
-            <div style="font-family: var(--mono); font-size: 1.5rem; font-weight: 900; color: var(--pink-s); margin-bottom: 0.5rem;">
-              0{index + 1}
-            </div>
-            <h3 style="font-size: 1.2rem; font-weight: 700; margin-bottom: 0.5rem;">{step.title}</h3>
-            <p style="color: var(--text-2); font-size: 0.9rem; line-height: 1.6;">{step.description}</p>
-          </div>
-        ))}
-      </div>
-    </section>
-
-    <!-- SEÇÃO CLOSING / CTA FINAL -->
-    <section style="margin-bottom: 5rem; text-align: center; padding: 3.5rem 2rem; background: radial-gradient(circle at center, rgba(230, 0, 126, 0.08) 0%, transparent 70%); border: 1px solid var(--border); border-radius: 12px;">
-      <div class="section-label" style="margin-bottom: 0.5rem;">{uiTexts.home.closing.eyebrow}</div>
-      <h2 style="font-size: 2rem; font-weight: 800; margin-bottom: 1rem; max-width: 700px; margin-left: auto; margin-right: auto; line-height: 1.2;">
-        {uiTexts.home.closing.title}
+    <!-- SEÇÃO MÉTODO (SEÇÃO ESCURA NO BG #272727) -->
+    <section style="margin-bottom: 3.5rem;">
+      <div class="section-label" style="margin-bottom: 0.4rem; color: var(--acid);">{uiTexts.home.method.eyebrow}</div>
+      <h2 style="font-size: 1.4rem; font-weight: 900; margin-bottom: 1.5rem; letter-spacing: -0.01em; color: #fff; text-transform: uppercase;">
+        {uiTexts.home.method.title}
       </h2>
-      <p style="color: var(--text-2); font-size: 1.05rem; max-width: 600px; margin: 0 auto 2rem auto; line-height: 1.6;">
-        {uiTexts.home.closing.body}
-      </p>
 
-      <div style="display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap;">
-        <a href="https://wa.me/556294789032" target="_blank" rel="noopener noreferrer" class="lc" style="padding: 0.9rem 2rem; background: var(--pink-s); color: #fff; text-decoration: none; font-weight: 700; font-size: 1rem; border-radius: 6px; display: inline-flex; align-items: center; gap: 8px;">
-          <i data-lucide="message-square"></i>
-          {uiTexts.home.closing.primary_cta}
-        </a>
+      <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(170px, 1fr)); gap: 1rem;">
+        {uiTexts.home.method.steps.map((step, index) => {
+          const stepIcons = ['search', 'layers', 'zap', 'activity'];
+          return (
+            <div class="lc" style="background: rgba(255, 255, 255, 0.03); backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px); border: 1px solid rgba(255, 255, 255, 0.08); border-radius: 16px; padding: 1.2rem; transition: transform 0.2s ease, border-color 0.2s ease;">
+              <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.6rem;">
+                <span style="font-family: var(--mono); font-size: 1.1rem; font-weight: 900; color: var(--acid);">
+                  0{index + 1}
+                </span>
+                <i data-lucide={stepIcons[index] || 'zap'} style="width: 18px; height: 18px; color: var(--acid); opacity: 0.85;"></i>
+              </div>
+              <h3 style="font-size: 0.95rem; font-weight: 800; margin-bottom: 0.3rem; color: #fff;">{step.title}</h3>
+              <p style="color: var(--text-2); font-size: 0.82rem; line-height: 1.5; margin: 0;">{step.description}</p>
+            </div>
+          );
+        })}
+      </div>
+    </section>
+
+    <!-- SEÇÃO SOBRE & CLOSING (SEÇÃO CLARA FULL-BLEED FULL RHYTHM) -->
+    <section class="section" style="position: relative; z-index: 1; width: 100vw; left: 50%; right: 50%; margin-left: -50vw; margin-right: -50vw; padding: 3.5rem 0 3.2rem; background: #e2e4e8; color: #0b0b0d; margin-bottom: 3.5rem; border-radius: 54px; border-top: 1px solid rgba(0, 0, 0, 0.1); border-bottom: 1px solid rgba(0, 0, 0, 0.12); box-shadow: 0 12px 40px rgba(0, 0, 0, 0.35);">
+      <div style="max-width: 420px; margin: 0 auto; padding: 0 0.85rem;">
+        
+        <!-- CARD SOBRE A AGÊNCIA & FOUNDER -->
+        <div id="sobre" style="position: relative; margin-bottom: 2.2rem; padding: 1.6rem 1.2rem; background: #ffffff; border: 1px solid rgba(0, 0, 0, 0.08); border-radius: 24px; box-shadow: 0 8px 30px rgba(0, 0, 0, 0.06); overflow: hidden;">
+          <div class="section-label" style="margin-bottom: 0.4rem; color: #0072FF; border-color: rgba(0, 114, 255, 0.3); background: rgba(0, 114, 255, 0.08);">{uiTexts.home.about.eyebrow}</div>
+          <h2 style="font-size: 1.25rem; font-weight: 900; margin-bottom: 1.4rem; letter-spacing: -0.01em; line-height: 1.25; color: #0b0b0d;">
+            {uiTexts.home.about.title}
+          </h2>
+          
+          <!-- AVATAR CIRCULAR DO FOUNDER -->
+          <div style="display: flex; flex-direction: column; align-items: center; margin-bottom: 1.4rem;">
+            <div style="position: relative; width: 125px; height: 125px; border-radius: 50%; overflow: hidden; border: 2.5px solid #0072FF; box-shadow: 0 8px 25px rgba(0, 114, 255, 0.25); background: #0a0a0c;">
+              <img 
+                src={nodeneoImage.src} 
+                alt="Neo Mello — Founder & Lead Architect" 
+                style="width: 100%; height: 100%; object-fit: cover; object-position: center 10%; transform: scale(1.18); filter: brightness(1.15) contrast(1.08); display: block;"
+              />
+              <div style="position: absolute; bottom: 3px; right: 3px; z-index: 3; background: #0a0a0c; padding: 2px; border-radius: 50%;">
+                <div style="width: 10px; height: 10px; border-radius: 50%; background: #0072FF; box-shadow: 0 0 8px #0072FF;"></div>
+              </div>
+            </div>
+
+            <!-- FALA DO FOUNDER -->
+            <div style="width: 100%; background: rgba(0, 0, 0, 0.04); border: 1px solid rgba(0, 0, 0, 0.08); border-radius: 16px; padding: 1rem 1.1rem; text-align: center; margin-top: 1rem;">
+              <div style="font-family: var(--mono); font-size: 0.58rem; font-weight: 800; text-transform: uppercase; letter-spacing: 0.1em; color: #0072FF; margin-bottom: 0.25rem;">
+                arquiteto de sistemas · ai agents · payments · cloud · automation · devops · ecosystems · webapps ·
+              </div>
+              <div style="font-family: var(--mono); font-size: 0.65rem; color: #555560; margin-bottom: 0.6rem;">
+                Neø Mello
+              </div>
+              <a href="/Neo_Mello.vcf" download="Neo_Mello.vcf" style="display: inline-flex; align-items: center; justify-content: center; gap: 6px; font-family: var(--mono); font-size: 0.68rem; font-weight: 800; color: #ffffff; background: #000000; border-radius: 8px; padding: 7px 14px; text-decoration: none; box-shadow: 0 4px 14px rgba(0, 0, 0, 0.25); transition: all 0.2s ease;">
+                <i data-lucide="contact" style="width: 14px; height: 14px; color: #0072FF;"></i>
+                Salvar Contato vCard (.vcf)
+              </a>
+            </div>
+          </div>
+
+          <!-- TEXTOS SOBRE A AGÊNCIA -->
+          <div style="display: flex; flex-direction: column; gap: 0.9rem;">
+            {uiTexts.home.about.paragraphs.map(p => (
+              <p style="color: #42424a; font-size: 0.88rem; line-height: 1.6; margin: 0; font-weight: 500;">{p}</p>
+            ))}
+          </div>
+        </div>
+
+        <!-- CLOSING / CTA FINAL -->
+        <div style="text-align: center; padding: 1.8rem 1rem 0.5rem 1rem;">
+          <div style="display: inline-flex; align-items: center; gap: 6px; font-family: var(--mono); font-size: 0.65rem; font-weight: 800; text-transform: uppercase; letter-spacing: 0.1em; color: #4a4a55; margin-bottom: 0.8rem; background: rgba(0, 0, 0, 0.06); padding: 4px 10px; border-radius: 999px; border: 1px solid rgba(0, 0, 0, 0.1);">
+            <span>{uiTexts.home.closing.eyebrow}</span>
+          </div>
+
+          <h2 style="font-size: 1.35rem; font-weight: 900; margin-bottom: 0.8rem; line-height: 1.25; color: #0d0d10; text-transform: uppercase; letter-spacing: -0.01em;">
+            {uiTexts.home.closing.title}
+          </h2>
+
+          <p style="color: #42424a; font-size: 0.88rem; max-width: 360px; margin: 0 auto 1.5rem auto; line-height: 1.6; font-weight: 500;">
+            {uiTexts.home.closing.body}
+          </p>
+
+          <div style="display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap;">
+            <a href="https://wa.me/556294789032" target="_blank" rel="noopener noreferrer" style="padding: 0.85rem 1.6rem; background: #000000; color: #ffffff; text-decoration: none; font-weight: 800; font-size: 0.88rem; border-radius: 10px; display: inline-flex; align-items: center; gap: 8px; box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3); transition: transform 0.2s ease;">
+              <i data-lucide="message-square" style="width: 16px; height: 16px; color: #0072FF;"></i>
+              {uiTexts.home.closing.primary_cta}
+            </a>
+          </div>
+        </div>
+
       </div>
     </section>
 
@@ -166,10 +247,53 @@ const servicos = catalogData.products.filter(p => p.category === 'Serviço');
       <p style="color: var(--text-2); font-size: 0.9rem; max-width: 400px; margin: 0;">
         {uiTexts.footer.tagline}
       </p>
-      <div style="font-family: var(--mono); font-size: 0.8rem; color: var(--pink-s); text-transform: uppercase;">
+      <div style="font-family: var(--mono); font-size: 0.8rem; color: var(--acid); text-transform: uppercase;">
         {uiTexts.footer.statement}
       </div>
-      <Image src={metaBadge} alt="Meta Tech Provider" style="height: 42px; width: auto; object-fit: contain; opacity: 0.85; margin-top: 0.5rem;" />
+
+      <!-- LINKS DE GOVERNANÇA E COMPLIANCE META -->
+      <div style="display: flex; gap: 1rem; flex-wrap: wrap; justify-content: center; font-family: var(--mono); font-size: 0.72rem; margin-top: 0.5rem;">
+        <a href="/privacy" style="color: var(--text-2); text-decoration: none; transition: color 0.2s;" onmouseover="this.style.color='var(--acid)'" onmouseout="this.style.color='var(--text-2)'">Política de Privacidade</a>
+        <span style="color: rgba(255,255,255,0.2);">•</span>
+        <a href="/legal" style="color: var(--text-2); text-decoration: none; transition: color 0.2s;" onmouseover="this.style.color='var(--acid)'" onmouseout="this.style.color='var(--text-2)'">Termos de Serviço</a>
+        <span style="color: rgba(255,255,255,0.2);">•</span>
+        <a href="/excluir-dados" style="color: var(--text-2); text-decoration: none; transition: color 0.2s;" onmouseover="this.style.color='var(--acid)'" onmouseout="this.style.color='var(--text-2)'">Exclusão de Dados</a>
+      </div>
     </footer>
   </div>
+
+  <script>
+    /* Ripple on tap/click */
+    document.querySelectorAll<HTMLElement>('.lc').forEach((el) => {
+      el.addEventListener('pointerdown', (e: PointerEvent) => {
+        const target = e.currentTarget as HTMLElement;
+        const r = document.createElement('span');
+        const rect = target.getBoundingClientRect();
+        const size = Math.max(rect.width, rect.height) * 2;
+        r.style.cssText = `
+          position:absolute;width:${size}px;height:${size}px;
+          left:${e.clientX - rect.left - size / 2}px;top:${e.clientY - rect.top - size / 2}px;
+          border-radius:50%;background:rgba(255,255,255,0.06);
+          transform:scale(0);animation:ripple 0.5s ease forwards;pointer-events:none;
+        `;
+        target.appendChild(r);
+        setTimeout(() => r.remove(), 600);
+      });
+    });
+
+    /* "EM BREVE" toast on soon element tap */
+    document.querySelectorAll<HTMLElement>('.section-soon').forEach((el) => {
+      el.addEventListener('click', (e: MouseEvent) => {
+        const existing = document.querySelector('.soon-toast');
+        if (existing) existing.remove();
+        const toast = document.createElement('div');
+        toast.className = 'soon-toast';
+        toast.style.left = `${e.clientX}px`;
+        toast.style.top = `${e.clientY}px`;
+        toast.textContent = 'EM BREVE';
+        document.body.appendChild(toast);
+        setTimeout(() => toast.remove(), 1300);
+      });
+    });
+  </script>
 </Base>

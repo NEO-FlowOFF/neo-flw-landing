@@ -14,7 +14,7 @@
     "secondary_cta": "Falar sobre minha operação"
   },
   "home": {
-    "services_label": "IMPLEMENTAÇÕES ESPECIALIZADAS",
+    "services_label": "IMPLEMENTAÇÕES À LA CARTE",
     "services_description": "Contrate uma camada técnica específica para conectar, corrigir ou ampliar sua operação.",
     "plans_label": "OPERAÇÕES CONECTADAS",
     "plans_description": "Combine agentes, canais, dados e automações em uma estrutura comercial implantada para a sua empresa.",
@@ -58,7 +58,7 @@
       "title": "Sua empresa não precisa de mais uma ferramenta. Precisa que as ferramentas trabalhem juntas.",
       "body": "Conte onde a operação trava. A partir disso, desenhamos a implantação certa — sem empilhar tecnologia por esporte.",
       "primary_cta": "Mapear minha operação",
-      "secondary_cta": "Ver a Operação SDR IA"
+      "secondary_cta": "Ver o Agente SDR IA"
     }
   },
   "product_page": {

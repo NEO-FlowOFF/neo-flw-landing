@@ -15,6 +15,44 @@
   },
   "products": [
     {
+      "id": "LICENÇA-A2M-POI-STANDARD",
+      "slug": "a2m-poi-standard",
+      "title": "A2M-PoI Standard — Validação de Intenção",
+      "short_title": "A2M-PoI Standard",
+      "description": "Especificação técnica do NEØ Protocol para validação real de intenção e eliminação de ruído em agentes de IA.",
+      "link": "https://a2m.neoprotocol.space/",
+      "image_link": "https://www.neoflowoff.agency/src/assets/images/POI.png",
+      "price": {
+        "value": 5000,
+        "currency": "BRL"
+      },
+      "price_label": "Licenciamento a partir de",
+      "availability": "in stock",
+      "condition": "new",
+      "category": "Serviço",
+      "display_category": "Especificação Técnica & Licença",
+      "brand": "NEØ Protocol",
+      "features": [
+        "Especificação integral do padrão A2M-PoI de validação de intenção",
+        "Aplicação em agentes de IA, fluxos SDR e atendimento comercial",
+        "Direito de modificação e rebrand white-label corporativo",
+        "Documentação técnica da arquitetura Proof of Intent",
+        "Separação computacional entre curiosidade e intenção real de compra"
+      ],
+      "outcomes": [
+        "Identificação cirúrgica de intenção antes do transbordo humano",
+        "Eliminação de ruído e curiosos no funil de vendas dos agentes",
+        "Padrão corporativo white-label de governança e maturidade"
+      ],
+      "search_terms": [
+        "A2M-PoI",
+        "Proof of Intent",
+        "licenciamento NEØ Protocol",
+        "especificação técnica IA",
+        "validação de intenção"
+      ]
+    },
+    {
       "id": "SERVIÇO-API-WHATSAPP",
       "slug": "api-whatsapp",
       "title": "WhatsApp Business API Oficial",
