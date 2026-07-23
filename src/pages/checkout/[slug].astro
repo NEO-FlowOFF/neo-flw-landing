@@ -2,8 +2,6 @@
 import Base from '../../layouts/Base.astro';
 import catalogData from '../../data/catalog.json';
 import uiTexts from '../../data/ui_texts.json';
-import { Image } from 'astro:assets';
-import metaBadge from '../../assets/images/badge_meta_tech_provider.webp';
 
 export function getStaticPaths() {
   const servicos = catalogData.products.filter(p => p.category === 'Serviço');
@@ -90,7 +88,7 @@ const { servico } = Astro.props;
       <p style="color: var(--text-2); font-size: 0.85rem; margin: 0;">
         {uiTexts.footer.tagline}
       </p>
-      <Image src={metaBadge} alt="Meta Tech Provider" style="height: 40px; width: auto; object-fit: contain; opacity: 0.8;" />
+      <img src="/assets/badge_meta_tech_provider.webp" alt="Meta Tech Provider" style="height: 40px; width: auto; object-fit: contain; opacity: 0.8;" loading="lazy" decoding="async" width="1400" height="401" />
     </footer>
   </div>
 </Base>

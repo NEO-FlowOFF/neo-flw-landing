@@ -1,9 +1,10 @@
 {
-  "extends": ["development"],
+  "extends": [
+    "development"
+  ],
   "hints": {
     "no-inline-styles": "error",
     "meta-viewport": "error",
-    "axe/color-contrast": "warning",
     "button-type": "warning",
     "no-friendly-error-pages": "off"
   }

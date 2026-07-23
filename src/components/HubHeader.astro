@@ -1,12 +1,22 @@
 ---
-import logoImage from '../assets/logos/neoflowoff-logo26-2.webp';
 import uiTexts from '../data/ui_texts.json';
 ---
 <header class="hub-header">
   <!-- FLOATING STICKY GLASSBAR -->
   <div class="glass-navbar">
     <a href="#" class="nav-brand">
-      <img src={logoImage.src} alt="neoflowoff.agency" class="nav-logo" />
+      <img
+        src="/assets/neoflowoff-logo-192.webp"
+        srcset="/assets/neoflowoff-logo-192.webp 192w, /assets/neoflowoff-logo-384.webp 384w"
+        sizes="136px"
+        alt="neoflowoff.agency"
+        class="nav-logo"
+        width="192"
+        height="34"
+        fetchpriority="high"
+        loading="eager"
+        decoding="async"
+      />
     </a>
 
     <div class="nav-right">
