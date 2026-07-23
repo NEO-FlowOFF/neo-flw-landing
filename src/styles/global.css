@@ -11,10 +11,10 @@
   --neon: #c8d41a;
   --neon-glow: rgb(200 212 26 / 35%);
   --acid: #c8d41a;
-  --acqua: #00f2ff;
+  --acqua: #c8d41a;
   --text: rgb(255 255 255 / 92%);
-  --text-2: rgb(255 255 255 / 40%);
-  --text-3: rgb(255 255 255 / 22%);
+  --text-2: rgb(255 255 255 / 68%);
+  --text-3: rgb(255 255 255 / 56%);
   --display: "Figtree", sans-serif;
   --mono: "DM Mono", monospace;
 }
@@ -78,7 +78,7 @@ body {
   font-size: 0.75rem;
   letter-spacing: 0.2em;
   text-transform: uppercase;
-  color: rgb(255 255 255 / 40%);
+  color: rgb(255 255 255 / 72%);
   margin-bottom: 1.5rem;
 }
 

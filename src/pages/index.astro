@@ -22,12 +22,12 @@ const servicos = catalogData.products.filter(p => p.category === 'Serviço' && !
         <span style="font-family: var(--mono); font-size: 0.72rem; font-weight: 800; color: #ffffff; text-transform: uppercase; letter-spacing: 0.05em; white-space: nowrap; display: inline-flex; align-items: center; gap: 0.7rem;">
           <span style="background: var(--acid); color: #000; font-size: 0.58rem; padding: 2px 6px; border-radius: 4px; font-weight: 900; letter-spacing: 0.08em;">LATEST</span>
           <span>Agentes de IA, páginas, CRM e fluxos comerciais para empresas. Marketing com infraestrutura.</span>
-          <span style="color: #0072FF; font-size: 0.6rem;">◆</span>
+          <span style="color: var(--acid); font-size: 0.6rem;">◆</span>
         </span>
         <span style="font-family: var(--mono); font-size: 0.72rem; font-weight: 800; color: #ffffff; text-transform: uppercase; letter-spacing: 0.05em; white-space: nowrap; display: inline-flex; align-items: center; gap: 0.7rem;">
           <span style="background: var(--acid); color: #000; font-size: 0.58rem; padding: 2px 6px; border-radius: 4px; font-weight: 900; letter-spacing: 0.08em;">LATEST</span>
           <span>Agentes de IA, páginas, CRM e fluxos comerciais para empresas. Marketing com infraestrutura.</span>
-          <span style="color: #0072FF; font-size: 0.6rem;">◆</span>
+          <span style="color: var(--acid); font-size: 0.6rem;">◆</span>
         </span>
       </div>
     </div>
@@ -117,7 +117,7 @@ const servicos = catalogData.products.filter(p => p.category === 'Serviço' && !
       <section class="section" style="position: relative; z-index: 1; width: 100vw; left: 50%; right: 50%; margin-left: -50vw; margin-right: -50vw; padding: 3.5rem 0; background: #e2e4e8; color: #0b0b0d; margin-bottom: 3.5rem; border-radius: 54px; border-top: 1px solid rgba(0, 0, 0, 0.1); border-bottom: 1px solid rgba(0, 0, 0, 0.12); box-shadow: 0 12px 40px rgba(0, 0, 0, 0.35);">
         <div style="max-width: 420px; margin: 0 auto; padding: 0 0.85rem;">
           <div style="margin-bottom: 1.2rem;">
-            <div class="section-label" style="color: #0072FF; border-color: rgba(0, 114, 255, 0.3); background: rgba(0, 114, 255, 0.08);">{uiTexts.home.services_label}</div>
+            <div class="section-label" style="color: #5f650c; border-color: rgba(95, 101, 12, 0.28); background: rgba(200, 212, 26, 0.14);">{uiTexts.home.services_label}</div>
             <p style="color: #42424a; font-size: 0.85rem; margin-top: 0.3rem; font-weight: 500;">{uiTexts.home.services_description}</p>
           </div>
           <div class="link-grid">
@@ -175,34 +175,34 @@ const servicos = catalogData.products.filter(p => p.category === 'Serviço' && !
 
         <!-- CARD SOBRE A AGÊNCIA & FOUNDER -->
         <div id="sobre" style="position: relative; margin-bottom: 2.2rem; padding: 1.6rem 1.2rem; background: #ffffff; border: 1px solid rgba(0, 0, 0, 0.08); border-radius: 24px; box-shadow: 0 8px 30px rgba(0, 0, 0, 0.06); overflow: hidden;">
-          <div class="section-label" style="margin-bottom: 0.4rem; color: #0072FF; border-color: rgba(0, 114, 255, 0.3); background: rgba(0, 114, 255, 0.08);">{uiTexts.home.about.eyebrow}</div>
+          <div class="section-label" style="margin-bottom: 0.4rem; color: #5f650c; border-color: rgba(95, 101, 12, 0.28); background: rgba(200, 212, 26, 0.14);">{uiTexts.home.about.eyebrow}</div>
           <h2 style="font-size: 1.25rem; font-weight: 900; margin-bottom: 1.4rem; letter-spacing: -0.01em; line-height: 1.25; color: #0b0b0d;">
             {uiTexts.home.about.title}
           </h2>
 
           <!-- AVATAR CIRCULAR DO FOUNDER -->
           <div style="display: flex; flex-direction: column; align-items: center; margin-bottom: 1.4rem;">
-            <div style="position: relative; width: 125px; height: 125px; border-radius: 50%; overflow: hidden; border: 2.5px solid #0072FF; box-shadow: 0 8px 25px rgba(0, 114, 255, 0.25); background: #0a0a0c;">
+            <div style="position: relative; width: 125px; height: 125px; border-radius: 50%; overflow: hidden; border: 2.5px solid var(--acid); box-shadow: 0 8px 25px rgba(200, 212, 26, 0.22); background: #0a0a0c;">
               <img
                 src={nodeneoImage.src}
                 alt="Neo Mello — Founder & Lead Architect"
                 style="width: 100%; height: 100%; object-fit: cover; object-position: center 10%; transform: scale(1.18); filter: brightness(1.15) contrast(1.08); display: block;"
               />
               <div style="position: absolute; bottom: 3px; right: 3px; z-index: 3; background: #0a0a0c; padding: 2px; border-radius: 50%;">
-                <div style="width: 10px; height: 10px; border-radius: 50%; background: #0072FF; box-shadow: 0 0 8px #0072FF;"></div>
+                <div style="width: 10px; height: 10px; border-radius: 50%; background: var(--acid); box-shadow: 0 0 8px var(--acid);"></div>
               </div>
             </div>
 
             <!-- FALA DO FOUNDER -->
             <div style="width: 100%; background: rgba(0, 0, 0, 0.04); border: 1px solid rgba(0, 0, 0, 0.08); border-radius: 16px; padding: 1rem 1.1rem; text-align: center; margin-top: 1rem;">
-              <div style="font-family: var(--mono); font-size: 0.58rem; font-weight: 800; text-transform: uppercase; letter-spacing: 0.1em; color: #0072FF; margin-bottom: 0.25rem;">
+              <div style="font-family: var(--mono); font-size: 0.58rem; font-weight: 800; text-transform: uppercase; letter-spacing: 0.1em; color: #5f650c; margin-bottom: 0.25rem;">
                 Neø Mello
               </div>
               <div style="font-family: var(--mono); font-size: 0.65rem; color: #555560; margin-bottom: 0.6rem;">
                 arquiteto de sistemas · ai agents · payments · cloud · automation · devops · ecosystems · webapps ·
               </div>
               <a href="/Neo_Mello.vcf" download="Neo_Mello.vcf" style="display: inline-flex; align-items: center; justify-content: center; gap: 6px; font-family: var(--mono); font-size: 0.68rem; font-weight: 800; color: #ffffff; background: #000000; border-radius: 8px; padding: 7px 14px; text-decoration: none; box-shadow: 0 4px 14px rgba(0, 0, 0, 0.25); transition: all 0.2s ease;">
-                <i data-lucide="contact" style="width: 14px; height: 14px; color: #0072FF;"></i>
+                <i data-lucide="contact" style="width: 14px; height: 14px; color: var(--acid);"></i>
                 Salvar Contato vCard (.vcf)
               </a>
             </div>
@@ -232,7 +232,7 @@ const servicos = catalogData.products.filter(p => p.category === 'Serviço' && !
 
           <div style="display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap;">
             <a href="https://wa.me/556294789032" target="_blank" rel="noopener noreferrer" style="padding: 0.85rem 1.6rem; background: #000000; color: #ffffff; text-decoration: none; font-weight: 800; font-size: 0.88rem; border-radius: 10px; display: inline-flex; align-items: center; gap: 8px; box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3); transition: transform 0.2s ease;">
-              <i data-lucide="message-square" style="width: 16px; height: 16px; color: #0072FF;"></i>
+              <i data-lucide="message-square" style="width: 16px; height: 16px; color: var(--acid);"></i>
               {uiTexts.home.closing.primary_cta}
             </a>
           </div>
