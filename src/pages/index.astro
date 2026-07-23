@@ -6,6 +6,7 @@ import catalogData from '../data/catalog.json';
 import uiTexts from '../data/ui_texts.json';
 import nodeneoImage from '../assets/images/nodeneo.webp';
 import bolhaImage from '../assets/images/bolha.webp';
+import steelLogoImage from '../assets/images/steel_flw.webp';
 
 const isMeta = (slug: string) => slug?.includes('meta') || slug?.includes('whatsapp');
 
@@ -242,10 +243,7 @@ const servicos = catalogData.products.filter(p => p.category === 'Serviço' && !
 
     <!-- FOOTER -->
     <footer class="hub-footer" style="display: flex; flex-direction: column; align-items: center; gap: 1.5rem; margin-top: 4rem; padding-bottom: 3rem; text-align: center;">
-      <div class="hub-footer-brand" style="font-size: 1.3rem; font-weight: 900;">
-        <span class="neo">»</span>
-        {uiTexts.footer.brand_name}
-      </div>
+      <img src={steelLogoImage.src} alt={uiTexts.footer.brand_name} width="3693" height="640" loading="lazy" decoding="async" style="width: min(240px, 78vw); height: auto; object-fit: contain; opacity: 0.94;" />
       <p style="color: var(--text-2); font-size: 0.9rem; max-width: 400px; margin: 0;">
         {uiTexts.footer.tagline}
       </p>

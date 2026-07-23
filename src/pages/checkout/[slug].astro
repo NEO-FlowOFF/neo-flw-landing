@@ -2,6 +2,7 @@
 import Base from '../../layouts/Base.astro';
 import catalogData from '../../data/catalog.json';
 import uiTexts from '../../data/ui_texts.json';
+import steelLogoImage from '../../assets/images/steel_flw.webp';
 
 export function getStaticPaths() {
   const servicos = catalogData.products.filter(p => p.category === 'Serviço');
@@ -81,10 +82,7 @@ const { servico } = Astro.props;
 
     <!-- FOOTER -->
     <footer class="hub-footer" style="display: flex; flex-direction: column; align-items: center; gap: 1.5rem; margin-top: 5rem; padding-bottom: 3rem; text-align: center;">
-      <div class="hub-footer-brand" style="font-size: 1.2rem; font-weight: 900;">
-        <span class="neo">»</span>
-        {uiTexts.footer.brand_name}
-      </div>
+      <img src={steelLogoImage.src} alt={uiTexts.footer.brand_name} width="3693" height="640" loading="lazy" decoding="async" style="width: min(220px, 76vw); height: auto; object-fit: contain; opacity: 0.9;" />
       <p style="color: var(--text-2); font-size: 0.85rem; margin: 0;">
         {uiTexts.footer.tagline}
       </p>
