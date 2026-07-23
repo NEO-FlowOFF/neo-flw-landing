@@ -1,0 +1,79 @@
+---
+import Base from '../layouts/Base.astro';
+---
+<Base title="Conectar WhatsApp — Meta Embedded Signup | NEØ FlowOFF">
+  <div style="min-height: 80vh; display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 2rem 1rem; text-align: center;">
+    <div style="max-width: 480px; width: 100%; background: #1c1c20; border: 1px solid rgba(255, 255, 255, 0.12); border-radius: 24px; padding: 2.5rem 1.8rem; box-shadow: 0 16px 45px rgba(0, 0, 0, 0.6);">
+      
+      <!-- LOGO META / WHATSAPP BADGE -->
+      <div style="display: inline-flex; align-items: center; gap: 8px; font-family: var(--mono); font-size: 0.7rem; font-weight: 800; text-transform: uppercase; letter-spacing: 0.1em; color: #0072FF; background: rgba(0, 114, 255, 0.08); padding: 6px 14px; border-radius: 999px; border: 1px solid rgba(0, 114, 255, 0.25); margin-bottom: 1.5rem;">
+        <span style="width: 7px; height: 7px; border-radius: 50%; background: #0072FF;"></span>
+        <span>Meta Tech Provider — Embedded Signup</span>
+      </div>
+
+      <h1 style="font-size: 1.5rem; font-weight: 900; color: #ffffff; margin-bottom: 0.8rem; text-transform: uppercase; letter-spacing: -0.01em;">
+        Conectar WhatsApp Business
+      </h1>
+
+      <p style="color: rgba(255, 255, 255, 0.7); font-size: 0.9rem; line-height: 1.6; margin-bottom: 2rem;">
+        Vincule sua conta do WhatsApp Business Management e conceda permissões de envio e gerenciamento de mensagens via infraestrutura oficial Meta Tech Provider.
+      </p>
+
+      <!-- BOTÃO EMBEDDED SIGNUP META -->
+      <button 
+        id="btn-meta-signup" 
+        onclick="launchWhatsAppSignup()" 
+        style="width: 100%; background: #1877F2; color: #ffffff; border: none; padding: 16px 24px; font-size: 1rem; font-weight: 800; border-radius: 12px; cursor: pointer; display: flex; align-items: center; justify-content: center; gap: 10px; box-shadow: 0 8px 24px rgba(24, 119, 242, 0.35); transition: transform 0.2s ease, background 0.2s ease;"
+      >
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="white" xmlns="http://www.w3.org/2000/svg">
+          <path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/>
+        </svg>
+        Conectar WhatsApp com Meta
+      </button>
+
+      <div id="signup-status" style="margin-top: 1.5rem; font-family: var(--mono); font-size: 0.78rem; color: #c8d41a; display: none;"></div>
+
+      <div style="margin-top: 2rem; padding-top: 1.2rem; border-top: 1px solid rgba(255, 255, 255, 0.08); font-size: 0.72rem; color: rgba(255, 255, 255, 0.4);">
+        App: NEØ FLOW E-gine (ID: 1500002841696407) · Graph API v25.0
+      </div>
+
+    </div>
+  </div>
+
+  <script is:inline>
+    window.fbAsyncInit = function() {
+      FB.init({
+        appId      : '1500002841696407', // App ID do NEØ FLOW E-gine
+        cookie     : true,
+        xfbml      : true,
+        version    : 'v25.0'
+      });
+    };
+
+    function launchWhatsAppSignup() {
+      const statusDiv = document.getElementById('signup-status');
+      FB.login(function (response) {
+        if (response.authResponse) {
+          console.log('Código/Token capturado com sucesso:', response.authResponse);
+          if (statusDiv) {
+            statusDiv.style.display = 'block';
+            statusDiv.innerHTML = '✓ Conexão realizada com sucesso! WABA vinculado.';
+          }
+          alert('Conexão realizada com sucesso! WABA vinculado.');
+        } else {
+          console.log('Login cancelado ou não autorizado.');
+          if (statusDiv) {
+            statusDiv.style.display = 'block';
+            statusDiv.style.color = '#ff4d4d';
+            statusDiv.innerText = '✕ Login cancelado ou não autorizado.';
+          }
+        }
+      }, {
+        /* Permissões exigidas pelo Tech Provider */
+        scope: 'whatsapp_business_management,whatsapp_business_messaging,business_management',
+        response_type: 'code'
+      });
+    }
+  </script>
+  <script async defer crossorigin="anonymous" src="https://connect.facebook.net/pt_BR/sdk.js"></script>
+</Base>
