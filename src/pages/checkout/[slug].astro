@@ -3,7 +3,7 @@ import Base from '../../layouts/Base.astro';
 import catalogData from '../../data/catalog.json';
 import uiTexts from '../../data/ui_texts.json';
 import { Image } from 'astro:assets';
-import metaBadge from '../../assets/images/badge_meta_tech_provider.png';
+import metaBadge from '../../assets/images/badge_meta_tech_provider.webp';
 
 export function getStaticPaths() {
   const servicos = catalogData.products.filter(p => p.category === 'Serviço');

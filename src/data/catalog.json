@@ -21,7 +21,7 @@
       "short_title": "A2M-PoI Standard",
       "description": "Especificação técnica do NEØ Protocol para validação real de intenção e eliminação de ruído em agentes de IA.",
       "link": "https://a2m.neoprotocol.space/",
-      "image_link": "https://www.neoflowoff.agency/src/assets/images/POI.png",
+      "image_link": "https://www.neoflowoff.agency/src/assets/images/POI.webp",
       "price": {
         "value": 5000,
         "currency": "BRL"
