@@ -1,4 +1,4 @@
-const CACHE_NAME = 'neo-flw-landing-v1';
+const CACHE_NAME = 'neo-flw-landing-v2';
 const ASSETS_TO_CACHE = [
   '/',
   '/manifest.webmanifest',
@@ -26,21 +26,32 @@ self.addEventListener('activate', event => {
 });
 
 self.addEventListener('fetch', event => {
-  // Ignora requests de API
-  if (event.request.url.includes('/api/')) return;
+  const requestUrl = new URL(event.request.url);
+
+  if (
+    event.request.method !== 'GET' ||
+    requestUrl.origin !== self.location.origin ||
+    requestUrl.pathname.startsWith('/api/') ||
+    requestUrl.pathname.startsWith('/_astro/') ||
+    requestUrl.pathname.startsWith('/_image') ||
+    requestUrl.pathname.startsWith('/src/')
+  ) {
+    return;
+  }
 
   event.respondWith(
     caches.match(event.request)
       .then(cachedResponse => {
-        // Stale-while-revalidate pattern
         const fetchPromise = fetch(event.request).then(networkResponse => {
           if (networkResponse && networkResponse.status === 200 && networkResponse.type === 'basic') {
             const responseToCache = networkResponse.clone();
-            caches.open(CACHE_NAME).then(cache => {
-              cache.put(event.request, responseToCache);
-            });
+            event.waitUntil(caches.open(CACHE_NAME).then(cache => cache.put(event.request, responseToCache)));
           }
           return networkResponse;
+        }).catch(() => {
+          if (cachedResponse) return cachedResponse;
+          if (event.request.mode === 'navigate') return caches.match('/');
+          return Response.error();
         });
         
         return cachedResponse || fetchPromise;
