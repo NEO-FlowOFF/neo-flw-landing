@@ -62,7 +62,7 @@ const keywords = uiTexts.meta.keywords.join(', ');
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=DM+Mono:ital,wght@0,300;0,400;0,500;1,300;1,400;1,500&family=Figtree:ital,wght@0,300..900;1,300..900&display=swap" rel="stylesheet">
-    <script src="https://unpkg.com/lucide@latest"></script>
+    <script src="https://unpkg.com/lucide@latest" defer></script>
   </head>
   <body>
     <div class="mesh"></div>
@@ -71,10 +71,12 @@ const keywords = uiTexts.meta.keywords.join(', ');
       // Declare global to avoid TS errors
       declare const lucide: any;
 
-      // Initialize icons
-      if (typeof lucide !== 'undefined') {
-        lucide.createIcons();
-      }
+      // Initialize icons safely after load
+      window.addEventListener('DOMContentLoaded', () => {
+        if (typeof lucide !== 'undefined') {
+          lucide.createIcons();
+        }
+      });
 
       // Register PWA Service Worker
       if ('serviceWorker' in navigator) {
