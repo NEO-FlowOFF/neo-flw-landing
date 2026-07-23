@@ -1,0 +1,175 @@
+---
+import Base from '../layouts/Base.astro';
+import ProductCard from '../components/ProductCard.astro';
+import catalogData from '../data/catalog.json';
+import uiTexts from '../data/ui_texts.json';
+import { Image } from 'astro:assets';
+import logoImage from '../assets/logos/neoflowoff_logo.png';
+import metaBadge from '../assets/images/badge_meta_tech_provider.png';
+
+const planos = catalogData.products.filter(p => p.category === 'Plano');
+const servicos = catalogData.products.filter(p => p.category === 'Serviço');
+---
+<Base>
+  <div class="page" style="max-width: 1100px; margin: 0 auto; padding: 2rem 1.5rem;">
+    <!-- HEADER -->
+    <header style="text-align: center; margin-bottom: 4rem; padding-top: 2rem;">
+      <Image src={logoImage} alt="neoflowoff.agency" style="width: 130px; height: auto; margin-bottom: 1.5rem;" />
+      
+      <div style="font-family: var(--mono); font-size: 0.8rem; color: var(--pink-s); letter-spacing: 0.1em; text-transform: uppercase; margin-bottom: 0.75rem; font-weight: 700;">
+        {uiTexts.header.eyebrow}
+      </div>
+
+      <h1 style="font-weight: 900; font-size: clamp(2rem, 5vw, 3.2rem); letter-spacing: -0.02em; line-height: 1.15; max-width: 800px; margin: 0 auto 1.2rem auto;">
+        {uiTexts.header.title_part1}<span style="color: var(--pink-s);">{uiTexts.header.title_highlight}</span>
+      </h1>
+
+      <p style="color: var(--text); font-size: 1.15rem; max-width: 720px; margin: 0 auto 1rem auto; line-height: 1.6;">
+        {uiTexts.header.subtitle}
+      </p>
+
+      <p style="color: var(--text-2); font-size: 0.95rem; max-width: 680px; margin: 0 auto 2rem auto; line-height: 1.6;">
+        {uiTexts.header.body}
+      </p>
+
+      <div style="display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap;">
+        <a href="#solucoes" class="lc" style="padding: 0.8rem 1.8rem; background: var(--pink-s); color: #fff; text-decoration: none; font-weight: 700; font-size: 0.95rem; border-radius: 6px;">
+          {uiTexts.header.primary_cta}
+        </a>
+        <a href="https://wa.me/556294789032" target="_blank" rel="noopener noreferrer" class="lc" style="padding: 0.8rem 1.8rem; background: transparent; border: 1px solid var(--border); color: var(--text); text-decoration: none; font-size: 0.95rem; border-radius: 6px; display: inline-flex; align-items: center; gap: 8px;">
+          <i data-lucide="message-circle" style="width: 18px; height: 18px; color: var(--acqua);"></i>
+          {uiTexts.header.secondary_cta}
+        </a>
+      </div>
+    </header>
+
+    <!-- SOLUÇÕES (GRID) -->
+    <div id="solucoes">
+      <!-- SERVIÇOS UNITÁRIOS -->
+      <section class="section" style="margin-bottom: 4rem;">
+        <div style="margin-bottom: 1.5rem;">
+          <div class="section-label">{uiTexts.home.services_label}</div>
+          <p style="color: var(--text-2); font-size: 0.9rem; margin-top: 0.25rem;">{uiTexts.home.services_description}</p>
+        </div>
+        <div class="link-grid">
+          {servicos.map((servico) => (
+            <ProductCard 
+              id={servico.id}
+              slug={servico.slug}
+              title={servico.title}
+              description={servico.description}
+              link={servico.link}
+              price={servico.price}
+              price_label={servico.price_label}
+              category={servico.category}
+              display_category={servico.display_category}
+              featured={servico.featured}
+              features={servico.features.slice(0, 3)} 
+            />
+          ))}
+        </div>
+      </section>
+
+      <!-- PACOTES COMPLETOS / OPERAÇÕES CONECTADAS -->
+      <section class="section" style="margin-bottom: 5rem;">
+        <div style="margin-bottom: 1.5rem;">
+          <div class="section-label">{uiTexts.home.plans_label}</div>
+          <p style="color: var(--text-2); font-size: 0.9rem; margin-top: 0.25rem;">{uiTexts.home.plans_description}</p>
+        </div>
+        <div class="link-grid">
+          {planos.map((plano) => (
+            <ProductCard 
+              id={plano.id}
+              slug={plano.slug}
+              title={plano.title}
+              description={plano.description}
+              link={plano.link}
+              price={plano.price}
+              price_label={plano.price_label}
+              category={plano.category}
+              display_category={plano.display_category}
+              featured={plano.featured}
+              features={plano.features.slice(0, 4)} 
+            />
+          ))}
+        </div>
+      </section>
+    </div>
+
+    <!-- SEÇÃO SOBRE -->
+    <section style="margin-bottom: 5rem; padding: 3rem 2rem; background: rgba(255, 255, 255, 0.02); border: 1px solid var(--border); border-radius: 12px;">
+      <div class="section-label" style="margin-bottom: 0.5rem;">{uiTexts.home.about.eyebrow}</div>
+      <h2 style="font-size: 1.8rem; font-weight: 800; margin-bottom: 1.5rem; letter-spacing: -0.01em;">{uiTexts.home.about.title}</h2>
+      
+      <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 2rem; margin-bottom: 2rem;">
+        <div>
+          {uiTexts.home.about.paragraphs.map(p => (
+            <p style="color: var(--text-2); font-size: 0.95rem; line-height: 1.7; margin-bottom: 1rem;">{p}</p>
+          ))}
+        </div>
+        <div>
+          <div style="font-family: var(--mono); font-size: 0.85rem; color: var(--pink-s); text-transform: uppercase; margin-bottom: 1rem; font-weight: 700;">Princípios da Operação:</div>
+          <ul style="list-style: none; padding: 0;">
+            {uiTexts.home.about.principles.map(principle => (
+              <li style="display: flex; align-items: center; gap: 10px; color: var(--text); font-size: 0.95rem; margin-bottom: 0.8rem;">
+                <i data-lucide="check" style="width: 16px; height: 16px; color: var(--acqua);"></i>
+                {principle}
+              </li>
+            ))}
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- SEÇÃO MÉTODO -->
+    <section style="margin-bottom: 5rem;">
+      <div class="section-label" style="margin-bottom: 0.5rem;">{uiTexts.home.method.eyebrow}</div>
+      <h2 style="font-size: 1.8rem; font-weight: 800; margin-bottom: 2rem; letter-spacing: -0.01em;">{uiTexts.home.method.title}</h2>
+
+      <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 1.5rem;">
+        {uiTexts.home.method.steps.map((step, index) => (
+          <div class="lc" style="padding: 1.8rem; border-radius: 8px;">
+            <div style="font-family: var(--mono); font-size: 1.5rem; font-weight: 900; color: var(--pink-s); margin-bottom: 0.5rem;">
+              0{index + 1}
+            </div>
+            <h3 style="font-size: 1.2rem; font-weight: 700; margin-bottom: 0.5rem;">{step.title}</h3>
+            <p style="color: var(--text-2); font-size: 0.9rem; line-height: 1.6;">{step.description}</p>
+          </div>
+        ))}
+      </div>
+    </section>
+
+    <!-- SEÇÃO CLOSING / CTA FINAL -->
+    <section style="margin-bottom: 5rem; text-align: center; padding: 3.5rem 2rem; background: radial-gradient(circle at center, rgba(230, 0, 126, 0.08) 0%, transparent 70%); border: 1px solid var(--border); border-radius: 12px;">
+      <div class="section-label" style="margin-bottom: 0.5rem;">{uiTexts.home.closing.eyebrow}</div>
+      <h2 style="font-size: 2rem; font-weight: 800; margin-bottom: 1rem; max-width: 700px; margin-left: auto; margin-right: auto; line-height: 1.2;">
+        {uiTexts.home.closing.title}
+      </h2>
+      <p style="color: var(--text-2); font-size: 1.05rem; max-width: 600px; margin: 0 auto 2rem auto; line-height: 1.6;">
+        {uiTexts.home.closing.body}
+      </p>
+
+      <div style="display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap;">
+        <a href="https://wa.me/556294789032" target="_blank" rel="noopener noreferrer" class="lc" style="padding: 0.9rem 2rem; background: var(--pink-s); color: #fff; text-decoration: none; font-weight: 700; font-size: 1rem; border-radius: 6px; display: inline-flex; align-items: center; gap: 8px;">
+          <i data-lucide="message-square"></i>
+          {uiTexts.home.closing.primary_cta}
+        </a>
+      </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer class="hub-footer" style="display: flex; flex-direction: column; align-items: center; gap: 1.5rem; margin-top: 4rem; padding-bottom: 3rem; text-align: center;">
+      <div class="hub-footer-brand" style="font-size: 1.3rem; font-weight: 900;">
+        <span class="neo">»</span>
+        {uiTexts.footer.brand_name}
+      </div>
+      <p style="color: var(--text-2); font-size: 0.9rem; max-width: 400px; margin: 0;">
+        {uiTexts.footer.tagline}
+      </p>
+      <div style="font-family: var(--mono); font-size: 0.8rem; color: var(--pink-s); text-transform: uppercase;">
+        {uiTexts.footer.statement}
+      </div>
+      <Image src={metaBadge} alt="Meta Tech Provider" style="height: 42px; width: auto; object-fit: contain; opacity: 0.85; margin-top: 0.5rem;" />
+    </footer>
+  </div>
+</Base>

@@ -1,0 +1,99 @@
+{
+  "brand": {
+    "name": "neoflowoff.agency",
+    "positioning": "Agentes de IA, páginas, CRM e fluxos comerciais para empresas. Marketing com infraestrutura.",
+    "short_positioning": "Marketing com infraestrutura."
+  },
+  "header": {
+    "eyebrow": "MARKETING COM INFRAESTRUTURA",
+    "title_part1": "Sistemas para ",
+    "title_highlight": "vender, atender e operar.",
+    "subtitle": "Agentes de IA, páginas, CRM, WhatsApp, mídia, dados e automações conectados à operação comercial da sua empresa.",
+    "body": "A neoflowoff.agency projeta e implanta as camadas que fazem uma oportunidade circular: do primeiro clique à conversa, do registro no CRM ao encaminhamento humano e à próxima ação.",
+    "primary_cta": "Explorar soluções",
+    "secondary_cta": "Falar sobre minha operação"
+  },
+  "home": {
+    "services_label": "IMPLEMENTAÇÕES ESPECIALIZADAS",
+    "services_description": "Contrate uma camada técnica específica para conectar, corrigir ou ampliar sua operação.",
+    "plans_label": "OPERAÇÕES CONECTADAS",
+    "plans_description": "Combine agentes, canais, dados e automações em uma estrutura comercial implantada para a sua empresa.",
+    "featured_label": "OPERAÇÃO PRINCIPAL",
+    "about": {
+      "eyebrow": "SOBRE A NEOFLOWOFF.AGENCY",
+      "title": "Não entregamos ferramentas soltas. Construímos a operação entre elas.",
+      "paragraphs": [
+        "Somos uma agência de infraestrutura comercial. Unimos estratégia, software, dados e automação para transformar ferramentas dispersas em uma operação que responde, registra, encaminha e aprende.",
+        "Construímos agentes de IA, páginas, CRM, integrações, mídia e dashboards como partes de um mesmo sistema. Porque conversa sem integração vira fila. Tráfego sem dados vira aposta. Automação sem arquitetura vira retrabalho.",
+        "Nosso trabalho é fazer tudo circular com contexto, rastreabilidade e controle humano onde ele realmente importa."
+      ],
+      "statement": "Marketing com infraestrutura.",
+      "principles": [
+        "Arquitetura antes da ferramenta",
+        "Integração antes do retrabalho",
+        "Dados antes do achismo",
+        "Automação com controle humano"
+      ]
+    },
+    "method": {
+      "eyebrow": "COMO TRABALHAMOS",
+      "title": "Começamos pelo fluxo. Depois escolhemos a tecnologia.",
+      "steps": [
+        {
+          "title": "Diagnosticar",
+          "description": "Entendemos onde a oportunidade entra, onde perde contexto e onde a operação depende de trabalho manual."
+        },
+        {
+          "title": "Conectar",
+          "description": "Ligamos canais, sistemas, dados e pessoas em uma arquitetura coerente com o processo comercial."
+        },
+        {
+          "title": "Operar",
+          "description": "Implantamos, testamos, documentamos e acompanhamos os sinais necessários para a estrutura continuar útil."
+        }
+      ]
+    },
+    "closing": {
+      "eyebrow": "PRÓXIMA CAMADA",
+      "title": "Sua empresa não precisa de mais uma ferramenta. Precisa que as ferramentas trabalhem juntas.",
+      "body": "Conte onde a operação trava. A partir disso, desenhamos a implantação certa — sem empilhar tecnologia por esporte.",
+      "primary_cta": "Mapear minha operação",
+      "secondary_cta": "Ver a Operação SDR IA"
+    }
+  },
+  "product_page": {
+    "back_button": "Voltar às soluções",
+    "service_label": "IMPLEMENTAÇÃO ESPECIALIZADA",
+    "plan_label": "OPERAÇÃO CONECTADA",
+    "included_features_label": "ESCOPO DA IMPLANTAÇÃO",
+    "outcomes_label": "O QUE ESTA CAMADA ORGANIZA",
+    "investment_label": "INVESTIMENTO",
+    "checkout_button": "Começar contratação",
+    "contact_button": "Validar escopo com a equipe",
+    "pricing_notice": "O escopo final, as integrações, a recorrência e o prazo são confirmados antes da contratação."
+  },
+  "footer": {
+    "brand_prefix": "»",
+    "brand_name": "NEOFLOWOFF.AGENCY",
+    "tagline": "Agentes de IA, páginas, CRM e fluxos comerciais para empresas.",
+    "statement": "Marketing com infraestrutura."
+  },
+  "meta": {
+    "default_title": "Agentes de IA, CRM, automação e dados | neoflowoff.agency",
+    "default_description": "A neoflowoff.agency implanta agentes de IA, páginas, CRM, WhatsApp API, automações, mídia e dados conectados à operação comercial de empresas.",
+    "og_title": "neoflowoff.agency — Marketing com infraestrutura",
+    "og_description": "Agentes de IA, páginas, CRM, dados e fluxos comerciais projetados para trabalhar juntos.",
+    "keywords": [
+      "agentes de IA",
+      "Agente SDR IA",
+      "automação comercial",
+      "CRM",
+      "WhatsApp Business API",
+      "Meta Developers",
+      "Google Ads",
+      "Meta Ads",
+      "landing pages",
+      "dashboards"
+    ]
+  }
+}

@@ -1,0 +1,28 @@
+# robots.txt for neoflowoff.agency
+# Premium SEO/AEO Configuration - NEØ Protocol
+
+User-agent: *
+Allow: /
+Allow: /index.html
+Allow: /manifest.webmanifest
+Allow: /sitemap.xml
+Allow: /llms.txt
+Allow: /sw.js
+
+# Security & Privacy - Block sensitive/technical paths
+Disallow: /api/
+Disallow: /checkout/
+Disallow: /*?checkout=success
+Disallow: /*?utm_*
+
+# AI & LLM Crawlers
+User-agent: GPTBot
+Allow: /
+User-agent: ClaudeBot
+Allow: /
+User-agent: PerplexityBot
+Allow: /
+User-agent: Google-Extended
+Allow: /
+
+Sitemap: https://lp.neoflowoff.agency/sitemap.xml

@@ -1,0 +1,24 @@
+{
+  "platform": {
+    "name": "neoflowoff.agency",
+    "base_url": "https://www.neoflowoff.agency",
+    "whatsapp_waba": "556294789032"
+  },
+  "integrations": {
+    "meta": {
+      "domain_verification": "zq0xygs8v9s714m5039mijjh0wowyj",
+      "pixel_events": ["begin_checkout", "add_payment_info", "purchase"]
+    },
+    "google": {
+      "merchant_center_id": "",
+      "analytics_id": ""
+    }
+  },
+  "backend": {
+    "api_base": "/api",
+    "endpoints": {
+      "create_charge": "/create-charge-landing",
+      "meta_webhook": "/meta-webhook"
+    }
+  }
+}

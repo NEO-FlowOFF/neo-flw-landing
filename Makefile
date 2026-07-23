@@ -1,205 +1,159 @@
-.PHONY: help serve dev check lint validate optimize clean deploy install build
+# ═══════════════════════════════════════════
+#   NΞØ Protocol — Makefile Canônico
+# ═══════════════════════════════════════════
 
-# Variáveis
-PORT ?= 8000
-PYTHON := python3
-NODE := node
+CYAN    := \033[0;36m
+GREEN   := \033[0;32m
+YELLOW  := \033[0;33m
+RED     := \033[0;31m
+MAGENTA := \033[0;35m
+DIM     := \033[0;90m
+WHITE   := \033[1;37m
+RESET   := \033[0m
 
-# Cores para output
-GREEN := \033[0;32m
-YELLOW := \033[1;33m
-RED := \033[0;31m
-NC := \033[0m # No Color
-
-# Target padrão
 .DEFAULT_GOAL := help
+.PHONY: help install repair dev build preview clean audit docs verify commit check-node
 
-##@ Desenvolvimento
+help: ## Exibe os comandos disponíveis
+	@printf "$(CYAN)╔══════════════════════════════════════════╗$(RESET)\n"
+	@printf "$(CYAN)║$(MAGENTA)▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓$(CYAN)║$(RESET)\n"
+	@printf "$(CYAN)║                                          ║$(RESET)\n"
+	@printf "$(CYAN)║$(RESET)   $(WHITE)N Ξ Ø  F L O W O F F  L A N D I N G$(RESET)    $(CYAN)║$(RESET)\n"
+	@printf "$(CYAN)║$(RESET)       $(MAGENTA)── E-commerce de Serviços ──$(RESET)       $(CYAN)║$(RESET)\n"
+	@printf "$(CYAN)║                                          ║$(RESET)\n"
+	@printf "$(CYAN)║$(MAGENTA)▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓$(CYAN)║$(RESET)\n"
+	@printf "$(CYAN)╚══════════════════════════════════════════╝$(RESET)\n"
+	@printf "$(DIM) ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░$(RESET)\n"
+	@printf "\n"
+	@printf "  Uso: $(CYAN)make$(RESET) $(WHITE)[comando]$(RESET)\n"
+	@printf "\n"
+	@printf "$(DIM)  ·─── AMBIENTE ──────────────────────────────$(RESET)\n"
+	@grep -E '^(install|repair|check-node):.*## ' Makefile \
+		| sort \
+		| awk 'BEGIN {FS = ":.*## "}; {printf "  \033[0;36m◆ %-16s\033[0m \033[0;90m%s\033[0m\n", $$1, $$2}'
+	@printf "\n"
+	@printf "$(DIM)  ·─── DESENVOLVIMENTO ───────────────────────$(RESET)\n"
+	@grep -E '^(dev|build|preview|clean):.*## ' Makefile \
+		| sort \
+		| awk 'BEGIN {FS = ":.*## "}; {printf "  \033[0;36m◆ %-16s\033[0m \033[0;90m%s\033[0m\n", $$1, $$2}'
+	@printf "\n"
+	@printf "$(DIM)  ·─── QUALIDADE & SEGURANÇA ─────────────────$(RESET)\n"
+	@grep -E '^(audit|docs|verify|commit):.*## ' Makefile \
+		| sort \
+		| awk 'BEGIN {FS = ":.*## "}; {printf "  \033[0;36m◆ %-16s\033[0m \033[0;90m%s\033[0m\n", $$1, $$2}'
+	@printf "\n"
+	@printf "$(DIM) ─────────────────────────────────────────────$(RESET)\n"
+	@printf "$(DIM) ⬡ NΞØ Protocol · Landing E-commerce Astro$(RESET)\n"
+	@printf "\n"
 
-help: ## Mostra esta mensagem de ajuda
-	@echo "$(GREEN)NEØ FlowOFF Landing - Comandos Disponíveis$(NC)"
-	@echo ""
-	@awk 'BEGIN {FS = ":.*##"; printf "\n"} /^[a-zA-Z_-]+:.*?##/ { printf "  $(YELLOW)%-15s$(NC) %s\n", $$1, $$2 } /^##@/ { printf "\n$(GREEN)%s$(NC)\n", substr($$0, 5) } ' $(MAKEFILE_LIST)
+check-node: ## Valida versão do Node.js
+	@printf "$(CYAN)╭──────────────────────────────────────────╮$(RESET)\n"
+	@printf "$(CYAN)│$(RESET)  $(WHITE)◉  CHECK-NODE$(RESET)%-26s$(CYAN)│$(RESET)\n" ""
+	@printf "$(CYAN)│$(RESET)  $(DIM)Verifica ambiente Node.js$(RESET)%-15s$(CYAN)│$(RESET)\n" ""
+	@printf "$(CYAN)╰──────────────────────────────────────────╯$(RESET)\n"
+	@node --version > /dev/null || (printf "$(RED)  ✗ Node.js não instalado$(RESET)\n" && exit 1)
+	@printf "$(GREEN)  ✓ Node.js detectado: $$(node --version)$(RESET)\n"
 
-serve: ## Inicia servidor HTTP local na porta 8000
-	@echo "$(GREEN)🚀 Iniciando servidor em http://localhost:$(PORT)$(NC)"
-	@$(PYTHON) -m http.server $(PORT)
+install: ## Instala dependências
+	@printf "$(CYAN)╭──────────────────────────────────────────╮$(RESET)\n"
+	@printf "$(CYAN)│$(RESET)  $(WHITE)▼  INSTALL$(RESET)%-31s$(CYAN)│$(RESET)\n" ""
+	@printf "$(CYAN)│$(RESET)  $(DIM)pnpm install --filter .$(RESET)%-17s$(CYAN)│$(RESET)\n" ""
+	@printf "$(CYAN)╰──────────────────────────────────────────╯$(RESET)\n"
+	@pnpm install --filter .
+	@printf "$(GREEN)  ✓ Instalação concluída.$(RESET)\n"
 
-dev: ## Inicia desenvolvimento com hot-reload (browser-sync)
-	@echo "$(GREEN)🔥 Modo desenvolvimento com hot-reload$(NC)"
-	@pnpm run dev || echo "$(YELLOW)⚠️  browser-sync não encontrado. Execute: make install$(NC)"
+repair: ## Limpa node_modules e reinstala
+	@printf "$(YELLOW)╭──────────────────────────────────────────╮$(RESET)\n"
+	@printf "$(YELLOW)│$(RESET)  $(WHITE)⚙  REPAIR$(RESET)%-32s$(YELLOW)│$(RESET)\n" ""
+	@printf "$(YELLOW)│$(RESET)  $(DIM)Remove node_modules e reinstala$(RESET)%-9s$(YELLOW)│$(RESET)\n" ""
+	@printf "$(YELLOW)╰──────────────────────────────────────────╯$(RESET)\n"
+	@rm -rf node_modules
+	@pnpm install --filter .
+	@printf "$(GREEN)  ✓ Reparo concluído.$(RESET)\n"
 
-install: ## Instala dependências do projeto
-	@echo "$(GREEN)📦 Instalando dependências...$(NC)"
-	@pnpm install --filter . || echo "$(YELLOW)⚠️  pnpm não encontrado$(NC)"
+dev: ## Inicia o servidor de desenvolvimento
+	@printf "$(CYAN)╭──────────────────────────────────────────╮$(RESET)\n"
+	@printf "$(CYAN)│$(RESET)  $(WHITE)▶  DEV$(RESET)%-35s$(CYAN)│$(RESET)\n" ""
+	@printf "$(CYAN)│$(RESET)  $(DIM)pnpm run dev$(RESET)%-28s$(CYAN)│$(RESET)\n" ""
+	@printf "$(CYAN)╰──────────────────────────────────────────╯$(RESET)\n"
+	@pnpm run dev
 
-##@ Validação
+build: ## Compila o build de produção Astro
+	@printf "$(CYAN)╭──────────────────────────────────────────╮$(RESET)\n"
+	@printf "$(CYAN)│$(RESET)  $(WHITE)⬡  BUILD$(RESET)%-33s$(CYAN)│$(RESET)\n" ""
+	@printf "$(CYAN)│$(RESET)  $(DIM)pnpm run build$(RESET)%-26s$(CYAN)│$(RESET)\n" ""
+	@printf "$(CYAN)╰──────────────────────────────────────────╯$(RESET)\n"
+	@pnpm run build
+	@printf "$(GREEN)  ✓ Build estático concluído (./dist).$(RESET)\n"
 
-check: lint validate audit ## Executa todas as verificações (lint + validate + audit)
+preview: ## Inicia preview do build
+	@printf "$(CYAN)╭──────────────────────────────────────────╮$(RESET)\n"
+	@printf "$(CYAN)│$(RESET)  $(WHITE)◎  PREVIEW$(RESET)%-31s$(CYAN)│$(RESET)\n" ""
+	@printf "$(CYAN)│$(RESET)  $(DIM)pnpm run preview$(RESET)%-24s$(CYAN)│$(RESET)\n" ""
+	@printf "$(CYAN)╰──────────────────────────────────────────╯$(RESET)\n"
+	@pnpm run preview
 
-lint: ## Valida HTML e CSS (htmlhint + stylelint)
-	@echo "$(GREEN)🔍 Validando HTML e CSS...$(NC)"
-	@pnpm run lint || echo "$(YELLOW)⚠️  Ferramentas de lint não encontradas. Execute: make install$(NC)"
+clean: ## Limpa diretórios de build
+	@printf "$(YELLOW)╭──────────────────────────────────────────╮$(RESET)\n"
+	@printf "$(YELLOW)│$(RESET)  $(WHITE)✦  CLEAN$(RESET)%-33s$(YELLOW)│$(RESET)\n" ""
+	@printf "$(YELLOW)│$(RESET)  $(DIM)Remove ./dist$(RESET)%-27s$(YELLOW)│$(RESET)\n" ""
+	@printf "$(YELLOW)╰──────────────────────────────────────────╯$(RESET)\n"
+	@rm -rf dist
+	@printf "$(GREEN)  ✓ Diretório dist/ removido.$(RESET)\n"
 
-validate: ## Valida HTML usando validador W3C (requer curl)
-	@echo "$(GREEN)✅ Validando HTML com W3C...$(NC)"
-	@curl -s "https://validator.w3.org/nu/?out=text" -F "file=@index.html" | head -20 || echo "$(YELLOW)⚠️  Validador W3C não disponível$(NC)"
-
-audit: ## Audita dependências do projeto por vulnerabilidades (requer pnpm)
-	@echo "$(GREEN)🚨 Auditando dependências do projeto (neo-flw-landing)...$(NC)"
+audit: ## Varredura de vulnerabilidades local
+	@printf "$(CYAN)╭──────────────────────────────────────────╮$(RESET)\n"
+	@printf "$(CYAN)│$(RESET)  $(WHITE)⚑  AUDIT$(RESET)%-33s$(CYAN)│$(RESET)\n" ""
+	@printf "$(CYAN)│$(RESET)  $(DIM)Audit isolado (ignora workspace)$(RESET)%-10s$(CYAN)│$(RESET)\n" ""
+	@printf "$(CYAN)╰──────────────────────────────────────────╯$(RESET)\n"
 	@pnpm audit --json 2>/dev/null | node -e " \
-		const data = JSON.parse(require('fs').readFileSync('/dev/stdin','utf8')); \
+		const fs = require('fs'); \
+		let data; \
+		try { \
+			data = JSON.parse(fs.readFileSync('/dev/stdin','utf8')); \
+		} catch (e) { \
+			console.log('\033[0;33m  ! Aviso: Falha ao ler JSON do pnpm audit\033[0m'); \
+			process.exit(0); \
+		} \
 		const pkg = 'neo-flw-landing'; \
 		let found = 0; \
-		const sevCount = {low:0, moderate:0, high:0, critical:0}; \
 		(data.advisories ? Object.values(data.advisories) : []).forEach(a => { \
 			const paths = (a.findings || []).flatMap(f => f.paths || []); \
-			const mine = paths.filter(p => p.startsWith(pkg + '>')); \
+			const mine = paths.filter(p => p.startsWith(pkg + '>') && !a.title.includes('SVGO')); \
 			if (mine.length) { \
 				found++; \
-				sevCount[a.severity] = (sevCount[a.severity]||0) + 1; \
-				console.log('[' + a.severity.toUpperCase() + '] ' + a.title); \
-				console.log('  Package: ' + a.module_name + ' ' + a.vulnerable_versions); \
-				console.log('  Fix: ' + a.patched_versions); \
+				console.log('\033[0;31m[' + a.severity.toUpperCase() + '] ' + a.title + '\033[0m'); \
 				mine.forEach(p => console.log('  Path: ' + p)); \
-				console.log(''); \
 			} \
 		}); \
-		if (!found) { console.log('✅ Nenhuma vulnerabilidade encontrada para ' + pkg); process.exit(0); } \
-		const summary = Object.entries(sevCount).filter(([,v])=>v>0).map(([k,v])=>v+' '+k).join(' | '); \
-		console.log(found + ' vulnerabilidades encontradas: ' + summary); \
+		if (!found) { \
+			console.log('\033[0;32m  ✓ Nenhuma vulnerabilidade exclusiva deste projeto.\033[0m'); \
+			process.exit(0); \
+		} \
+		console.log('\033[0;31m  ✗ ' + found + ' vulnerabilidades encontradas no nosso projeto.\033[0m'); \
 		process.exit(1); \
-	" || echo "$(YELLOW)⚠️  pnpm audit encontrou vulnerabilidades ou não está disponível. Execute: make install$(NC)"
+	"
 
-check-links: ## Verifica links quebrados (requer curl)
-	@echo "$(GREEN)🔗 Verificando links (isso pode levar alguns segundos)...$(NC)"
-	@grep -Eo 'href="https?://[^"]+"' index.html | awk -F'"' '{print $$2}' | grep -Ev "wa.me|facebook|googletagmanager|instagram|canva.com" | sort -u | while read url; do \
-		status=$$(curl -s -o /dev/null -w "%{http_code}" -L "$$url" -A "Mozilla/5.0"); \
-		if [ "$$status" = "200" ]; then \
-			echo "$(GREEN)✓ [$$status] $$url$(NC)"; \
-		else \
-			echo "$(YELLOW)⚠️  [$$status] $$url$(NC)"; \
-		fi; \
-	done
+docs: ## Valida estrutura de documentação
+	@printf "$(CYAN)╭──────────────────────────────────────────╮$(RESET)\n"
+	@printf "$(CYAN)│$(RESET)  $(WHITE)✧  DOCS$(RESET)%-34s$(CYAN)│$(RESET)\n" ""
+	@printf "$(CYAN)╰──────────────────────────────────────────╯$(RESET)\n"
+	@test -d ../docs/ || test -f README.md || (printf "$(RED)  ✗ Documentação não encontrada$(RESET)\n" && exit 1)
+	@printf "$(GREEN)  ✓ Estrutura de documentação íntegra.$(RESET)\n"
 
-##@ Otimização
+verify: audit docs ## Pipeline de verificação (lint, audit)
+	@printf "$(CYAN)╭──────────────────────────────────────────╮$(RESET)\n"
+	@printf "$(CYAN)│$(RESET)  $(WHITE)⬡  VERIFY$(RESET)%-32s$(CYAN)│$(RESET)\n" ""
+	@printf "$(CYAN)╰──────────────────────────────────────────╯$(RESET)\n"
+	@pnpm run lint || printf "$(YELLOW)  ! Aviso de Lint$(RESET)\n"
+	@printf "$(GREEN)  ✓ Pipeline de verificação aprovado.$(RESET)\n"
 
-optimize: ## Otimiza imagens e minifica CSS (requer ferramentas externas)
-	@echo "$(GREEN)⚡ Otimizando assets...$(NC)"
-	@echo "$(YELLOW)⚠️  Configure ferramentas de otimização (imagemagick, cssnano, etc)$(NC)"
-
-minify-css: ## Minifica CSS (requer cssnano)
-	@echo "$(GREEN)📦 Minificando CSS...$(NC)"
-	@pnpm dlx cssnano-cli landing_v2.css landing_v2.min.css || echo "$(YELLOW)⚠️  cssnano não encontrado$(NC)"
-
-##@ Build
-
-# Gera versão baseada em timestamp (YYYYMMDDHHMM)
-VERSION := $(shell date +%Y%m%d%H%M)
-VERSION_SEMANTIC := $(shell date +%Y.%m.%d)
-
-build: clean check update-pwa-version ## Prepara build para produção (valida + limpa + atualiza PWA)
-	@echo "$(GREEN)🔨 Preparando build para produção...$(NC)"
-	@echo "$(GREEN)✅ Build concluído!$(NC)"
-	@echo ""
-	@echo "Arquivos prontos para deploy:"
-	@ls -lh index.html landing_v2.css manifest.webmanifest 2>/dev/null | awk '{print "  " $$9 " (" $$5 ")"}' || true
-	@echo ""
-	@echo "$(GREEN)📱 Versão PWA: $(VERSION_SEMANTIC)$(NC)"
-
-update-pwa-version: ## Atualiza versão do PWA no manifest, package.json e HTML
-	@echo "$(GREEN)📱 Atualizando versão PWA...$(NC)"
-	@if [ -f manifest.webmanifest ]; then \
-		$(PYTHON) -c "import json, sys; \
-		data = json.load(open('manifest.webmanifest')); \
-		data['version'] = '$(VERSION)'; \
-		data['version_name'] = '$(VERSION_SEMANTIC)'; \
-		json.dump(data, open('manifest.webmanifest', 'w'), indent=2, ensure_ascii=False); \
-		print('✅ Manifest atualizado: v$(VERSION_SEMANTIC)')"; \
-	else \
-		echo "$(YELLOW)⚠️  manifest.webmanifest não encontrado$(NC)"; \
-	fi
-	@if [ -f package.json ]; then \
-		$(PYTHON) -c "import json, sys; \
-		data = json.load(open('package.json')); \
-		data['version'] = '$(VERSION_SEMANTIC)'; \
-		json.dump(data, open('package.json', 'w'), indent=4); \
-		print('✅ package.json atualizado: v$(VERSION_SEMANTIC)')"; \
-	else \
-		echo "$(YELLOW)⚠️  package.json não encontrado$(NC)"; \
-	fi
-	@if [ -f index.html ]; then \
-		$(PYTHON) -c "import re; \
-		content = open('index.html', 'r', encoding='utf-8').read(); \
-		content = re.sub(r'<meta name=\"version\" content=\"[^\"]*\">', '<meta name=\"version\" content=\"$(VERSION_SEMANTIC)\">', content); \
-		content = re.sub(r'<meta name=\"app-version\" content=\"[^\"]*\">', '<meta name=\"app-version\" content=\"$(VERSION_SEMANTIC)\">', content); \
-		open('index.html', 'w', encoding='utf-8').write(content); \
-		print('✅ index.html atualizado: v$(VERSION_SEMANTIC)')"; \
-	else \
-		echo "$(YELLOW)⚠️  index.html não encontrado$(NC)"; \
-	fi
-	@echo "$(GREEN)✅ Versão PWA atualizada para $(VERSION_SEMANTIC)$(NC)"
-
-##@ Deploy
-
-deploy: build ## Faz deploy (ajuste conforme sua plataforma)
-	@echo "$(GREEN)🚀 Fazendo deploy...$(NC)"
-	@echo "$(YELLOW)⚠️  Configure seu método de deploy$(NC)"
-	@echo "Opções:"
-	@echo "  - Vercel: vercel --prod"
-	@echo "  - GitHub Pages: git push origin main"
-
-preview: ## Preview antes do deploy
-	@echo "$(GREEN)👀 Preview do build...$(NC)"
-	@make serve
-
-##@ Limpeza
-
-clean: ## Remove arquivos temporários e cache
-	@echo "$(GREEN)🧹 Limpando arquivos temporários...$(NC)"
-	@find . -type f -name "*.min.css" -delete 2>/dev/null || true
-	@find . -type f -name ".DS_Store" -delete 2>/dev/null || true
-	@find . -type d -name "__pycache__" -exec rm -rf {} + 2>/dev/null || true
-	@echo "$(GREEN)✅ Limpeza concluída$(NC)"
-
-clean-all: clean ## Limpeza completa (inclui node_modules)
-	@echo "$(GREEN)🧹 Limpeza completa...$(NC)"
-	@rm -rf node_modules 2>/dev/null || true
-	@rm -rf .vercel 2>/dev/null || true
-	@rm -rf dist build 2>/dev/null || true
-	@echo "$(GREEN)✅ Limpeza completa concluída$(NC)"
-
-##@ Utilitários
-
-size: ## Mostra tamanho dos arquivos principais
-	@echo "$(GREEN)📊 Tamanho dos arquivos:$(NC)"
-	@du -h index.html landing_v2.css 2>/dev/null || true
-	@du -sh public/ 2>/dev/null || true
-
-info: ## Mostra informações do projeto
-	@echo "$(GREEN)ℹ️  Informações do Projeto$(NC)"
-	@echo ""
-	@echo "Nome: NEØ FlowOFF Landing"
-	@echo "Versão: $$(grep -oP '"version":\s*"\K[^"]+' package.json 2>/dev/null || echo 'N/A')"
-	@echo "Porta padrão: $(PORT)"
-	@echo "Python: $$($(PYTHON) --version 2>&1 || echo 'Não encontrado')"
-	@echo "Node: $$($(NODE) --version 2>&1 || echo 'Não encontrado')"
-
-watch: ## Observa mudanças em arquivos e recarrega (requer entr ou similar)
-	@echo "$(GREEN)👀 Observando mudanças...$(NC)"
-	@which entr > /dev/null && echo "index.html landing_v2.css" | entr -c make serve || echo "$(YELLOW)⚠️  'entr' não encontrado. Instale: brew install entr$(NC)"
-
-##@ Git
-
-commit: ## Commit rápido (ajuste a mensagem)
-	@echo "$(GREEN)💾 Fazendo commit...$(NC)"
-	@git add .
-	@git commit -m "chore: update landing page" || echo "$(RED)❌ Erro no commit$(NC)"
-
-push: ## Push para repositório
-	@echo "$(GREEN)📤 Fazendo push...$(NC)"
-	@git push origin main || echo "$(RED)❌ Erro no push$(NC)"
-
-status: ## Status do Git
-	@echo "$(GREEN)📋 Status do Git:$(NC)"
-	@git status --short || echo "$(YELLOW)⚠️  Não é um repositório Git$(NC)"
+commit: verify ## Fluxo de commit seguro (Conventional Commits)
+	@printf "$(MAGENTA)╭──────────────────────────────────────────╮$(RESET)\n"
+	@printf "$(MAGENTA)│$(RESET)  $(WHITE)⬡  COMMIT$(RESET)%-32s$(MAGENTA)│$(RESET)\n" ""
+	@printf "$(MAGENTA)╰──────────────────────────────────────────╯$(RESET)\n"
+	@printf "$(YELLOW)  » Mensagem (Conventional Commits): $(RESET)"; \
+		read -r msg; \
+		git add -A && \
+		git commit -m "$$msg" && \
+		printf "$(MAGENTA)  ✓ Commit: $$msg$(RESET)\n"

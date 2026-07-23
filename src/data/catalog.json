@@ -1,0 +1,426 @@
+{
+  "catalog_meta": {
+    "version": "2026.3",
+    "brand": "neoflowoff.agency",
+    "positioning": "Agentes de IA, páginas, CRM e fluxos comerciais para empresas. Marketing com infraestrutura.",
+    "currency": "BRL",
+    "pricing_notice": "Os valores publicados representam a configuração-base de cada solução. Escopo, integrações, recorrência e prazo são confirmados antes da contratação.",
+    "distribution": {
+      "site": true,
+      "meta_professional_services_catalog": true,
+      "google_business_profile_services": true,
+      "google_ads_assets": true,
+      "google_merchant_center": false
+    }
+  },
+  "products": [
+    {
+      "id": "SERVIÇO-API-WHATSAPP",
+      "slug": "api-whatsapp",
+      "title": "WhatsApp Business API Oficial",
+      "short_title": "WhatsApp Business API",
+      "description": "Implantação da infraestrutura oficial da Meta para conectar o WhatsApp da empresa a atendentes, agentes de IA, CRM e automações, com templates, webhooks e governança de acesso.",
+      "link": "https://www.neoflowoff.agency/checkout/api-whatsapp",
+      "image_link": "https://www.neoflowoff.agency/public/og-image.jpg",
+      "price": {
+        "value": 1000,
+        "currency": "BRL"
+      },
+      "price_label": "A partir de",
+      "availability": "in stock",
+      "condition": "new",
+      "category": "Serviço",
+      "display_category": "Implementação especializada",
+      "brand": "neoflowoff.agency",
+      "features": [
+        "Configuração da conta WhatsApp Business e do número",
+        "Criação e organização de modelos de mensagem",
+        "Webhooks para eventos, mensagens e respostas",
+        "Integração com CRM, multiatendimento ou agentes de IA",
+        "Documentação técnica e entrega assistida"
+      ],
+      "outcomes": [
+        "Canal oficial preparado para integrações",
+        "Atendimento conectado à operação comercial",
+        "Mais controle sobre mensagens, eventos e acessos"
+      ],
+      "search_terms": [
+        "WhatsApp Business API",
+        "API oficial WhatsApp",
+        "WABA",
+        "integração WhatsApp CRM",
+        "automação WhatsApp",
+        "WhatsApp Cloud API"
+      ]
+    },
+    {
+      "id": "SERVIÇO-APP-META-DEVELOPERS",
+      "slug": "app-meta",
+      "title": "Meta Developers: Apps, APIs e Webhooks",
+      "short_title": "App Meta Developers",
+      "description": "Estruturação do aplicativo da empresa na Meta para operar integrações com WhatsApp, Instagram, Facebook, Graph API, Pixel e Conversions API conforme o escopo aprovado.",
+      "link": "https://www.neoflowoff.agency/checkout/app-meta",
+      "image_link": "https://www.neoflowoff.agency/public/og-image.jpg",
+      "price": {
+        "value": 1500,
+        "currency": "BRL"
+      },
+      "price_label": "A partir de",
+      "availability": "in stock",
+      "condition": "new",
+      "category": "Serviço",
+      "display_category": "Implementação especializada",
+      "brand": "neoflowoff.agency",
+      "features": [
+        "Criação e organização do aplicativo na Meta Developers",
+        "Configuração de produtos, permissões e URLs de retorno",
+        "Webhooks, tokens e eventos necessários à integração",
+        "Apoio técnico na verificação e nos requisitos do negócio",
+        "Auditoria de acessos, documentação e handoff"
+      ],
+      "outcomes": [
+        "Base técnica para integrações oficiais da Meta",
+        "Permissões e acessos organizados",
+        "Menos dependência de configurações improvisadas"
+      ],
+      "search_terms": [
+        "Meta Developers",
+        "Graph API",
+        "aplicativo Meta",
+        "webhooks Meta",
+        "Conversions API",
+        "integração Instagram API"
+      ]
+    },
+    {
+      "id": "SERVIÇO-DASHBOARD-E-GESTÃO-DE-DADOS",
+      "slug": "dashboard-dados",
+      "title": "Dashboards e Gestão de Dados",
+      "short_title": "Dashboards e Dados",
+      "description": "Unificamos sinais de mídia, CRM, atendimento e vendas em painéis que ajudam a acompanhar a operação, entender conversões e localizar gargalos com mais clareza.",
+      "link": "https://www.neoflowoff.agency/checkout/dashboard-dados",
+      "image_link": "https://www.neoflowoff.agency/public/og-image.jpg",
+      "price": {
+        "value": 2500,
+        "currency": "BRL"
+      },
+      "price_label": "A partir de",
+      "availability": "in stock",
+      "condition": "new",
+      "category": "Serviço",
+      "display_category": "Implementação especializada",
+      "brand": "neoflowoff.agency",
+      "features": [
+        "Mapeamento de fontes, eventos e definições de métricas",
+        "Integração de mídia, CRM, atendimento e vendas",
+        "Painéis operacionais e executivos",
+        "Atualização automatizada e validação dos dados",
+        "Documentação de indicadores e regras de leitura"
+      ],
+      "outcomes": [
+        "Visão consolidada da operação",
+        "Decisões apoiadas por dados rastreáveis",
+        "Identificação mais rápida de perdas e oportunidades"
+      ],
+      "search_terms": [
+        "dashboard comercial",
+        "gestão de dados",
+        "Looker Studio",
+        "dashboard vendas",
+        "integração de dados",
+        "analytics comercial"
+      ]
+    },
+    {
+      "id": "SERVIÇO-WEBAPP-/-LANDING-PAGES",
+      "slug": "webapp-lp",
+      "title": "Landing Pages e WebApps Conectados",
+      "short_title": "Landing Pages e WebApps",
+      "description": "Criamos páginas e aplicações rápidas, mobile-first e preparadas para capturar intenção, registrar conversões e conversar com CRM, WhatsApp, APIs, dados e agentes de IA.",
+      "link": "https://www.neoflowoff.agency/checkout/webapp-lp",
+      "image_link": "https://www.neoflowoff.agency/public/og-image.jpg",
+      "price": {
+        "value": 2500,
+        "currency": "BRL"
+      },
+      "price_label": "A partir de",
+      "availability": "in stock",
+      "condition": "new",
+      "category": "Serviço",
+      "display_category": "Implementação especializada",
+      "brand": "neoflowoff.agency",
+      "features": [
+        "Arquitetura de conteúdo, interface e jornada de conversão",
+        "Desenvolvimento responsivo e otimizado para desempenho",
+        "Formulários, eventos, pixels e rastreamento de conversões",
+        "Integrações com WhatsApp, CRM, APIs ou agentes de IA",
+        "Deploy, documentação e entrega técnica"
+      ],
+      "outcomes": [
+        "Superfície digital preparada para gerar e registrar intenção",
+        "Experiência conectada aos canais comerciais",
+        "Base técnica pronta para mídia, dados e automação"
+      ],
+      "search_terms": [
+        "landing page",
+        "webapp",
+        "site para vendas",
+        "landing page integrada CRM",
+        "site com agente de IA",
+        "desenvolvimento web"
+      ]
+    },
+    {
+      "id": "PACOTE-AGENTE-SDR-VENDAS",
+      "slug": "agente-sdr",
+      "title": "Operação SDR IA Plug & Play",
+      "short_title": "Operação SDR IA",
+      "description": "Implantamos uma operação com Agente SDR para responder, identificar intenção, capturar dados, qualificar oportunidades e encaminhar cada conversa ao comercial com contexto.",
+      "link": "https://www.neoflowoff.agency/planos/agente-sdr",
+      "image_link": "https://www.neoflowoff.agency/public/og-image.jpg",
+      "price": {
+        "value": 7000,
+        "currency": "BRL"
+      },
+      "price_label": "Implantação a partir de",
+      "availability": "in stock",
+      "condition": "new",
+      "category": "Plano",
+      "display_category": "Operação conectada",
+      "brand": "neoflowoff.agency",
+      "featured": true,
+      "features": [
+        "Agente SDR configurado para oferta, público e linguagem da empresa",
+        "Qualificação por perfil, intenção, urgência e regras comerciais",
+        "Captura estruturada de dados e histórico da conversa",
+        "Encaminhamento humano com resumo e próxima ação",
+        "Integração com CRM, alertas e painel operacional"
+      ],
+      "outcomes": [
+        "Primeira resposta mais rápida e consistente",
+        "Triagem comercial organizada antes do atendimento humano",
+        "Oportunidades entregues ao time com mais contexto"
+      ],
+      "search_terms": [
+        "Agente SDR IA",
+        "SDR para WhatsApp",
+        "IA para qualificação de leads",
+        "automação comercial com IA",
+        "atendimento comercial 24 horas",
+        "agente de vendas"
+      ]
+    },
+    {
+      "id": "PACOTE-AGENTS-IA",
+      "slug": "agents-ia",
+      "title": "Agentes de IA para Operações",
+      "short_title": "Agentes de IA",
+      "description": "Nossa estrutura serve como a espinha dorsal aprovada para o desenvolvimento do ecossistema, proporcionando um ambiente determinístico no qual os agentes não estão apenas conectados a nós, mas são nativamente orquestrados como extensões complementares da lógica da rede. Tratamos cada interação digital como uma transição de estado dentro de um modelo de confiança zero (zero-trust), incorporando a segurança desde a concepção (security-by-design) diretamente na camada de consenso, em vez de adicioná-la posteriormente.",
+      "link": "https://www.neoflowoff.agency/planos/agents-ia",
+      "image_link": "https://www.neoflowoff.agency/public/og-image.jpg",
+      "price": {
+        "value": 4667,
+        "currency": "BRL"
+      },
+      "price_label": "A partir de",
+      "availability": "in stock",
+      "condition": "new",
+      "category": "Plano",
+      "display_category": "Operação conectada",
+      "brand": "neoflowoff.agency",
+      "features": [
+        "Definição do papel, objetivos, limites e critérios de escalonamento",
+        "Construção de contexto, conhecimento e linguagem operacional",
+        "Integração com sistemas, APIs e fontes autorizadas",
+        "Logs, rastreabilidade e passagem para atendimento humano",
+        "Testes, monitoramento e evolução orientada por uso"
+      ],
+      "outcomes": [
+        "Agentes alinhados à operação real da empresa",
+        "Menos tarefas repetitivas e mais contexto disponível",
+        "Automação com limites e supervisão definidos"
+      ],
+      "search_terms": [
+        "agentes de IA",
+        "IA para empresas",
+        "agente de atendimento",
+        "agente de suporte",
+        "automação com inteligência artificial",
+        "agentes integrados ao CRM"
+      ]
+    },
+    {
+      "id": "PACOTE-CRM-INTELIGENTE",
+      "slug": "crm-inteligente",
+      "title": "CRM e Operação Comercial",
+      "short_title": "CRM Comercial",
+      "description": "Estruturamos funis, dados e automações para que cada lead tenha histórico, origem, responsável, próxima ação e critérios claros de avanço.",
+      "link": "https://www.neoflowoff.agency/planos/crm-inteligente",
+      "image_link": "https://www.neoflowoff.agency/public/og-image.jpg",
+      "price": {
+        "value": 3000,
+        "currency": "BRL"
+      },
+      "price_label": "A partir de",
+      "availability": "in stock",
+      "condition": "new",
+      "category": "Plano",
+      "display_category": "Operação conectada",
+      "brand": "neoflowoff.agency",
+      "features": [
+        "Desenho de pipeline, etapas, campos e critérios de avanço",
+        "Automação de cadências, tarefas e atualizações",
+        "Integração com WhatsApp, formulários, e-mail e agentes",
+        "Rastreabilidade de origem, conversão e responsabilidade",
+        "Treinamento, documentação e rotina de uso"
+      ],
+      "outcomes": [
+        "Funil comercial mais visível e organizado",
+        "Menos leads sem responsável ou próxima ação",
+        "Histórico centralizado para decisões e acompanhamento"
+      ],
+      "search_terms": [
+        "implantação de CRM",
+        "CRM comercial",
+        "automação de funil",
+        "pipeline de vendas",
+        "integração WhatsApp CRM",
+        "gestão de leads"
+      ]
+    },
+    {
+      "id": "PACOTE-FLUXOS-INTERNOS-E-AUTOMAÇÃO-COMERCIAL",
+      "slug": "fluxos-automacao",
+      "title": "Automações e Fluxos Comerciais",
+      "short_title": "Fluxos e Automações",
+      "description": "Conectamos formulários, WhatsApp, CRM, e-mail, dados e APIs para reduzir retrabalho, acelerar respostas e manter a operação sincronizada.",
+      "link": "https://www.neoflowoff.agency/planos/fluxos-automacao",
+      "image_link": "https://www.neoflowoff.agency/public/og-image.jpg",
+      "price": {
+        "value": 3500,
+        "currency": "BRL"
+      },
+      "price_label": "A partir de",
+      "availability": "in stock",
+      "condition": "new",
+      "category": "Plano",
+      "display_category": "Operação conectada",
+      "brand": "neoflowoff.agency",
+      "features": [
+        "Mapeamento de processos, gatilhos, dependências e exceções",
+        "Integrações entre ferramentas e fontes de dados",
+        "Alertas, notificações e encaminhamentos em tempo real",
+        "Validação, sincronização e enriquecimento de dados",
+        "Logs, tratamento de falhas e documentação do fluxo"
+      ],
+      "outcomes": [
+        "Menos tarefas manuais entre ferramentas",
+        "Informações circulando com mais consistência",
+        "Respostas e encaminhamentos operacionais mais rápidos"
+      ],
+      "search_terms": [
+        "automação comercial",
+        "integração de sistemas",
+        "n8n",
+        "Make",
+        "webhooks",
+        "automação de vendas"
+      ]
+    },
+    {
+      "id": "PACOTE-TRÁFEGO-PAGO-GOOGLE-ADS",
+      "slug": "trafego-google",
+      "title": "Google Ads para Demanda de Alta Intenção",
+      "short_title": "Gestão de Google Ads",
+      "description": "Estratégia, estruturação e gestão de campanhas para alcançar pessoas que já estão buscando soluções como a sua, com conversões configuradas e dados para otimização.",
+      "link": "https://www.neoflowoff.agency/planos/trafego-google",
+      "image_link": "https://www.neoflowoff.agency/public/og-image.jpg",
+      "price": {
+        "value": 4667,
+        "currency": "BRL"
+      },
+      "price_label": "A partir de",
+      "availability": "in stock",
+      "condition": "new",
+      "category": "Plano",
+      "display_category": "Operação conectada",
+      "brand": "neoflowoff.agency",
+      "features": [
+        "Pesquisa de intenção, termos e estrutura de campanhas",
+        "Campanhas de Pesquisa e outros formatos aplicáveis",
+        "Criação e evolução de anúncios e ativos",
+        "Configuração de conversões, tags e eventos",
+        "Otimização contínua e leitura de desempenho"
+      ],
+      "outcomes": [
+        "Captação de demanda com intenção mais explícita",
+        "Campanhas conectadas às conversões do negócio",
+        "Mais clareza sobre termos, custos e oportunidades"
+      ],
+      "search_terms": [
+        "gestão Google Ads",
+        "tráfego pago Google",
+        "campanha de pesquisa",
+        "Performance Max para leads",
+        "Google Ads para empresas",
+        "conversões Google Ads"
+      ]
+    },
+    {
+      "id": "PACOTE-TRÁFEGO-PAGO-META",
+      "slug": "trafego-meta",
+      "title": "Meta Ads com Dados e Conversões",
+      "short_title": "Gestão de Meta Ads",
+      "description": "Planejamento e gestão de campanhas no ecossistema Meta, combinando criativos, públicos, Pixel e Conversions API para distribuir mensagens e medir resultados com mais consistência.",
+      "link": "https://www.neoflowoff.agency/planos/trafego-meta",
+      "image_link": "https://www.neoflowoff.agency/public/og-image.jpg",
+      "price": {
+        "value": 1500,
+        "currency": "BRL"
+      },
+      "price_label": "A partir de",
+      "availability": "in stock",
+      "condition": "new",
+      "category": "Plano",
+      "display_category": "Operação conectada",
+      "brand": "neoflowoff.agency",
+      "features": [
+        "Planejamento de campanhas, objetivos e públicos",
+        "Estrutura de anúncios para Instagram e Facebook",
+        "Testes de criativos, mensagens e segmentações",
+        "Configuração ou revisão de Pixel e Conversions API",
+        "Otimização, relatórios e leitura de conversões"
+      ],
+      "outcomes": [
+        "Distribuição orientada por objetivo comercial",
+        "Mensuração mais consistente entre navegador e servidor",
+        "Aprendizado contínuo sobre criativos e públicos"
+      ],
+      "search_terms": [
+        "gestão Meta Ads",
+        "tráfego pago Instagram",
+        "Facebook Ads",
+        "Conversions API",
+        "Pixel Meta",
+        "anúncios para empresas"
+      ]
+    }
+  ],
+  "legacy_items": [
+    {
+      "id": "PACOTE-START",
+      "previous_title": "Pacote Start",
+      "recommendation": "Retirar da vitrine principal. O nome é genérico e duplica a oferta de Landing Pages e WebApps Conectados."
+    },
+    {
+      "id": "PACOTE-PROFISSIONAL",
+      "previous_title": "Pacote Profissional",
+      "recommendation": "Retirar da vitrine principal. O preço zero e o escopo genérico prejudicam catálogo, percepção de valor e integrações."
+    },
+    {
+      "id": "PACOTE-PREMIUM",
+      "previous_title": "Pacote Premium",
+      "recommendation": "Retirar da vitrine principal. O nome não explica resultado, duplica serviços web e ainda carregava uma referência legada a Web3."
+    }
+  ]
+}

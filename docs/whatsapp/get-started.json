@@ -1,0 +1,137 @@
+{
+  "project": {
+    "name": "neo-whatsapp-connect",
+    "role": "Independent WhatsApp gateway for neo-growth-system",
+    "responsibility": [
+      "Expose the internal provider contract used by neo-crm-core",
+      "Send WhatsApp messages through the configured Meta WhatsApp Cloud API credentials",
+      "Receive Meta webhook callbacks at /webhook",
+      "Validate Meta webhook signatures when META_APP_SECRET is configured",
+      "Forward inbound message events to the configured internal webhook consumer",
+      "Expose /health for Railway and operational monitoring"
+    ],
+    "not_responsible_for": [
+      "Business decision logic",
+      "Journey orchestration",
+      "Suppression decisions",
+      "Frequency control",
+      "Product-specific rules",
+      "Storing or exposing secrets in the frontend",
+      "Acting as source of truth for users or conversations"
+    ]
+  },
+  "architecture_position": {
+    "ecosystem": "neo-growth-system",
+    "upstream_authority": "neo-crm-core",
+    "downstream_transport": "Meta WhatsApp Cloud API",
+    "inbound_callback_source": "Meta Developers WhatsApp Webhooks",
+    "internal_feedback_target": "WEBHOOK_URL",
+    "flow": [
+      "neo-crm-core -> POST /send",
+      "neo-whatsapp-connect -> Meta Graph API /messages",
+      "Meta WhatsApp -> POST /webhook",
+      "neo-whatsapp-connect -> WEBHOOK_URL"
+    ]
+  },
+  "public_endpoints": {
+    "health": {
+      "method": "GET",
+      "path": "/health",
+      "purpose": "Platform healthcheck and runtime visibility",
+      "auth_required": false
+    },
+    "send": {
+      "method": "POST",
+      "path": "/send",
+      "purpose": "Internal authenticated WhatsApp message send",
+      "auth_required": true,
+      "auth": "Authorization: Bearer PROVIDER_SECRET or GATEWAY_SECRET"
+    },
+    "webhook_verify": {
+      "method": "GET",
+      "path": "/webhook",
+      "purpose": "Meta webhook verification handshake",
+      "auth_required": false,
+      "uses": "META_WEBHOOK_VERIFY_TOKEN"
+    },
+    "webhook_receive": {
+      "method": "POST",
+      "path": "/webhook",
+      "purpose": "Receive WhatsApp webhook events from Meta",
+      "auth_required": true,
+      "auth": "X-Hub-Signature-256 validated with META_APP_SECRET"
+    }
+  },
+  "meta_developers_setup": {
+    "platform": "developers.facebook.com",
+    "app_use_case": "Connect with customers through WhatsApp",
+    "required_meta_sections": [
+      "WhatsApp > API Setup",
+      "App Settings > Basic",
+      "WhatsApp > Configuration > Webhooks"
+    ],
+    "callback_url": "https://neo-whatsapp-connect-production.up.railway.app/webhook",
+    "webhook_verify_token_env": "META_WEBHOOK_VERIFY_TOKEN",
+    "webhook_subscribed_fields": ["messages"],
+    "required_permissions": [
+      "whatsapp_business_messaging",
+      "whatsapp_business_management"
+    ]
+  },
+  "env_contract": {
+    "from_meta": {
+      "WHATSAPP_ACCESS_TOKEN": "Access token used to call Meta Graph API",
+      "WHATSAPP_PHONE_NUMBER_ID": "Phone Number ID used in /messages endpoint",
+      "WHATSAPP_BUSINESS_ACCOUNT_ID": "WhatsApp Business Account ID from API Setup",
+      "META_APP_SECRET": "Meta app secret used to validate webhook signatures"
+    },
+    "generated_by_neo": {
+      "META_WEBHOOK_VERIFY_TOKEN": "Random verification token configured both in Meta and Railway",
+      "WEBHOOK_SECRET": "Bearer secret used when forwarding inbound events internally",
+      "PROVIDER_SECRET": "Bearer secret used by neo-crm-core to call /send"
+    },
+    "runtime": {
+      "WEBHOOK_URL": "Internal callback URL that receives normalized inbound events",
+      "GRAPH_API_VERSION": "Meta Graph API version, default v25.0",
+      "DEFAULT_COUNTRY_CODE": "Default phone normalization country code, default 55",
+      "REDIS_URL": "Optional Redis URL for dedupe",
+      "DATABASE_URL": "Optional PostgreSQL URL for local persistence",
+      "PROVIDER_PORT": "Service port, default 3007",
+      "PORT": "Fallback runtime port"
+    }
+  },
+  "connection_page_role": {
+    "purpose": "Guide the operator through connecting the Meta WhatsApp app to neo-whatsapp-connect",
+    "must_collect": [
+      "WHATSAPP_ACCESS_TOKEN",
+      "WHATSAPP_PHONE_NUMBER_ID",
+      "WHATSAPP_BUSINESS_ACCOUNT_ID",
+      "META_APP_SECRET"
+    ],
+    "must_generate": ["META_WEBHOOK_VERIFY_TOKEN", "WEBHOOK_SECRET"],
+    "must_display_to_operator": [
+      "Callback URL to paste in Meta Webhooks",
+      "Verify token to paste in Meta Webhooks",
+      "Required subscribed field: messages",
+      "Required permissions for production token"
+    ],
+    "must_not_do": [
+      "Expose secrets in client-side code",
+      "Store Meta credentials in localStorage",
+      "Use temporary access token as production credential",
+      "Bypass webhook signature validation",
+      "Send test messages without explicit operator action"
+    ]
+  },
+  "railway": {
+    "service": "neo-whatsapp-connect",
+    "builder": "Dockerfile",
+    "healthcheck_path": "/health",
+    "runtime_command": "node dist/index.js",
+    "degraded_mode": {
+      "description": "Service can boot without operational WhatsApp secrets so Railway healthcheck passes",
+      "health_http_status": 200,
+      "send_behavior_without_config": "POST /send returns 503 whatsapp_not_configured"
+    }
+  }
+}

@@ -1,0 +1,68 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "NEO-FlowOFF Landing API",
+    "version": "1.0.0",
+    "description": "Especificação da API Serverless da Vercel para pagamentos e webhooks."
+  },
+  "servers": [
+    {
+      "url": "https://www.neoflowoff.agency/api",
+      "description": "Servidor de Produção (Vercel)"
+    }
+  ],
+  "paths": {
+    "/create-charge-landing": {
+      "post": {
+        "summary": "Proxy para criar cobrança (FlowPay)",
+        "description": "Recebe os dados do cliente e produtos e gera um PIX seguro.",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "amount_brl": { "type": "number", "example": 1500 },
+                  "product_ref": { "type": "string", "example": "landing-manual" },
+                  "customer_email": { "type": "string", "example": "cliente@email.com" },
+                  "customer_name": { "type": "string", "example": "" },
+                  "tax_id": { "type": "string", "example": "000.000.000-00" },
+                  "utm_data": { "type": "object" }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Cobrança gerada com sucesso",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "success": { "type": "boolean" },
+                    "charge": {
+                      "type": "object",
+                      "properties": {
+                        "charge_id": { "type": "string" },
+                        "qr_code": { "type": "string" },
+                        "pix_copy_paste": { "type": "string" },
+                        "status": { "type": "string" },
+                        "amount_brl": { "type": "number" }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "502": {
+            "description": "Erro de gateway"
+          }
+        }
+      }
+    }
+  }
+}

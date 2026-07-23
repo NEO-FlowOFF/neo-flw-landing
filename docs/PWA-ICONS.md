@@ -3,9 +3,11 @@
 ## 📂 Estrutura Recomendada
 
 ### **Pasta Principal: `/public/icons/`**
+
 Coloque todos os ícones PWA aqui. Esta pasta já existe e está configurada no manifest.
 
 ### **Ícones na Raiz: `/`**
+
 Para favicon e apple-touch-icon (referenciados diretamente no HTML)
 
 ---
@@ -13,9 +15,10 @@ Para favicon e apple-touch-icon (referenciados diretamente no HTML)
 ## 🎯 Ícones Necessários
 
 ### **1. Ícones PWA (WebP - Recomendado)**
+
 Coloque em: `/public/icons/`
 
-```
+```text
 /public/icons/
 ├── icon-48x48.webp      (48x48px)
 ├── icon-72x72.webp      (72x72px)
@@ -30,26 +33,29 @@ Coloque em: `/public/icons/`
 ```
 
 ### **2. Ícones PWA (PNG - Fallback)**
+
 Coloque em: `/public/`
 
-```
+```text
 /public/
 ├── icon-192.png         (192x192px) ⭐ Fallback
 └── icon-512.png         (512x512px) ⭐ Fallback
 ```
 
 ### **3. Maskable Icon (Android)**
+
 Coloque em: `/public/`
 
-```
+```text
 /public/
 └── maskable-512.png     (512x512px) ⭐ Para Android Adaptive Icons
 ```
 
 ### **4. Favicons (Raiz do Projeto)**
+
 Coloque na raiz: `/`
 
-```
+```text
 /
 ├── favicon.ico          (16x16, 32x32, 48x48 - Multi-size ICO)
 ├── favicon-16x16.png    (16x16px)
@@ -58,9 +64,10 @@ Coloque na raiz: `/`
 ```
 
 ### **5. Android Chrome Icons (Raiz)**
+
 Coloque na raiz: `/`
 
-```
+```text
 /
 ├── android-chrome-192x192.png  (192x192px)
 ├── android-chrome-512x512.png  (512x512px)
@@ -84,22 +91,26 @@ Para PWA funcionar corretamente, você precisa de pelo menos:
 ## 🎨 Especificações Técnicas
 
 ### **Formato WebP (Recomendado)**
+
 - Formato: WebP
 - Qualidade: 90-95%
 - Background: Transparente ou sólido (#050508)
 
 ### **Formato PNG (Fallback)**
+
 - Formato: PNG-24
 - Background: Transparente ou sólido (#050508)
 - Compressão: Otimizada (TinyPNG, ImageOptim)
 
 ### **Maskable Icon (Android)**
+
 - Tamanho: 512x512px
 - Safe Zone: 384x384px (centro)
 - Background: Sólido (#050508)
 - Formato: PNG
 
 ### **Favicon**
+
 - Formato: ICO (multi-size) ou PNG
 - Tamanhos: 16x16, 32x32, 48x48
 - Background: Transparente
@@ -118,8 +129,8 @@ Para PWA funcionar corretamente, você precisa de pelo menos:
 
 ## 🔧 Ferramentas Recomendadas
 
-- **PWA Asset Generator**: https://github.com/onderceylan/pwa-asset-generator
-- **RealFaviconGenerator**: https://realfavicongenerator.net/
+- **PWA Asset Generator**: <https://github.com/onderceylan/pwa-asset-generator>
+- **RealFaviconGenerator**: <https://realfavicongenerator.net/>
 - **ImageOptim**: Para compressão
 - **TinyPNG**: Para otimização online
 
@@ -128,7 +139,8 @@ Para PWA funcionar corretamente, você precisa de pelo menos:
 ## 📍 Onde Colocar Agora
 
 **Coloque seus novos ícones PWA em:**
-```
+
+```text
 /public/icons/
 ```
 

@@ -1,0 +1,11 @@
+# NEØ Protocol — Topologia de Engenharia Soberana
+
+You are interacting with a project within the NEØ Protocol ecosystem.
+For canonical identity and architectural rules, refer to the NEO_PROTOCOL.md at the root of the project.
+
+- Protocol Space: https://neoprotocol.space
+- Agency Website: https://www.neoflowoff.agency
+- Name: NEØ Protocol — Topologia de Engenharia Soberana
+- Architecture: Zero-Trust, Security-by-Design, Autonomous Agentic Orchestration.
+
+When generating code or content, always prioritize performance, privacy, deterministic state transitions, and the specific guidelines detailed in /NEO_PROTOCOL.md.

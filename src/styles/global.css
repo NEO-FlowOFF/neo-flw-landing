@@ -1,0 +1,244 @@
+/* ── NEØ FlowOFF ── */
+:root {
+  /* Adjusted background from #0e0e10 to #16161a as requested */
+  --bg: #16161a;
+  --card: #1c1c20;
+  --card-h: #222226;
+  --border: rgb(255 255 255 / 8%);
+  --pink: #f0c;
+  --pink-s: #ff40d9;
+  --pink-glow: rgb(255 0 204 / 20%);
+  --neon: #de0e8e;
+  --neon-glow: rgb(200 212 26 / 35%);
+  --acqua: #00f2ff;
+  --text: rgb(255 255 255 / 92%);
+  --text-2: rgb(255 255 255 / 40%);
+  --text-3: rgb(255 255 255 / 22%);
+  --display: "Figtree", sans-serif;
+  --mono: "DM Mono", monospace;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  min-height: 100vh;
+  background: var(--bg);
+  color: var(--text);
+  font-family: var(--display);
+  -webkit-font-smoothing: antialiased;
+  overflow-x: hidden;
+}
+
+.mesh {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 0;
+  background: radial-gradient(
+    ellipse 50% 35% at 50% -5%,
+    rgb(200 212 26 / 3%) 0%,
+    transparent 70%
+  );
+}
+
+.page {
+  position: relative;
+  z-index: 1;
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 3rem 1.5rem 4rem;
+}
+
+/* ── SECTIONS ── */
+.section {
+  margin-bottom: 3rem;
+}
+
+.section-label {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  font-family: var(--mono);
+  font-size: 0.75rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: rgb(255 255 255 / 40%);
+  margin-bottom: 1.5rem;
+}
+
+.section-label::before {
+  content: "◆";
+  font-size: 0.5rem;
+  color: var(--pink-s);
+}
+
+/* ── GRID ── */
+.link-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+  gap: 16px;
+}
+
+/* ═══════════════════════════════════
+   WIDGET CARD
+   ═══════════════════════════════════ */
+.lc {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: 1.5rem;
+  aspect-ratio: 1 / 1;
+  border-radius: 24px;
+  background: var(--card);
+  text-decoration: none;
+  color: var(--text);
+  position: relative;
+  overflow: hidden;
+  cursor: pointer;
+  transition:
+    background 0.3s ease,
+    transform 0.25s cubic-bezier(0.16, 1, 0.3, 1),
+    box-shadow 0.3s ease;
+  animation: card-in 0.6s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  box-shadow:
+    0 4px 12px rgb(0 0 0 / 20%),
+    inset 0 1px 0 rgb(255 255 255 / 5%);
+}
+
+.lc::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  background:
+    linear-gradient(180deg, rgb(255 255 255 / 4%) 0%, transparent 40%),
+    radial-gradient(
+      ellipse at 80% 100%,
+      rgb(200 212 26 / 3%) 0%,
+      transparent 50%
+    );
+  pointer-events: none;
+}
+
+.lc::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  padding: 1px;
+  background: linear-gradient(
+    160deg,
+    rgb(255 255 255 / 8%) 0%,
+    rgb(255 255 255 / 2%) 30%,
+    transparent 60%
+  );
+  mask:
+    linear-gradient(#fff 0 0) content-box,
+    linear-gradient(#fff 0 0);
+  /* stylelint-disable-next-line property-no-vendor-prefix, declaration-property-value-no-unknown */
+  -webkit-mask-composite: destination-out;
+  mask-composite: exclude;
+  pointer-events: none;
+  transition: opacity 0.3s;
+}
+
+.lc:hover {
+  background: var(--card-h);
+  transform: translateY(-4px) scale(1.02);
+  box-shadow:
+    0 12px 40px rgb(0 0 0 / 40%),
+    0 0 40px rgb(200 212 26 / 5%),
+    inset 0 1px 0 rgb(255 255 255 / 8%);
+}
+
+.lc:hover::after {
+  background: linear-gradient(
+    160deg,
+    rgb(255 255 255 / 15%) 0%,
+    rgb(200 212 26 / 10%) 40%,
+    transparent 70%
+  );
+}
+
+.lc:active {
+  transform: translateY(0) scale(0.98);
+  transition-duration: 0.08s;
+}
+
+/* ── TEXT ── */
+.lc-title {
+  font-weight: 800;
+  font-size: 1.5rem;
+  color: #fff;
+  line-height: 1.2;
+  letter-spacing: -0.01em;
+  text-transform: uppercase;
+}
+
+.lc-sub {
+  font-family: var(--mono);
+  font-size: 0.85rem;
+  color: var(--acqua);
+  letter-spacing: 0.06em;
+  margin-top: 0.25rem;
+}
+
+.lc-desc {
+  font-size: 0.9rem;
+  color: var(--text-2);
+  margin-top: 1rem;
+  line-height: 1.5;
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.lc-price {
+  font-size: 1.8rem;
+  font-weight: 900;
+  color: var(--neon);
+  margin-top: auto;
+  padding-top: 1rem;
+}
+
+.hub-footer {
+  text-align: center;
+  margin-top: 4rem;
+  padding-top: 2rem;
+  border-top: 1px solid var(--border);
+}
+
+.hub-footer-brand {
+  font-weight: 900;
+  font-size: 0.9rem;
+  color: var(--text-3);
+}
+
+.hub-footer-brand .neo {
+  color: var(--mono);
+  opacity: 0.4;
+}
+
+@keyframes card-in {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}

@@ -1,0 +1,89 @@
+---
+import '../styles/global.css';
+import fs from 'node:fs';
+import path from 'node:path';
+import uiTexts from '../data/ui_texts.json';
+
+// Read config to get meta verification token
+const configPath = path.join(process.cwd(), 'src/data/config.json');
+const configData = JSON.parse(fs.readFileSync(configPath, 'utf8'));
+const metaVerifyToken = configData.integrations.meta.domain_verification;
+const title = Astro.props.title || uiTexts.meta.default_title;
+const description = Astro.props.description || uiTexts.meta.default_description;
+const keywords = uiTexts.meta.keywords.join(', ');
+---
+
+<!DOCTYPE html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    <meta name="keywords" content={keywords} />
+    <meta property="og:title" content={uiTexts.meta.og_title} />
+    <meta property="og:description" content={uiTexts.meta.og_description} />
+    <meta name="theme-color" content="#16161a" />
+    <meta name="facebook-domain-verification" content={metaVerifyToken} />
+    <link rel="manifest" href="/manifest.webmanifest" />
+    <link rel="icon" type="image/x-icon" href="/favicon.ico" />
+    
+    <script type="application/ld+json" is:inline>
+      {
+        "@context": "https://schema.org",
+        "@graph": [
+          {
+            "@type": "Organization",
+            "@id": "https://neoprotocol.space/organizations/neo-protocol#organization",
+            "name": "NEØ Protocol",
+            "alternateName": "Neo Protocol",
+            "url": "https://neoprotocol.space",
+            "logo": "https://www.neoflowoff.agency/icon-512.png",
+            "description": "Esta organização mantém a camada de protocolo exclusiva para identidades independentes, mas a identidade é apenas o ponto de entrada. Nossa estrutura serve como a espinha dorsal aprovada para o desenvolvimento do ecossistema, proporcionando um ambiente determinístico no qual os agentes não estão apenas conectados a nós, mas são nativamente orquestrados como extensões complementares da lógica da rede."
+          },
+          {
+            "@type": "WebPage",
+            "@id": "https://neoprotocol.space/#webpage",
+            "url": "https://neoprotocol.space",
+            "name": "NEØ Protocol — Topologia de Engenharia Soberana",
+            "description": "Esta organização mantém a camada de protocolo exclusiva para identidades independentes, mas a identidade é apenas o ponto de entrada. Nossa estrutura serve como a espinha dorsal aprovada para o desenvolvimento do ecossistema, proporcionando um ambiente determinístico no qual os agentes não estão apenas conectados a nós, mas são nativamente orquestrados como extensões complementares da lógica da rede. Tratamos cada interação digital como uma transição de estado dentro de um modelo de confiança zero (zero-trust), incorporando a segurança desde a concepção (security-by-design) diretamente na camada de consenso, em vez de adicioná-la posteriormente.",
+            "inLanguage": "pt-BR",
+            "isPartOf": {
+              "@id": "https://neoprotocol.space/#website"
+            },
+            "about": {
+              "@id": "https://neoprotocol.space/organizations/neo-protocol#organization"
+            }
+          }
+        ]
+      }
+    </script>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=DM+Mono:ital,wght@0,300;0,400;0,500;1,300;1,400;1,500&family=Figtree:ital,wght@0,300..900;1,300..900&display=swap" rel="stylesheet">
+    <script src="https://unpkg.com/lucide@latest"></script>
+  </head>
+  <body>
+    <div class="mesh"></div>
+    <slot />
+    <script>
+      // Declare global to avoid TS errors
+      declare const lucide: any;
+
+      // Initialize icons
+      if (typeof lucide !== 'undefined') {
+        lucide.createIcons();
+      }
+
+      // Register PWA Service Worker
+      if ('serviceWorker' in navigator) {
+        window.addEventListener('load', () => {
+          navigator.serviceWorker.register('/sw.js').catch(err => {
+            console.error('ServiceWorker registration failed: ', err);
+          });
+        });
+      }
+    </script>
+  </body>
+</html>

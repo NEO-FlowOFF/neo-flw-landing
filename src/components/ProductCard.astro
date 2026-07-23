@@ -1,0 +1,39 @@
+---
+const { id, slug, title, sub, description, link, price, price_label, category, display_category, featured, isSoon, features } = Astro.props;
+
+const targetHref = slug 
+  ? (category === 'Serviço' ? `/checkout/${slug}` : `/planos/${slug}`) 
+  : link;
+const href = isSoon ? '#' : targetHref;
+const cardClass = featured ? 'lc lc-featured' : (isSoon ? 'lc section-soon' : 'lc');
+---
+<a href={href} class={cardClass}>
+  {featured && (
+    <div style="background: var(--pink-s); color: #fff; font-family: var(--mono); font-size: 0.7rem; font-weight: 700; padding: 4px 10px; border-radius: 4px; display: inline-block; margin-bottom: 0.8rem; text-transform: uppercase; letter-spacing: 0.05em;">
+      ⭐ OPERAÇÃO PRINCIPAL
+    </div>
+  )}
+  {display_category && !featured && (
+    <div style="color: var(--text-2); font-family: var(--mono); font-size: 0.75rem; text-transform: uppercase; margin-bottom: 0.5rem; letter-spacing: 0.05em;">
+      {display_category}
+    </div>
+  )}
+  <div class="lc-body">
+    <div class="lc-title">{title}</div>
+    {sub && <div class="lc-sub">{sub}</div>}
+    <div class="lc-desc">{description}</div>
+  </div>
+  
+  <div class="lc-price" style="margin-top: 1rem;">
+    {price_label && <span style="font-size: 0.8rem; color: var(--text-2); font-weight: 400; display: block; margin-bottom: 2px;">{price_label}</span>}
+    R$ {price.value.toLocaleString('pt-BR', { minimumFractionDigits: 2 })}
+  </div>
+  
+  <ul style="margin-top: 1rem; list-style: none; padding: 0;">
+    {features && features.map((feature: unknown) => (
+      <li style="display: flex; gap: 8px; align-items: center; color: var(--text-2); font-size: 0.8rem; margin-bottom: 6px;">
+        <i data-lucide="check-circle" style="width: 14px; height: 14px; color: var(--acqua);"></i> {feature}
+      </li>
+    ))}
+  </ul>
+</a>
