@@ -1,0 +1,214 @@
+<!-- markdownlint-disable MD003 MD007 MD013 MD022 MD023 MD025 MD029 MD032 MD033 MD034 -->
+# SETUP · neo-flw-landing
+
+```text
+========================================
+       SETUP · NEO-FLW-LANDING
+========================================
+Runtime: Astro v7 + Cloudflare Pages + Functions
+Package Manager: pnpm (monorepo-aware)
+Node: via mise / corepack
+========================================
+```
+
+Este documento cobre ambiente local, build, deploy e validação.
+
+---
+
+## 1. Pré-requisitos
+
+```text
+pnpm        >= 9
+Node        >= 20 (via mise ou .nvmrc)
+wrangler    >= 4.113 (devDependency, usar via pnpm exec)
+```
+
+> **Monorepo:** Este repositório é um child do workspace `NEO-FlowOFF`.
+> Nunca execute `pnpm install` global — isso pode quebrar outros projetos.
+
+---
+
+## 2. Instalação isolada
+
+```bash
+# correto — instala apenas as dependências deste projeto
+make install
+
+# equivalente direto
+pnpm install --filter .
+```
+
+Se o pnpm global falhar por `EPERM` (corepack/mise), use o binário local:
+
+```bash
+./node_modules/.bin/astro --version
+```
+
+---
+
+## 3. Desenvolvimento local
+
+```bash
+make dev
+
+# equivalente
+pnpm run dev
+# → http://localhost:4321/
+```
+
+---
+
+## 4. Build de produção
+
+```bash
+make build
+
+# equivalente
+pnpm run build
+# output: ./dist/
+```
+
+O Astro gera rotas estáticas. O `dist/` é artefato — não edite como fonte.
+
+Rotas geradas no build atual:
+
+```text
+/                            home
+/planos/[slug]/              6 planos
+/checkout/[slug]/            5 checkouts
+/conectar-whatsapp/          connector WhatsApp
+/privacy/  /privacidade/     política EN + pt-BR
+/legal/    /terms/           termos
+/excluir-dados/ /data-deletion/   exclusão de dados
+/404.html
+```
+
+---
+
+## 5. Validação antes de publicar
+
+```bash
+# build completo (validação mínima obrigatória)
+pnpm run build
+
+# lint CSS
+./node_modules/.bin/stylelint 'src/styles/**/*.css'
+
+# syntax check do service worker
+node --check public/sw.js
+
+# validação do sitemap
+xmllint --noout public/sitemap.xml
+
+# atalho que roda tudo acima
+make verify
+```
+
+> `pnpm exec astro check` pode falhar neste checkout por problema interno
+> do language server. Não declare typecheck aprovado se falhar; use
+> `pnpm run build` como validação mínima.
+
+---
+
+## 6. Deploy
+
+### Via CLI (Wrangler)
+
+```bash
+make deploy
+
+# equivalente
+pnpm exec wrangler pages deploy dist --project-name=neoflowoff-agency
+```
+
+### Via Cloudflare Pages Dashboard (Git deploy)
+
+```text
+Build command:  pnpm run build
+Output dir:     dist
+```
+
+`wrangler.jsonc` declara `pages_build_output_dir: "./dist"`, mas **não**
+substitui o comando de build configurado no dashboard.
+
+---
+
+## 7. Cloudflare — configurações ativas
+
+| Recurso                  | Valor                                     |
+|--------------------------|-------------------------------------------|
+| Project name             | `neoflowoff-agency`                       |
+| Output dir               | `./dist`                                  |
+| Compatibility date       | `2026-07-23`                              |
+| KV binding               | `META_DELETION_REQUESTS`                  |
+| KV namespace ID          | `afe76b8c5bf44e2cb4b19f20ebe60081`        |
+| Functions dir            | `functions/`                              |
+
+---
+
+## 8. Variáveis de ambiente
+
+O arquivo `.env.example` documenta as variáveis necessárias.
+Copie antes de rodar localmente:
+
+```bash
+cp .env.example .env
+# edite os valores reais
+```
+
+> Nunca commite `.env`. Credenciais e secrets devem ficar fora do bundle.
+
+---
+
+## 9. Dependências principais
+
+| Pacote                       | Versão        | Função                     |
+|------------------------------|---------------|----------------------------|
+| `astro`                      | ^7.1.3        | static site generator      |
+| `wrangler`                   | ^4.113.0      | deploy CLI Cloudflare       |
+| `stylelint`                  | ^17.14.1      | lint CSS                   |
+| `stylelint-config-standard`  | ^40.0.0       | ruleset padrão             |
+| `@astrojs/check`             | ^0.9.3        | typecheck Astro            |
+| `typescript`                 | ^7.0.2        | types                      |
+
+---
+
+## 10. Scripts npm disponíveis
+
+```bash
+pnpm run dev        # servidor local
+pnpm run build      # build de produção
+pnpm run preview    # preview do dist
+pnpm run lint       # stylelint --fix
+pnpm run deploy     # wrangler pages deploy
+pnpm run push       # git add + commit + push main
+```
+
+---
+
+## 11. Service Worker
+
+`public/sw.js` deve ignorar ativos internos do Astro para evitar
+cache de arquivos dinâmicos:
+
+```text
+/_astro/   → bypass
+/_image/   → bypass
+/src/      → bypass
+/api/      → bypass
+```
+
+---
+
+## 12. Atualizações do catálogo
+
+- **Catálogo publicado:** `src/data/catalog.json` — alimenta home e rotas dinâmicas
+- **Insumo canônico:** `drafts/catalog_v2026_2.json` — não editar sem pedido explícito
+
+Para adicionar um plano ou checkout, edite `catalog.json` e rode `make build`.
+
+```text
+────────────────────────────
+SETUP · NΞØ FlowOFF Landing
+────────────────────────────
+```

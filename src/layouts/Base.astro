@@ -20,15 +20,21 @@ const jsonLd = {
       '@type': 'Organization',
       '@id': `${platformBaseUrl}/#organization`,
       name: 'NEØ FlowOFF',
-      alternateName: 'Neo FlowOFF Agency',
+      alternateName: ['Neo FlowOFF Agency', 'NEO FlowOFF'],
       url: platformBaseUrl,
       logo: `${platformBaseUrl}/icon-512.png`,
       description,
+      telephone: '+55-62-94789032',
+      sameAs: [
+        'https://neoflowoff.agency',
+        'https://wa.me/556294789032'
+      ],
       contactPoint: {
         '@type': 'ContactPoint',
         contactType: 'customer support',
+        telephone: '+55-62-94789032',
         email: 'neo@neoflowoff.agency',
-        availableLanguage: ['pt-BR']
+        availableLanguage: ['pt-BR', 'en']
       }
     },
     {
@@ -36,8 +42,14 @@ const jsonLd = {
       '@id': `${platformBaseUrl}/#website`,
       url: platformBaseUrl,
       name: 'neoflowoff.agency',
+      inLanguage: 'pt-BR',
       publisher: {
         '@id': `${platformBaseUrl}/#organization`
+      },
+      potentialAction: {
+        '@type': 'SearchAction',
+        target: `${platformBaseUrl}/sitemap.xml`,
+        'query-input': 'required name=search_term_string'
       }
     },
     {
@@ -79,9 +91,9 @@ const jsonLd = {
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=DM+Mono:ital,wght@0,300;0,400;0,500;1,300;1,400;1,500&family=Figtree:ital,wght@0,300..900;1,300..900&display=swap" media="print" onload="this.media='all'">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=DM+Mono:ital,wght@0,300;0,400;0,500;1,300;1,400;1,500&family=Figtree:ital,wght@0,300..900;1,300..900&family=Outfit:wght@500;700;800;900&family=Space+Grotesk:wght@500;600;700&display=swap" media="print" onload="this.media='all'">
     <noscript>
-      <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=DM+Mono:ital,wght@0,300;0,400;0,500;1,300;1,400;1,500&family=Figtree:ital,wght@0,300..900;1,300..900&display=swap">
+      <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=DM+Mono:ital,wght@0,300;0,400;0,500;1,300;1,400;1,500&family=Figtree:ital,wght@0,300..900;1,300..900&family=Outfit:wght@500;700;800;900&family=Space+Grotesk:wght@500;600;700&display=swap">
     </noscript>
   </head>
   <body>

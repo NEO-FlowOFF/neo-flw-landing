@@ -30,7 +30,7 @@ Estratégia, automação, Web3 e tokenização como **sistema operacional de neg
 
 ### Headline Principal
 
-**neoflowoff.agency**  
+**neoflowoff.agency*
 **da Estratégia ao Token**
 
 ### Subheadline
@@ -39,15 +39,19 @@ Arquitetura Web2 → Web3 para empresas que buscam alta performance,
 automação com IA e ecossistemas em blockchain.
 
 ### Apoio Conceitual (1 linha)
+
 Marketing como infraestrutura. Tecnologia que executa sozinha.
 
 ### CTA Primário
-**Iniciar Projeto**
+
+**Iniciar Projeto*
 
 ### CTA Secundário
+
 Console + Web3
 
 > Observação para IA:
+>
 > - Headline forte, limpa, alto contraste.
 > - Não usar frases longas.
 > - A imagem pode ser placeholder (3D abstrato, grid, símbolo).
@@ -57,11 +61,14 @@ Console + Web3
 ## BLOCO: O PROBLEMA (RUPTURA)
 
 ### Título
+
 O problema não é tráfego.  
 É a falta de sistema.
 
 ### Texto
+
 A maioria das empresas ainda opera crescimento como campanha:
+
 - Ação isolada
 - Dependência humana
 - Métricas que não viram ativos
@@ -74,10 +81,12 @@ Isso quebra quando a atenção some.
 
 ## BLOCO: A SOLUÇÃO NEØ
 
-### Título
+> Título
+
 Nós construímos sistemas que executam crescimento.
 
-### Pontos-chave (bullet curto)
+> Pontos-chave (bullet curto)
+
 - Estratégia como arquitetura
 - Automação com IA desde o primeiro lead
 - Integração Web3 quando faz sentido (não como hype)
@@ -90,7 +99,7 @@ Tudo é funcional.
 
 ## BLOCO: O QUE ENTREGAMOS (CLARO E DIRETO)
 
-### Serviços Principais
+> Serviços Principais
 
 - Landing pages orientadas a conversão real
 - Automação de aquisição e vendas com IA
@@ -106,13 +115,13 @@ Tudo é funcional.
 
 ## BLOCO: PARA QUEM É
 
-### Ideal para:
+> Ideal para
 
 - Empresas que querem escalar sem inflar equipe
 - Projetos digitais que exigem performance e rastreabilidade
 - Fundadores que pensam produto, não campanha
 
-### Não é para:
+> Não é para
 
 - Quem busca “post bonito”
 - Quem quer promessa rápida sem estrutura
@@ -138,12 +147,12 @@ Sistema vivo. Não entrega estática.
 
 Pronto para sair do improviso?
 
-### Texto
+> Texto
 
 Se você entende que crescimento é sistema,  
 a neoflowoff.agency é o próximo passo.
 
-### CTA
+> CTA
 
 -*Falar com a Flow*
 

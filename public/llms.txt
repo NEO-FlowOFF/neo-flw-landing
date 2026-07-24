@@ -30,9 +30,12 @@ This is a public landing and service catalog for agents and humans. Treat the pa
 ## Compliance
 
 - [Privacy Policy](https://neoflowoff.agency/privacy/): Public privacy policy for Meta, WhatsApp Cloud API, and data governance.
+- [Privacy Policy (pt-BR)](https://neoflowoff.agency/privacidade/): Alias em português da política de privacidade.
 - [Terms of Service](https://neoflowoff.agency/legal/): Terms for services, integrations, and Meta platform usage.
-- [Data Deletion](https://neoflowoff.agency/excluir-dados/): User data deletion instructions for Meta and LGPD compliance.
-- [WhatsApp Connection](https://neoflowoff.agency/conectar-whatsapp/): Operational route for WhatsApp connection and Embedded Signup context.
+- [Terms of Service (EN alias)](https://neoflowoff.agency/terms/): English alias for the terms of service page.
+- [Data Deletion (pt-BR)](https://neoflowoff.agency/excluir-dados/): User data deletion instructions for Meta and LGPD compliance.
+- [Data Deletion (EN alias)](https://neoflowoff.agency/data-deletion/): English alias for the data deletion page.
+- [WhatsApp Connection](https://neoflowoff.agency/conectar-whatsapp/): Meta Embedded Signup connector — authorizes WhatsApp Business channels into the NEØ Growth System.
 
 ## Ecosystem
 

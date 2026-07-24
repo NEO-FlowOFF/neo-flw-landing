@@ -1,6 +1,6 @@
 {
-  "name": "neoflowoff.agency - Agentes de IA, sites e CRM",
-  "short_name": "neoflowoff.agency",
+  "name": "neoflow.agency",
+  "short_name": "neoflow.ag",
   "description": "Agentes de IA, sites, CRM e fluxos comerciais para empresas. Marketing com infraestrutura.",
   "start_url": "/",
   "display": "standalone",
@@ -10,10 +10,7 @@
   "scope": "/",
   "lang": "pt-BR",
   "dir": "ltr",
-  "categories": [
-    "business",
-    "productivity"
-  ],
+  "categories": ["business", "productivity"],
   "icons": [
     {
       "src": "/icon-192.png",
@@ -35,7 +32,5 @@
     }
   ],
   "screenshots": [],
-  "shortcuts": [],
-  "version": "202607231057",
-  "version_name": "2026.07.23"
+  "shortcuts": []
 }

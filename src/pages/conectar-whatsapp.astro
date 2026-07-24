@@ -1,6 +1,7 @@
 ---
 import Base from '../layouts/Base.astro';
 import configData from '../data/config.json';
+import brandLogo from '../assets/logos/neoflowoff-logo26-2.webp';
 
 const metaConfig = configData.integrations.meta;
 const metaAppId = metaConfig.app_id;
@@ -8,46 +9,33 @@ const graphApiVersion = metaConfig.graph_api_version;
 const requestedScopes = metaConfig.requested_scopes.join(',');
 ---
 
-<Base title="Conectar WhatsApp Business | Meta Tech Provider — NEØ FlowOFF" description="Conexão oficial via Meta Cloud API para WhatsApp Business.">
+<Base title="Conectar WhatsApp Business | Meta Tech Provider — neoflowoff.agency" description="Conexão oficial via Meta Cloud API para WhatsApp Business.">
   <div class="wa-page-wrapper">
     <div class="wa-page-container">
       <!-- HEADER COM LOGO DA AGÊNCIA (SEM MENU HAMBÚRGUER) -->
       <header class="clean-header">
         <div class="glass-navbar-simple">
           <a href="/" class="nav-brand">
-            <img
-              src="/assets/neoflowoff-logo-192.webp"
-              srcset="/assets/neoflowoff-logo-192.webp 192w, /assets/neoflowoff-logo-384.webp 384w"
-              sizes="136px"
-              alt="neoflowoff.agency"
-              class="nav-logo"
-              width="192"
-              height="34"
-              fetchpriority="high"
-              loading="eager"
-              decoding="async"
-            />
+            <span class="portal-brand-text">neoflowoff.portal</span>
           </a>
           <div class="header-status-badge">
             <span class="status-dot"></span>
-            <span class="status-text">OFFICIAL PORTAL</span>
+            <span class="status-text">// NEØ GROWTH SYSTEM</span>
           </div>
         </div>
       </header>
 
       <!-- CARD MINIMALISTA E MODERNO -->
       <main class="wa-card">
-        <!-- AMBIENT BLUE GLOW -->
-        <div class="card-ambient-glow"></div>
 
         <!-- LOGO META TECH PROVIDER -->
         <div class="meta-brand-header">
           <img 
-            src="/myapp_NEOFLOW_E-gine.png" 
+            src="/lgo-app-stell.png" 
             alt="NEOFLOW E-gine Meta App" 
             class="meta-badge-img"
-            width="135"
-            height="68"
+            width="78"
+            height="39"
             loading="eager"
           />
         </div>
@@ -55,15 +43,27 @@ const requestedScopes = metaConfig.requested_scopes.join(',');
         <!-- TAG MINIMALISTA -->
         <div class="meta-tag">
           <span class="pulse-dot"></span>
-          <span>CONEXÃO COM META API // FACEBOOK</span>
+          <span>META BUSINESS MESSAGING CONNECTOR</span>
         </div>
 
         <!-- TÍTULO & SUBTÍTULO -->
         <h1 class="wa-card-title">
-          NEO portal // Meta Cloud API
+        <img 
+          src={brandLogo.src} 
+          alt="NEØ FlowOFF Agency" 
+          class="card-brand-logo-img"
+          width="275"
+          height="48"
+          loading="eager"
+          style={{ 
+            width: '100%', 
+            maxWidth: '275px', 
+            height: 'auto' 
+          }}
+        />
         </h1>
         <p class="wa-card-desc">
-          Conecte sua conta oficial do WhatsApp Business através da integração oficial da Meta Cloud API.
+          Autorize os canais comerciais da sua empresa para integração com o <strong>NEØ Growth System</strong>.
         </p>
 
         <!-- BOTÃO AZUL OFICIAL META -->
@@ -73,12 +73,12 @@ const requestedScopes = metaConfig.requested_scopes.join(',');
             onclick="launchWhatsAppSignup()" 
             class="btn-meta-blue"
             data-haptic
-            aria-label="Conectar WhatsApp com Facebook Meta"
+            aria-label="Continuar com a Meta"
           >
             <svg class="meta-btn-icon" width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
               <path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/>
             </svg>
-            <span class="btn-text">Conectar com Meta</span>
+            <span class="btn-text">Continuar com a Meta</span>
             <div class="btn-spinner" hidden></div>
           </button>
         </div>
@@ -91,36 +91,51 @@ const requestedScopes = metaConfig.requested_scopes.join(',');
           <div class="trust-card">
             <i data-lucide="shield-check" style="width: 16px; height: 16px; color: var(--acid);"></i>
             <div>
-              <strong>Conexão Segura</strong>
-              <small>NEØ Protocol oficial</small>
+              <strong>Autorização via Meta</strong>
+              <small>Ambiente oficial de conexão</small>
             </div>
           </div>
           <div class="trust-card">
             <i data-lucide="zap" style="width: 16px; height: 16px; color: var(--acid);"></i>
             <div>
-              <strong>Conexão Segura</strong>
-              <small>Autenticação Oficial Meta</small>
+              <strong>Orquestração NEØ</strong>
+              <small>Integração com o Growth System</small>
             </div>
           </div>
         </div>
 
         <!-- FOOTER INFO DO APP -->
         <footer class="app-info-footer">
-          <span>App: <strong>NEØFlow E-gine</strong></span>
+          <span>NEØFLW ENGINE//01</span>
           <span>·</span>
-          <span>ID: <code>{metaAppId}</code></span>
+          <span><code>{metaAppId}</code></span>
         </footer>
       </main>
     </div>
   </div>
 
   <style>
+    /* ─── PÁGINA ─── */
     .wa-page-wrapper {
       min-height: 100vh;
       display: flex;
       flex-direction: column;
       align-items: center;
-      padding: 0.5rem 0.85rem 3.5rem;
+      padding: 0.5rem 1rem 4rem;
+      position: relative;
+      isolation: isolate;
+    }
+
+    /* Glow ambiente no fundo */
+    .wa-page-wrapper::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      background:
+        radial-gradient(ellipse 70% 55% at 50% -10%, rgba(24, 119, 242, 0.14) 0%, transparent 65%),
+        radial-gradient(ellipse 50% 40% at 80% 90%, rgba(200, 212, 26, 0.06) 0%, transparent 60%);
+      pointer-events: none;
+      z-index: -1;
     }
 
     .wa-page-container {
@@ -129,49 +144,53 @@ const requestedScopes = metaConfig.requested_scopes.join(',');
       margin: 0 auto;
     }
 
-    /* HEADER MINIMALISTA (COM LOGO DA AGÊNCIA, SEM MENU) */
+    /* ─── HEADER ─── */
     .clean-header {
       position: sticky;
-      top: 10px;
+      top: 12px;
       z-index: 100;
-      margin-bottom: 1.6rem;
+      margin-bottom: 2rem;
       width: 100%;
+      animation: fadeUp 0.5s cubic-bezier(0.22, 1, 0.36, 1) both;
     }
 
     .glass-navbar-simple {
       display: flex;
       align-items: center;
       justify-content: space-between;
-      padding: 0.55rem 1rem;
-      background: rgba(22, 22, 26, 0.78);
-      backdrop-filter: blur(16px) saturate(180%);
-      -webkit-backdrop-filter: blur(16px) saturate(180%);
-      border: 1px solid rgba(255, 255, 255, 0.12);
+      padding: 0.6rem 1.1rem;
+      background: rgba(18, 18, 22, 0.82);
+      backdrop-filter: blur(20px) saturate(200%);
+      -webkit-backdrop-filter: blur(20px) saturate(200%);
+      border: 1px solid rgba(255, 255, 255, 0.09);
       border-radius: 999px;
-      box-shadow: 0 8px 32px rgba(0, 0, 0, 0.6), inset 0 1px 0 rgba(255, 255, 255, 0.12);
+      box-shadow:
+        0 4px 24px rgba(0, 0, 0, 0.55),
+        0 1px 0 rgba(255, 255, 255, 0.06) inset;
     }
 
     .nav-brand {
       display: flex;
       align-items: center;
+      gap: 8px;
       text-decoration: none;
     }
 
-    .nav-logo {
-      height: 24px;
-      width: auto;
-      object-fit: contain;
-      filter: drop-shadow(0 0 12px rgba(200, 212, 26, 0.4));
+    .portal-brand-text {
+      color: rgba(255, 255, 255, 0.6);
+      font-size: 0.85rem;
+      font-weight: 500;
+      letter-spacing: 0.01em;
     }
 
     .header-status-badge {
       display: inline-flex;
       align-items: center;
       gap: 6px;
-      padding: 3px 10px;
+      padding: 4px 11px;
       border-radius: 999px;
-      background: rgba(200, 212, 26, 0.08);
-      border: 1px solid rgba(200, 212, 26, 0.28);
+      background: rgba(200, 212, 26, 0.07);
+      border: 1px solid rgba(200, 212, 26, 0.22);
     }
 
     .status-dot {
@@ -179,72 +198,100 @@ const requestedScopes = metaConfig.requested_scopes.join(',');
       height: 5px;
       border-radius: 50%;
       background: var(--acid);
-      box-shadow: 0 0 6px var(--acid);
+      box-shadow: 0 0 7px var(--acid);
+      animation: blink 2.4s ease-in-out infinite;
     }
 
     .status-text {
       font-family: var(--mono);
-      font-size: 0.6rem;
-      font-weight: 800;
+      font-size: 0.59rem;
+      font-weight: 700;
       color: var(--acid);
-      letter-spacing: 0.06em;
+      letter-spacing: 0.07em;
+      opacity: 0.85;
     }
 
-    /* CARD MINIMALISTA E ELEGANTE */
+    /* ─── CARD PRINCIPAL ─── */
     .wa-card {
       position: relative;
-      background: linear-gradient(180deg, rgba(22, 22, 28, 0.94), rgba(12, 12, 16, 0.98));
-      backdrop-filter: blur(24px) saturate(180%);
-      -webkit-backdrop-filter: blur(24px) saturate(180%);
-      border: 1px solid rgba(255, 255, 255, 0.12);
+      /* borda gradiente via pseudo-element */
+      background: linear-gradient(165deg, rgba(26, 26, 34, 0.97) 0%, rgba(10, 10, 14, 0.99) 100%);
       border-radius: 28px;
-      padding: 2.2rem 1.8rem 1.6rem;
-      box-shadow: 0 24px 60px rgba(0, 0, 0, 0.75), inset 0 1px 0 rgba(255, 255, 255, 0.08);
+      padding: 2.6rem 2.2rem 2rem;
       text-align: center;
       overflow: hidden;
+      animation: fadeUp 0.55s 0.08s cubic-bezier(0.22, 1, 0.36, 1) both;
     }
 
-    .card-ambient-glow {
+    /* Borda com gradiente sutil */
+    .wa-card::before {
+      content: '';
       position: absolute;
-      top: -90px;
+      inset: 0;
+      border-radius: 28px;
+      padding: 1px;
+      background: linear-gradient(
+        160deg,
+        rgba(255, 255, 255, 0.16) 0%,
+        rgba(255, 255, 255, 0.04) 40%,
+        rgba(24, 119, 242, 0.18) 100%
+      );
+      -webkit-mask:
+        linear-gradient(#fff 0 0) content-box,
+        linear-gradient(#fff 0 0);
+      -webkit-mask-composite: xor;
+      mask-composite: exclude;
+      pointer-events: none;
+    }
+
+    /* Profundidade + glow azul no topo */
+    .wa-card::after {
+      content: '';
+      position: absolute;
+      top: -80px;
       left: 50%;
       transform: translateX(-50%);
-      width: 260px;
-      height: 260px;
-      background: radial-gradient(circle, rgba(24, 119, 242, 0.22), transparent 70%);
+      width: 320px;
+      height: 320px;
+      background: radial-gradient(circle, rgba(24, 119, 242, 0.18) 0%, transparent 68%);
       pointer-events: none;
-      border-radius: 50%;
-      filter: blur(18px);
+      filter: blur(20px);
     }
 
+    /* ─── LOGO APP / META ─── */
     .meta-brand-header {
       display: flex;
       justify-content: center;
-      margin-bottom: 1.1rem;
+      margin-bottom: 1.3rem;
+      position: relative;
+      z-index: 1;
     }
 
     .meta-badge-img {
-      max-width: 135px;
+      max-width: 120px;
       width: 100%;
       height: auto;
       object-fit: contain;
-      filter: drop-shadow(0 0 10px rgba(24, 119, 242, 0.4));
+      filter: drop-shadow(0 0 12px rgba(24, 119, 242, 0.5));
     }
 
+    /* ─── TAG CONNECTOR ─── */
     .meta-tag {
       display: inline-flex;
       align-items: center;
-      gap: 6px;
+      gap: 7px;
       font-family: var(--mono);
-      font-size: 0.64rem;
+      font-size: 0.62rem;
       font-weight: 800;
-      letter-spacing: 0.08em;
-      color: #3898ff;
-      background: rgba(24, 119, 242, 0.12);
-      padding: 5px 14px;
+      letter-spacing: 0.09em;
+      color: #4fa3ff;
+      background: rgba(24, 119, 242, 0.1);
+      padding: 5px 15px;
       border-radius: 999px;
-      border: 1px solid rgba(24, 119, 242, 0.35);
-      margin-bottom: 1.2rem;
+      border: 1px solid rgba(24, 119, 242, 0.28);
+      margin-bottom: 1.4rem;
+      position: relative;
+      z-index: 1;
     }
 
     .pulse-dot {
@@ -253,63 +300,119 @@ const requestedScopes = metaConfig.requested_scopes.join(',');
       border-radius: 50%;
       background: #1877F2;
       box-shadow: 0 0 8px #1877F2;
-      animation: status-pulse 1.8s infinite ease-in-out;
+      animation: blink 2s infinite ease-in-out;
     }
 
+    /* ─── TÍTULO / LOGO MARCA ─── */
     .wa-card-title {
       font-size: 1.5rem;
       font-weight: 900;
       color: #ffffff;
-      margin-bottom: 0.6rem;
+      margin-bottom: 0.7rem;
       text-transform: uppercase;
       letter-spacing: -0.01em;
       line-height: 1.2;
+      position: relative;
+      z-index: 1;
+    }
+
+    .card-brand-logo-img {
+      max-width: 210px;
+      width: 100%;
+      height: auto;
+      object-fit: contain;
+      filter:
+        drop-shadow(0 0 18px rgba(200, 212, 26, 0.3))
+        drop-shadow(0 2px 8px rgba(0, 0, 0, 0.6));
+      margin: 0.2rem auto 0.5rem;
+      display: block;
     }
 
     .wa-card-desc {
-      color: rgba(255, 255, 255, 0.72);
-      font-size: 0.88rem;
-      line-height: 1.55;
-      margin-bottom: 1.8rem;
+      color: rgba(255, 255, 255, 0.58);
+      font-size: 0.875rem;
+      line-height: 1.6;
+      margin-bottom: 2rem;
+      position: relative;
+      z-index: 1;
+      max-width: 320px;
+      margin-left: auto;
+      margin-right: auto;
     }
 
-    /* BOTÃO AZUL META (FACEBOOK) */
+    /* ─── BOTÃO META ─── */
     .cta-wrapper {
-      margin-bottom: 1.2rem;
+      margin-bottom: 1.4rem;
+      position: relative;
+      z-index: 1;
     }
 
     .btn-meta-blue {
       width: 100%;
-      background: #1877F2;
+      background: linear-gradient(180deg, #2385ff 0%, #1877F2 55%, #1464d8 100%);
       color: #ffffff;
       border: none;
-      padding: 16px 22px;
-      font-size: 0.98rem;
-      font-weight: 800;
+      padding: 17px 24px;
+      font-size: 0.96rem;
+      font-weight: 700;
+      letter-spacing: 0.01em;
       border-radius: 14px;
       cursor: pointer;
       display: flex;
       align-items: center;
       justify-content: center;
       gap: 10px;
-      box-shadow: 0 10px 28px rgba(24, 119, 242, 0.38), inset 0 1px 0 rgba(255, 255, 255, 0.25);
-      transition: transform 0.18s ease, background 0.18s ease, box-shadow 0.18s ease;
+      box-shadow:
+        0 1px 0 rgba(255, 255, 255, 0.22) inset,
+        0 -1px 0 rgba(0, 0, 0, 0.25) inset,
+        0 8px 24px rgba(24, 119, 242, 0.42),
+        0 2px 6px rgba(24, 119, 242, 0.28);
+      transition: transform 0.2s ease, box-shadow 0.2s ease, filter 0.2s ease;
       position: relative;
+      overflow: hidden;
+    }
+
+    /* shimmer no hover */
+    .btn-meta-blue::after {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 60%;
+      height: 100%;
+      background: linear-gradient(
+        105deg,
+        transparent 20%,
+        rgba(255, 255, 255, 0.12) 50%,
+        transparent 80%
+      );
+      transition: left 0.45s ease;
+    }
+
+    .btn-meta-blue:hover:not(:disabled)::after {
+      left: 160%;
     }
 
     .btn-meta-blue:hover:not(:disabled) {
-      background: #166fe5;
       transform: translateY(-2px);
-      box-shadow: 0 14px 34px rgba(24, 119, 242, 0.48);
+      box-shadow:
+        0 1px 0 rgba(255, 255, 255, 0.22) inset,
+        0 -1px 0 rgba(0, 0, 0, 0.25) inset,
+        0 14px 36px rgba(24, 119, 242, 0.52),
+        0 4px 10px rgba(24, 119, 242, 0.3);
+      filter: brightness(1.06);
     }
 
     .btn-meta-blue:active:not(:disabled) {
       transform: translateY(0) scale(0.98);
-      background: #1464d2;
+      box-shadow:
+        0 1px 0 rgba(255, 255, 255, 0.18) inset,
+        0 4px 12px rgba(24, 119, 242, 0.32);
+      filter: brightness(0.96);
     }
 
     .btn-meta-blue:disabled {
-      opacity: 0.65;
+      opacity: 0.55;
       cursor: not-allowed;
     }
 
@@ -321,107 +424,138 @@ const requestedScopes = metaConfig.requested_scopes.join(',');
     .btn-spinner {
       width: 18px;
       height: 18px;
-      border: 2px solid rgba(255, 255, 255, 0.3);
+      border: 2px solid rgba(255, 255, 255, 0.25);
       border-top-color: #ffffff;
       border-radius: 50%;
-      animation: spin 0.7s linear infinite;
+      animation: spin 0.65s linear infinite;
     }
 
-    /* CAIXA DE STATUS */
+    /* ─── STATUS BOX ─── */
     .status-box {
       margin-top: 1rem;
       margin-bottom: 1.2rem;
-      padding: 0.85rem 1.1rem;
+      padding: 0.9rem 1.15rem;
       border-radius: 12px;
       font-family: var(--mono);
-      font-size: 0.76rem;
-      line-height: 1.45;
+      font-size: 0.74rem;
+      line-height: 1.5;
       text-align: left;
       border: 1px solid transparent;
-      animation: fadeIn 0.2s ease;
+      animation: fadeIn 0.25s ease both;
+      position: relative;
+      z-index: 1;
     }
 
     .status-box.info {
-      background: rgba(24, 119, 242, 0.12);
-      border-color: rgba(24, 119, 242, 0.35);
-      color: #72b3ff;
+      background: rgba(24, 119, 242, 0.1);
+      border-color: rgba(24, 119, 242, 0.3);
+      color: #7bbfff;
     }
 
     .status-box.success {
-      background: rgba(200, 212, 26, 0.14);
-      border-color: rgba(200, 212, 26, 0.45);
+      background: rgba(200, 212, 26, 0.1);
+      border-color: rgba(200, 212, 26, 0.38);
       color: var(--acid);
     }
 
     .status-box.warning {
-      background: rgba(255, 179, 0, 0.14);
-      border-color: rgba(255, 179, 0, 0.4);
-      color: #ffca28;
+      background: rgba(255, 179, 0, 0.1);
+      border-color: rgba(255, 179, 0, 0.35);
+      color: #ffc940;
     }
 
     .status-box.error {
-      background: rgba(255, 82, 82, 0.14);
-      border-color: rgba(255, 82, 82, 0.4);
-      color: #ff7b7b;
+      background: rgba(255, 82, 82, 0.1);
+      border-color: rgba(255, 82, 82, 0.35);
+      color: #ff8585;
     }
 
-    /* GRID DE SEGURANÇA E CONEXÃO */
+    /* ─── TRUST GRID ─── */
     .trust-grid {
       display: grid;
       grid-template-columns: 1fr 1fr;
-      gap: 10px;
-      margin-top: 1.2rem;
-      padding-top: 1.2rem;
-      border-top: 1px solid rgba(255, 255, 255, 0.08);
+      gap: 8px;
+      margin-top: 1.4rem;
+      padding-top: 1.4rem;
+      border-top: 1px solid rgba(255, 255, 255, 0.06);
       text-align: left;
+      position: relative;
+      z-index: 1;
     }
 
     .trust-card {
       display: flex;
       align-items: flex-start;
-      gap: 9px;
-      background: rgba(255, 255, 255, 0.025);
-      border: 1px solid rgba(255, 255, 255, 0.06);
-      border-radius: 12px;
-      padding: 0.65rem 0.75rem;
+      gap: 10px;
+      background: rgba(255, 255, 255, 0.02);
+      border: 1px solid rgba(255, 255, 255, 0.055);
+      border-radius: 14px;
+      padding: 0.8rem 0.85rem;
+      transition: border-color 0.2s ease, background 0.2s ease;
+    }
+
+    .trust-card:hover {
+      background: rgba(255, 255, 255, 0.038);
+      border-color: rgba(255, 255, 255, 0.1);
     }
 
     .trust-card strong {
       display: block;
-      font-size: 0.74rem;
-      color: #ffffff;
-      line-height: 1.2;
+      font-size: 0.73rem;
+      color: rgba(255, 255, 255, 0.88);
+      line-height: 1.25;
+      font-weight: 600;
     }
 
     .trust-card small {
       display: block;
-      font-size: 0.65rem;
-      color: rgba(255, 255, 255, 0.52);
-      margin-top: 2px;
+      font-size: 0.63rem;
+      color: rgba(255, 255, 255, 0.42);
+      margin-top: 3px;
+      line-height: 1.4;
     }
 
-    /* FOOTER INFO DO APP */
+    /* ─── FOOTER ─── */
     .app-info-footer {
-      margin-top: 1.4rem;
-      padding-top: 1rem;
-      border-top: 1px dashed rgba(255, 255, 255, 0.08);
+      margin-top: 1.8rem;
+      padding-top: 1.1rem;
+      border-top: 1px solid rgba(255, 255, 255, 0.05);
       font-family: var(--mono);
-      font-size: 0.66rem;
-      color: rgba(255, 255, 255, 0.42);
+      font-size: 0.63rem;
+      color: rgba(255, 255, 255, 0.3);
       display: flex;
       align-items: center;
       justify-content: center;
       gap: 10px;
       flex-wrap: wrap;
+      letter-spacing: 0.04em;
+      position: relative;
+      z-index: 1;
     }
 
     .app-info-footer code {
-      color: rgba(255, 255, 255, 0.75);
+      color: rgba(255, 255, 255, 0.55);
+      background: rgba(255, 255, 255, 0.05);
+      padding: 2px 7px;
+      border-radius: 5px;
+      border: 1px solid rgba(255, 255, 255, 0.07);
     }
 
-    @keyframes status-pulse {
+    /* ─── KEYFRAMES ─── */
+    @keyframes fadeUp {
+      from {
+        opacity: 0;
+        transform: translateY(14px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    @keyframes blink {
       0%, 100% { opacity: 1; transform: scale(1); }
-      50% { opacity: 0.35; transform: scale(0.85); }
+      50% { opacity: 0.3; transform: scale(0.82); }
     }
 
     @keyframes spin {
@@ -429,8 +563,8 @@ const requestedScopes = metaConfig.requested_scopes.join(',');
     }
 
     @keyframes fadeIn {
-      from { opacity: 0; transform: translateY(-4px); }
-      to { opacity: 1; transform: translateY(0); }
+      from { opacity: 0; transform: translateY(-5px); }
+      to   { opacity: 1; transform: translateY(0); }
     }
   </style>
 
