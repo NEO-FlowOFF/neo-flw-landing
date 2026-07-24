@@ -253,34 +253,16 @@ const servicos = catalogData.products.filter(p => p.category === 'Serviço' && !
 
       <!-- LINKS DE GOVERNANÇA E COMPLIANCE META -->
       <div style="display: flex; gap: 1rem; flex-wrap: wrap; justify-content: center; font-family: var(--mono); font-size: 0.72rem; margin-top: 0.5rem;">
-        <a href="/privacy" style="color: var(--text-2); text-decoration: none; transition: color 0.2s;" onmouseover="this.style.color='var(--acid)'" onmouseout="this.style.color='var(--text-2)'">Política de Privacidade</a>
+        <a href="/privacy" class="footer-governance-link">Política de Privacidade</a>
         <span style="color: rgba(255,255,255,0.2);">•</span>
-        <a href="/legal" style="color: var(--text-2); text-decoration: none; transition: color 0.2s;" onmouseover="this.style.color='var(--acid)'" onmouseout="this.style.color='var(--text-2)'">Termos de Serviço</a>
+        <a href="/legal" class="footer-governance-link">Termos de Serviço</a>
         <span style="color: rgba(255,255,255,0.2);">•</span>
-        <a href="/excluir-dados" style="color: var(--text-2); text-decoration: none; transition: color 0.2s;" onmouseover="this.style.color='var(--acid)'" onmouseout="this.style.color='var(--text-2)'">Exclusão de Dados</a>
+        <a href="/excluir-dados" class="footer-governance-link">Exclusão de Dados</a>
       </div>
     </footer>
   </div>
 
   <script>
-    /* Ripple on tap/click */
-    document.querySelectorAll<HTMLElement>('.lc').forEach((el) => {
-      el.addEventListener('pointerdown', (e: PointerEvent) => {
-        const target = e.currentTarget as HTMLElement;
-        const r = document.createElement('span');
-        const rect = target.getBoundingClientRect();
-        const size = Math.max(rect.width, rect.height) * 2;
-        r.style.cssText = `
-          position:absolute;width:${size}px;height:${size}px;
-          left:${e.clientX - rect.left - size / 2}px;top:${e.clientY - rect.top - size / 2}px;
-          border-radius:50%;background:rgba(255,255,255,0.06);
-          transform:scale(0);animation:ripple 0.5s ease forwards;pointer-events:none;
-        `;
-        target.appendChild(r);
-        setTimeout(() => r.remove(), 600);
-      });
-    });
-
     /* "EM BREVE" toast on soon element tap */
     document.querySelectorAll<HTMLElement>('.section-soon').forEach((el) => {
       el.addEventListener('click', (e: MouseEvent) => {

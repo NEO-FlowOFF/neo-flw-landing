@@ -1,9 +1,14 @@
 # Auditoria e Plano de Implementação — Meta, NEØ Growth System e Superfícies Comerciais
 
-**Projeto:** neoflowoff.agency  
-**Data:** 15/07/2026  
-**Destino:** Agent Dev responsável por auditar, implementar, validar e enviar para deploy  
+**Projeto:** neoflowoff.agency
+**Data:** 15/07/2026
+**Destino:** Agent Dev responsável por auditar, implementar, validar e enviar para deploy
 **Status geral:** infraestrutura parcialmente configurada; **não colocar os apps Meta em Live antes de concluir os bloqueadores deste documento**
+
+> Atualização de auditoria — 24/07/2026:
+> este documento preserva a fotografia operacional de 15/07/2026, mas o contrato ativo da landing agora aponta para `https://neoflowoff.agency`, para a página `GET /conectar-whatsapp` e para o adapter server-side `POST /api/meta/embedded-signup`.
+> O webhook oficial de WhatsApp deve ser tratado como `https://neo-whatsapp-connect-production.up.railway.app/webhook`; `https://lp.neoflowoff.agency/api/meta-webhook` é apenas rollback/migração.
+> App ID canônico para esta submissão: `1500002841696407`, conforme painel Meta. `src/data/config.json`, `docs/meta-app-review.md` e `functions/api/meta/embedded-signup.js` devem permanecer alinhados a esse valor.
 
 ---
 
@@ -11,9 +16,9 @@
 
 Concluir a infraestrutura mínima necessária para vender e operar:
 
-1. **Operação SDR IA Plug & Play**
+1. **Agent SDR IA**
 2. Atendimento e qualificação via WhatsApp
-3. Chat flutuante com identidade do **NΞØ:One**
+3. Chat flutuante com identidade do **NEØ:One**
 4. Landing page comercial do SDR
 5. Página de vendas e checkout por serviço
 6. Gestão de campanhas e ativos Meta da neoflowoff.agency
@@ -40,7 +45,7 @@ Repositórios informados:
 ```text
 neo-provider-telegram
 neo-provider-sms
-neo-whatsapp-connec
+neo-whatsapp-connect
 neo-growth-system-workspace
 neo-provider-resend
 neo-message-orchestrator
@@ -92,10 +97,13 @@ Função:
 
 Situação atual:
 
-- o endpoint Meta está temporariamente nesta aplicação:
-  `https://lp.neoflowoff.agency/api/meta-webhook`
-- isso deve ser tratado como configuração transitória
-- a landing page não deve permanecer como ingressor definitivo de eventos Meta
+- a aplicação publica a página de conexão:
+  `https://neoflowoff.agency/conectar-whatsapp`
+- o adapter server-side mínimo está em:
+  `https://neoflowoff.agency/api/meta/embedded-signup`
+- o adapter deve falhar fechado quando não houver storage/forward seguro configurado
+- a landing page não deve receber, registrar ou persistir secrets Meta no frontend
+- o endpoint antigo `https://lp.neoflowoff.agency/api/meta-webhook` deve ser tratado somente como rollback/migração
 
 #### `neoflowoff-chat-ui`
 
@@ -119,7 +127,7 @@ Função:
 
 Responsabilidade recomendada:
 
-- endpoint público definitivo dos webhooks Meta
+- camada definitiva futura para ingestão ampla de eventos Meta e Growth System
 - validação do challenge GET
 - validação de `X-Hub-Signature-256`
 - identificação do app, WABA, número e cliente
@@ -129,7 +137,7 @@ Responsabilidade recomendada:
 - resposta HTTP rápida
 - publicação do evento na fila
 
-Este serviço deve substituir o endpoint hoje hospedado em `neo-flw-landing`.
+No estado revisado de 24/07/2026, o webhook operacional de WhatsApp está documentado em `neo-whatsapp-connect`. O `neo-event-ingestor` continua recomendado como evolução para ingestão ampla e multiobjeto, mas não deve ser declarado como ativo até deploy e testes reais.
 
 ### `neo-queue-worker`
 
@@ -157,9 +165,14 @@ Este serviço deve substituir o endpoint hoje hospedado em `neo-flw-landing`.
 - tratar respostas e códigos de erro da API
 - usar token exclusivo do serviço de WhatsApp
 
-### `neo-whatsapp-connec`
+### `neo-whatsapp-connect`
 
+- gateway independente atual para WhatsApp Cloud API
 - conexão e onboarding de WABAs
+- recebimento do webhook oficial em `/webhook`
+- validação de challenge GET e assinatura `X-Hub-Signature-256`
+- envio de mensagens pela WhatsApp Cloud API quando configurado
+- forward de eventos normalizados para consumidor interno
 - Embedded Signup, quando implementado
 - associação de Business, WABA, phone number e cliente
 - armazenamento seguro de referências de token
@@ -217,13 +230,26 @@ Não criar agora um novo repositório de Ads apenas por organização. Um módul
 
 ### 4.1 App atual de WhatsApp e agentes
 
-Dados confirmados:
+Dados canônicos para esta submissão:
 
 ```env
 META_APP_ID=1500002841696407
 META_APP_NAME="NEOFLOW E-gine"
 META_APP_NAMESPACE=neoflowoff
 META_GRAPH_API_VERSION=v25.0
+```
+
+Diretriz de auditoria:
+
+- usar `1500002841696407` como App ID canônico para o App Review
+- antes de gravar o screencast, confirmar que a página `/conectar-whatsapp`, `src/data/config.json`, `docs/meta-app-review.md` e o adapter de Embedded Signup exibem/consomem o mesmo App ID
+
+Permissões solicitadas para App Review:
+
+```text
+whatsapp_business_management
+whatsapp_business_messaging
+business_management
 ```
 
 Função recomendada:
@@ -467,8 +493,14 @@ Diretriz:
 ## 8. Webhook atual
 
 ```env
-META_WEBHOOK_URL=https://lp.neoflowoff.agency/api/meta-webhook
-META_VERIFY_TOKEN=<SECRET_CONFIGURADO_NA_VERCEL>
+META_WEBHOOK_URL=https://neo-whatsapp-connect-production.up.railway.app/webhook
+META_VERIFY_TOKEN=<SECRET_CONFIGURADO_NO_RUNTIME_DO_GATEWAY>
+```
+
+Rollback/migração:
+
+```env
+META_WEBHOOK_ROLLBACK_URL=https://lp.neoflowoff.agency/api/meta-webhook
 ```
 
 Objeto ativo:
@@ -487,7 +519,7 @@ message_template_quality_update
 phone_number_quality_update
 ```
 
-Validações concluídas:
+Validações históricas concluídas no endpoint antigo:
 
 ```text
 Challenge GET:
@@ -518,7 +550,7 @@ A desativação atual é correta para o app de WhatsApp enquanto o backend ainda
 
 ## 9. Falhas do webhook atual que precisam ser corrigidas antes do Live
 
-O endpoint atual:
+O endpoint antigo:
 
 - compara `META_VERIFY_TOKEN` no GET
 - recebe qualquer POST
@@ -531,7 +563,7 @@ O endpoint atual:
 - não distingue cliente
 - não mascara PII
 
-Implementação obrigatória:
+Implementação obrigatória no gateway oficial:
 
 ### Validar assinatura
 
@@ -588,7 +620,7 @@ provider + event_id + timestamp
 
 ```text
 Meta
-→ neo-event-ingestor
+→ neo-whatsapp-connect
 → validar assinatura
 → deduplicar
 → normalizar
@@ -631,7 +663,7 @@ META_PROVIDER_TIMEOUT_MS=10000
 META_PROVIDER_MAX_RETRIES=3
 ```
 
-> `neo-whatsapp-connec`
+> `neo-whatsapp-connect`
 
 ```env
 NODE_ENV=production
@@ -674,11 +706,19 @@ Não inserir secrets Meta no código ou bundle cliente.
 Durante a migração:
 
 ```env
-META_VERIFY_TOKEN=
-META_APP_SECRET=
+META_EMBEDDED_SIGNUP_FORWARD_URL=
+META_EMBEDDED_SIGNUP_FORWARD_SECRET=
 ```
 
-Depois da migração do webhook para `neo-event-ingestor`, remover esses segredos da landing.
+Modo alternativo com storage seguro em Cloudflare KV:
+
+```env
+META_APP_SECRET=
+META_TOKEN_ENCRYPTION_KEY=
+META_CONNECTIONS=
+```
+
+Depois da migração do webhook para o gateway oficial, a landing não deve manter `META_VERIFY_TOKEN` nem operar callback de webhook Meta.
 
 Variáveis públicas aceitáveis:
 
@@ -843,7 +883,7 @@ Esse arquivo não pode conter secrets ou access tokens.
 
 ### Fase 2 — Corrigir ingresso de webhook
 
-- [ ] implementar challenge GET em `neo-event-ingestor`
+- [ ] implementar ou validar challenge GET em `neo-whatsapp-connect`
 - [ ] implementar raw body
 - [ ] validar `X-Hub-Signature-256`
 - [ ] implementar idempotência
@@ -866,7 +906,7 @@ Esse arquivo não pode conter secrets ou access tokens.
 
 ### Fase 4 — Migração do endpoint
 
-- [ ] publicar `neo-event-ingestor`
+- [ ] publicar/validar `neo-whatsapp-connect` como gateway oficial
 - [ ] testar callback em staging
 - [ ] testar challenge
 - [ ] testar `messages v25.0`
@@ -953,15 +993,17 @@ O app de Ads deve seguir processo separado de permissões, revisão, onboarding 
 4. **Business ID:** `227957544965390`
 5. **Ad Account principal:** `act_1579803729592779`
 6. **App atual de WhatsApp:** `1500002841696407`
-7. **Endpoint atual validado:** `https://lp.neoflowoff.agency/api/meta-webhook`
-8. **Campos WABA ativos:** cinco campos listados neste documento
-9. **Provider do `neoflowoff-chat-ui`:** ASI1.one
-10. **Provider previsto para o chat da `neo-flw-landing`:** OpenAI
-11. **Ingressor definitivo dos webhooks:** `neo-event-ingestor`
-12. **Ativos de clientes:** banco de dados, nunca variáveis globais
-13. **Apps de Ads e WhatsApp:** responsabilidades separadas
-14. **App Ads `470678155999569`:** pendente de confirmação técnica
-15. **Nenhum app deve entrar em Live antes dos bloqueadores de segurança e operação**
+7. **Endpoint oficial de webhook WhatsApp:** `https://neo-whatsapp-connect-production.up.railway.app/webhook`
+8. **Endpoint rollback/migração:** `https://lp.neoflowoff.agency/api/meta-webhook`
+9. **Campos WABA ativos:** cinco campos listados neste documento
+10. **Provider do `neoflowoff-chat-ui`:** ASI1.one
+11. **Provider previsto para o chat da `neo-flw-landing`:** OpenAI
+12. **Ingressor WhatsApp atual:** `neo-whatsapp-connect`
+13. **Ingestor amplo futuro:** `neo-event-ingestor`
+14. **Ativos de clientes:** banco de dados, nunca variáveis globais
+15. **Apps de Ads e WhatsApp:** responsabilidades separadas
+16. **App Ads `470678155999569`:** pendente de confirmação técnica
+17. **Nenhum app deve entrar em Live antes dos bloqueadores de segurança e operação**
 
 ---
 

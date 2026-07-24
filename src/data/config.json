@@ -6,18 +6,23 @@
   },
   "integrations": {
     "meta": {
-      "app_id": "150002841696407",
+      "app_id": "1500002841696407",
       "app_name": "NEOFLOW E-gine",
       "graph_api_version": "v25.0",
       "domain_verification": "zq0xygs8v9s714m5039mijjh0wowyj",
-      "pixel_events": ["begin_checkout", "add_payment_info", "purchase"],
+      "pixel_events": [
+        "begin_checkout",
+        "add_payment_info",
+        "purchase"
+      ],
       "requested_scopes": [
         "whatsapp_business_management",
         "whatsapp_business_messaging",
         "business_management"
       ],
       "webhook_official": "https://neo-whatsapp-connect-production.up.railway.app/webhook",
-      "webhook_rollback": "https://lp.neoflowoff.agency/api/meta-webhook"
+      "webhook_rollback": "https://lp.neoflowoff.agency/api/meta-webhook",
+      "data_deletion_callback": "https://neoflowoff.agency/api/meta/data-deletion"
     },
     "google": {
       "merchant_center_id": "",
@@ -28,7 +33,8 @@
     "api_base": "/api",
     "endpoints": {
       "create_charge": "/create-charge-landing",
-      "meta_webhook": "/meta-webhook"
+      "meta_webhook": "/meta-webhook",
+      "meta_data_deletion": "/meta/data-deletion"
     }
   }
 }

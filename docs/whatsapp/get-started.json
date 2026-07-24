@@ -45,7 +45,7 @@
       "path": "/send",
       "purpose": "Internal authenticated WhatsApp message send",
       "auth_required": true,
-      "auth": "Authorization: Bearer PROVIDER_SECRET or GATEWAY_SECRET"
+      "auth": "Authorization: Bearer PROVIDER_SECRET"
     },
     "webhook_verify": {
       "method": "GET",
@@ -58,8 +58,9 @@
       "method": "POST",
       "path": "/webhook",
       "purpose": "Receive WhatsApp webhook events from Meta",
-      "auth_required": true,
-      "auth": "X-Hub-Signature-256 validated with META_APP_SECRET"
+      "auth_required": false,
+      "signature_required": true,
+      "signature": "X-Hub-Signature-256 validated with META_APP_SECRET"
     }
   },
   "meta_developers_setup": {
@@ -75,7 +76,8 @@
     "webhook_subscribed_fields": ["messages"],
     "required_permissions": [
       "whatsapp_business_messaging",
-      "whatsapp_business_management"
+      "whatsapp_business_management",
+      "business_management"
     ]
   },
   "env_contract": {
@@ -100,11 +102,30 @@
       "PORT": "Fallback runtime port"
     }
   },
+  "data_deletion_callback": {
+    "method": "POST",
+    "url": "https://neoflowoff.agency/api/meta/data-deletion",
+    "receives": "Meta signed_request",
+    "validates_with": "META_APP_SECRET",
+    "returns": ["url", "confirmation_code"],
+    "secure_handlers": {
+      "forward_to_sovereign_backend": [
+        "META_DATA_DELETION_FORWARD_URL",
+        "META_DATA_DELETION_FORWARD_SECRET"
+      ],
+      "cloudflare_kv_queue": [
+        "META_DELETION_REQUESTS"
+      ]
+    }
+  },
   "connection_page_role": {
     "purpose": "Guide the operator through connecting the Meta WhatsApp app to neo-whatsapp-connect",
     "browser_route": "https://neoflowoff.agency/conectar-whatsapp",
     "server_adapter": "POST https://neoflowoff.agency/api/meta/embedded-signup",
-    "must_collect": [
+    "must_receive_from_browser": [
+      "Meta Embedded Signup authorization code"
+    ],
+    "must_resolve_server_side": [
       "WHATSAPP_ACCESS_TOKEN",
       "WHATSAPP_PHONE_NUMBER_ID",
       "WHATSAPP_BUSINESS_ACCOUNT_ID",
@@ -136,6 +157,10 @@
       ]
     }
   },
+  "pre_review_checks": [
+    "Confirm Meta Developers, src/data/config.json, docs/meta-app-review.md, and the Embedded Signup adapter all use canonical App ID 1500002841696407.",
+    "Configure POST https://neoflowoff.agency/api/meta/data-deletion in Meta Developers as the Data Deletion Callback URL."
+  ],
   "railway": {
     "service": "neo-whatsapp-connect",
     "builder": "Dockerfile",

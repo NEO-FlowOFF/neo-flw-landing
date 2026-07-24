@@ -1,5 +1,5 @@
 const GRAPH_API_VERSION = 'v25.0';
-const PUBLIC_META_APP_ID = '150002841696407';
+const PUBLIC_META_APP_ID = '1500002841696407';
 
 const JSON_HEADERS = {
   'Content-Type': 'application/json; charset=utf-8',

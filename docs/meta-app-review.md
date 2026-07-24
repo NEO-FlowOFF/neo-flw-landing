@@ -10,6 +10,7 @@ It must not contain access tokens, app secrets, bearer secrets, private keys, or
 - Privacy Policy: `https://neoflowoff.agency/privacy`
 - Terms of Service: `https://neoflowoff.agency/legal`
 - Data Deletion: `https://neoflowoff.agency/excluir-dados`
+- Data Deletion Callback: `https://neoflowoff.agency/api/meta/data-deletion`
 - Embedded Signup page: `https://neoflowoff.agency/conectar-whatsapp`
 
 If Meta Developers still requires the `lp.` subdomain during transition, keep both domains in App Domains until DNS/canonical redirects are confirmed.
@@ -24,7 +25,7 @@ Requested permissions:
 
 Public App ID used by the landing:
 
-- `150002841696407`
+- `1500002841696407`
 
 Graph API version:
 
@@ -61,6 +62,34 @@ The adapter supports two safe modes:
    - optional `META_OAUTH_REDIRECT_URI`
 
 If neither mode is configured, the adapter must return `503 secure_storage_not_configured`, and the frontend must not display a successful connection.
+
+## Data Deletion Callback Contract
+
+Meta dashboard URL:
+
+```text
+POST /api/meta/data-deletion
+```
+
+The callback must receive Meta's `signed_request`, validate it with `META_APP_SECRET`, initiate deletion through either a sovereign backend forward or a secure Cloudflare KV record, and return:
+
+```json
+{
+  "url": "https://neoflowoff.agency/excluir-dados?confirmation_code=...",
+  "confirmation_code": "..."
+}
+```
+
+If `META_APP_SECRET` or a secure deletion handler is not configured, the callback must fail closed.
+
+Supported secure handlers:
+
+1. Forward to sovereign backend:
+   - `META_DATA_DELETION_FORWARD_URL`
+   - `META_DATA_DELETION_FORWARD_SECRET`
+
+2. Queue in Cloudflare KV for processing:
+   - `META_DELETION_REQUESTS` KV binding
 
 ## Webhook Endpoint Decision
 

@@ -2,5 +2,11 @@
   "$schema": "./node_modules/wrangler/config-schema.json",
   "name": "neoflowoff-agency",
   "pages_build_output_dir": "./dist",
-  "compatibility_date": "2026-07-23"
+  "compatibility_date": "2026-07-23",
+  "kv_namespaces": [
+    {
+      "binding": "META_DELETION_REQUESTS",
+      "id": "afe76b8c5bf44e2cb4b19f20ebe60081"
+    }
+  ]
 }

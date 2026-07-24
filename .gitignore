@@ -20,8 +20,12 @@ pnpm-lock.yaml
 # Env
 .env
 !.env.example
+.wrangler
 .vercel
 .env*.local
 .claude/
 .pnpm-store/
 .env*
+
+# Local operator notes (not tracked)
+.local/

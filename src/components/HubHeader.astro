@@ -22,7 +22,7 @@ import uiTexts from '../data/ui_texts.json';
     <div class="nav-right">
       <button id="menu-toggle" class="hamburger-btn" aria-label="Abrir menu" aria-expanded="false" aria-controls="mobile-menu">
         <i data-lucide="menu" id="menu-icon-open" style="width: 18px; height: 18px; color: var(--acid);"></i>
-        <i data-lucide="x" id="menu-icon-close" style="width: 18px; height: 18px; color: var(--acid); display: none;"></i>
+        <i data-lucide="x" id="menu-icon-close" style="width: 18px; height: 18px; color: var(--acid);" hidden></i>
       </button>
     </div>
   </div>
@@ -349,8 +349,8 @@ import uiTexts from '../data/ui_texts.json';
     toggleBtn.setAttribute('aria-expanded', String(Boolean(isOpen)));
     toggleBtn.classList.toggle('is-open', Boolean(isOpen));
     if (iconOpen && iconClose) {
-      iconOpen.style.display = isOpen ? 'none' : 'block';
-      iconClose.style.display = isOpen ? 'block' : 'none';
+      iconOpen.hidden = Boolean(isOpen);
+      iconClose.hidden = !isOpen;
     }
   });
 
@@ -360,8 +360,8 @@ import uiTexts from '../data/ui_texts.json';
       toggleBtn?.setAttribute('aria-expanded', 'false');
       toggleBtn?.classList.remove('is-open');
       if (iconOpen && iconClose) {
-        iconOpen.style.display = 'block';
-        iconClose.style.display = 'none';
+        iconOpen.hidden = false;
+        iconClose.hidden = true;
       }
     });
   });
@@ -371,8 +371,8 @@ import uiTexts from '../data/ui_texts.json';
     menu.classList.remove('active');
     toggleBtn?.setAttribute('aria-expanded', 'false');
     toggleBtn?.classList.remove('is-open');
-    iconOpen && (iconOpen.style.display = 'block');
-    iconClose && (iconClose.style.display = 'none');
+    if (iconOpen) iconOpen.hidden = false;
+    if (iconClose) iconClose.hidden = true;
     toggleBtn?.focus();
   });
 </script>

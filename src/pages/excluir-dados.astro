@@ -48,6 +48,19 @@ import Base from '../layouts/Base.astro';
 
         <section style="background: rgba(0, 0, 0, 0.3); border: 1px solid rgba(255, 255, 255, 0.08); border-radius: 14px; padding: 1.2rem;">
           <h2 style="font-size: 1rem; font-weight: 800; color: var(--acid); margin-bottom: 0.5rem; display: flex; align-items: center; gap: 6px;">
+            <i data-lucide="shield-check" style="width: 16px; height: 16px;"></i>
+            Callback Automático da Meta
+          </h2>
+          <p style="margin-bottom: 0.6rem;">
+            Quando a Meta enviar uma solicitação automatizada de exclusão, a neoflowoff.agency recebe a requisição assinada no endpoint abaixo, valida a assinatura com o App Secret, registra ou encaminha a solicitação para processamento seguro e retorna um código de confirmação.
+          </p>
+          <div style="font-family: var(--mono); font-size: 0.72rem; color: var(--acid); overflow-wrap: anywhere;">
+            POST https://neoflowoff.agency/api/meta/data-deletion
+          </div>
+        </section>
+
+        <section style="background: rgba(0, 0, 0, 0.3); border: 1px solid rgba(255, 255, 255, 0.08); border-radius: 14px; padding: 1.2rem;">
+          <h2 style="font-size: 1rem; font-weight: 800; color: var(--acid); margin-bottom: 0.5rem; display: flex; align-items: center; gap: 6px;">
             <i data-lucide="trash-2" style="width: 16px; height: 16px;"></i>
             Opção 2: Solicitação Direta de Exclusão de Dados (SaaS / WABA)
           </h2>
