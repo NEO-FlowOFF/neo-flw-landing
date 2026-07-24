@@ -7,51 +7,439 @@ const metaAppId = metaConfig.app_id;
 const graphApiVersion = metaConfig.graph_api_version;
 const requestedScopes = metaConfig.requested_scopes.join(',');
 ---
-<Base title="Conectar WhatsApp — Meta Embedded Signup | NEØ FlowOFF">
-  <div style="min-height: 80vh; display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 2rem 1rem; text-align: center;">
-    <div style="max-width: 480px; width: 100%; background: #1c1c20; border: 1px solid rgba(255, 255, 255, 0.12); border-radius: 24px; padding: 2.5rem 1.8rem; box-shadow: 0 16px 45px rgba(0, 0, 0, 0.6);">
-      
-      <!-- LOGO META / WHATSAPP BADGE -->
-      <div style="display: inline-flex; align-items: center; gap: 8px; font-family: var(--mono); font-size: 0.7rem; font-weight: 800; text-transform: uppercase; letter-spacing: 0.1em; color: var(--acid); background: rgba(200, 212, 26, 0.1); padding: 6px 14px; border-radius: 999px; border: 1px solid rgba(200, 212, 26, 0.3); margin-bottom: 1.5rem;">
-        <span style="width: 7px; height: 7px; border-radius: 50%; background: var(--acid);"></span>
-        <span>Meta Tech Provider — Embedded Signup</span>
-      </div>
 
-      <h1 style="font-size: 1.5rem; font-weight: 900; color: #ffffff; margin-bottom: 0.8rem; text-transform: uppercase; letter-spacing: -0.01em;">
-        Conectar WhatsApp Business
-      </h1>
+<Base title="Conectar WhatsApp Business | Meta Tech Provider — NEØ FlowOFF" description="Conexão oficial via Meta Cloud API para WhatsApp Business.">
+  <div class="wa-page-wrapper">
+    <div class="wa-page-container">
+      <!-- HEADER COM LOGO DA AGÊNCIA (SEM MENU HAMBÚRGUER) -->
+      <header class="clean-header">
+        <div class="glass-navbar-simple">
+          <a href="/" class="nav-brand">
+            <img
+              src="/assets/neoflowoff-logo-192.webp"
+              srcset="/assets/neoflowoff-logo-192.webp 192w, /assets/neoflowoff-logo-384.webp 384w"
+              sizes="136px"
+              alt="neoflowoff.agency"
+              class="nav-logo"
+              width="192"
+              height="34"
+              fetchpriority="high"
+              loading="eager"
+              decoding="async"
+            />
+          </a>
+          <div class="header-status-badge">
+            <span class="status-dot"></span>
+            <span class="status-text">OFFICIAL PORTAL</span>
+          </div>
+        </div>
+      </header>
 
-      <p style="color: rgba(255, 255, 255, 0.7); font-size: 0.9rem; line-height: 1.6; margin-bottom: 2rem;">
-        Vincule sua conta do WhatsApp Business Management e conceda permissões de envio e gerenciamento de mensagens via infraestrutura oficial Meta Tech Provider.
-      </p>
+      <!-- CARD MINIMALISTA E MODERNO -->
+      <main class="wa-card">
+        <!-- AMBIENT BLUE GLOW -->
+        <div class="card-ambient-glow"></div>
 
-      <!-- BOTÃO EMBEDDED SIGNUP META -->
-      <button 
-        id="btn-meta-signup" 
-        onclick="launchWhatsAppSignup()" 
-        style="width: 100%; background: var(--acid); color: #0b0b0d; border: none; padding: 16px 24px; font-size: 1rem; font-weight: 800; border-radius: 12px; cursor: pointer; display: flex; align-items: center; justify-content: center; gap: 10px; box-shadow: 0 8px 24px rgba(200, 212, 26, 0.28); transition: transform 0.2s ease, background 0.2s ease;"
-      >
-        <svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-          <path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/>
-        </svg>
-        Conectar WhatsApp com Meta
-      </button>
+        <!-- LOGO META TECH PROVIDER -->
+        <div class="meta-brand-header">
+          <img 
+            src="/myapp_NEOFLOW_E-gine.png" 
+            alt="NEOFLOW E-gine Meta App" 
+            class="meta-badge-img"
+            width="135"
+            height="68"
+            loading="eager"
+          />
+        </div>
 
-      <div id="signup-status" style="margin-top: 1.5rem; font-family: var(--mono); font-size: 0.78rem; color: #c8d41a; display: none;"></div>
+        <!-- TAG MINIMALISTA -->
+        <div class="meta-tag">
+          <span class="pulse-dot"></span>
+          <span>CONEXÃO COM META API // FACEBOOK</span>
+        </div>
 
-      <div style="margin-top: 2rem; padding-top: 1.2rem; border-top: 1px solid rgba(255, 255, 255, 0.08); font-size: 0.72rem; color: rgba(255, 255, 255, 0.4);">
-        App: NEØ FLOW E-gine (ID: {metaAppId}) · Graph API {graphApiVersion}
-      </div>
+        <!-- TÍTULO & SUBTÍTULO -->
+        <h1 class="wa-card-title">
+          NEO portal // Meta Cloud API
+        </h1>
+        <p class="wa-card-desc">
+          Conecte sua conta oficial do WhatsApp Business através da integração oficial da Meta Cloud API.
+        </p>
 
+        <!-- BOTÃO AZUL OFICIAL META -->
+        <div class="cta-wrapper">
+          <button 
+            id="btn-meta-signup" 
+            onclick="launchWhatsAppSignup()" 
+            class="btn-meta-blue"
+            data-haptic
+            aria-label="Conectar WhatsApp com Facebook Meta"
+          >
+            <svg class="meta-btn-icon" width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+              <path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/>
+            </svg>
+            <span class="btn-text">Conectar com Meta</span>
+            <div class="btn-spinner" hidden></div>
+          </button>
+        </div>
+
+        <!-- CAIXA DE STATUS -->
+        <div id="signup-status" class="status-box" hidden></div>
+
+        <!-- SELOS DE SEGURANÇA E CONEXÃO -->
+        <div class="trust-grid">
+          <div class="trust-card">
+            <i data-lucide="shield-check" style="width: 16px; height: 16px; color: var(--acid);"></i>
+            <div>
+              <strong>Conexão Segura</strong>
+              <small>NEØ Protocol oficial</small>
+            </div>
+          </div>
+          <div class="trust-card">
+            <i data-lucide="zap" style="width: 16px; height: 16px; color: var(--acid);"></i>
+            <div>
+              <strong>Conexão Segura</strong>
+              <small>Autenticação Oficial Meta</small>
+            </div>
+          </div>
+        </div>
+
+        <!-- FOOTER INFO DO APP -->
+        <footer class="app-info-footer">
+          <span>App: <strong>NEØFlow E-gine</strong></span>
+          <span>·</span>
+          <span>ID: <code>{metaAppId}</code></span>
+        </footer>
+      </main>
     </div>
   </div>
+
+  <style>
+    .wa-page-wrapper {
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 0.5rem 0.85rem 3.5rem;
+    }
+
+    .wa-page-container {
+      width: 100%;
+      max-width: 440px;
+      margin: 0 auto;
+    }
+
+    /* HEADER MINIMALISTA (COM LOGO DA AGÊNCIA, SEM MENU) */
+    .clean-header {
+      position: sticky;
+      top: 10px;
+      z-index: 100;
+      margin-bottom: 1.6rem;
+      width: 100%;
+    }
+
+    .glass-navbar-simple {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0.55rem 1rem;
+      background: rgba(22, 22, 26, 0.78);
+      backdrop-filter: blur(16px) saturate(180%);
+      -webkit-backdrop-filter: blur(16px) saturate(180%);
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      border-radius: 999px;
+      box-shadow: 0 8px 32px rgba(0, 0, 0, 0.6), inset 0 1px 0 rgba(255, 255, 255, 0.12);
+    }
+
+    .nav-brand {
+      display: flex;
+      align-items: center;
+      text-decoration: none;
+    }
+
+    .nav-logo {
+      height: 24px;
+      width: auto;
+      object-fit: contain;
+      filter: drop-shadow(0 0 12px rgba(200, 212, 26, 0.4));
+    }
+
+    .header-status-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 3px 10px;
+      border-radius: 999px;
+      background: rgba(200, 212, 26, 0.08);
+      border: 1px solid rgba(200, 212, 26, 0.28);
+    }
+
+    .status-dot {
+      width: 5px;
+      height: 5px;
+      border-radius: 50%;
+      background: var(--acid);
+      box-shadow: 0 0 6px var(--acid);
+    }
+
+    .status-text {
+      font-family: var(--mono);
+      font-size: 0.6rem;
+      font-weight: 800;
+      color: var(--acid);
+      letter-spacing: 0.06em;
+    }
+
+    /* CARD MINIMALISTA E ELEGANTE */
+    .wa-card {
+      position: relative;
+      background: linear-gradient(180deg, rgba(22, 22, 28, 0.94), rgba(12, 12, 16, 0.98));
+      backdrop-filter: blur(24px) saturate(180%);
+      -webkit-backdrop-filter: blur(24px) saturate(180%);
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      border-radius: 28px;
+      padding: 2.2rem 1.8rem 1.6rem;
+      box-shadow: 0 24px 60px rgba(0, 0, 0, 0.75), inset 0 1px 0 rgba(255, 255, 255, 0.08);
+      text-align: center;
+      overflow: hidden;
+    }
+
+    .card-ambient-glow {
+      position: absolute;
+      top: -90px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 260px;
+      height: 260px;
+      background: radial-gradient(circle, rgba(24, 119, 242, 0.22), transparent 70%);
+      pointer-events: none;
+      border-radius: 50%;
+      filter: blur(18px);
+    }
+
+    .meta-brand-header {
+      display: flex;
+      justify-content: center;
+      margin-bottom: 1.1rem;
+    }
+
+    .meta-badge-img {
+      max-width: 135px;
+      width: 100%;
+      height: auto;
+      object-fit: contain;
+      filter: drop-shadow(0 0 10px rgba(24, 119, 242, 0.4));
+    }
+
+    .meta-tag {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-family: var(--mono);
+      font-size: 0.64rem;
+      font-weight: 800;
+      letter-spacing: 0.08em;
+      color: #3898ff;
+      background: rgba(24, 119, 242, 0.12);
+      padding: 5px 14px;
+      border-radius: 999px;
+      border: 1px solid rgba(24, 119, 242, 0.35);
+      margin-bottom: 1.2rem;
+    }
+
+    .pulse-dot {
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: #1877F2;
+      box-shadow: 0 0 8px #1877F2;
+      animation: status-pulse 1.8s infinite ease-in-out;
+    }
+
+    .wa-card-title {
+      font-size: 1.5rem;
+      font-weight: 900;
+      color: #ffffff;
+      margin-bottom: 0.6rem;
+      text-transform: uppercase;
+      letter-spacing: -0.01em;
+      line-height: 1.2;
+    }
+
+    .wa-card-desc {
+      color: rgba(255, 255, 255, 0.72);
+      font-size: 0.88rem;
+      line-height: 1.55;
+      margin-bottom: 1.8rem;
+    }
+
+    /* BOTÃO AZUL META (FACEBOOK) */
+    .cta-wrapper {
+      margin-bottom: 1.2rem;
+    }
+
+    .btn-meta-blue {
+      width: 100%;
+      background: #1877F2;
+      color: #ffffff;
+      border: none;
+      padding: 16px 22px;
+      font-size: 0.98rem;
+      font-weight: 800;
+      border-radius: 14px;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      box-shadow: 0 10px 28px rgba(24, 119, 242, 0.38), inset 0 1px 0 rgba(255, 255, 255, 0.25);
+      transition: transform 0.18s ease, background 0.18s ease, box-shadow 0.18s ease;
+      position: relative;
+    }
+
+    .btn-meta-blue:hover:not(:disabled) {
+      background: #166fe5;
+      transform: translateY(-2px);
+      box-shadow: 0 14px 34px rgba(24, 119, 242, 0.48);
+    }
+
+    .btn-meta-blue:active:not(:disabled) {
+      transform: translateY(0) scale(0.98);
+      background: #1464d2;
+    }
+
+    .btn-meta-blue:disabled {
+      opacity: 0.65;
+      cursor: not-allowed;
+    }
+
+    .meta-btn-icon {
+      flex-shrink: 0;
+      color: #ffffff;
+    }
+
+    .btn-spinner {
+      width: 18px;
+      height: 18px;
+      border: 2px solid rgba(255, 255, 255, 0.3);
+      border-top-color: #ffffff;
+      border-radius: 50%;
+      animation: spin 0.7s linear infinite;
+    }
+
+    /* CAIXA DE STATUS */
+    .status-box {
+      margin-top: 1rem;
+      margin-bottom: 1.2rem;
+      padding: 0.85rem 1.1rem;
+      border-radius: 12px;
+      font-family: var(--mono);
+      font-size: 0.76rem;
+      line-height: 1.45;
+      text-align: left;
+      border: 1px solid transparent;
+      animation: fadeIn 0.2s ease;
+    }
+
+    .status-box.info {
+      background: rgba(24, 119, 242, 0.12);
+      border-color: rgba(24, 119, 242, 0.35);
+      color: #72b3ff;
+    }
+
+    .status-box.success {
+      background: rgba(200, 212, 26, 0.14);
+      border-color: rgba(200, 212, 26, 0.45);
+      color: var(--acid);
+    }
+
+    .status-box.warning {
+      background: rgba(255, 179, 0, 0.14);
+      border-color: rgba(255, 179, 0, 0.4);
+      color: #ffca28;
+    }
+
+    .status-box.error {
+      background: rgba(255, 82, 82, 0.14);
+      border-color: rgba(255, 82, 82, 0.4);
+      color: #ff7b7b;
+    }
+
+    /* GRID DE SEGURANÇA E CONEXÃO */
+    .trust-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 10px;
+      margin-top: 1.2rem;
+      padding-top: 1.2rem;
+      border-top: 1px solid rgba(255, 255, 255, 0.08);
+      text-align: left;
+    }
+
+    .trust-card {
+      display: flex;
+      align-items: flex-start;
+      gap: 9px;
+      background: rgba(255, 255, 255, 0.025);
+      border: 1px solid rgba(255, 255, 255, 0.06);
+      border-radius: 12px;
+      padding: 0.65rem 0.75rem;
+    }
+
+    .trust-card strong {
+      display: block;
+      font-size: 0.74rem;
+      color: #ffffff;
+      line-height: 1.2;
+    }
+
+    .trust-card small {
+      display: block;
+      font-size: 0.65rem;
+      color: rgba(255, 255, 255, 0.52);
+      margin-top: 2px;
+    }
+
+    /* FOOTER INFO DO APP */
+    .app-info-footer {
+      margin-top: 1.4rem;
+      padding-top: 1rem;
+      border-top: 1px dashed rgba(255, 255, 255, 0.08);
+      font-family: var(--mono);
+      font-size: 0.66rem;
+      color: rgba(255, 255, 255, 0.42);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+
+    .app-info-footer code {
+      color: rgba(255, 255, 255, 0.75);
+    }
+
+    @keyframes status-pulse {
+      0%, 100% { opacity: 1; transform: scale(1); }
+      50% { opacity: 0.35; transform: scale(0.85); }
+    }
+
+    @keyframes spin {
+      to { transform: rotate(360deg); }
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(-4px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+  </style>
 
   <script is:inline define:vars={{ metaAppId, graphApiVersion, requestedScopes }}>
     function setSignupStatus(message, tone) {
       const statusDiv = document.getElementById('signup-status');
       if (!statusDiv) return;
-      statusDiv.style.display = 'block';
-      statusDiv.style.color = tone === 'error' ? '#ff6b6b' : '#c8d41a';
+      statusDiv.hidden = false;
+      statusDiv.className = 'status-box ' + (tone || 'info');
       statusDiv.textContent = message;
     }
 
@@ -82,50 +470,60 @@ const requestedScopes = metaConfig.requested_scopes.join(',');
     }
 
     window.fbAsyncInit = function() {
-      FB.init({
-        appId      : metaAppId,
-        cookie     : true,
-        xfbml      : true,
-        version    : graphApiVersion
-      });
+      if (window.FB) {
+        FB.init({
+          appId      : metaAppId,
+          cookie     : true,
+          xfbml      : true,
+          version    : graphApiVersion
+        });
+      }
     };
 
     window.launchWhatsAppSignup = function() {
       const button = document.getElementById('btn-meta-signup');
+      const spinner = button ? button.querySelector('.btn-spinner') : null;
+
       if (!window.FB) {
-        setSignupStatus('SDK da Meta ainda não carregou. Tente novamente em instantes.', 'error');
+        setSignupStatus('O SDK da Meta ainda está inicializando. Aguarde 2 segundos e tente novamente.', 'error');
         return;
       }
 
       if (button) {
         button.setAttribute('disabled', 'disabled');
-        button.style.opacity = '0.7';
+        if (spinner) spinner.hidden = false;
       }
-      setSignupStatus('Abrindo autorização da Meta...', 'info');
+      setSignupStatus('Conectando à API oficial da Meta...', 'info');
 
-      FB.login(async function (response) {
-        if (response.authResponse) {
-          try {
-            setSignupStatus('Confirmando conexão com o backend seguro...', 'info');
-            await confirmEmbeddedSignup(response.authResponse);
-            setSignupStatus('Conexão confirmada. A infraestrutura recebeu a autorização com segurança.', 'info');
-          } catch {
-            setSignupStatus('A autorização foi recebida pela Meta, mas ainda não foi confirmada pelo backend seguro.', 'error');
-          }
+      FB.login(function (response) {
+        if (response && response.authResponse) {
+          setSignupStatus('Confirmando vinculação segura com o backend da NEØ FlowOFF...', 'info');
+          confirmEmbeddedSignup(response.authResponse)
+            .then(function() {
+              setSignupStatus('✓ Conexão concluída com sucesso! Sua conta foi vinculada à infraestrutura soberana.', 'success');
+            })
+            .catch(function() {
+              setSignupStatus('A autorização foi concedida na Meta, mas aguarda sincronização final com o servidor.', 'warning');
+            })
+            .finally(function() {
+              if (button) {
+                button.removeAttribute('disabled');
+                if (spinner) spinner.hidden = true;
+              }
+            });
         } else {
-          setSignupStatus('Login cancelado ou não autorizado.', 'error');
-        }
-
-        if (button) {
-          button.removeAttribute('disabled');
-          button.style.opacity = '1';
+          setSignupStatus('O fluxo de autorização da Meta foi fechado ou não concluído.', 'error');
+          if (button) {
+            button.removeAttribute('disabled');
+            if (spinner) spinner.hidden = true;
+          }
         }
       }, {
         scope: requestedScopes,
         return_scopes: true,
         response_type: 'code'
       });
-    }
+    };
   </script>
   <script async defer crossorigin="anonymous" src="https://connect.facebook.net/pt_BR/sdk.js"></script>
 </Base>
