@@ -65,6 +65,7 @@ import uiTexts from '../data/ui_texts.json';
     </nav>
   </div>
 </header>
+<div id="menu-backdrop" class="menu-backdrop"></div>
 
 <style>
   .hub-header {
@@ -161,6 +162,22 @@ import uiTexts from '../data/ui_texts.json';
     opacity: 0;
     transition: opacity 0.2s ease;
     z-index: -1;
+  }
+
+  .menu-backdrop {
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.4);
+    backdrop-filter: blur(8px);
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.22s ease;
+    z-index: 99;
+  }
+
+  .menu-backdrop.active {
+    opacity: 1;
+    pointer-events: auto;
   }
 
   .hamburger-btn:hover,
@@ -348,6 +365,8 @@ import uiTexts from '../data/ui_texts.json';
     const isOpen = menu?.classList.toggle('active');
     toggleBtn.setAttribute('aria-expanded', String(Boolean(isOpen)));
     toggleBtn.classList.toggle('is-open', Boolean(isOpen));
+    const backdrop = document.getElementById('menu-backdrop');
+    if (backdrop) backdrop.classList.toggle('active', Boolean(isOpen));
     if (iconOpen && iconClose) {
       iconOpen.hidden = Boolean(isOpen);
       iconClose.hidden = !isOpen;
@@ -363,6 +382,8 @@ import uiTexts from '../data/ui_texts.json';
         iconOpen.hidden = false;
         iconClose.hidden = true;
       }
+      const backdrop = document.getElementById('menu-backdrop');
+      if (backdrop) backdrop.classList.remove('active');
     });
   });
 
@@ -373,6 +394,8 @@ import uiTexts from '../data/ui_texts.json';
     toggleBtn?.classList.remove('is-open');
     if (iconOpen) iconOpen.hidden = false;
     if (iconClose) iconClose.hidden = true;
+    const backdrop = document.getElementById('menu-backdrop');
+    if (backdrop) backdrop.classList.remove('active');
     toggleBtn?.focus();
   });
 </script>

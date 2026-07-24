@@ -1,0 +1,17 @@
+---
+import Base from '../layouts/Base.astro';
+import '../styles/spinner.css';
+---
+
+<Base title="Página não encontrada" description="Desculpe, a página que você procura não existe.">
+  <section class="centered-404" style="display:flex;flex-direction:column;align-items:center;justify-content:center;height:80vh;gap:1.5rem;">
+    <h1 style="font-size:4rem;color:#ff5c8d;">404</h1>
+    <p style="font-size:1.2rem;color:#ddd;max-width:500px;text-align:center;">
+      O conteúdo que você tentou acessar não foi encontrado. Talvez ele tenha sido removido ou o link está incorreto.
+    </p>
+    <a href="/" class="button-primary" style="display:inline-block;background:var(--pink-s);color:#fff;padding:0.9rem 1.5rem;border-radius:6px;text-decoration:none;font-weight:600;">
+      Voltar para a Home
+    </a>
+    <div class="spinner" style="margin-top:2rem;"></div>
+  </section>
+</Base>

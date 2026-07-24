@@ -132,6 +132,29 @@ const jsonLd = {
       (window as Window & { lucide?: { createIcons: () => void } }).lucide = { createIcons };
       createIcons();
 
+      // Haptic feedback utility
+      // Simple vibration helper – works only on devices that support the Vibration API (Android).
+      const hapticVibrate = (pattern = 10) => {
+        if (typeof navigator !== "undefined" && "vibrate" in navigator) {
+          try {
+            return navigator.vibrate(pattern);
+          } catch {
+            return false;
+          }
+        }
+        return false;
+      };
+      // Expose a convenient click helper on the window object.
+      (window as any).haptic = { click: () => hapticVibrate(10) };
+      // Global listener: any element with a `data-haptic` attribute triggers a short vibration on click.
+      document.addEventListener("click", (e) => {
+        const el = e.target;
+        if (el instanceof HTMLElement && el.dataset.haptic !== undefined) {
+          hapticVibrate(10);
+        }
+      });
+
+
       // Register PWA Service Worker
       if ('serviceWorker' in navigator) {
         window.addEventListener('load', () => {
