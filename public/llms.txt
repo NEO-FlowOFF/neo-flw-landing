@@ -6,33 +6,33 @@ This is a public landing and service catalog for agents and humans. Treat the pa
 
 ## Primary Pages
 
-- [Home](https://lp.neoflowoff.agency/): Overview of the agency, product categories, method, and primary WhatsApp contact route.
-- [Sitemap](https://lp.neoflowoff.agency/sitemap.xml): XML index of public routes generated for this landing page.
-- [Robots Policy](https://lp.neoflowoff.agency/robots.txt): Crawler access policy for search and AI agents.
+- [Home](https://neoflowoff.agency/): Overview of the agency, product categories, method, and primary WhatsApp contact route.
+- [Sitemap](https://neoflowoff.agency/sitemap.xml): XML index of public routes generated for this landing page.
+- [Robots Policy](https://neoflowoff.agency/robots.txt): Crawler access policy for search and AI agents.
 
 ## Plans
 
-- [Agente SDR IA Plug & Play](https://lp.neoflowoff.agency/planos/agente-sdr/): AI SDR operation for qualification, routing, and commercial follow-up.
-- [Agentes de IA para Operações](https://lp.neoflowoff.agency/planos/agents-ia/): AI agents designed around operational roles, integrations, logs, and human escalation.
-- [CRM e Operação Comercial](https://lp.neoflowoff.agency/planos/crm-inteligente/): CRM structure for pipeline, records, follow-up, and sales visibility.
-- [Automações e Fluxos Comerciais](https://lp.neoflowoff.agency/planos/fluxos-automacao/): Connected workflows across forms, WhatsApp, CRM, email, data, and APIs.
-- [Google Ads para Demanda de Alta Intenção](https://lp.neoflowoff.agency/planos/trafego-google/): Google Ads operation focused on high-intent demand and measurable conversion flows.
-- [Meta Ads com Server-Side CAPI](https://lp.neoflowoff.agency/planos/trafego-meta/): Meta Ads operation with data quality, Pixel, and Conversions API support.
+- [Agente SDR IA Plug & Play](https://neoflowoff.agency/planos/agente-sdr/): AI SDR operation for qualification, routing, and commercial follow-up.
+- [Agentes de IA para Operações](https://neoflowoff.agency/planos/agents-ia/): AI agents designed around operational roles, integrations, logs, and human escalation.
+- [CRM e Operação Comercial](https://neoflowoff.agency/planos/crm-inteligente/): CRM structure for pipeline, records, follow-up, and sales visibility.
+- [Automações e Fluxos Comerciais](https://neoflowoff.agency/planos/fluxos-automacao/): Connected workflows across forms, WhatsApp, CRM, email, data, and APIs.
+- [Google Ads para Demanda de Alta Intenção](https://neoflowoff.agency/planos/trafego-google/): Google Ads operation focused on high-intent demand and measurable conversion flows.
+- [Meta Ads com Server-Side CAPI](https://neoflowoff.agency/planos/trafego-meta/): Meta Ads operation with data quality, Pixel, and Conversions API support.
 
 ## Services
 
-- [A2M-PoI Standard](https://lp.neoflowoff.agency/checkout/a2m-poi-standard/): Public service page for Proof-of-Intention validation and licensing.
-- [WhatsApp Business API Oficial](https://lp.neoflowoff.agency/checkout/api-whatsapp/): WhatsApp Cloud API implementation with templates, webhooks, and governance.
-- [Meta Developers: Apps, APIs e Webhooks](https://lp.neoflowoff.agency/checkout/app-meta/): Meta app setup, API permissions, webhook configuration, and compliance support.
-- [Dashboards e Gestão de Dados](https://lp.neoflowoff.agency/checkout/dashboard-dados/): Dashboards and data organization for commercial visibility.
-- [Landing Pages e WebApps Conectados](https://lp.neoflowoff.agency/checkout/webapp-lp/): Landing pages and connected web applications for campaigns and operations.
+- [A2M-PoI Standard](https://neoflowoff.agency/checkout/a2m-poi-standard/): Public service page for Proof-of-Intention validation and licensing.
+- [WhatsApp Business API Oficial](https://neoflowoff.agency/checkout/api-whatsapp/): WhatsApp Cloud API implementation with templates, webhooks, and governance.
+- [Meta Developers: Apps, APIs e Webhooks](https://neoflowoff.agency/checkout/app-meta/): Meta app setup, API permissions, webhook configuration, and compliance support.
+- [Dashboards e Gestão de Dados](https://neoflowoff.agency/checkout/dashboard-dados/): Dashboards and data organization for commercial visibility.
+- [Landing Pages e WebApps Conectados](https://neoflowoff.agency/checkout/webapp-lp/): Landing pages and connected web applications for campaigns and operations.
 
 ## Compliance
 
-- [Privacy Policy](https://lp.neoflowoff.agency/privacy/): Public privacy policy for Meta, WhatsApp Cloud API, and data governance.
-- [Terms of Service](https://lp.neoflowoff.agency/legal/): Terms for services, integrations, and Meta platform usage.
-- [Data Deletion](https://lp.neoflowoff.agency/excluir-dados/): User data deletion instructions for Meta and LGPD compliance.
-- [WhatsApp Connection](https://lp.neoflowoff.agency/conectar-whatsapp/): Operational route for WhatsApp connection and Embedded Signup context.
+- [Privacy Policy](https://neoflowoff.agency/privacy/): Public privacy policy for Meta, WhatsApp Cloud API, and data governance.
+- [Terms of Service](https://neoflowoff.agency/legal/): Terms for services, integrations, and Meta platform usage.
+- [Data Deletion](https://neoflowoff.agency/excluir-dados/): User data deletion instructions for Meta and LGPD compliance.
+- [WhatsApp Connection](https://neoflowoff.agency/conectar-whatsapp/): Operational route for WhatsApp connection and Embedded Signup context.
 
 ## Ecosystem
 

@@ -1,56 +1,197 @@
-# Manual de Arquitetura e Estrutura do Código (CODEX.md)
-
-Este documento descreve a organização física, o fluxo de dados e os principais componentes da `neo-flw-landing`.
-
----
-
-## 1. Estrutura de Diretórios e Arquivos
+<!-- markdownlint-disable MD003 MD007 MD013 MD022 MD023 MD025 MD029 MD032 MD033 MD034 -->
+# CODEX.md
 
 ```text
-neo-flw-landing/
-├── api/                             # Rotas Serverless (Vercel)
-│   ├── create-charge-landing.js     # Proxy para a API de cobranças do FlowPay (com UTMs)
-│   └── _lib/                        # Bibliotecas internas de processamento
-├── checkout/                        # Checkouts individuais (Serviços Unitários)
-│   ├── api-whatsapp/
-│   ├── app-meta/
-│   ├── dashboard-dados/
-│   └── webapp-lp/
-├── planos/                          # Checkouts de Pacotes / Bundles Completos
-│   ├── start/
-│   ├── profissional/
-│   ├── premium/
-│   ├── agents-ia/
-│   ├── agente-sdr/
-│   ├── crm-inteligente/
-│   └── fluxos-automacao/
-├── public/                          # Imagens, logotipos e vetores
-├── js/
-│   └── payment.js                   # Lógica compartilhada do FlowPay e rastreamento UTM
-├── css/
-│   ├── checkout.css                 # Estilos específicos do fluxo de pagamento
-│   └── landing_v2.css               # Estilo visual principal (dark/neon) da home
-├── index.html                       # Página inicial do ecossistema
-├── safe-page.html                   # Página limpa e institucional servida aos crawlers
-├── middleware.js                    # Roteador baseado em User-Agent (proxy para safe-page)
-├── vercel.json                      # Configurações de rotas e headers da Vercel
-└── Makefile                         # Orquestrador de tarefas locais
+========================================
+          CODEX · RUNTIME MAP
+========================================
+Repo: neo-flw-landing
+Role: commercial landing with minimal Meta adapter
+Host: Cloudflare Pages
+========================================
 ```
 
----
+Este arquivo orienta agentes que precisam alterar,
+auditar ou publicar o `neo-flw-landing`.
 
-## 2. Fluxo Principal de Vendas e Atribuição
+A realidade do runtime vence documentacao antiga.
+Verifique imports, rotas geradas e artefatos de `public/`
+antes de afirmar que uma capacidade esta ativa.
 
-```mermaid
-graph TD
-    A[Usuário com UTMs na URL] -->|Acessa planos ou checkout| B[InitPayment e Persistência de UTM]
-    B -->|Grava sessionStorage neo_utm_data| C[Formulário preenchido e clique em Gerar PIX]
-    C -->|Gera begin_checkout DataLayer| D[Chamada POST /api/create-charge-landing]
-    D -->|Envia dados + utm_data no payload| E[FlowPay Gateway api.flowpay.cash]
-    E -->|Retorna QR Code e código PIX| F[Apresentação do PIX na tela]
+────────────────────────────────────────
+
+## ⟠ Arquitetura
+
+```text
+Astro SSG
+├── src/layouts/Base.astro
+│   ├── head global
+│   ├── token de verificacao Meta
+│   ├── fontes Figtree + DM Mono
+│   ├── subset local de icones data-lucide
+│   └── registro do service worker
+├── src/pages/index.astro
+│   └── home comercial alimentada por catalogo
+├── src/pages/planos/[slug].astro
+│   └── paginas de planos
+├── src/pages/checkout/[slug].astro
+│   └── paginas publicas de servicos unitarios
+└── public/
+    ├── manifest.webmanifest
+    ├── sw.js
+    ├── llms.txt
+    ├── robots.txt
+    └── sitemap.xml
+
+Cloudflare Pages Functions
+└── functions/api/meta/embedded-signup.js
+    └── server-side adapter for Meta Embedded Signup code handling
 ```
 
----
+`dist/` e apenas saida de build.
+Nao edite `dist/` como fonte.
 
-## 3. Diretrizes de Segurança de Dados
-- **Zero Secrets em bundle público:** Nenhuma chave (`OPENAI_API_KEY`, etc.) deve ser injetada em scripts da pasta `js/` ou arquivos HTML. Toda interação que necessite de tokens privados deve ser enviada a um endpoint na pasta `api/` que consumirá segredos de ambiente no servidor da Vercel.
+────────────────────────────────────────
+
+## ⧉ Dados
+
+```text
+src/data/catalog.json        catalogo publicado no site
+src/data/ui_texts.json       copy e textos de interface
+src/data/config.json         config publica segura
+drafts/catalog_v2026_2.json  insumo canonico do operador
+```
+
+Nao edite `drafts/catalog_v2026_2.json` sem pedido explicito.
+
+Quando o operador perguntar se todos os produtos estao veiculados,
+compare o draft canonico com `src/data/catalog.json`,
+com a home e com as rotas geradas.
+
+────────────────────────────────────────
+
+## ◬ Catalogo
+
+Home:
+
+```text
+Bloco Meta
+└─ api-whatsapp
+└─ app-meta
+└─ trafego-meta
+
+Planos
+└─ agente-sdr
+└─ agents-ia
+└─ crm-inteligente
+└─ fluxos-automacao
+└─ trafego-google
+
+Servicos
+└─ a2m-poi-standard
+└─ dashboard-dados
+└─ webapp-lp
+```
+
+Rotas dinamicas:
+
+```text
+/planos/[slug]     category = Plano
+/checkout/[slug]   category = Serviço
+```
+
+────────────────────────────────────────
+
+## ⨷ Performance
+
+Contratos atuais:
+
+- nao carregar `lucide.min.js` de CDN
+- usar subset SVG local para `data-lucide`
+- manter logo LCP com `loading="eager"` e `fetchpriority="high"`
+- usar assets estaticos de `public/assets/` quando isso evita `/_image`
+- manter `manifest.webmanifest` valido para evitar 404
+- nao preloaded Google Fonts se o stylesheet for carregado via
+  `media="print" onload`
+- service worker deve ignorar assets de dev/build sensiveis:
+  `/_astro`, `/_image`, `/src` e `/api`
+
+Se DevTools apontar `/_image` em producao,
+trate como cheiro de uso indevido do endpoint de imagem
+em ambiente nao-dev.
+
+────────────────────────────────────────
+
+## ⍟ Agentes
+
+Superficies publicas para agentes:
+
+```text
+public/llms.txt
+public/robots.txt
+public/sitemap.xml
+public/manifest.webmanifest
+```
+
+`llms.txt` deve ser Markdown,
+ter pelo menos um H1,
+e conter links para as paginas publicas principais.
+
+`robots.txt`, `sitemap.xml` e `llms.txt`
+devem contar a mesma historia sobre rotas publicas.
+
+Nao inclua segredos, criterios internos,
+precificacao excepcional ou comportamento backend privado
+em nenhuma superficie publica para agentes.
+
+`functions/api/meta/embedded-signup.js` nao torna este repo
+backend autoritativo. Ele deve apenas encaminhar o authorization
+code para backend soberano ou armazenar de forma segura quando
+Cloudflare KV e criptografia estiverem configurados.
+
+────────────────────────────────────────
+
+## ◯ Deploy
+
+Deploy local:
+
+```bash
+make deploy
+```
+
+O alvo usa:
+
+```bash
+pnpm exec wrangler pages deploy dist --project-name=neoflowoff-agency
+```
+
+Cloudflare Pages Git deploy precisa ter:
+
+```text
+Build command: pnpm run build
+Output directory: dist
+```
+
+`wrangler.jsonc` versiona `pages_build_output_dir: "./dist"`.
+
+────────────────────────────────────────
+
+## ⦿ Validacao
+
+Use a validacao mais proxima do risco alterado:
+
+```bash
+pnpm run build
+./node_modules/.bin/stylelint 'src/styles/**/*.css'
+node --check public/sw.js
+xmllint --noout public/sitemap.xml
+```
+
+Se `astro check` falhar por erro interno do language server,
+registre a falha de typecheck em vez de mascara-la.
+
+```text
+────────────────────────────
+CODEX · NΞØ FlowOFF Landing
+────────────────────────────
+```

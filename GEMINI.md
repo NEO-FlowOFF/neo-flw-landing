@@ -1,133 +1,109 @@
+<!-- markdownlint-disable MD003 MD007 MD013 MD022 MD023 MD025 MD029 MD032 MD033 MD034 -->
 # GEMINI.md
 
-## Purpose
+```text
+========================================
+          GEMINI · AGENT RULES
+========================================
+Repo: neo-flw-landing
+Runtime: Astro + Cloudflare Pages + Functions
+========================================
+```
 
-This file defines how the agent should work in this repository.
+Este arquivo define como agentes devem operar neste child repo.
 
-Act like a senior engineering operator: precise, conservative with changes, honest about uncertainty, and focused on production reality.
+Runtime vence narrativa.
+Estado do checkout vence memoria.
+Arquivos publicos nao sao autoridade de backend.
+`functions/` existe apenas como adapter server-side minimo;
+nao coloque regra de produto, secrets ou persistencia soberana nele.
 
-## Current Documentation Rule
+────────────────────────────────────────
 
-When the task involves a library, framework, SDK, API, CLI tool, or cloud service, fetch current docs before answering or editing.
+## ⟠ Documentacao Atual
 
-Use Context7 MCP for documentation when available.
+Quando a tarefa envolver biblioteca, framework, SDK,
+API, CLI ou cloud service, busque documentacao atual.
 
-Examples: React, Next.js, Prisma, Express, Tailwind, Django, Spring Boot, Railway, Vercel, Cloudflare, Redis, Postgres, Meta APIs, OpenAI, SDKs, CLIs, setup, migrations, config, API syntax, and version-specific behavior.
+Use Context7 MCP quando disponivel.
 
-Do not use Context7 for pure refactors, business logic debugging, code review, scripts from scratch, or general programming concepts.
+Exemplos:
 
-Process:
+- Astro
+- Cloudflare Pages
+- Wrangler
+- Meta APIs
+- Google Fonts
+- service workers
+- OpenAI SDKs
 
-1. Resolve the library ID first, unless the user provides an exact `/org/project` ID.
-2. Pick the most relevant match by name, description, source reputation, snippet count, and version.
-3. Query docs with the user's full question.
-4. Answer or edit using the fetched docs.
+Nao use Context7 para refatoracao pura,
+debug de regra de negocio,
+review geral ou scripts simples.
 
-## Core Rules
+────────────────────────────────────────
 
-Runtime beats documentation.
-State beats narrative.
-Backend authority beats interface assumptions.
+## ⧉ Regras
 
-Never assume a feature is active because a markdown file says so. Verify where it is loaded, imported, called, enforced, or rendered.
+- investigue o caminho real antes de editar
+- preserve diffs locais do operador
+- nunca exponha secrets ou valores de `.env`
+- nao edite `drafts/catalog_v2026_2.json` sem pedido explicito
+- nao trate `dist/` como fonte
+- nao adicione dependencias sem necessidade clara
+- nao carregue bibliotecas de terceiros no critical path
+  quando o projeto ja tem alternativa local
+- mantenha `robots.txt`, `sitemap.xml` e `llms.txt`
+  semanticamente alinhados
 
-Prefer small, reversible changes.
-Do not rewrite large areas unless explicitly asked.
-Do not invent architecture.
-Do not hide real failures behind fake fallbacks.
-Do not add dependencies without explaining why.
-Do not expose secrets, keys, tokens, providers, internal routing, or env values.
-Do not treat frontend state as backend authority.
+────────────────────────────────────────
 
-## Investigation Order
+## ◬ Ordem De Investigacao
 
-Before fixing production/runtime issues, inspect the real path:
+Para bugs de runtime:
 
-1. Entry point
-2. Runtime/config loading
-3. API route or server handler
-4. Auth/access control
-5. Ledger/state validation
-6. External provider call
-7. Error handling
-8. Frontend rendering
-9. Logs/observability
-10. Closest available test or reproducible command
+1. `src/layouts/Base.astro`
+2. pagina em `src/pages/`
+3. componente importado em `src/components/`
+4. dados em `src/data/`
+5. assets em `public/` ou `src/assets/`
+6. functions em `functions/`
+7. build em `dist/`
+8. Cloudflare Pages/Wrangler config
+9. service worker/cache
+10. teste reproduzivel
 
-## NEØ PROTOCOL / FlowOFF Rules
+────────────────────────────────────────
 
-For workspace, chat, payment, or runtime projects:
+## ⨷ Performance
 
-* Provider remains invisible.
-* Access must derive from ledger balance, subscription, free quota, or explicit tier.
-* Payment confirmation must not depend only on invisible webhook success.
-* HTTP 402 is a product state, not just an error.
-* Guest, free, paid, and pro states must be explicit.
-* Runtime docs are not authority unless the backend reads them.
-* Persona files are not authority unless imported or loaded.
-* Frontend selectors do not define backend behavior.
-* End-user answers should be compact unless expansion is requested.
+Contratos atuais:
 
-## Debugging Priorities
+- header logo e LCP usam asset estatico em `public/assets/`
+- icones usam subset local de `data-lucide`
+- Google Fonts usa stylesheet nao bloqueante,
+  sem preload redundante
+- `manifest.webmanifest` deve existir
+- service worker nao deve interceptar `/_astro`,
+  `/_image`, `/src` ou `/api`
 
-For chat/runtime failures, check first:
+────────────────────────────────────────
 
-1. Railway logs
-2. API route errors
-3. CORS / Cloudflare / WAF
-4. Ledger / 402 handling
-5. Redis
-6. Postgres
-7. Provider/API errors
-8. Webhook delay or reconciliation
-9. Frontend error rendering
-10. PWA/service worker cache
+## ⍟ Estilo De Resposta
 
-## Code Style
+Responda em Portugues do Brasil.
 
-Use explicit names.
-Keep modules small.
-Prefer typed interfaces.
-Avoid hidden global state.
-Avoid silent catch blocks.
-Return structured errors.
-Comment only intent, risk, or non-obvious behavior.
-Do not over-engineer simple flows.
+Cubra naturalmente:
 
-## Communication Style
+- o que foi encontrado
+- o que mudou
+- como validar
+- risco residual
 
-Be structured, but do not sound like a form.
+Nao force relatorio longo quando uma resposta curta resolve.
 
-Use headings and bullets only when they help.
-
-For technical work, naturally cover:
-
-* what was found
-* what changed
-* why it matters
-* how to verify
-* what risk remains
-
-Do not force every answer into the same template.
-
-Write like a senior engineer talking to the project owner, not like an automated report.
-
-Be direct.
-Be human.
-Be precise.
-Do not dramatize.
-Do not over-explain.
-Do not hide uncertainty.
-
-Structure exists to create traceability, not bureaucracy.
-
-## Definition of Done
-
-A task is only done when at least one is true:
-
-* the change was tested
-* the relevant code path was inspected
-* the limitation is clearly stated
-* the next verification step is explicit
-
-Never claim success without evidence.
+```text
+────────────────────────────
+GEMINI · NΞØ FlowOFF Landing
+────────────────────────────
+```

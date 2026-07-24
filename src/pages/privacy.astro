@@ -57,10 +57,10 @@ import Base from '../layouts/Base.astro';
             3. Armazenamento e Segurança
           </h2>
           <p>
-            Todos os tokens de acesso (<em>Access Tokens</em>), segredos e payloads de Webhook são criptografados em repouso via padrão <strong>AES-256</strong> e transmitidos exclusivamente via protocolos seguros <strong>TLS/HTTPS</strong>.
+            Tokens de acesso (<em>Access Tokens</em>) e segredos operacionais não são processados no navegador. Quando a integração exige persistência, o armazenamento ocorre em backend seguro ou em storage criptografado configurado para esse fim. O tráfego entre navegador, backend e APIs oficiais ocorre por <strong>TLS/HTTPS</strong>.
           </p>
           <p style="margin-top: 0.5rem;">
-            Não vendemos, alugamos nem compartilhamos dados de usuários ou de conversas com terceiros.
+            Logs e payloads de Webhook devem ser minimizados, mascarados quando possível e mantidos apenas pelo tempo necessário para operação, auditoria, suporte e cumprimento legal. Não vendemos, alugamos nem compartilhamos dados de usuários ou de conversas com terceiros.
           </p>
         </section>
 

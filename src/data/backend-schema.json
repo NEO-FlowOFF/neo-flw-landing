@@ -7,7 +7,7 @@
   },
   "servers": [
     {
-      "url": "https://www.neoflowoff.agency/api",
+      "url": "https://neoflowoff.agency/api",
       "description": "Servidor de Produção (Vercel)"
     }
   ],

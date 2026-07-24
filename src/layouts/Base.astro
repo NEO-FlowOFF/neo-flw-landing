@@ -8,9 +8,54 @@ import uiTexts from '../data/ui_texts.json';
 const configPath = path.join(process.cwd(), 'src/data/config.json');
 const configData = JSON.parse(fs.readFileSync(configPath, 'utf8'));
 const metaVerifyToken = configData.integrations.meta.domain_verification;
+const platformBaseUrl = String(configData.platform.base_url || 'https://neoflowoff.agency').replace(/\/$/, '');
+const canonicalUrl = new URL(Astro.url.pathname, platformBaseUrl).toString();
 const title = Astro.props.title || uiTexts.meta.default_title;
 const description = Astro.props.description || uiTexts.meta.default_description;
 const keywords = uiTexts.meta.keywords.join(', ');
+const jsonLd = {
+  '@context': 'https://schema.org',
+  '@graph': [
+    {
+      '@type': 'Organization',
+      '@id': `${platformBaseUrl}/#organization`,
+      name: 'NEØ FlowOFF',
+      alternateName: 'Neo FlowOFF Agency',
+      url: platformBaseUrl,
+      logo: `${platformBaseUrl}/icon-512.png`,
+      description,
+      contactPoint: {
+        '@type': 'ContactPoint',
+        contactType: 'customer support',
+        email: 'neo@neoflowoff.agency',
+        availableLanguage: ['pt-BR']
+      }
+    },
+    {
+      '@type': 'WebSite',
+      '@id': `${platformBaseUrl}/#website`,
+      url: platformBaseUrl,
+      name: 'neoflowoff.agency',
+      publisher: {
+        '@id': `${platformBaseUrl}/#organization`
+      }
+    },
+    {
+      '@type': 'WebPage',
+      '@id': canonicalUrl,
+      url: canonicalUrl,
+      name: title,
+      description,
+      inLanguage: 'pt-BR',
+      isPartOf: {
+        '@id': `${platformBaseUrl}/#website`
+      },
+      about: {
+        '@id': `${platformBaseUrl}/#organization`
+      }
+    }
+  ]
+};
 ---
 
 <!DOCTYPE html>
@@ -21,43 +66,16 @@ const keywords = uiTexts.meta.keywords.join(', ');
     <title>{title}</title>
     <meta name="description" content={description} />
     <meta name="keywords" content={keywords} />
+    <link rel="canonical" href={canonicalUrl} />
     <meta property="og:title" content={uiTexts.meta.og_title} />
     <meta property="og:description" content={uiTexts.meta.og_description} />
+    <meta property="og:url" content={canonicalUrl} />
     <meta name="theme-color" content="#16161a" />
     <meta name="facebook-domain-verification" content={metaVerifyToken} />
     <link rel="manifest" href="/manifest.webmanifest" />
     <link rel="icon" type="image/x-icon" href="/favicon.ico" />
     
-    <script type="application/ld+json" is:inline>
-      {
-        "@context": "https://schema.org",
-        "@graph": [
-          {
-            "@type": "Organization",
-            "@id": "https://neoprotocol.space/organizations/neo-protocol#organization",
-            "name": "NEØ Protocol",
-            "alternateName": "Neo Protocol",
-            "url": "https://neoprotocol.space",
-            "logo": "https://www.neoflowoff.agency/icon-512.png",
-            "description": "Esta organização mantém a camada de protocolo exclusiva para identidades independentes, mas a identidade é apenas o ponto de entrada. Nossa estrutura serve como a espinha dorsal aprovada para o desenvolvimento do ecossistema, proporcionando um ambiente determinístico no qual os agentes não estão apenas conectados a nós, mas são nativamente orquestrados como extensões complementares da lógica da rede."
-          },
-          {
-            "@type": "WebPage",
-            "@id": "https://neoprotocol.space/#webpage",
-            "url": "https://neoprotocol.space",
-            "name": "NEØ Protocol — Topologia de Engenharia Soberana",
-            "description": "Esta organização mantém a camada de protocolo exclusiva para identidades independentes, mas a identidade é apenas o ponto de entrada. Nossa estrutura serve como a espinha dorsal aprovada para o desenvolvimento do ecossistema, proporcionando um ambiente determinístico no qual os agentes não estão apenas conectados a nós, mas são nativamente orquestrados como extensões complementares da lógica da rede. Tratamos cada interação digital como uma transição de estado dentro de um modelo de confiança zero (zero-trust), incorporando a segurança desde a concepção (security-by-design) diretamente na camada de consenso, em vez de adicioná-la posteriormente.",
-            "inLanguage": "pt-BR",
-            "isPartOf": {
-              "@id": "https://neoprotocol.space/#website"
-            },
-            "about": {
-              "@id": "https://neoprotocol.space/organizations/neo-protocol#organization"
-            }
-          }
-        ]
-      }
-    </script>
+    <script type="application/ld+json" is:inline set:html={JSON.stringify(jsonLd)}></script>
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -120,9 +138,7 @@ const keywords = uiTexts.meta.keywords.join(', ');
       // Register PWA Service Worker
       if ('serviceWorker' in navigator) {
         window.addEventListener('load', () => {
-          navigator.serviceWorker.register('/sw.js').catch(err => {
-            console.error('ServiceWorker registration failed: ', err);
-          });
+          navigator.serviceWorker.register('/sw.js').catch(() => {});
         });
       }
     </script>

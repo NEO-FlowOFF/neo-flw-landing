@@ -102,6 +102,8 @@
   },
   "connection_page_role": {
     "purpose": "Guide the operator through connecting the Meta WhatsApp app to neo-whatsapp-connect",
+    "browser_route": "https://neoflowoff.agency/conectar-whatsapp",
+    "server_adapter": "POST https://neoflowoff.agency/api/meta/embedded-signup",
     "must_collect": [
       "WHATSAPP_ACCESS_TOKEN",
       "WHATSAPP_PHONE_NUMBER_ID",
@@ -121,7 +123,18 @@
       "Use temporary access token as production credential",
       "Bypass webhook signature validation",
       "Send test messages without explicit operator action"
-    ]
+    ],
+    "adapter_modes": {
+      "forward_to_sovereign_backend": [
+        "META_EMBEDDED_SIGNUP_FORWARD_URL",
+        "META_EMBEDDED_SIGNUP_FORWARD_SECRET"
+      ],
+      "encrypted_kv_storage": [
+        "META_APP_SECRET",
+        "META_TOKEN_ENCRYPTION_KEY",
+        "META_CONNECTIONS"
+      ]
+    }
   },
   "railway": {
     "service": "neo-whatsapp-connect",

@@ -1,5 +1,11 @@
 ---
 import Base from '../layouts/Base.astro';
+import configData from '../data/config.json';
+
+const metaConfig = configData.integrations.meta;
+const metaAppId = metaConfig.app_id;
+const graphApiVersion = metaConfig.graph_api_version;
+const requestedScopes = metaConfig.requested_scopes.join(',');
 ---
 <Base title="Conectar WhatsApp — Meta Embedded Signup | NEØ FlowOFF">
   <div style="min-height: 80vh; display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 2rem 1rem; text-align: center;">
@@ -34,43 +40,89 @@ import Base from '../layouts/Base.astro';
       <div id="signup-status" style="margin-top: 1.5rem; font-family: var(--mono); font-size: 0.78rem; color: #c8d41a; display: none;"></div>
 
       <div style="margin-top: 2rem; padding-top: 1.2rem; border-top: 1px solid rgba(255, 255, 255, 0.08); font-size: 0.72rem; color: rgba(255, 255, 255, 0.4);">
-        App: NEØ FLOW E-gine (ID: 1500002841696407) · Graph API v25.0
+        App: NEØ FLOW E-gine (ID: {metaAppId}) · Graph API {graphApiVersion}
       </div>
 
     </div>
   </div>
 
-  <script is:inline>
+  <script is:inline define:vars={{ metaAppId, graphApiVersion, requestedScopes }}>
+    function setSignupStatus(message, tone) {
+      const statusDiv = document.getElementById('signup-status');
+      if (!statusDiv) return;
+      statusDiv.style.display = 'block';
+      statusDiv.style.color = tone === 'error' ? '#ff6b6b' : '#c8d41a';
+      statusDiv.textContent = message;
+    }
+
+    async function confirmEmbeddedSignup(authResponse) {
+      const code = authResponse && authResponse.code;
+      if (!code) {
+        throw new Error('missing_authorization_code');
+      }
+
+      const response = await fetch('/api/meta/embedded-signup', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+          code,
+          grantedScopes: authResponse.grantedScopes || authResponse.granted_scopes || '',
+          requestedScopes
+        })
+      });
+
+      const payload = await response.json().catch(() => ({}));
+      if (!response.ok || !payload.ok) {
+        throw new Error(payload.error || 'embedded_signup_not_confirmed');
+      }
+
+      return payload;
+    }
+
     window.fbAsyncInit = function() {
       FB.init({
-        appId      : '1500002841696407', // App ID do NEØ FLOW E-gine
+        appId      : metaAppId,
         cookie     : true,
         xfbml      : true,
-        version    : 'v25.0'
+        version    : graphApiVersion
       });
     };
 
-    function launchWhatsAppSignup() {
-      const statusDiv = document.getElementById('signup-status');
-      FB.login(function (response) {
+    window.launchWhatsAppSignup = function() {
+      const button = document.getElementById('btn-meta-signup');
+      if (!window.FB) {
+        setSignupStatus('SDK da Meta ainda não carregou. Tente novamente em instantes.', 'error');
+        return;
+      }
+
+      if (button) {
+        button.setAttribute('disabled', 'disabled');
+        button.style.opacity = '0.7';
+      }
+      setSignupStatus('Abrindo autorização da Meta...', 'info');
+
+      FB.login(async function (response) {
         if (response.authResponse) {
-          console.log('Código/Token capturado com sucesso:', response.authResponse);
-          if (statusDiv) {
-            statusDiv.style.display = 'block';
-            statusDiv.innerHTML = '✓ Conexão realizada com sucesso! WABA vinculado.';
+          try {
+            setSignupStatus('Confirmando conexão com o backend seguro...', 'info');
+            await confirmEmbeddedSignup(response.authResponse);
+            setSignupStatus('Conexão confirmada. A infraestrutura recebeu a autorização com segurança.', 'info');
+          } catch {
+            setSignupStatus('A autorização foi recebida pela Meta, mas ainda não foi confirmada pelo backend seguro.', 'error');
           }
-          alert('Conexão realizada com sucesso! WABA vinculado.');
         } else {
-          console.log('Login cancelado ou não autorizado.');
-          if (statusDiv) {
-            statusDiv.style.display = 'block';
-            statusDiv.style.color = '#ff4d4d';
-            statusDiv.innerText = '✕ Login cancelado ou não autorizado.';
-          }
+          setSignupStatus('Login cancelado ou não autorizado.', 'error');
+        }
+
+        if (button) {
+          button.removeAttribute('disabled');
+          button.style.opacity = '1';
         }
       }, {
-        /* Permissões exigidas pelo Tech Provider */
-        scope: 'whatsapp_business_management,whatsapp_business_messaging,business_management',
+        scope: requestedScopes,
+        return_scopes: true,
         response_type: 'code'
       });
     }

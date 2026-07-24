@@ -11,7 +11,6 @@ Allow: /sw.js
 
 # Security & Privacy - Block sensitive/technical paths
 Disallow: /api/
-Disallow: /checkout/
 Disallow: /*?checkout=success
 Disallow: /*?utm_*
 
@@ -25,4 +24,4 @@ Allow: /
 User-agent: Google-Extended
 Allow: /
 
-Sitemap: https://lp.neoflowoff.agency/sitemap.xml
+Sitemap: https://neoflowoff.agency/sitemap.xml
