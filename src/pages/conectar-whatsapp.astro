@@ -32,7 +32,7 @@ const requestedScopes = metaConfig.requested_scopes.join(',');
         <div class="meta-brand-header">
           <img 
             src="/lgo-app-stell.png" 
-            alt="NEOFLOW E-gine Meta App" 
+            alt="NEOFLOW Engine Meta App" 
             class="meta-badge-img"
             width="78"
             height="39"
@@ -111,6 +111,15 @@ const requestedScopes = metaConfig.requested_scopes.join(',');
           <span><code>{metaAppId}</code></span>
         </footer>
       </main>
+
+      <!-- FOOTER DE CONFORMIDADE -->
+      <nav class="compliance-footer" aria-label="Links de conformidade">
+        <a href="/privacidade/" class="compliance-link">Política de Privacidade</a>
+        <span class="compliance-sep" aria-hidden="true">•</span>
+        <a href="/legal/" class="compliance-link">Termos de Serviço</a>
+        <span class="compliance-sep" aria-hidden="true">•</span>
+        <a href="/excluir-dados/" class="compliance-link">Exclusão de Dados</a>
+      </nav>
     </div>
   </div>
 
@@ -565,6 +574,38 @@ const requestedScopes = metaConfig.requested_scopes.join(',');
     @keyframes fadeIn {
       from { opacity: 0; transform: translateY(-5px); }
       to   { opacity: 1; transform: translateY(0); }
+    }
+
+    /* ─── FOOTER DE CONFORMIDADE ─── */
+    .compliance-footer {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      flex-wrap: wrap;
+      margin-top: 1.6rem;
+      padding: 0.6rem 0 0.2rem;
+      animation: fadeUp 0.6s 0.2s cubic-bezier(0.22, 1, 0.36, 1) both;
+    }
+
+    .compliance-link {
+      font-family: var(--mono);
+      font-size: 0.62rem;
+      font-weight: 500;
+      letter-spacing: 0.04em;
+      color: rgba(255, 255, 255, 0.35);
+      text-decoration: none;
+      transition: color 0.18s ease;
+    }
+
+    .compliance-link:hover {
+      color: rgba(255, 255, 255, 0.72);
+    }
+
+    .compliance-sep {
+      font-size: 0.5rem;
+      color: rgba(255, 255, 255, 0.18);
+      line-height: 1;
     }
   </style>
 

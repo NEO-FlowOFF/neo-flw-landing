@@ -234,7 +234,7 @@ Dados canônicos para esta submissão:
 
 ```env
 META_APP_ID=1500002841696407
-META_APP_NAME="NEOFLOW E-gine"
+META_APP_NAME="NEOFLOW Engine"
 META_APP_NAMESPACE=neoflowoff
 META_GRAPH_API_VERSION=v25.0
 ```
@@ -438,7 +438,7 @@ Bloqueador:
 Confirmados:
 
 ```text
-NEOFLOW E-gine
+NEOFLOW Engine
 App ID: 1500002841696407
 
 Social Media Connector / Zernio
@@ -814,7 +814,7 @@ Estrutura sugerida:
   "apps": {
     "messaging": {
       "id": "1500002841696407",
-      "name": "NEOFLOW E-gine",
+      "name": "NEOFLOW Engine",
       "status": "development",
       "confirmed": true
     },
