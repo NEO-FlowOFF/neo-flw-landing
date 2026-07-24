@@ -24,6 +24,7 @@ This is a public landing and service catalog for agents and humans. Treat the pa
 - [A2M-PoI Standard](https://neoflowoff.agency/checkout/a2m-poi-standard/): Public service page for Proof-of-Intention validation and licensing.
 - [WhatsApp Business API Oficial](https://neoflowoff.agency/checkout/api-whatsapp/): WhatsApp Cloud API implementation with templates, webhooks, and governance.
 - [Meta Developers: Apps, APIs e Webhooks](https://neoflowoff.agency/checkout/app-meta/): Meta app setup, API permissions, webhook configuration, and compliance support.
+- [Regularização Meta + WABA](https://neoflowoff.agency/checkout/regularizacao-meta-waba/): Audit, Business Manager verification, display name approval, number validation, template organization, and 30 days of support.
 - [Dashboards e Gestão de Dados](https://neoflowoff.agency/checkout/dashboard-dados/): Dashboards and data organization for commercial visibility.
 - [Landing Pages e WebApps Conectados](https://neoflowoff.agency/checkout/webapp-lp/): Landing pages and connected web applications for campaigns and operations.
 

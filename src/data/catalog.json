@@ -131,6 +131,47 @@
       ]
     },
     {
+      "id": "SERVIÇO-REGULARIZAÇÃO-META-WABA",
+      "slug": "regularizacao-meta-waba",
+      "title": "Regularização Meta + WABA",
+      "short_title": "Regularização Meta & WABA",
+      "description": "Auditoria técnica, verificação empresarial (BM), homologação de nome de exibição, número oficial, organização de templates e higienização da estrutura com 30 dias de suporte.",
+      "link": "https://www.neoflowoff.agency/checkout/regularizacao-meta-waba",
+      "image_link": "https://www.neoflowoff.agency/public/og-image.jpg",
+      "price": {
+        "value": 1500,
+        "currency": "BRL"
+      },
+      "price_label": "A partir de (R$ 1.500 a R$ 2.200 · conforme escopo)",
+      "availability": "in stock",
+      "condition": "new",
+      "category": "Serviço",
+      "display_category": "Implementação especializada",
+      "brand": "neoflowoff.agency",
+      "features": [
+        "Auditoria completa de ativos na Meta Business Manager e WhatsApp Center",
+        "Apoio no processo de verificação empresarial (BM) e requisitos corporativos",
+        "Submissão e homologação de nome de exibição (Display Name) oficial",
+        "Conexão, validação de número de telefone e governança do canal WABA",
+        "Organização de templates de mensagem e higienização da estrutura",
+        "Acompanhamento e suporte técnico operacional por 30 dias pós-entrega"
+      ],
+      "outcomes": [
+        "Estrutura Meta e WhatsApp Business API 100% regularizada",
+        "Prevenção de bloqueios, rejeições de templates e pendências de validação",
+        "Suporte técnico dedicado por 30 dias para estabilidade da operação"
+      ],
+      "search_terms": [
+        "Regularização Meta",
+        "Verificação BM WhatsApp",
+        "WABA verificação empresarial",
+        "nome de exibição WhatsApp Business",
+        "desbloqueio Meta Business Manager",
+        "suporte WABA 30 dias",
+        "auditoria Meta WhatsApp"
+      ]
+    },
+    {
       "id": "SERVIÇO-DASHBOARD-E-GESTÃO-DE-DADOS",
       "slug": "dashboard-dados",
       "title": "Dashboards e Gestão de Dados",

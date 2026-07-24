@@ -22,6 +22,7 @@ const getIcon = (itemSlug: string, itemCategory: string) => {
   if (itemSlug?.includes('crm')) return 'git-branch';
   if (itemSlug?.includes('fluxo') || itemSlug?.includes('automacao')) return 'zap';
   if (itemSlug?.includes('google')) return 'search';
+  if (itemSlug?.includes('regularizacao')) return 'shield-check';
   if (itemSlug?.includes('meta')) return 'share-2';
   return itemCategory === 'Serviço' ? 'terminal' : 'box';
 };
