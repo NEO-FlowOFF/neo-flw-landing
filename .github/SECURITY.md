@@ -1,96 +1,134 @@
 # Security Policy
 
+## Project Scope
+
+This policy applies to:
+
+- project: `neoflowoff.agency / neo-flw-landing`
+- supported runtime: `main` branch
+- runtime model: Astro static site on Cloudflare Pages
+- server-side surface: Cloudflare Pages Functions in `functions/`
+
+This repository is not the authoritative backend for customer data,
+payments, CRM, campaign automation or WhatsApp message orchestration.
+
+## Covered Surfaces
+
+Security reports for this repository should focus on:
+
+- public Astro pages under `src/pages/`
+- shared layout and components under `src/layouts/` and `src/components/`
+- public assets and crawler surfaces under `public/`
+- Cloudflare Pages configuration in `wrangler.jsonc`
+- Meta Embedded Signup adapter in `functions/api/meta/embedded-signup.js`
+- Meta Data Deletion callback in `functions/api/meta/data-deletion.js`
+- privacy, legal and data deletion public routes
+
+## Out Of Scope
+
+The following systems may be part of the wider NEO FlowOFF ecosystem,
+but are not owned by this checkout:
+
+- sovereign backend services
+- CRM storage and dashboards
+- payment processors and reconciliation services
+- WhatsApp provider runtime
+- Meta Ads campaign execution
+- databases and tenant data stores outside this repository
+
+If a vulnerability spans multiple services,
+report it privately and identify every affected surface when possible.
+
 ## Reporting Security Vulnerabilities
 
-If you discover a security vulnerability in NØX, please **DO NOT** open a public GitHub issue.
+If you discover a vulnerability,
+please do not open a public GitHub issue.
 
-### Reporting Process
+Preferred reporting channel:
 
-1. **Email:** <security@neoflowoff.agency>
-2. **Subject:** `[SECURITY] Vulnerability Report - [Brief Description]`
-3. **Include:**
-   - Detailed description of the vulnerability
-   - Steps to reproduce
-   - Potential impact
-   - Suggested fix (if available)
+- Email: <security@neoflowoff.agency>
+- Subject: `[SECURITY] neo-flw-landing - brief description`
 
-### Response Timeline
+If the security mailbox is not available or does not respond,
+use the general contact as fallback:
 
-- **Acknowledgment:** Within 24 hours
-- **Assessment:** Within 48 hours
-- **Fix/Patch:** Within 7-14 days (depending on severity)
-- **Public Disclosure:** After fix is deployed
+- Email: <neo@neoflowoff.agency>
 
----
+Include:
 
-## Supported Versions
+- affected URL, route, file or endpoint
+- steps to reproduce
+- potential impact
+- whether secrets, user data or platform credentials may be exposed
+- suggested fix, if available
 
-| Version | Status | Security Updates |
-|---------|--------|------------------|
-| 4.2.x   | Active | ✅ Yes            |
-| 4.1.x   | Legacy | ⚠️ Critical only  |
-| < 4.0   | EOL    | ❌ No             |
+Do not include live secrets, private keys, bearer tokens,
+webhook secrets or customer data in the report body.
+Use redacted examples whenever possible.
 
----
+## Response Expectations
 
-## Security Best Practices
+Expected handling:
 
-### For Developers
+- acknowledge the report as soon as practical
+- assess whether this repository owns the affected surface
+- fail closed for Meta, webhook, deletion and authorization-code flows
+- coordinate with the sovereign backend owner when the issue is external
+- disclose publicly only after a fix or mitigation is available
 
-1. **Environment Variables**
-   - Never commit `.env` files
-   - Use `.env.example` as template
-   - Rotate secrets on team member departure
+No fixed SLA is promised in this repository unless a separate support
+agreement defines one.
 
-2. **Dependencies**
-   - Run `make audit` before commits
-   - Keep Node.js >= 22.12.0
-   - Review `CHANGELOG.md` for security updates
+## Supported Version
 
-3. **Authentication**
-   - JWT tokens are identity-only (no sensitive data)
-   - Always verify token signature
-   - Implement token revocation for logout
+| Target | Status | Security Updates |
+|--------|--------|------------------|
+| `main` | Active | Yes              |
 
-4. **Database**
-   - Use parameterized queries ($1, $2, etc.)
-   - Never interpolate user input
-   - Implement row-level security (RLS) for multi-tenant data
+Historical tags or branches are not guaranteed to receive fixes.
 
-### For Operations
+## Local Security Practices
 
-1. **Deployment**
-   - Enable HTTPS everywhere
-   - Use Railway's secret management
-   - Implement rate limiting at WAF level
+Developers working in this checkout should:
 
-2. **Monitoring**
-   - Alert on failed authentication attempts
-   - Monitor webhook signature failures
-   - Track rate limit violations
+- never commit `.env` files or secrets
+- use `.env.example` only as a variable-name template
+- avoid exposing private tokens in Astro, `public/` or client scripts
+- keep Meta App secrets and webhook secrets server-side only
+- validate Meta signed requests and authorization-code handling server-side
+- keep `functions/` narrow and fail closed when secure storage is absent
+- run project-local validation before publishing changes
 
----
+Recommended local checks:
 
-## Third-Party Dependencies
+```bash
+pnpm run build
+./node_modules/.bin/stylelint 'src/styles/**/*.css'
+node --check public/sw.js
+xmllint --noout public/sitemap.xml
+```
 
-All dependencies are scanned for vulnerabilities using:
+Use `make audit` when dependency audit is relevant to the change.
 
-- `pnpm audit` (on every commit via Makefile)
-- GitHub Advanced Security (continuous)
-- Snyk (scheduled)
+## Data Deletion And Compliance Surface
 
----
+Public data deletion instructions are served at:
 
-## Compliance
+```text
+https://neoflowoff.agency/excluir-dados
+https://neoflowoff.agency/data-deletion
+```
 
-- **GDPR:** User data deletion via `/api/meta/data-deletion`
-- **PCI DSS:** Payment data NOT stored in NØX (delegated to FlowPay)
-- **OWASP Top 10:** See `docs/SECURITY_AUDIT_2026.md`
+Meta Data Deletion callback surface:
 
----
+```text
+POST /api/meta/data-deletion
+```
+
+The callback must validate Meta input and fail closed when required
+configuration or secure handling is unavailable.
 
 ## Contact
 
-- **Security:** <security@neoflowoff.agency>
-- **General:** <neo@neoflowoff.agency>
-- **Twitter:** @neoflowoff.agency
+- Security: <security@neoflowoff.agency>
+- General: <neo@neoflowoff.agency>

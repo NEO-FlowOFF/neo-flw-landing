@@ -168,6 +168,100 @@ Regras:
 
 ────────────────────────────────────────
 
+## ◧ Dashboard do Cliente
+
+Subdominio alvo:
+
+```text
+app.neoflowoff.agency
+```
+
+Este sera o painel de controle restrito para clientes.
+Nao deve ser servido como rota publica da landing sem autenticacao,
+isolamento de tenant, backend autoritativo e contrato de dados.
+
+Direcao visual:
+
+- fundo escuro continuo
+- blocos glassmorphism flutuantes para separar informacoes
+- molduras metalicas nos graficos e paineis criticos
+- azul apenas quando a informacao for explicitamente Meta
+- acid, cinza, preto e branco como base dominante
+
+Modulos previstos:
+
+1. Central de Treinamento da IA
+
+Interface para upload e gestao de materiais que treinam ou contextualizam
+o atendimento:
+
+- PDFs
+- regras de negocio
+- politicas de devolucao
+- catalogos de produtos
+- Brand Voice do cliente
+- limites de linguagem, promessas e tom de atendimento
+
+O upload deve passar por backend soberano, validacao de tipo/tamanho,
+armazenamento seguro e trilha de auditoria. O frontend nao deve processar
+documentos sensiveis diretamente no browser alem do necessario para UX.
+
+2. Caixa de Escalabilidade
+
+Fluxo de contingencia para `Human Handoff`.
+
+Quando a IA encontrar um problema nao resolvido, detectar risco de
+alucinacao, receber pedido explicito por humano ou violar regra de negocio,
+o atendimento deve cair nesta caixa com:
+
+- historico completo da conversa
+- contexto de origem e campanha
+- resumo operacional gerado pela IA
+- motivo da escalada
+- status, responsavel e SLA
+- caminho de retorno para a automacao
+
+3. Metricas e Anomalias em Tempo Real
+
+Graficos com molduras metalicas para acompanhar:
+
+- reducao de CPA
+- aumento de ROAS
+- volume de atendimentos resolvidos pela IA
+- taxa de handoff humano
+- alertas de queda de performance
+- anomalias por campanha, canal, criativo ou funil
+
+A promessa de deteccao de quedas `72% mais rapido que analistas humanos`
+deve permanecer como hipotese comercial ate existir telemetria verificavel,
+baseline documentado e metodologia auditavel.
+
+4. Guard-rails Financeiros
+
+Configuracoes de seguranca financeira para campanhas:
+
+- teto de orcamento diario por cliente, campanha e canal
+- regra de pausa automatica por CPA, ROAS, gasto ou anomalia
+- aprovacao humana para retomada quando necessario
+- simulacao de impacto antes de aplicar limite
+- log auditavel de quem alterou cada regra
+- modo de desligamento manual imediato
+
+Contrato de arquitetura:
+
+```text
+app browser
+└─ backend autoritativo
+   ├─ autenticacao e tenant isolation
+   ├─ storage seguro de documentos
+   ├─ fila/eventos para ingestao e embeddings
+   ├─ CRM/handoff operacional
+   ├─ metricas em tempo real
+   └─ guard-rails financeiros auditaveis
+```
+
+────────────────────────────────────────
+
 ## ⦿ Fases
 
 1. UX shell
@@ -236,6 +330,19 @@ Validar:
 - LCP sem regressao
 - fallback WhatsApp quando backend falhar
 
+6. Dashboard restrito `app`
+
+Definir especificacao e contratos antes de implementar:
+
+- fronteira entre landing publica e painel autenticado
+- autenticacao, RBAC e isolamento por cliente
+- contrato de upload/ingestao da Central de Treinamento
+- contrato de handoff humano e historico conversacional
+- contrato de metricas/anomalias em tempo real
+- contrato de guard-rails financeiros e pausas automaticas
+- requisitos visuais de glassmorphism escuro e molduras metalicas
+- estrategia de deploy do subdominio `app`
+
 ────────────────────────────────────────
 
 ## ⧇ Riscos
@@ -246,6 +353,10 @@ Validar:
 - service worker cachear respostas de chat indevidamente
 - menu perder clareza se chat e navegacao competirem
 - atendimento IA prometer escopo/preco sem confirmacao humana
+- painel restrito ser publicado como rota estatica sem autenticacao
+- documentos de cliente vazarem por bundle, cache ou logs
+- metricas financeiras acionarem pausas automaticas sem auditoria
+- promessa de deteccao `72% mais rapido` virar claim publico sem prova
 
 ────────────────────────────────────────
 
@@ -257,6 +368,8 @@ Considerar pronto apenas quando:
 - campo de texto permanece utilizavel com teclado mobile aberto
 - chamada IA passa por backend autoritativo
 - fallback WhatsApp funciona sem dependencia do chat
+- dashboard `app` tem autenticacao, tenant isolation e backend soberano
+- uploads, handoff, metricas e guard-rails possuem contratos auditaveis
 - build passa
 - teste visual mobile confirma que a UI nao sobrepoe conteudo
 
