@@ -23,6 +23,9 @@
     "google": {
       "merchant_center_id": "",
       "analytics_id": ""
+    },
+    "tiktok": {
+      "pixel_id": "D9IQURBC77U84G6G883G"
     }
   },
   "backend": {
