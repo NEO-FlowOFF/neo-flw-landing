@@ -50,6 +50,9 @@ review geral ou scripts simples.
 - nunca exponha secrets ou valores de `.env`
 - nao edite `drafts/catalog_v2026_2.json` sem pedido explicito
 - nao trate `dist/` como fonte
+- nao recrie HTMLs legais legados na raiz:
+  `privacy/index.html`, `legal/index.html` ou
+  `excluir-dados/index.html`
 - nao adicione dependencias sem necessidade clara
 - nao carregue bibliotecas de terceiros no critical path
   quando o projeto ja tem alternativa local
@@ -73,6 +76,22 @@ Para bugs de runtime:
 9. service worker/cache
 10. teste reproduzivel
 
+Rotas legais canonicas para Meta/App Review:
+
+```text
+/privacy/
+/terms/
+/data-deletion/
+```
+
+Aliases publicos em Portugues:
+
+```text
+/legal/
+/privacidade/
+/excluir-dados/
+```
+
 ────────────────────────────────────────
 
 ## ⨷ Performance
@@ -80,6 +99,8 @@ Para bugs de runtime:
 Contratos atuais:
 
 - header logo e LCP usam asset estatico em `public/assets/`
+- hero da home usa `/logo_transp.png` com dimensoes explicitas
+  e prioridade de carregamento
 - icones usam subset local de `data-lucide`
 - Google Fonts usa stylesheet nao bloqueante,
   sem preload redundante
@@ -101,6 +122,10 @@ Cubra naturalmente:
 - risco residual
 
 Nao force relatorio longo quando uma resposta curta resolve.
+
+Em alteracoes visuais, preserve o ticker editorial do topo da home,
+mantenha azul restrito ao bloco Meta e verifique contraste quando
+texto acid aparece sobre fundo claro.
 
 ```text
 ────────────────────────────

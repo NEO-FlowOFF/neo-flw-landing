@@ -51,6 +51,17 @@ Nao trate `index.html`, `landing_v2.css`, `css/`,
 `js/payment.js` ou rotas HTML antigas como fonte principal
 sem verificar se ainda sao importadas ou servidas.
 
+Os HTMLs legais legados da raiz foram removidos e nao devem ser
+recriados:
+
+```text
+privacy/index.html
+legal/index.html
+excluir-dados/index.html
+```
+
+As paginas corretas para essas URLs vivem em `src/pages/`.
+
 Fonte principal:
 
 ```text
@@ -61,6 +72,22 @@ src/styles/global.css
 src/data/
 public/
 functions/
+```
+
+Rotas legais canonicas para aprovacao Meta:
+
+```text
+/privacy/
+/terms/
+/data-deletion/
+```
+
+Aliases publicos em Portugues:
+
+```text
+/legal/
+/privacidade/
+/excluir-dados/
 ```
 
 `functions/` nao e backend autoritativo de produto.
@@ -78,6 +105,11 @@ Embedded Signup da Meta, sem expor secrets ao navegador.
 - preserve contraste acessivel
 - mantenha azul apenas no bloco Meta do topo
 - use acid, cinza, preto e branco nas demais secoes
+- preserve o ticker editorial `TOP TELENOTICIAS` no topo da home,
+  salvo pedido explicito de remocao
+- nao use texto acid diretamente sobre bege claro; o selo
+  `OPERACAO PRINCIPAL` deve permanecer em alto contraste
+- a hero da home usa `/logo_transp.png` no lugar do titulo textual
 
 O projeto usa varios estilos inline em componentes Astro.
 Nao aplique uma regra antiga de "zero inline style"

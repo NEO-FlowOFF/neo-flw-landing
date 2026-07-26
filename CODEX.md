@@ -31,12 +31,21 @@ Astro SSG
 │   ├── subset local de icones data-lucide
 │   └── registro do service worker
 ├── src/pages/index.astro
-│   └── home comercial alimentada por catalogo
+│   ├── home comercial alimentada por catalogo
+│   ├── ticker editorial TOP TELENOTICIAS
+│   └── hero com imagem estatica /logo_transp.png
 ├── src/pages/planos/[slug].astro
 │   └── paginas de planos
 ├── src/pages/checkout/[slug].astro
 │   └── paginas publicas de servicos unitarios
+├── src/pages/privacy.astro
+├── src/pages/terms.astro
+├── src/pages/data-deletion.astro
+├── src/pages/legal.astro
+├── src/pages/privacidade.astro
+├── src/pages/excluir-dados.astro
 └── public/
+    ├── logo_transp.png
     ├── manifest.webmanifest
     ├── sw.js
     ├── llms.txt
@@ -50,6 +59,17 @@ Cloudflare Pages Functions
 
 `dist/` e apenas saida de build.
 Nao edite `dist/` como fonte.
+
+Os HTMLs legais legados da raiz foram removidos:
+
+```text
+privacy/index.html
+legal/index.html
+excluir-dados/index.html
+```
+
+Nao recrie esses arquivos. As URLs equivalentes sao geradas por
+Astro em `src/pages/*.astro`.
 
 ────────────────────────────────────────
 
@@ -78,6 +98,7 @@ Home:
 Bloco Meta
 └─ api-whatsapp
 └─ app-meta
+└─ regularizacao-meta-waba
 └─ trafego-meta
 
 Planos
@@ -109,6 +130,8 @@ Contratos atuais:
 - nao carregar `lucide.min.js` de CDN
 - usar subset SVG local para `data-lucide`
 - manter logo LCP com `loading="eager"` e `fetchpriority="high"`
+- manter a imagem da hero `/logo_transp.png` com dimensoes explicitas,
+  `loading="eager"`, `decoding="async"` e `fetchpriority="high"`
 - usar assets estaticos de `public/assets/` quando isso evita `/_image`
 - manter `manifest.webmanifest` valido para evitar 404
 - nao preloaded Google Fonts se o stylesheet for carregado via
@@ -131,6 +154,22 @@ public/llms.txt
 public/robots.txt
 public/sitemap.xml
 public/manifest.webmanifest
+```
+
+Superficies legais para Meta/App Review:
+
+```text
+/privacy/
+/terms/
+/data-deletion/
+```
+
+Aliases publicos em Portugues:
+
+```text
+/legal/
+/privacidade/
+/excluir-dados/
 ```
 
 `llms.txt` deve ser Markdown,

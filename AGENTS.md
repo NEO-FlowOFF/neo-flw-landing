@@ -36,6 +36,16 @@ Qualquer agente que atuar neste repositório DEVE seguir estas regras.
 - **Verificação de Domínio Meta:** O token ativo é `zq0xygs8v9s714m5039mijjh0wowyj`. Ele é carregado em `src/layouts/Base.astro` a partir de `src/data/config.json` e deve permanecer no `<head>` das rotas Astro.
 - **Safe Page Legada Removida:** `middleware.js` foi removido deste checkout. Não reativar fluxo de crawler/safe-page, renderização condicional por User-Agent ou proxy silencioso sem decisão explícita de arquitetura e revisão de compliance.
 - **WhatsApp do Agent:** O contato oficial ativo é o **`+55 62 9478-9032`**. Em links de redirecionamento, use estritamente o formato internacional limpo: `https://wa.me/556294789032` (sem o caractere `+`).
+- **URLs para aprovação Meta:** para submissão/App Review use as rotas Astro
+  públicas `https://neoflowoff.agency/privacy/`,
+  `https://neoflowoff.agency/terms/` e
+  `https://neoflowoff.agency/data-deletion/`. As rotas em português
+  `/privacidade/`, `/legal/` e `/excluir-dados/` permanecem como
+  superfícies públicas equivalentes para usuários.
+- **HTMLs legais legados removidos da raiz:** os arquivos
+  `privacy/index.html`, `legal/index.html` e `excluir-dados/index.html`
+  foram removidos para evitar ambiguidade auditável. Não recriar HTML
+  estático paralelo nesses caminhos; a fonte correta é `src/pages/*.astro`.
 
 ---
 
@@ -65,6 +75,10 @@ Qualquer agente que atuar neste repositório DEVE seguir estas regras.
 
 - A fonte principal é `src/pages`, `src/components`,
   `src/layouts`, `src/styles` e `src/data`.
+- Rotas públicas como `/privacy/`, `/terms/`, `/data-deletion/`,
+  `/legal/`, `/privacidade/` e `/excluir-dados/` são geradas por
+  Astro a partir de `src/pages`. Diretórios HTML homônimos na raiz do
+  projeto não são fonte de publicação e não devem ser reintroduzidos.
 - A única superfície server-side local atual é `functions/`,
   deployada como Cloudflare Pages Functions.
 - `dist/` é artefato de build e não deve ser editado como fonte.
@@ -81,6 +95,9 @@ Qualquer agente que atuar neste repositório DEVE seguir estas regras.
 - Ícones `data-lucide` usam subset SVG local em `Base.astro`.
 - Logo LCP do header deve usar asset estático em `public/assets/`,
   `loading="eager"` e `fetchpriority="high"`.
+- A hero da home usa `public/logo_transp.png` como imagem principal.
+  Preserve `width`, `height`, `loading="eager"`, `decoding="async"`
+  e `fetchpriority="high"` quando ajustar esse bloco.
 - Evitar `astro:assets` para imagens que gerem tráfego `/_image`
   em produção.
 - Google Fonts usa `preconnect` e stylesheet não bloqueante.
@@ -96,6 +113,8 @@ Qualquer agente que atuar neste repositório DEVE seguir estas regras.
 - `public/sitemap.xml` deve listar apenas rotas públicas reais.
 - `public/robots.txt` deve estar semanticamente alinhado ao sitemap
   e ao `llms.txt`.
+- As superfícies legais públicas são `/privacy/`, `/terms/`,
+  `/data-deletion/`, `/legal/`, `/privacidade/` e `/excluir-dados/`.
 - Rotas públicas de produto incluem `/planos/<slug>/`
   e `/checkout/<slug>/`.
 - Nunca publicar segredos, critérios internos, fluxos privados,
@@ -108,6 +127,10 @@ Qualquer agente que atuar neste repositório DEVE seguir estas regras.
 - Azul fica restrito ao trecho Meta no topo.
 - Demais seções usam acid, cinza, preto e branco.
 - Ajustes visuais devem preservar contraste suficiente.
+- O ticker `TOP TELENOTÍCIAS` no topo da home é elemento editorial
+  existente e deve ser preservado, salvo pedido explícito de remoção.
+- O selo `OPERAÇÃO PRINCIPAL` em card bege deve manter contraste
+  alto; não usar texto verde acid diretamente sobre bege claro.
 - Logo steel do footer vem de `src/assets/images/steel_flw.webp`.
 
 ---
