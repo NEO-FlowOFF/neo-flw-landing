@@ -1,15 +1,16 @@
 ---
 import BadgeChip from './BadgeChip.astro';
 
-const { id, slug, title, short_title, sub, description, link, price, price_label, category, display_category, featured, fullWidth, isSoon, features, isLightSection } = Astro.props;
+const { id, slug, title, short_title, sub, description, link, price, price_label, category, display_category, featured, fullWidth, isSoon, features, isLightSection, forceGrid } = Astro.props;
 
 const targetHref = slug 
   ? (category === 'Serviço' ? `/checkout/${slug}` : `/planos/${slug}`) 
   : link;
 const href = isSoon ? '#' : targetHref;
 
-const isFullRow = featured || fullWidth || slug === 'trafego-meta';
-const baseCardClass = featured ? 'lc lc-featured' : (isFullRow ? 'lc lc-fullwidth' : (isSoon ? 'lc section-soon' : 'lc'));
+const isFeaturedCard = featured && !forceGrid;
+const isFullRow = !forceGrid && (featured || fullWidth || slug === 'trafego-meta');
+const baseCardClass = isFeaturedCard ? 'lc lc-featured' : (isFullRow ? 'lc lc-fullwidth' : (isSoon ? 'lc section-soon' : 'lc'));
 
 const getIcon = (itemSlug: string, itemCategory: string) => {
   if (itemSlug?.includes('whatsapp')) return 'message-square';
@@ -29,69 +30,70 @@ const getIcon = (itemSlug: string, itemCategory: string) => {
 
 const iconName = getIcon(slug, category);
 const isMetaCard = slug?.includes('meta') || slug?.includes('whatsapp');
-const accentColor = isMetaCard ? '#0072FF' : 'var(--acid)';
-
-const lightStyle = isLightSection ? "background: #ffffff; border: 1px solid rgba(0, 0, 0, 0.08); box-shadow: 0 4px 16px rgba(0, 0, 0, 0.06);" : "";
-const titleStyle = isLightSection ? "color: #0b0b0d;" : "";
-const subStyle = isLightSection ? "color: #555560;" : "";
+const cardClass = [
+  baseCardClass,
+  isLightSection ? 'lc--light' : '',
+  isMetaCard ? 'lc--meta' : ''
+].filter(Boolean).join(' ');
 ---
-<a href={href} class={baseCardClass} style={lightStyle}>
-  {featured ? (
-    <div style="display: flex; align-items: center; gap: 0.85rem; width: 100%;">
-      <div class="lc-icon" style="margin-bottom: 0;">
-        <i data-lucide={iconName} style="width: 20px; height: 20px; color: #000;"></i>
+<a href={href} class={cardClass}>
+  {isFeaturedCard ? (
+    <div class="product-card-row">
+      <div class="lc-icon product-card-icon">
+        <i data-lucide={iconName}></i>
       </div>
-      <div class="lc-body" style="flex: 1;">
-        <div style="margin-bottom: 0.2rem;">
+      <div class="lc-body product-card-body">
+        <div class="product-card-badge">
           <BadgeChip label="OPERAÇÃO PRINCIPAL" color="acid" pulse={true} />
         </div>
-        <div class="lc-title" style="font-size: 0.95rem;">{short_title || title}</div>
+        <div class="lc-title product-card-featured-title">{short_title || title}</div>
         <div class="lc-sub">{display_category || category}</div>
+        {description && <p class="lc-desc">{description}</p>}
       </div>
-      <div style="text-align: right; flex-shrink: 0;">
-        <!-- SDR CARD BUTTON 100% BLACK -->
-        <span style="font-size: 0.65rem; color: #ffffff; background: #000000; font-family: var(--mono); font-weight: 800; text-transform: uppercase; letter-spacing: 0.05em; display: inline-flex; align-items: center; gap: 3px; padding: 6px 12px; border-radius: 8px; box-shadow: 0 4px 12px rgba(0, 0, 0, 0.25);">
-          Ver detalhes <i data-lucide="chevron-right" style={`width: 12px; height: 12px; color: ${accentColor};`}></i>
+      <div class="product-card-action-slot">
+        <span class="card-action card-action--strong">
+          Ver detalhes <i data-lucide="chevron-right"></i>
         </span>
       </div>
     </div>
   ) : isFullRow ? (
-    <div style="display: flex; align-items: center; gap: 0.85rem; width: 100%;">
-      <div class="lc-icon" style="margin-bottom: 0;">
-        <i data-lucide={iconName} style={`width: 18px; height: 18px; color: ${accentColor};`}></i>
+    <div class="product-card-row">
+      <div class="lc-icon product-card-icon">
+        <i data-lucide={iconName}></i>
       </div>
-      <div class="lc-body" style="flex: 1;">
-        <div class="lc-title" style={`font-size: 0.82rem; ${titleStyle}`}>{short_title || title}</div>
-        <div class="lc-sub" style={subStyle}>{display_category || category}</div>
+      <div class="lc-body product-card-body">
+        <div class="lc-title product-card-row-title">{short_title || title}</div>
+        <div class="lc-sub">{display_category || category}</div>
+        {description && <p class="lc-desc">{description}</p>}
       </div>
-      <div style="text-align: right; flex-shrink: 0;">
-        <span style="font-size: 0.6rem; color: #ffffff; background: #000000; border: 1px solid rgba(0, 0, 0, 0.1); font-family: var(--mono); font-weight: 700; text-transform: uppercase; letter-spacing: 0.05em; display: inline-flex; align-items: center; gap: 3px; padding: 5px 10px; border-radius: 6px;">
-          Ver detalhes <i data-lucide="chevron-right" style={`width: 11px; height: 11px; color: ${accentColor};`}></i>
+      <div class="product-card-action-slot">
+        <span class="card-action">
+          Ver detalhes <i data-lucide="chevron-right"></i>
         </span>
       </div>
     </div>
   ) : (
     <>
-      <div style="display: flex; justify-content: space-between; align-items: flex-start; width: 100%;">
+      <div class="product-card-top">
         <div class="lc-icon">
-          <i data-lucide={iconName} style={`width: 18px; height: 18px; color: ${accentColor};`}></i>
+          <i data-lucide={iconName}></i>
         </div>
         {display_category && (
-          <span style={`font-family: var(--mono); font-size: 0.52rem; text-transform: uppercase; letter-spacing: 0.05em; text-align: right; max-width: 50%; ${isLightSection ? 'color: #555560;' : 'color: var(--text-3);'}`}>
+          <span class="product-card-category">
             {display_category.replace('Implementação ', '').replace('Operação ', '')}
           </span>
         )}
       </div>
 
-      <div class="lc-body" style="margin-top: 0.4rem;">
-        <div class="lc-title" style={titleStyle}>{short_title || title}</div>
-        <div class="lc-sub" style={subStyle}>{sub || category}</div>
+      <div class="lc-body product-card-body product-card-body--stack">
+        <div class="lc-title">{short_title || title}</div>
+        <div class="lc-sub">{sub || category}</div>
+        {description && <p class="lc-desc">{description}</p>}
       </div>
       
-      <div style="display: flex; justify-content: flex-end; align-items: center; margin-top: 0.4rem;">
-        <!-- REGULAR CARD BUTTON 100% BLACK -->
-        <span style="font-size: 0.58rem; color: #ffffff; background: #000000; border: 1px solid rgba(0, 0, 0, 0.1); font-family: var(--mono); font-weight: 700; text-transform: uppercase; letter-spacing: 0.05em; display: inline-flex; align-items: center; gap: 2px; padding: 4px 8px; border-radius: 6px;">
-          Ver detalhes <i data-lucide="chevron-right" style={`width: 11px; height: 11px; color: ${accentColor};`}></i>
+      <div class="product-card-footer">
+        <span class="card-action">
+          Ver detalhes <i data-lucide="chevron-right"></i>
         </span>
       </div>
     </>

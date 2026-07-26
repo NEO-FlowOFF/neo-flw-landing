@@ -28,15 +28,15 @@ const { label, color = "acid", pulse = false } = Astro.props;
   .badge.pink,
   .badge.acid,
   .badge.neon {
-    background: rgba(200, 212, 26, 0.12);
+    background: rgba(143, 254, 9, 0.12);
     color: var(--acid);
-    border-color: rgba(200, 212, 26, 0.3);
+    border-color: rgba(143, 254, 9, 0.28);
   }
 
   .badge.blue {
-    background: rgba(200, 212, 26, 0.12);
-    color: var(--acid);
-    border-color: rgba(200, 212, 26, 0.3);
+    background: rgba(24, 119, 242, 0.1);
+    color: #4fa3ff;
+    border-color: rgba(24, 119, 242, 0.28);
   }
 
   .badge.mono {
@@ -51,7 +51,7 @@ const { label, color = "acid", pulse = false } = Astro.props;
     height: 6px;
     border-radius: 50%;
     background: currentColor;
-    box-shadow: 0 0 8px currentColor;
+    box-shadow: 0 0 0 4px rgb(143 254 9 / 10%);
     animation: pulse 1.5s infinite ease-in-out;
   }
 

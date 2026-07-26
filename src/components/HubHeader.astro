@@ -21,8 +21,8 @@ import uiTexts from '../data/ui_texts.json';
 
     <div class="nav-right">
       <button id="menu-toggle" class="hamburger-btn" aria-label="Abrir menu" aria-expanded="false" aria-controls="mobile-menu">
-        <i data-lucide="menu" id="menu-icon-open" style="width: 18px; height: 18px; color: var(--acid);"></i>
-        <i data-lucide="x" id="menu-icon-close" style="width: 18px; height: 18px; color: var(--acid);" hidden></i>
+        <i data-lucide="menu" id="menu-icon-open" class="menu-toggle-icon"></i>
+        <i data-lucide="x" id="menu-icon-close" class="menu-toggle-icon" hidden></i>
       </button>
     </div>
   </div>
@@ -35,28 +35,28 @@ import uiTexts from '../data/ui_texts.json';
     </div>
     <nav class="menu-nav">
       <a href="#" class="menu-item">
-        <span class="menu-icon"><i data-lucide="home" style="width: 16px; height: 16px;"></i></span>
+        <span class="menu-icon"><i data-lucide="home"></i></span>
         <span class="menu-copy">
           <span>Início</span>
           <small>Visão geral</small>
         </span>
       </a>
       <a href="#solucoes" class="menu-item">
-        <span class="menu-icon"><i data-lucide="grid" style="width: 16px; height: 16px;"></i></span>
+        <span class="menu-icon"><i data-lucide="grid"></i></span>
         <span class="menu-copy">
           <span>Soluções & Implementações</span>
           <small>Planos e serviços</small>
         </span>
       </a>
       <a href="#sobre" class="menu-item">
-        <span class="menu-icon"><i data-lucide="shield" style="width: 16px; height: 16px;"></i></span>
+        <span class="menu-icon"><i data-lucide="shield"></i></span>
         <span class="menu-copy">
           <span>Sobre a Agência</span>
           <small>Arquitetura e método</small>
         </span>
       </a>
       <a href="https://wa.me/556294789032" target="_blank" rel="noopener noreferrer" class="menu-item cta-item">
-        <span class="menu-icon"><i data-lucide="message-circle" style="width: 16px; height: 16px;"></i></span>
+        <span class="menu-icon"><i data-lucide="message-circle"></i></span>
         <span class="menu-copy">
           <span>Atendimento WhatsApp</span>
           <small>Mapear operação</small>
@@ -70,9 +70,9 @@ import uiTexts from '../data/ui_texts.json';
 <style>
   .hub-header {
     position: sticky;
-    top: 10px;
+    top: max(10px, env(safe-area-inset-top));
     z-index: 100;
-    margin-bottom: 2rem;
+    margin-bottom: 1rem;
     width: 100%;
   }
 
@@ -82,12 +82,12 @@ import uiTexts from '../data/ui_texts.json';
     align-items: center;
     justify-content: space-between;
     padding: 0.55rem 0.95rem;
-    background: rgba(22, 22, 26, 0.78);
-    backdrop-filter: blur(16px) saturate(180%);
-    -webkit-backdrop-filter: blur(16px) saturate(180%);
+    background: rgba(20, 22, 20, 0.72);
+    backdrop-filter: blur(18px) saturate(150%);
+    -webkit-backdrop-filter: blur(18px) saturate(150%);
     border: 1px solid rgba(255, 255, 255, 0.12);
     border-radius: 999px;
-    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.6), inset 0 1px 0 rgba(255, 255, 255, 0.12);
+    box-shadow: 0 18px 44px rgba(0, 0, 0, 0.28), inset 0 1px 0 rgba(255, 255, 255, 0.12);
     position: relative;
     z-index: 2;
   }
@@ -102,7 +102,7 @@ import uiTexts from '../data/ui_texts.json';
     height: 24px;
     width: auto;
     object-fit: contain;
-    filter: drop-shadow(0 0 12px rgba(200, 212, 26, 0.4));
+    filter: drop-shadow(0 0 8px rgba(143, 254, 9, 0.18));
   }
 
   .nav-right {
@@ -117,8 +117,8 @@ import uiTexts from '../data/ui_texts.json';
     gap: 5px;
     padding: 3px 9px;
     border-radius: 999px;
-    background: rgba(200, 212, 26, 0.1);
-    border: 1px solid rgba(200, 212, 26, 0.3);
+    background: rgba(143, 254, 9, 0.1);
+    border: 1px solid rgba(143, 254, 9, 0.3);
   }
 
   .status-dot {
@@ -142,13 +142,13 @@ import uiTexts from '../data/ui_texts.json';
     width: 38px;
     height: 38px;
     border-radius: 50%;
-    background: linear-gradient(180deg, rgba(255, 255, 255, 0.12), rgba(255, 255, 255, 0.035));
-    border: 1px solid rgba(200, 212, 26, 0.24);
+    background: linear-gradient(180deg, rgba(255, 255, 255, 0.13), rgba(255, 255, 255, 0.04));
+    border: 1px solid rgba(143, 254, 9, 0.22);
     display: flex;
     align-items: center;
     justify-content: center;
     cursor: pointer;
-    box-shadow: 0 8px 22px rgba(0, 0, 0, 0.4), inset 0 1px 0 rgba(255, 255, 255, 0.12);
+    box-shadow: 0 10px 24px rgba(0, 0, 0, 0.26), inset 0 1px 0 rgba(255, 255, 255, 0.12);
     position: relative;
     transition: background 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease, transform 0.15s ease;
   }
@@ -158,7 +158,7 @@ import uiTexts from '../data/ui_texts.json';
     position: absolute;
     inset: -5px;
     border-radius: inherit;
-    background: radial-gradient(circle, rgba(200, 212, 26, 0.24), transparent 64%);
+    background: radial-gradient(circle, rgba(143, 254, 9, 0.18), transparent 64%);
     opacity: 0;
     transition: opacity 0.2s ease;
     z-index: -1;
@@ -183,9 +183,9 @@ import uiTexts from '../data/ui_texts.json';
   .hamburger-btn:hover,
   .hamburger-btn:focus-visible,
   .hamburger-btn.is-open {
-    background: rgba(200, 212, 26, 0.1);
-    border-color: rgba(200, 212, 26, 0.55);
-    box-shadow: 0 10px 26px rgba(0, 0, 0, 0.48), 0 0 18px rgba(200, 212, 26, 0.16);
+    background: rgba(143, 254, 9, 0.1);
+    border-color: rgba(143, 254, 9, 0.44);
+    box-shadow: 0 12px 28px rgba(0, 0, 0, 0.34), 0 0 18px rgba(143, 254, 9, 0.12);
     outline: none;
   }
 
@@ -197,6 +197,12 @@ import uiTexts from '../data/ui_texts.json';
 
   .hamburger-btn:active {
     transform: scale(0.92);
+  }
+
+  .menu-toggle-icon {
+    width: 18px;
+    height: 18px;
+    color: var(--acid);
   }
 
   /* GLASSMORPHIC DROPDOWN MENU */
@@ -211,10 +217,10 @@ import uiTexts from '../data/ui_texts.json';
       rgba(12, 12, 15, 0.94);
     backdrop-filter: blur(28px) saturate(170%);
     -webkit-backdrop-filter: blur(28px) saturate(170%);
-    border: 1px solid rgba(200, 212, 26, 0.26);
+    border: 1px solid rgba(143, 254, 9, 0.2);
     border-radius: 22px;
     padding: 0.75rem;
-    box-shadow: 0 22px 48px rgba(0, 0, 0, 0.72), 0 0 0 1px rgba(255, 255, 255, 0.035) inset;
+    box-shadow: 0 24px 54px rgba(0, 0, 0, 0.48), 0 0 0 1px rgba(255, 255, 255, 0.035) inset;
     opacity: 0;
     transform: translateY(-12px) scale(0.98);
     pointer-events: none;
@@ -226,7 +232,7 @@ import uiTexts from '../data/ui_texts.json';
     content: '';
     position: absolute;
     inset: 0;
-    background: linear-gradient(120deg, rgba(200, 212, 26, 0.14), transparent 38%, rgba(255, 255, 255, 0.04));
+    background: linear-gradient(120deg, rgba(143, 254, 9, 0.1), transparent 38%, rgba(255, 255, 255, 0.04));
     opacity: 0.75;
     pointer-events: none;
   }
@@ -258,7 +264,7 @@ import uiTexts from '../data/ui_texts.json';
   }
 
   .menu-head span:last-child {
-    color: rgba(200, 212, 26, 0.78);
+    color: rgba(143, 254, 9, 0.78);
     text-align: right;
   }
 
@@ -288,7 +294,7 @@ import uiTexts from '../data/ui_texts.json';
   .menu-item:hover,
   .menu-item:focus-visible {
     background: rgba(255, 255, 255, 0.075);
-    border-color: rgba(200, 212, 26, 0.24);
+    border-color: rgba(143, 254, 9, 0.24);
     box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.075), 0 8px 20px rgba(0, 0, 0, 0.24);
     outline: none;
   }
@@ -301,9 +307,14 @@ import uiTexts from '../data/ui_texts.json';
     align-items: center;
     justify-content: center;
     color: var(--acid);
-    background: rgba(200, 212, 26, 0.09);
-    border: 1px solid rgba(200, 212, 26, 0.18);
+    background: rgba(143, 254, 9, 0.08);
+    border: 1px solid rgba(143, 254, 9, 0.16);
     flex: 0 0 auto;
+  }
+
+  .menu-icon [data-lucide] {
+    width: 16px;
+    height: 16px;
   }
 
   .menu-copy {
@@ -336,7 +347,7 @@ import uiTexts from '../data/ui_texts.json';
     border: none;
     margin-top: 4px;
     font-weight: 800;
-    box-shadow: 0 12px 26px rgba(200, 212, 26, 0.24);
+    box-shadow: 0 12px 26px rgba(143, 254, 9, 0.18);
   }
 
   .menu-item.cta-item .menu-icon {

@@ -234,7 +234,7 @@ Dados canônicos para esta submissão:
 
 ```env
 META_APP_ID=1500002841696407
-META_APP_NAME="NEOFLOW Engine"
+META_APP_NAME="NEØFLW ENGINE:one"
 META_APP_NAMESPACE=neoflowoff
 META_GRAPH_API_VERSION=v25.0
 ```
@@ -267,7 +267,7 @@ Sugestões coerentes:
 ```text
 NEØ Agent Operations
 neoflowoff.agency Agents
-NEØ Messaging Engine
+NEØ Messaging Engine:one
 ```
 
 Não usar `NΞØ:One` como nome do app, pois NΞØ:One é o agente demonstrador e não a infraestrutura vendida.
@@ -438,14 +438,14 @@ Bloqueador:
 Confirmados:
 
 ```text
-NEOFLOW Engine
+NEØFLW ENGINE:one
 App ID: 1500002841696407
 
 Social Media Connector / Zernio
 App ID: 712341431446535
 ```
 
-Não remover o Zernio até concluir origem do número, fluxo atual de mensagens, possível coexistência, risco de interrupção e plano de rollback.
+Remover o Zernio até concluir origem do número, fluxo atual de mensagens, possível coexistência, risco de interrupção e plano de rollback.
 
 ---
 
@@ -814,7 +814,7 @@ Estrutura sugerida:
   "apps": {
     "messaging": {
       "id": "1500002841696407",
-      "name": "NEOFLOW Engine",
+      "name": "NEØFLW ENGINE:one",
       "status": "development",
       "confirmed": true
     },

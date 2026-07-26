@@ -7,10 +7,14 @@
   "integrations": {
     "meta": {
       "app_id": "1500002841696407",
-      "app_name": "NEOFLOW Engine",
+      "app_name": "NEØFLW ENGINE:one",
       "graph_api_version": "v25.0",
       "domain_verification": "zq0xygs8v9s714m5039mijjh0wowyj",
-      "pixel_events": ["begin_checkout", "add_payment_info", "purchase"],
+      "pixel_events": [
+        "begin_checkout",
+        "add_payment_info",
+        "purchase"
+      ],
       "requested_scopes": [
         "whatsapp_business_management",
         "whatsapp_business_messaging",

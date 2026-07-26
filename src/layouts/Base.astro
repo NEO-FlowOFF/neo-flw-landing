@@ -117,9 +117,12 @@ const jsonLd = {
       <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=DM+Mono:ital,wght@0,300;0,400;0,500;1,300;1,400;1,500&family=Figtree:ital,wght@0,300..900;1,300..900&family=Outfit:wght@500;700;800;900&family=Space+Grotesk:wght@500;600;700&display=swap">
     </noscript>
   </head>
-  <body>
-    <div class="mesh"></div>
-    <slot />
+  <body class="neo-site-shell">
+    <a class="skip-link" href="#conteudo-principal">Ir para o conteúdo</a>
+    <div class="mesh" aria-hidden="true"></div>
+    <div id="conteudo-principal" class="site-shell">
+      <slot />
+    </div>
     <script>
       const iconPaths: Record<string, string> = {
         activity: '<path d="M22 12h-4l-3 9L9 3l-3 9H2"></path>',

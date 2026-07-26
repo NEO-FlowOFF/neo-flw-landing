@@ -3,42 +3,40 @@ import Base from '../layouts/Base.astro';
 ---
 
 <Base title="Instruções de Exclusão de Dados — neoflowoff.agency" description="Protocolo de exclusão e revogação de dados de usuários e contas WABA na plataforma neoflowoff.agency.">
-  <div class="page" style="max-width: 680px; margin: 0 auto; padding: 2rem 1rem 4rem;">
-    
-    <!-- HEADER BRANDING -->
-    <header style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 2rem; padding-bottom: 1rem; border-bottom: 1px solid rgba(255, 255, 255, 0.1);">
-      <a href="/" style="display: flex; align-items: center; text-decoration: none;">
-        <img src="/assets/neoflowoff-logo-192.webp" alt="neoflowoff.agency" style="height: 26px; width: auto; filter: drop-shadow(0 0 10px rgba(200, 212, 26, 0.3));" width="192" height="34" loading="eager" decoding="async" />
+  <div class="legal-page">
+    <header class="legal-header">
+      <a href="/" class="legal-brand-link" aria-label="neoflowoff.agency">
+        <img src="/assets/neoflowoff-logo-192.webp" alt="neoflowoff.agency" width="192" height="34" loading="eager" decoding="async" />
       </a>
-      <a href="/" style="font-family: var(--mono); font-size: 0.72rem; color: var(--acid); text-decoration: none; font-weight: 700; text-transform: uppercase;">
-        ← Voltar ao site
+      <a href="/" class="legal-back-link">
+        <i data-lucide="chevron-left"></i>
+        <span>Voltar ao site</span>
       </a>
     </header>
 
-    <!-- CONTENT CARD -->
-    <article style="background: rgba(255, 255, 255, 0.03); backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px); border: 1px solid rgba(255, 255, 255, 0.1); border-radius: 20px; padding: 2rem 1.4rem; box-shadow: 0 16px 40px rgba(0,0,0,0.6);">
-      <div style="font-family: var(--mono); font-size: 0.65rem; color: var(--acid); text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 0.4rem; font-weight: 700;">
+    <article class="legal-card">
+      <div class="legal-kicker">
         PROTOCOLO DE SOBERANIA E PRIVACIDADE DE DADOS
       </div>
-      <h1 style="font-size: 1.5rem; font-weight: 900; color: #fff; margin-bottom: 0.3rem; letter-spacing: -0.01em;">
+      <h1>
         Instruções de Exclusão de Dados do Usuário
       </h1>
-      <p style="font-family: var(--mono); font-size: 0.7rem; color: var(--text-3); margin-bottom: 1.8rem;">
+      <p class="legal-update">
         Data Deletion Protocol · Compliance Meta Developers & LGPD
       </p>
 
-      <div style="display: flex; flex-direction: column; gap: 1.5rem; color: var(--text-2); font-size: 0.9rem; line-height: 1.65;">
+      <div class="legal-content">
         
         <p>
           A <strong>neoflowoff.agency</strong> respeita a privacidade e a soberania dos dados de seus usuários e clientes. Caso deseje remover o vínculo do seu aplicativo com nossa plataforma e solicitar a exclusão completa de todos os dados armazenados, siga o procedimento abaixo:
         </p>
 
-        <section style="background: rgba(0, 0, 0, 0.3); border: 1px solid rgba(255, 255, 255, 0.08); border-radius: 14px; padding: 1.2rem;">
-          <h2 style="font-size: 1rem; font-weight: 800; color: var(--acid); margin-bottom: 0.5rem; display: flex; align-items: center; gap: 6px;">
-            <i data-lucide="shield-alert" style="width: 16px; height: 16px;"></i>
+        <section class="legal-step">
+          <h2>
+            <i data-lucide="shield-alert"></i>
             Opção 1: Remoção Direta via Meta / Facebook
           </h2>
-          <ol style="padding-left: 1.2rem; margin: 0; display: flex; flex-direction: column; gap: 0.4rem;">
+          <ol>
             <li>Acesse sua conta do Facebook ou Meta Business Manager.</li>
             <li>Vá em <strong>Configurações e Privacidade &gt; Configurações &gt; Aplicativos e Sites</strong>.</li>
             <li>Localize o aplicativo <strong>neoflowoff.agency</strong> e clique em <strong>Remover</strong>.</li>
@@ -46,29 +44,29 @@ import Base from '../layouts/Base.astro';
           </ol>
         </section>
 
-        <section style="background: rgba(0, 0, 0, 0.3); border: 1px solid rgba(255, 255, 255, 0.08); border-radius: 14px; padding: 1.2rem;">
-          <h2 style="font-size: 1rem; font-weight: 800; color: var(--acid); margin-bottom: 0.5rem; display: flex; align-items: center; gap: 6px;">
-            <i data-lucide="shield-check" style="width: 16px; height: 16px;"></i>
+        <section class="legal-step">
+          <h2>
+            <i data-lucide="shield-check"></i>
             Callback Automático da Meta
           </h2>
-          <p style="margin-bottom: 0.6rem;">
+          <p>
             Quando a Meta enviar uma solicitação automatizada de exclusão, a neoflowoff.agency recebe a requisição assinada no endpoint abaixo, valida a assinatura com o App Secret, registra ou encaminha a solicitação para processamento seguro e retorna um código de confirmação.
           </p>
-          <div style="font-family: var(--mono); font-size: 0.72rem; color: var(--acid); overflow-wrap: anywhere;">
+          <div class="legal-endpoint">
             POST https://neoflowoff.agency/api/meta/data-deletion
           </div>
         </section>
 
-        <section style="background: rgba(0, 0, 0, 0.3); border: 1px solid rgba(255, 255, 255, 0.08); border-radius: 14px; padding: 1.2rem;">
-          <h2 style="font-size: 1rem; font-weight: 800; color: var(--acid); margin-bottom: 0.5rem; display: flex; align-items: center; gap: 6px;">
-            <i data-lucide="trash-2" style="width: 16px; height: 16px;"></i>
+        <section class="legal-step">
+          <h2>
+            <i data-lucide="trash-2"></i>
             Opção 2: Solicitação Direta de Exclusão de Dados (SaaS / WABA)
           </h2>
-          <p style="margin-bottom: 0.6rem;">
+          <p>
             Para solicitar a remoção dos registros operacionais associados à integração, incluindo dados de conexão, histórico de mensagens mantido pela operação e logs de Webhooks quando aplicável:
           </p>
-          <ol style="padding-left: 1.2rem; margin: 0; display: flex; flex-direction: column; gap: 0.4rem;">
-            <li>Envie um e-mail para <a href="mailto:neo@neoflowoff.agency" style="color: var(--acid); font-weight: 700;">neo@neoflowoff.agency</a> com o assunto: <strong>"Solicitação de Exclusão de Dados - [Nome da sua Empresa]"</strong>.</li>
+          <ol>
+            <li>Envie um e-mail para <a href="mailto:neo@neoflowoff.agency">neo@neoflowoff.agency</a> com o assunto: <strong>"Solicitação de Exclusão de Dados - [Nome da sua Empresa]"</strong>.</li>
             <li>Informe o <strong>WABA ID</strong> (ID da Conta do WhatsApp Business) e o número cadastrado.</li>
             <li>Nossa equipe de infraestrutura executará o processo de exclusão ou anonimização aplicável e enviará um protocolo de confirmação em até <strong>48 horas úteis</strong>, salvo obrigações legais, antifraude ou auditoria que exijam retenção limitada.</li>
           </ol>
@@ -77,13 +75,12 @@ import Base from '../layouts/Base.astro';
       </div>
     </article>
 
-    <!-- FOOTER NAV -->
-    <footer style="margin-top: 2rem; display: flex; gap: 1rem; justify-content: center; font-family: var(--mono); font-size: 0.7rem;">
-      <a href="/privacy" style="color: var(--text-2); text-decoration: none;">Privacidade</a>
-      <span style="color: rgba(255,255,255,0.2);">•</span>
-      <a href="/legal" style="color: var(--text-2); text-decoration: none;">Termos de Serviço</a>
-      <span style="color: rgba(255,255,255,0.2);">•</span>
-      <a href="/excluir-dados" style="color: var(--acid); text-decoration: none; font-weight: 700;">Exclusão de Dados</a>
+    <footer class="legal-footer">
+      <a href="/privacy">Privacidade</a>
+      <span aria-hidden="true">•</span>
+      <a href="/legal">Termos de Serviço</a>
+      <span aria-hidden="true">•</span>
+      <a href="/excluir-dados" aria-current="page">Exclusão de Dados</a>
     </footer>
 
   </div>

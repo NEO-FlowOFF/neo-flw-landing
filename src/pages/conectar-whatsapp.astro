@@ -30,9 +30,9 @@ const requestedScopes = metaConfig.requested_scopes.join(',');
 
         <!-- LOGO META TECH PROVIDER -->
         <div class="meta-brand-header">
-          <img 
-            src="/lgo-app-stell.png" 
-            alt="NEOFLOW Engine Meta App" 
+          <img
+            src="/lgo-app-stell.png"
+            alt="NEØFLW ENGINE:one Meta App"
             class="meta-badge-img"
             width="78"
             height="39"
@@ -48,18 +48,13 @@ const requestedScopes = metaConfig.requested_scopes.join(',');
 
         <!-- TÍTULO & SUBTÍTULO -->
         <h1 class="wa-card-title">
-        <img 
-          src={brandLogo.src} 
-          alt="NEØ FlowOFF Agency" 
+        <img
+          src={brandLogo.src}
+          alt="NEØ FlowOFF Agency"
           class="card-brand-logo-img"
           width="275"
           height="48"
           loading="eager"
-          style={{ 
-            width: '100%', 
-            maxWidth: '275px', 
-            height: 'auto' 
-          }}
         />
         </h1>
         <p class="wa-card-desc">
@@ -68,9 +63,9 @@ const requestedScopes = metaConfig.requested_scopes.join(',');
 
         <!-- BOTÃO AZUL OFICIAL META -->
         <div class="cta-wrapper">
-          <button 
-            id="btn-meta-signup" 
-            onclick="launchWhatsAppSignup()" 
+          <button
+            id="btn-meta-signup"
+            onclick="launchWhatsAppSignup()"
             class="btn-meta-blue"
             data-haptic
             aria-label="Continuar com a Meta"
@@ -89,14 +84,14 @@ const requestedScopes = metaConfig.requested_scopes.join(',');
         <!-- SELOS DE SEGURANÇA E CONEXÃO -->
         <div class="trust-grid">
           <div class="trust-card">
-            <i data-lucide="shield-check" style="width: 16px; height: 16px; color: var(--acid);"></i>
+            <i data-lucide="shield-check" class="trust-icon"></i>
             <div>
               <strong>Autorização via Meta</strong>
               <small>Ambiente oficial de conexão</small>
             </div>
           </div>
           <div class="trust-card">
-            <i data-lucide="zap" style="width: 16px; height: 16px; color: var(--acid);"></i>
+            <i data-lucide="zap" class="trust-icon"></i>
             <div>
               <strong>Orquestração NEØ</strong>
               <small>Integração com o Growth System</small>
@@ -106,7 +101,7 @@ const requestedScopes = metaConfig.requested_scopes.join(',');
 
         <!-- FOOTER INFO DO APP -->
         <footer class="app-info-footer">
-          <span>NEØFLW ENGINE//01</span>
+          <span>NEØFLW ENGINE:one</span>
           <span>·</span>
           <span><code>{metaAppId}</code></span>
         </footer>
@@ -142,7 +137,7 @@ const requestedScopes = metaConfig.requested_scopes.join(',');
       inset: 0;
       background:
         radial-gradient(ellipse 70% 55% at 50% -10%, rgba(24, 119, 242, 0.14) 0%, transparent 65%),
-        radial-gradient(ellipse 50% 40% at 80% 90%, rgba(200, 212, 26, 0.06) 0%, transparent 60%);
+        radial-gradient(ellipse 50% 40% at 80% 90%, rgba(143, 254, 9, 0.06) 0%, transparent 60%);
       pointer-events: none;
       z-index: -1;
     }
@@ -168,7 +163,7 @@ const requestedScopes = metaConfig.requested_scopes.join(',');
       align-items: center;
       justify-content: space-between;
       padding: 0.6rem 1.1rem;
-      background: rgba(18, 18, 22, 0.82);
+      background: rgba(23, 24, 23, 0.82);
       backdrop-filter: blur(20px) saturate(200%);
       -webkit-backdrop-filter: blur(20px) saturate(200%);
       border: 1px solid rgba(255, 255, 255, 0.09);
@@ -198,8 +193,8 @@ const requestedScopes = metaConfig.requested_scopes.join(',');
       gap: 6px;
       padding: 4px 11px;
       border-radius: 999px;
-      background: rgba(200, 212, 26, 0.07);
-      border: 1px solid rgba(200, 212, 26, 0.22);
+      background: rgba(143, 254, 9, 0.07);
+      border: 1px solid rgba(143, 254, 9, 0.22);
     }
 
     .status-dot {
@@ -225,7 +220,7 @@ const requestedScopes = metaConfig.requested_scopes.join(',');
       position: relative;
       /* borda gradiente via pseudo-element */
       background: linear-gradient(165deg, rgba(26, 26, 34, 0.97) 0%, rgba(10, 10, 14, 0.99) 100%);
-      border-radius: 28px;
+      border-radius: 12px;
       padding: 2.6rem 2.2rem 2rem;
       text-align: center;
       overflow: hidden;
@@ -237,7 +232,7 @@ const requestedScopes = metaConfig.requested_scopes.join(',');
       content: '';
       position: absolute;
       inset: 0;
-      border-radius: 28px;
+      border-radius: 12px;
       padding: 1px;
       background: linear-gradient(
         160deg,
@@ -331,7 +326,7 @@ const requestedScopes = metaConfig.requested_scopes.join(',');
       height: auto;
       object-fit: contain;
       filter:
-        drop-shadow(0 0 18px rgba(200, 212, 26, 0.3))
+        drop-shadow(0 0 18px rgba(143, 254, 9, 0.24))
         drop-shadow(0 2px 8px rgba(0, 0, 0, 0.6));
       margin: 0.2rem auto 0.5rem;
       display: block;
@@ -462,8 +457,8 @@ const requestedScopes = metaConfig.requested_scopes.join(',');
     }
 
     .status-box.success {
-      background: rgba(200, 212, 26, 0.1);
-      border-color: rgba(200, 212, 26, 0.38);
+      background: rgba(143, 254, 9, 0.1);
+      border-color: rgba(143, 254, 9, 0.38);
       color: var(--acid);
     }
 
@@ -522,6 +517,12 @@ const requestedScopes = metaConfig.requested_scopes.join(',');
       color: rgba(255, 255, 255, 0.42);
       margin-top: 3px;
       line-height: 1.4;
+    }
+
+    .trust-icon {
+      width: 16px;
+      height: 16px;
+      color: var(--acid);
     }
 
     /* ─── FOOTER ─── */

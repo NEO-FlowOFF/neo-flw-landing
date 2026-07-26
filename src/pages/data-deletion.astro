@@ -1,4 +1,84 @@
 ---
-import DataDeletionPage from './excluir-dados.astro';
+import Base from '../layouts/Base.astro';
 ---
-<DataDeletionPage />
+
+<Base title="Instruções de Exclusão de Dados — neoflowoff.agency" description="Protocolo de exclusão e revogação de dados de usuários e contas WABA na plataforma neoflowoff.agency.">
+  <div class="legal-page">
+    <header class="legal-header">
+      <a href="/" class="legal-brand-link" aria-label="neoflowoff.agency">
+        <img src="/assets/neoflowoff-logo-192.webp" alt="neoflowoff.agency" width="192" height="34" loading="eager" decoding="async" />
+      </a>
+      <a href="/" class="legal-back-link">
+        <i data-lucide="chevron-left"></i>
+        <span>Voltar ao site</span>
+      </a>
+    </header>
+
+    <article class="legal-card">
+      <div class="legal-kicker">
+        PROTOCOLO DE SOBERANIA E PRIVACIDADE DE DADOS
+      </div>
+      <h1>
+        Instruções de Exclusão de Dados do Usuário
+      </h1>
+      <p class="legal-update">
+        Data Deletion Protocol · Compliance Meta Developers & LGPD
+      </p>
+
+      <div class="legal-content">
+        <p>
+          A <strong>neoflowoff.agency</strong> respeita a privacidade e a soberania dos dados de seus usuários e clientes. Caso deseje remover o vínculo do seu aplicativo com nossa plataforma e solicitar a exclusão completa de todos os dados armazenados, siga o procedimento abaixo:
+        </p>
+
+        <section class="legal-step">
+          <h2>
+            <i data-lucide="shield-alert"></i>
+            Opção 1: Remoção Direta via Meta / Facebook
+          </h2>
+          <ol>
+            <li>Acesse sua conta do Facebook ou Meta Business Manager.</li>
+            <li>Vá em <strong>Configurações e Privacidade &gt; Configurações &gt; Aplicativos e Sites</strong>.</li>
+            <li>Localize o aplicativo <strong>neoflowoff.agency</strong> e clique em <strong>Remover</strong>.</li>
+            <li>A revogação do token é processada imediatamente e a conexão com nossa API é encerrada.</li>
+          </ol>
+        </section>
+
+        <section class="legal-step">
+          <h2>
+            <i data-lucide="shield-check"></i>
+            Callback Automático da Meta
+          </h2>
+          <p>
+            Quando a Meta enviar uma solicitação automatizada de exclusão, a neoflowoff.agency recebe a requisição assinada no endpoint abaixo, valida a assinatura com o App Secret, registra ou encaminha a solicitação para processamento seguro e retorna um código de confirmação.
+          </p>
+          <div class="legal-endpoint">
+            POST https://neoflowoff.agency/api/meta/data-deletion
+          </div>
+        </section>
+
+        <section class="legal-step">
+          <h2>
+            <i data-lucide="trash-2"></i>
+            Opção 2: Solicitação Direta de Exclusão de Dados (SaaS / WABA)
+          </h2>
+          <p>
+            Para solicitar a remoção dos registros operacionais associados à integração, incluindo dados de conexão, histórico de mensagens mantido pela operação e logs de Webhooks quando aplicável:
+          </p>
+          <ol>
+            <li>Envie um e-mail para <a href="mailto:neo@neoflowoff.agency">neo@neoflowoff.agency</a> com o assunto: <strong>"Solicitação de Exclusão de Dados - [Nome da sua Empresa]"</strong>.</li>
+            <li>Informe o <strong>WABA ID</strong> (ID da Conta do WhatsApp Business) e o número cadastrado.</li>
+            <li>Nossa equipe de infraestrutura executará o processo de exclusão ou anonimização aplicável e enviará um protocolo de confirmação em até <strong>48 horas úteis</strong>, salvo obrigações legais, antifraude ou auditoria que exijam retenção limitada.</li>
+          </ol>
+        </section>
+      </div>
+    </article>
+
+    <footer class="legal-footer">
+      <a href="/privacy">Privacidade</a>
+      <span aria-hidden="true">•</span>
+      <a href="/terms">Termos de Serviço</a>
+      <span aria-hidden="true">•</span>
+      <a href="/data-deletion" aria-current="page">Exclusão de Dados</a>
+    </footer>
+  </div>
+</Base>

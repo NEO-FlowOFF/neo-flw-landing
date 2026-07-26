@@ -15,47 +15,46 @@ export function getStaticPaths() {
 const { servico } = Astro.props;
 ---
 <Base title={`${servico.title} | neoflowoff.agency`} description={servico.description}>
-  <div class="page" style="max-width: 900px; margin: 0 auto; padding: 2rem 1.5rem;">
-    <header style="margin-bottom: 2rem;">
-      <a href="/" style="color: var(--text-2); text-decoration: none; font-size: 0.9rem; display: flex; align-items: center; gap: 8px;">
-        <i data-lucide="chevron-left" style="width: 16px; height: 16px;"></i> {uiTexts.product_page.back_button}
+  <div class="detail-page">
+    <header class="detail-header">
+      <a href="/" class="back-link">
+        <i data-lucide="chevron-left"></i>
+        <span>{uiTexts.product_page.back_button}</span>
       </a>
     </header>
 
-    <div class="lc lc-featured" style="margin-bottom: 3rem; padding: 2.5rem;">
-      <div class="lc-body">
-        <div class="section-label" style="margin-bottom: 0.5rem;">{servico.display_category || uiTexts.product_page.service_label}</div>
-        <h1 class="lc-title" style="font-size: 2.5rem; margin-bottom: 1rem; font-weight: 900; line-height: 1.2;">{servico.title}</h1>
-        
-        <div class="lc-price" style="font-size: 2.2rem; margin-bottom: 1rem;">
-          {servico.price_label && <span style="font-size: 0.9rem; color: var(--text-2); display: block; font-weight: 400;">{servico.price_label}</span>}
-          R$ {servico.price.value.toLocaleString('pt-BR', { minimumFractionDigits: 2 })}
-        </div>
-        <p class="lc-desc" style="font-size: 1.1rem; line-height: 1.6;">{servico.description}</p>
+    <article class="detail-hero">
+      <div class="detail-hero-copy">
+        <div class="detail-kicker">{servico.display_category || uiTexts.product_page.service_label}</div>
+        <h1>{servico.title}</h1>
+        <p>{servico.description}</p>
       </div>
-    </div>
+      <aside class="detail-price-panel" aria-label="Resumo de preço">
+        {servico.price_label && <span>{servico.price_label}</span>}
+        <strong>R$ {servico.price.value.toLocaleString('pt-BR', { minimumFractionDigits: 2 })}</strong>
+        <small>Escopo validado antes da ativação.</small>
+      </aside>
+    </article>
 
-    <!-- ESCOPO DA IMPLANTAÇÃO -->
-    <section class="section" style="margin-bottom: 3rem;">
-      <div class="section-label" style="margin-bottom: 1rem;">{uiTexts.product_page.included_features_label}</div>
-      <ul style="list-style: none; padding: 0;">
+    <section class="detail-section">
+      <div class="section-label">{uiTexts.product_page.included_features_label}</div>
+      <ul class="detail-list">
         {servico.features.map(feature => (
-          <li style="display: flex; gap: 12px; align-items: flex-start; margin-bottom: 1rem; color: var(--text); font-size: 1.05rem; line-height: 1.5;">
-            <i data-lucide="check-circle" style="color: var(--acqua); width: 20px; height: 20px; flex-shrink: 0; margin-top: 2px;"></i>
+          <li>
+            <i data-lucide="check-circle"></i>
             <span>{feature}</span>
           </li>
         ))}
       </ul>
     </section>
 
-    <!-- O QUE ESTA CAMADA ORGANIZA (OUTCOMES) -->
     {servico.outcomes && (
-      <section class="section" style="margin-bottom: 3rem; padding: 2rem; background: rgba(255, 255, 255, 0.02); border: 1px solid var(--border); border-radius: 8px;">
-        <div class="section-label" style="margin-bottom: 1rem;">{uiTexts.product_page.outcomes_label}</div>
-        <ul style="list-style: none; padding: 0;">
+      <section class="detail-section detail-section--panel">
+        <div class="section-label">{uiTexts.product_page.outcomes_label}</div>
+        <ul class="detail-list detail-list--outcomes">
           {servico.outcomes.map(outcome => (
-            <li style="display: flex; gap: 12px; align-items: flex-start; margin-bottom: 0.8rem; color: var(--text); font-size: 1rem; line-height: 1.5;">
-              <i data-lucide="sparkles" style="color: var(--pink-s); width: 18px; height: 18px; flex-shrink: 0; margin-top: 2px;"></i>
+            <li>
+              <i data-lucide="sparkles"></i>
               <span>{outcome}</span>
             </li>
           ))}
@@ -63,30 +62,30 @@ const { servico } = Astro.props;
       </section>
     )}
 
-    <!-- AVISO DE PRECIFICAÇÃO E AÇÕES -->
-    <div style="margin-top: 3rem; text-align: center;">
-      <p style="color: var(--text-2); font-size: 0.85rem; margin-bottom: 1.5rem; max-width: 600px; margin-left: auto; margin-right: auto; line-height: 1.5;">
+    <section class="detail-cta" aria-label="Próximo passo">
+      <p>
         {uiTexts.product_page.pricing_notice}
       </p>
 
-      <div style="display: flex; gap: 1rem; flex-direction: column; max-width: 500px; margin: 0 auto;">
-        <button class="lc" style="width: 100%; display: inline-flex; align-items: center; justify-content: center; gap: 12px; font-size: 1.1rem; font-weight: 700; background: var(--pink-s); color: #fff; padding: 1.2rem; border-radius: 6px;">
-          <i data-lucide="credit-card"></i> {uiTexts.product_page.checkout_button}
+      <div class="detail-actions">
+        <button class="detail-action detail-action--primary">
+          <i data-lucide="credit-card"></i>
+          <span>{uiTexts.product_page.checkout_button}</span>
         </button>
 
-        <a href={`https://wa.me/556294789032?text=Olá!%20Gostaria%20de%20validar%20o%20escopo%20do%20serviço%20${encodeURIComponent(servico.title)}`} target="_blank" rel="noopener noreferrer" class="lc" style="width: 100%; display: inline-flex; align-items: center; justify-content: center; gap: 10px; font-size: 1rem; background: transparent; border: 1px solid var(--border); color: var(--text); padding: 1rem; text-decoration: none; border-radius: 6px;">
-          <i data-lucide="message-circle" style="color: var(--acqua);"></i> {uiTexts.product_page.contact_button}
+        <a href={`https://wa.me/556294789032?text=Olá!%20Gostaria%20de%20validar%20o%20escopo%20do%20serviço%20${encodeURIComponent(servico.title)}`} target="_blank" rel="noopener noreferrer" class="detail-action detail-action--secondary">
+          <i data-lucide="message-circle"></i>
+          <span>{uiTexts.product_page.contact_button}</span>
         </a>
       </div>
-    </div>
+    </section>
 
-    <!-- FOOTER -->
-    <footer class="hub-footer" style="display: flex; flex-direction: column; align-items: center; gap: 1.5rem; margin-top: 5rem; padding-bottom: 3rem; text-align: center;">
-      <img src={steelLogoImage.src} alt={uiTexts.footer.brand_name} width="3693" height="640" loading="lazy" decoding="async" style="width: min(220px, 76vw); height: auto; object-fit: contain; opacity: 0.9;" />
-      <p style="color: var(--text-2); font-size: 0.85rem; margin: 0;">
+    <footer class="detail-footer">
+      <img class="detail-footer-logo" src={steelLogoImage.src} alt={uiTexts.footer.brand_name} width="3693" height="640" loading="lazy" decoding="async" />
+      <p>
         {uiTexts.footer.tagline}
       </p>
-      <img src="/assets/badge_meta_tech_provider.webp" alt="Meta Tech Provider" style="height: 40px; width: auto; object-fit: contain; opacity: 0.8;" loading="lazy" decoding="async" width="1400" height="401" />
+      <img class="detail-footer-badge" src="/assets/badge_meta_tech_provider.webp" alt="Meta Tech Provider" loading="lazy" decoding="async" width="1400" height="401" />
     </footer>
   </div>
 </Base>
