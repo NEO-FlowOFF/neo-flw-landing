@@ -1,11 +1,12 @@
-const CACHE_NAME = 'neo-flw-landing-v2';
+const CACHE_NAME = 'neo-flw-landing-v3';
 const ASSETS_TO_CACHE = [
   '/',
   '/manifest.webmanifest',
   '/favicon.ico',
   '/icon-192.png',
   '/icon-512.png',
-  '/maskable-512.png'
+  '/maskable-512.png',
+  '/logo_transp.png'
 ];
 
 self.addEventListener('install', event => {

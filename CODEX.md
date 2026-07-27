@@ -132,6 +132,11 @@ Contratos atuais:
 - manter logo LCP com `loading="eager"` e `fetchpriority="high"`
 - manter a imagem da hero `/logo_transp.png` com dimensoes explicitas,
   `loading="eager"`, `decoding="async"` e `fetchpriority="high"`
+- para imagens importadas de `src/assets`, usar `<img>` com
+  `src={asset.src}`, `width={asset.width}` e `height={asset.height}`
+- para URLs publicas em JSON/catalogo/metadados, usar arquivos em
+  `public/` por caminho publico (`/assets/...`), nunca `/src/assets/...`
+  nem `/public/...`
 - usar assets estaticos de `public/assets/` quando isso evita `/_image`
 - manter `manifest.webmanifest` valido para evitar 404
 - nao preloaded Google Fonts se o stylesheet for carregado via

@@ -21,7 +21,7 @@
       "short_title": "A2M-PoI Standard",
       "description": "Especificação técnica do NEØ Protocol para validação real de intenção e eliminação de ruído em agentes de IA.",
       "link": "https://a2m.neoprotocol.space/",
-      "image_link": "https://www.neoflowoff.agency/src/assets/images/POI.webp",
+      "image_link": "https://neoflowoff.agency/assets/poi.webp",
       "price": {
         "value": 5000,
         "currency": "BRL"
@@ -59,7 +59,7 @@
       "short_title": "WhatsApp Business API",
       "description": "Implantação da infraestrutura oficial da Meta para conectar o WhatsApp da empresa a atendentes, agentes de IA, CRM e automações, com templates, webhooks e governança de acesso.",
       "link": "https://www.neoflowoff.agency/checkout/api-whatsapp",
-      "image_link": "https://www.neoflowoff.agency/public/og-image.jpg",
+      "image_link": "https://neoflowoff.agency/assets/og-image.png",
       "price": {
         "value": 1000,
         "currency": "BRL"
@@ -98,7 +98,7 @@
       "short_title": "App Meta Developers",
       "description": "Estruturação do aplicativo da empresa na Meta para operar integrações com WhatsApp, Instagram, Facebook, Graph API, Pixel e Conversions API conforme o escopo aprovado.",
       "link": "https://www.neoflowoff.agency/checkout/app-meta",
-      "image_link": "https://www.neoflowoff.agency/public/og-image.jpg",
+      "image_link": "https://neoflowoff.agency/assets/og-image.png",
       "price": {
         "value": 1500,
         "currency": "BRL"
@@ -137,7 +137,7 @@
       "short_title": "Regularização Meta & WABA",
       "description": "Auditoria técnica, verificação empresarial (BM), homologação de nome de exibição, número oficial, organização de templates e higienização da estrutura com 30 dias de suporte.",
       "link": "https://www.neoflowoff.agency/checkout/regularizacao-meta-waba",
-      "image_link": "https://www.neoflowoff.agency/public/og-image.jpg",
+      "image_link": "https://neoflowoff.agency/assets/og-image.png",
       "price": {
         "value": 1500,
         "currency": "BRL"
@@ -178,7 +178,7 @@
       "short_title": "Dashboards e Dados",
       "description": "Unificamos sinais de mídia, CRM, atendimento e vendas em painéis que ajudam a acompanhar a operação, entender conversões e localizar gargalos com mais clareza.",
       "link": "https://www.neoflowoff.agency/checkout/dashboard-dados",
-      "image_link": "https://www.neoflowoff.agency/public/og-image.jpg",
+      "image_link": "https://neoflowoff.agency/assets/og-image.png",
       "price": {
         "value": 2500,
         "currency": "BRL"
@@ -217,7 +217,7 @@
       "short_title": "Landing Pages e WebApps",
       "description": "Criamos páginas e aplicações rápidas, mobile-first e preparadas para capturar intenção, registrar conversões e conversar com CRM, WhatsApp, APIs, dados e agentes de IA.",
       "link": "https://www.neoflowoff.agency/checkout/webapp-lp",
-      "image_link": "https://www.neoflowoff.agency/public/og-image.jpg",
+      "image_link": "https://neoflowoff.agency/assets/og-image.png",
       "price": {
         "value": 2500,
         "currency": "BRL"
@@ -256,7 +256,7 @@
       "short_title": "Agente SDR IA",
       "description": "Implantamos uma operação com Agente SDR para responder, identificar intenção, capturar dados, qualificar oportunidades e encaminhar cada conversa ao comercial com contexto.",
       "link": "https://www.neoflowoff.agency/planos/agente-sdr",
-      "image_link": "https://www.neoflowoff.agency/public/og-image.jpg",
+      "image_link": "https://neoflowoff.agency/assets/og-image.png",
       "price": {
         "value": 7000,
         "currency": "BRL"
@@ -296,7 +296,7 @@
       "short_title": "Agentes de IA",
       "description": "Nossa estrutura serve como a espinha dorsal aprovada para o desenvolvimento do ecossistema, proporcionando um ambiente determinístico no qual os agentes não estão apenas conectados a nós, mas são nativamente orquestrados como extensões complementares da lógica da rede. Tratamos cada interação digital como uma transição de estado dentro de um modelo de confiança zero (zero-trust), incorporando a segurança desde a concepção (security-by-design) diretamente na camada de consenso, em vez de adicioná-la posteriormente.",
       "link": "https://www.neoflowoff.agency/planos/agents-ia",
-      "image_link": "https://www.neoflowoff.agency/public/og-image.jpg",
+      "image_link": "https://neoflowoff.agency/assets/og-image.png",
       "price": {
         "value": 4667,
         "currency": "BRL"
@@ -335,7 +335,7 @@
       "short_title": "CRM Comercial",
       "description": "Estruturamos funis, dados e automações para que cada lead tenha histórico, origem, responsável, próxima ação e critérios claros de avanço.",
       "link": "https://www.neoflowoff.agency/planos/crm-inteligente",
-      "image_link": "https://www.neoflowoff.agency/public/og-image.jpg",
+      "image_link": "https://neoflowoff.agency/assets/og-image.png",
       "price": {
         "value": 3000,
         "currency": "BRL"
@@ -374,7 +374,7 @@
       "short_title": "Fluxos e Automações",
       "description": "Conectamos formulários, WhatsApp, CRM, e-mail, dados e APIs para reduzir retrabalho, acelerar respostas e manter a operação sincronizada.",
       "link": "https://www.neoflowoff.agency/planos/fluxos-automacao",
-      "image_link": "https://www.neoflowoff.agency/public/og-image.jpg",
+      "image_link": "https://neoflowoff.agency/assets/og-image.png",
       "price": {
         "value": 3500,
         "currency": "BRL"
@@ -413,7 +413,7 @@
       "short_title": "Gestão de Google Ads",
       "description": "Estratégia, estruturação e gestão de campanhas para alcançar pessoas que já estão buscando soluções como a sua, com conversões configuradas e dados para otimização.",
       "link": "https://www.neoflowoff.agency/planos/trafego-google",
-      "image_link": "https://www.neoflowoff.agency/public/og-image.jpg",
+      "image_link": "https://neoflowoff.agency/assets/og-image.png",
       "price": {
         "value": 4667,
         "currency": "BRL"
@@ -452,7 +452,7 @@
       "short_title": "Meta Ads & Conversions API",
       "description": "Distribuição de campanhas no Instagram e Facebook integradas via Conversions API (CAPI server-side), rastreamento determinístico e Pixel para capturar intenção sem perda de sinal.",
       "link": "https://www.neoflowoff.agency/planos/trafego-meta",
-      "image_link": "https://www.neoflowoff.agency/public/og-image.jpg",
+      "image_link": "https://neoflowoff.agency/assets/og-image.png",
       "price": {
         "value": 1500,
         "currency": "BRL"

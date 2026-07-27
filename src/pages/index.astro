@@ -215,6 +215,8 @@ const servicos = catalogData.products.filter(p => p.category === 'Serviço' && !
             <div class="founder-avatar">
               <img
                 src={nodeneoImage.src}
+                width={nodeneoImage.width}
+                height={nodeneoImage.height}
                 alt="Neo Mello — Founder & Lead Architect"
               />
               <div class="founder-status-shell">
@@ -227,12 +229,23 @@ const servicos = catalogData.products.filter(p => p.category === 'Serviço' && !
               <div class="founder-name">
                 Neø Mello
               </div>
+              <blockquote class="founder-quote">
+                "Tecnologia só vale quando simplifica a operação de quem vende, atende e decide."
+              </blockquote>
               <div class="founder-stack">
-                arquiteto de sistemas · ai agents · payments · cloud · automation · devops · ecosystems · webapps ·
+                Arquiteto de sistemas para operações comerciais com IA.
               </div>
-              <a href="/Neo_Mello.vcf" download="Neo_Mello.vcf" class="founder-contact">
+              <p class="founder-contact-copy">
+                Salve meu contato e me chame quando quiser conversar sobre sua operação.
+              </p>
+              <a
+                href="/Neo_Mello.vcf"
+                download="Neo_Mello.vcf"
+                class="founder-contact"
+                aria-label="Salvar o contato de Neø Mello na agenda"
+              >
                 <i data-lucide="contact"></i>
-                Salvar Contato vCard (.vcf)
+                Salvar Contato
               </a>
             </div>
           </div>
@@ -272,7 +285,7 @@ const servicos = catalogData.products.filter(p => p.category === 'Serviço' && !
 
     <!-- FOOTER -->
     <footer class="brand-footer">
-      <img src={steelLogoImage.src} alt={uiTexts.footer.brand_name} width="3693" height="640" loading="lazy" decoding="async" />
+      <img src={steelLogoImage.src} alt={uiTexts.footer.brand_name} width={steelLogoImage.width} height={steelLogoImage.height} loading="lazy" decoding="async" />
       <p>
         {uiTexts.footer.tagline}
       </p>

@@ -115,8 +115,8 @@ Use `make audit` when dependency audit is relevant to the change.
 Public data deletion instructions are served at:
 
 ```text
-https://neoflowoff.agency/excluir-dados
-https://neoflowoff.agency/data-deletion
+https://neoflowoff.agency/excluir-dados/
+https://neoflowoff.agency/data-deletion/
 ```
 
 Meta Data Deletion callback surface:

@@ -98,6 +98,12 @@ Qualquer agente que atuar neste repositório DEVE seguir estas regras.
 - A hero da home usa `public/logo_transp.png` como imagem principal.
   Preserve `width`, `height`, `loading="eager"`, `decoding="async"`
   e `fetchpriority="high"` quando ajustar esse bloco.
+- Imagens em `src/assets` devem ser importadas em arquivos Astro e,
+  quando usadas com `<img>`, devem passar `src={asset.src}`,
+  `width={asset.width}` e `height={asset.height}`. URLs públicas
+  em JSON, catálogo, OG, sitemap ou HTML direto devem apontar para
+  `public/` via caminho público (`/assets/...`, `/logo_transp.png`),
+  nunca para `/src/assets/...` ou `/public/...`.
 - Evitar `astro:assets` para imagens que gerem tráfego `/_image`
   em produção.
 - Google Fonts usa `preconnect` e stylesheet não bloqueante.

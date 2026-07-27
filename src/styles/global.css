@@ -1021,7 +1021,8 @@ body::selection {
 }
 
 .founder-name,
-.founder-stack {
+.founder-stack,
+.founder-contact-copy {
   font-family: var(--mono);
 }
 
@@ -1035,9 +1036,26 @@ body::selection {
 }
 
 .founder-stack {
-  margin-bottom: 0.65rem;
+  margin-bottom: 0.55rem;
   color: rgb(11 12 11 / 58%);
   font-size: 0.68rem;
+  line-height: 1.45;
+}
+
+.founder-quote {
+  max-width: 28rem;
+  margin: 0 0 0.6rem;
+  color: var(--neo-carbon);
+  font-size: clamp(1.08rem, 1.6vw, 1.35rem);
+  font-weight: 800;
+  line-height: 1.18;
+}
+
+.founder-contact-copy {
+  max-width: 27rem;
+  margin: 0 0 0.7rem;
+  color: rgb(11 12 11 / 70%);
+  font-size: 0.72rem;
   line-height: 1.45;
 }
 

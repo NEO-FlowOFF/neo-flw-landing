@@ -52,9 +52,10 @@ const requestedScopes = metaConfig.requested_scopes.join(',');
           src={brandLogo.src}
           alt="NEØ FlowOFF Agency"
           class="card-brand-logo-img"
-          width="275"
-          height="48"
+          width={brandLogo.width}
+          height={brandLogo.height}
           loading="eager"
+          decoding="async"
         />
         </h1>
         <p class="wa-card-desc">
