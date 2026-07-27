@@ -84,6 +84,35 @@ canonica para SEO, AEO, LGPD e revisao Meta.
 
 ────────────────────────────────────────
 
+## ⧆ Pos-aprovacao Meta: Agent Readiness
+
+Status: backlog local. Nao implementar antes da aprovacao Meta.
+
+As skills de agent readiness recebidas em 2026-07-27 foram movidas de
+`.well-known/agent-skills/` para:
+
+```text
+.local/agent-readiness-skills/
+```
+
+Motivo: evitar que instrucoes locais de AEO/agents sejam confundidas com
+superficies publicas exigidas pela revisao Meta.
+
+Nao publicar essas skills em `public/.well-known` antes da aprovacao.
+Nao adicionar headers `Link`, negociacao `Accept: text/markdown` ou
+`Content-Signal` em producao ate a revisao Meta estar concluida.
+
+Retomar apos aprovacao:
+
+- avaliar `Content-Signal` em `robots.txt`
+- avaliar headers `Link` via Cloudflare Transform Rules ou Worker
+- avaliar Markdown for Agents / `Accept: text/markdown`
+- validar com ferramenta de agent readiness somente em ambiente de teste
+- garantir que `/privacy/`, `/terms/`, `/data-deletion/` e Embedded Signup
+  continuem sendo as superficies canonicas para revisao e compliance
+
+────────────────────────────────────────
+
 ## ◬ Interface
 
 Comportamento desejado:
