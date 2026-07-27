@@ -11,8 +11,10 @@ DIM     := \033[0;90m
 WHITE   := \033[1;37m
 RESET   := \033[0m
 
+PNPM := pnpm
+
 .DEFAULT_GOAL := help
-.PHONY: help install repair dev build preview clean audit docs verify commit check-node
+.PHONY: help install repair dev build deploy cloudflare-whoami preview clean audit docs verify commit check-node
 
 help: ## Exibe os comandos disponíveis
 	@printf "$(CYAN)╔══════════════════════════════════════════╗$(RESET)\n"
@@ -28,7 +30,7 @@ help: ## Exibe os comandos disponíveis
 	@printf "  Uso: $(CYAN)make$(RESET) $(WHITE)[comando]$(RESET)\n"
 	@printf "\n"
 	@printf "$(DIM)  ·─── AMBIENTE ──────────────────────────────$(RESET)\n"
-	@grep -E '^(install|repair|check-node):.*## ' Makefile \
+	@grep -E '^(install|repair|check-node|cloudflare-whoami):.*## ' Makefile \
 		| sort \
 		| awk 'BEGIN {FS = ":.*## "}; {printf "  \033[0;36m◆ %-16s\033[0m \033[0;90m%s\033[0m\n", $$1, $$2}'
 	@printf "\n"
@@ -59,7 +61,7 @@ install: ## Instala dependências
 	@printf "$(CYAN)│$(RESET)  $(WHITE)▼  INSTALL$(RESET)%-31s$(CYAN)│$(RESET)\n" ""
 	@printf "$(CYAN)│$(RESET)  $(DIM)pnpm install --filter .$(RESET)%-17s$(CYAN)│$(RESET)\n" ""
 	@printf "$(CYAN)╰──────────────────────────────────────────╯$(RESET)\n"
-	@pnpm install --filter .
+	@$(PNPM) install --filter .
 	@printf "$(GREEN)  ✓ Instalação concluída.$(RESET)\n"
 
 repair: ## Limpa node_modules e reinstala
@@ -68,7 +70,7 @@ repair: ## Limpa node_modules e reinstala
 	@printf "$(YELLOW)│$(RESET)  $(DIM)Remove node_modules e reinstala$(RESET)%-9s$(YELLOW)│$(RESET)\n" ""
 	@printf "$(YELLOW)╰──────────────────────────────────────────╯$(RESET)\n"
 	@rm -rf node_modules
-	@pnpm install --filter .
+	@$(PNPM) install --filter .
 	@printf "$(GREEN)  ✓ Reparo concluído.$(RESET)\n"
 
 dev: ## Inicia o servidor de desenvolvimento
@@ -76,22 +78,29 @@ dev: ## Inicia o servidor de desenvolvimento
 	@printf "$(CYAN)│$(RESET)  $(WHITE)▶  DEV$(RESET)%-35s$(CYAN)│$(RESET)\n" ""
 	@printf "$(CYAN)│$(RESET)  $(DIM)pnpm run dev$(RESET)%-28s$(CYAN)│$(RESET)\n" ""
 	@printf "$(CYAN)╰──────────────────────────────────────────╯$(RESET)\n"
-	@pnpm run dev
+	@$(PNPM) run dev
 
 build: ## Compila o build de produção Astro
 	@printf "$(CYAN)╭──────────────────────────────────────────╮$(RESET)\n"
 	@printf "$(CYAN)│$(RESET)  $(WHITE)⬡  BUILD$(RESET)%-33s$(CYAN)│$(RESET)\n" ""
 	@printf "$(CYAN)│$(RESET)  $(DIM)pnpm run build$(RESET)%-26s$(CYAN)│$(RESET)\n" ""
 	@printf "$(CYAN)╰──────────────────────────────────────────╯$(RESET)\n"
-	@pnpm run build
+	@$(PNPM) run build
 	@printf "$(GREEN)  ✓ Build estático concluído (./dist).$(RESET)\n"
+
+cloudflare-whoami: ## Confere token Cloudflare via pnpm/wrangler
+	@printf "$(CYAN)╭──────────────────────────────────────────╮$(RESET)\n"
+	@printf "$(CYAN)│$(RESET)  $(WHITE)☁  CLOUDFLARE WHOAMI$(RESET)%-20s$(CYAN)│$(RESET)\n" ""
+	@printf "$(CYAN)│$(RESET)  $(DIM)pnpm exec wrangler whoami$(RESET)%-15s$(CYAN)│$(RESET)\n" ""
+	@printf "$(CYAN)╰──────────────────────────────────────────╯$(RESET)\n"
+	@$(PNPM) exec wrangler whoami
 
 deploy: build ## Publica na Cloudflare Pages via Wrangler
 	@printf "$(MAGENTA)╭──────────────────────────────────────────╮$(RESET)\n"
 	@printf "$(MAGENTA)│$(RESET)  $(WHITE)🚀  DEPLOY$(RESET)%-32s$(MAGENTA)│$(RESET)\n" ""
 	@printf "$(MAGENTA)│$(RESET)  $(DIM)Deploy para Cloudflare Pages$(RESET)%-13s$(MAGENTA)│$(RESET)\n" ""
 	@printf "$(MAGENTA)╰──────────────────────────────────────────╯$(RESET)\n"
-	@pnpm exec wrangler pages deploy dist --project-name=neoflowoff-agency
+	@$(PNPM) exec wrangler pages deploy dist --project-name=neoflowoff-agency
 	@printf "$(GREEN)  ✓ Deploy concluído na Cloudflare Pages!$(RESET)\n"
 
 preview: ## Inicia preview do build
@@ -99,7 +108,7 @@ preview: ## Inicia preview do build
 	@printf "$(CYAN)│$(RESET)  $(WHITE)◎  PREVIEW$(RESET)%-31s$(CYAN)│$(RESET)\n" ""
 	@printf "$(CYAN)│$(RESET)  $(DIM)pnpm run preview$(RESET)%-24s$(CYAN)│$(RESET)\n" ""
 	@printf "$(CYAN)╰──────────────────────────────────────────╯$(RESET)\n"
-	@pnpm run preview
+	@$(PNPM) run preview
 
 clean: ## Limpa diretórios de build
 	@printf "$(YELLOW)╭──────────────────────────────────────────╮$(RESET)\n"
@@ -114,7 +123,7 @@ audit: ## Varredura de vulnerabilidades local
 	@printf "$(CYAN)│$(RESET)  $(WHITE)⚑  AUDIT$(RESET)%-33s$(CYAN)│$(RESET)\n" ""
 	@printf "$(CYAN)│$(RESET)  $(DIM)Audit isolado (ignora workspace)$(RESET)%-10s$(CYAN)│$(RESET)\n" ""
 	@printf "$(CYAN)╰──────────────────────────────────────────╯$(RESET)\n"
-	@pnpm audit --json 2>/dev/null | node -e " \
+	@$(PNPM) audit --json 2>/dev/null | node -e " \
 		const fs = require('fs'); \
 		let data; \
 		try { \
@@ -153,7 +162,7 @@ verify: audit docs ## Pipeline de verificação (lint, audit)
 	@printf "$(CYAN)╭──────────────────────────────────────────╮$(RESET)\n"
 	@printf "$(CYAN)│$(RESET)  $(WHITE)⬡  VERIFY$(RESET)%-32s$(CYAN)│$(RESET)\n" ""
 	@printf "$(CYAN)╰──────────────────────────────────────────╯$(RESET)\n"
-	@pnpm run lint || printf "$(YELLOW)  ! Aviso de Lint$(RESET)\n"
+	@$(PNPM) run lint || printf "$(YELLOW)  ! Aviso de Lint$(RESET)\n"
 	@printf "$(GREEN)  ✓ Pipeline de verificação aprovado.$(RESET)\n"
 
 commit: verify ## Fluxo de commit seguro (Conventional Commits)
