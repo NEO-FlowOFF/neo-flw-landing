@@ -27,6 +27,7 @@ Astro SSG
 ├── src/layouts/Base.astro
 │   ├── head global
 │   ├── token de verificacao Meta
+│   ├── Google Analytics via Cloudflare Google Tag Gateway (/n4py)
 │   ├── fontes Figtree + DM Mono
 │   ├── subset local de icones data-lucide
 │   └── registro do service worker
@@ -56,6 +57,19 @@ Cloudflare Pages Functions
 └── functions/api/meta/embedded-signup.js
     └── server-side adapter for Meta Embedded Signup code handling
 ```
+
+Google Tag Gateway ativo na zona Cloudflare:
+
+```text
+measurementId    G-EQRKXQD7FW
+endpoint         /n4py
+hideOriginalIp   true
+setUpTag         false
+```
+
+Como `setUpTag=false`, o carregamento e manual em `Base.astro`.
+Nao trocar para `googletagmanager.com` sem revalidar a configuracao
+da zona.
 
 `dist/` e apenas saida de build.
 Nao edite `dist/` como fonte.

@@ -29,6 +29,9 @@ para tráfego pago, busca, crawlers e agentes de IA.
 - deploy em Cloudflare Pages via Wrangler
 - superfícies públicas para agentes: `public/llms.txt`,
   `public/robots.txt` e `public/sitemap.xml`
+- Google Analytics GA4 carregado por Cloudflare Google Tag Gateway:
+  measurement `G-EQRKXQD7FW`, endpoint first-party `/n4py`,
+  `hideOriginalIp=true` e `setUpTag=false`
 
 Não trate este repositório como backend autoritativo.
 
@@ -53,6 +56,7 @@ PWA                   public/manifest.webmanifest + public/sw.js
 Hosting               Cloudflare Pages
 Serverless            Cloudflare Pages Functions
 Deploy CLI            wrangler v4
+Analytics             GA4 via Cloudflare Google Tag Gateway
 ```
 
 ---

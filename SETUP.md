@@ -143,6 +143,11 @@ substitui o comando de build configurado no dashboard.
 | KV binding               | `META_DELETION_REQUESTS`                  |
 | KV namespace ID          | `afe76b8c5bf44e2cb4b19f20ebe60081`        |
 | Functions dir            | `functions/`                              |
+| Google Tag Gateway       | `enabled`                                 |
+| Google Tag endpoint      | `/n4py`                                   |
+| GA4 measurement ID       | `G-EQRKXQD7FW`                            |
+| Hide original IP         | `true`                                    |
+| Setup tag automatico     | `false`                                   |
 
 ---
 

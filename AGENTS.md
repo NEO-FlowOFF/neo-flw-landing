@@ -108,6 +108,13 @@ Qualquer agente que atuar neste repositório DEVE seguir estas regras.
   em produção.
 - Google Fonts usa `preconnect` e stylesheet não bloqueante.
   Não adicionar preload redundante para essa URL.
+- Google Analytics usa Cloudflare Google Tag Gateway first-party.
+  O script global em `Base.astro` deve carregar
+  `/n4py/gtag/js?id=G-EQRKXQD7FW`, não
+  `https://www.googletagmanager.com/gtag/js?id=G-EQRKXQD7FW`,
+  enquanto a zona Cloudflare retornar Google Tag Gateway ativo com
+  endpoint `/n4py`, `measurementId=G-EQRKXQD7FW`,
+  `hideOriginalIp=true` e `setUpTag=false`.
 - `public/manifest.webmanifest` deve existir para evitar 404.
 - `public/sw.js` deve ignorar `/_astro`, `/_image`, `/src` e `/api`.
 
