@@ -1185,6 +1185,15 @@ body::selection {
   text-transform: uppercase;
 }
 
+.footer-legal-entity {
+  max-width: 520px;
+  margin: -0.35rem 0 0;
+  color: rgb(255 255 255 / 36%);
+  font-family: var(--mono);
+  font-size: 0.68rem;
+  line-height: 1.55;
+}
+
 .brand-footer-links {
   display: flex;
   flex-wrap: wrap;
