@@ -44,6 +44,46 @@ nao um widget externo colado sobre a landing.
 
 ────────────────────────────────────────
 
+## ⧆ Pos-aprovacao Meta: IPFS/Web3
+
+Status: sem urgencia.
+
+IPFS/Web3 deve ficar fora do caminho critico da aprovacao do app na
+Meta Developers ate a aprovacao estar concluida.
+
+Nao usar `ipfs.neoflowoff.agency` em:
+
+- App Domains
+- Privacy Policy URL
+- Terms URL
+- User Data Deletion URL
+- OAuth Redirect URI
+- Embedded Signup
+- qualquer fluxo que o reviewer da Meta precise abrir para validar o app
+
+Uso recomendado apos aprovacao:
+
+- gateway publico de artefatos verificaveis
+- manifestos e whitepapers versionados por CID
+- snapshots de documentacao publica
+- hashes de releases e materiais institucionais
+- pagina simples explicando que IPFS e camada de transparencia, nao coleta
+  de dados de clientes
+
+Antes de reativar como superficie publica, publicar conteudo real no gateway
+e remover qualquer estado de onboarding Cloudflare. Se o gateway permanecer
+sem conteudo final, manter `robots.txt` do host IPFS com:
+
+```text
+User-agent: *
+Disallow: /
+```
+
+O dominio principal `https://neoflowoff.agency/` continua sendo a superficie
+canonica para SEO, AEO, LGPD e revisao Meta.
+
+────────────────────────────────────────
+
 ## ◬ Interface
 
 Comportamento desejado:
