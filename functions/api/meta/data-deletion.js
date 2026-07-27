@@ -154,7 +154,7 @@ export async function onRequestGet(context) {
     ok: true,
     endpoint: `${origin}/api/meta/data-deletion`,
     method: 'POST',
-    instructions_url: `${origin}/excluir-dados`,
+    instructions_url: `${origin}/data-deletion/`,
   });
 }
 
@@ -176,7 +176,7 @@ export async function onRequestPost(context) {
   }
 
   const confirmationCode = `meta-del-${crypto.randomUUID()}`;
-  const statusUrl = `${new URL(request.url).origin}/excluir-dados?confirmation_code=${encodeURIComponent(confirmationCode)}`;
+  const statusUrl = `${new URL(request.url).origin}/data-deletion/?confirmation_code=${encodeURIComponent(confirmationCode)}`;
 
   if (env.META_DATA_DELETION_FORWARD_URL && env.META_DATA_DELETION_FORWARD_SECRET) {
     const forwarded = await forwardDeletionRequest({

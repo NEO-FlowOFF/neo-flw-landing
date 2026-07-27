@@ -6,14 +6,16 @@ It must not contain access tokens, app secrets, bearer secrets, private keys, or
 ## Canonical Public Surface
 
 - Canonical domain: `https://neoflowoff.agency`
-- Temporary landing/review subdomain: `https://lp.neoflowoff.agency`
-- Privacy Policy: `https://neoflowoff.agency/privacy`
-- Terms of Service: `https://neoflowoff.agency/legal`
-- Data Deletion: `https://neoflowoff.agency/excluir-dados`
+- Privacy Policy: `https://neoflowoff.agency/privacy/`
+- Terms of Service: `https://neoflowoff.agency/terms/`
+- Data Deletion: `https://neoflowoff.agency/data-deletion/`
 - Data Deletion Callback: `https://neoflowoff.agency/api/meta/data-deletion`
-- Embedded Signup page: `https://neoflowoff.agency/conectar-whatsapp`
+- Embedded Signup page: `https://neoflowoff.agency/conectar-whatsapp/`
 
-If Meta Developers still requires the `lp.` subdomain during transition, keep both domains in App Domains until DNS/canonical redirects are confirmed.
+Do not use `lp.neoflowoff.agency`, `ipfs.neoflowoff.agency`, or legacy
+Portuguese aliases as primary URLs in the Meta App Review form. The aliases
+remain public for compatibility, but the approval submission should use the
+canonical URLs above.
 
 ## App Review Scope
 
@@ -75,7 +77,7 @@ The callback must receive Meta's `signed_request`, validate it with `META_APP_SE
 
 ```json
 {
-  "url": "https://neoflowoff.agency/excluir-dados?confirmation_code=...",
+  "url": "https://neoflowoff.agency/data-deletion/?confirmation_code=...",
   "confirmation_code": "..."
 }
 ```
@@ -93,11 +95,22 @@ Supported secure handlers:
 
 ## Webhook Endpoint Decision
 
-Official Meta webhook callback for the current architecture:
+Canonical service owner:
+
+```text
+neo-provider-messaging
+```
+
+Public callback URL currently verified for the WhatsApp Cloud API runtime:
 
 ```text
 https://neo-whatsapp-connect-production.up.railway.app/webhook
 ```
+
+This Railway URL still contains the previous service name. Keep it only while
+it is the active, verified production endpoint. Before submitting or updating
+the Meta webhook callback, confirm the public URL that currently returns
+`/health` with `status: ok` and `whatsappConfigured: true`.
 
 Required behavior:
 
@@ -106,13 +119,15 @@ Required behavior:
 - The service responds quickly to Meta and processes inbound events asynchronously.
 - Inbound events must be forwarded to the internal consumer without exposing secrets to the static landing.
 
-Rollback endpoint during migration:
+Legacy rollback endpoint during migration only:
 
 ```text
 https://lp.neoflowoff.agency/api/meta-webhook
 ```
 
-Do not keep rollback active longer than the migration window. The landing should not be the long-term owner of Meta webhook processing.
+Do not use the rollback endpoint in the Meta App Review form unless there is an
+active incident on the production provider. The landing should not be the
+long-term owner of Meta webhook processing.
 
 ## Data Handling
 
