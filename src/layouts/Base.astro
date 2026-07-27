@@ -107,6 +107,15 @@ const jsonLd = {
     <link rel="manifest" href="/manifest.webmanifest" />
     <link rel="icon" type="image/x-icon" href="/favicon.ico" />
     
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-EQRKXQD7FW"></script>
+    <script is:inline>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+
+      gtag('config', 'G-EQRKXQD7FW');
+    </script>
     <script type="application/ld+json" is:inline set:html={JSON.stringify(jsonLd)}></script>
     {tiktokPixelScript && <script is:inline set:html={tiktokPixelScript}></script>}
 
