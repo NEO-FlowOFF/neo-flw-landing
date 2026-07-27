@@ -8,6 +8,7 @@ Thumbs.db
 .cursor/
 
 # Vercel / Deploy
+.astro/
 .vercel/
 dist/
 build/
