@@ -2,6 +2,7 @@
 # Premium SEO/AEO Configuration - NEØ Protocol
 
 User-agent: *
+Content-Signal: search=yes, ai-input=yes, ai-train=no, use=reference
 Allow: /
 Allow: /index.html
 Allow: /manifest.webmanifest
@@ -10,6 +11,7 @@ Allow: /llms.txt
 Allow: /sw.js
 
 # Security & Privacy - Block sensitive/technical paths
+Disallow: /cdn-cgi/
 Disallow: /api/
 Disallow: /*?checkout=success
 Disallow: /*?utm_*
