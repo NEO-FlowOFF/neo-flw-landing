@@ -3,6 +3,7 @@ import { Image } from 'astro:assets';
 import Base from '../layouts/Base.astro';
 import configData from '../data/config.json';
 import brandLogo from '../assets/logos/neoflowoff-logo26-2.webp';
+import '../styles/spinner.css';
 
 const metaConfig = configData.integrations.meta;
 const metaAppId = metaConfig.app_id;
@@ -68,13 +69,16 @@ const requestedScopes = metaConfig.requested_scopes.join(',');
             onclick="launchWhatsAppSignup()"
             class="btn-meta-blue"
             data-haptic
+            data-meta-app-id={metaAppId}
+            data-graph-api-version={graphApiVersion}
+            data-requested-scopes={requestedScopes}
             aria-label="Continuar com a Meta"
           >
             <svg class="meta-btn-icon" width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
               <path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/>
             </svg>
             <span class="btn-text">Continuar com a Meta</span>
-            <div class="btn-spinner" hidden></div>
+            <span class="btn-spinner-host" data-spinner-host aria-hidden="true"></span>
           </button>
         </div>
 
@@ -463,13 +467,21 @@ const requestedScopes = metaConfig.requested_scopes.join(',');
       color: #ffffff;
     }
 
-    .btn-spinner {
+    .btn-spinner-host {
+      display: inline-grid;
+      place-items: center;
       width: 18px;
       height: 18px;
-      border: 2px solid rgba(255, 255, 255, 0.25);
-      border-top-color: #ffffff;
-      border-radius: 50%;
-      animation: spin 0.65s linear infinite;
+      flex-shrink: 0;
+      visibility: hidden;
+    }
+
+    .btn-spinner-host.is-active {
+      visibility: visible;
+    }
+
+    .btn-spinner-host .spinner {
+      display: block;
     }
 
     /* ─── STATUS BOX ─── */
@@ -606,10 +618,6 @@ const requestedScopes = metaConfig.requested_scopes.join(',');
       50% { opacity: 0.3; transform: scale(0.82); }
     }
 
-    @keyframes spin {
-      to { transform: rotate(360deg); }
-    }
-
     @keyframes fadeIn {
       from { opacity: 0; transform: translateY(-5px); }
       to   { opacity: 1; transform: translateY(0); }
@@ -717,96 +725,6 @@ const requestedScopes = metaConfig.requested_scopes.join(',');
     }
   </style>
 
-  <script is:inline define:vars={{ metaAppId, graphApiVersion, requestedScopes }}>
-    function setSignupStatus(message, tone) {
-      const statusDiv = document.getElementById('signup-status');
-      if (!statusDiv) return;
-      statusDiv.hidden = false;
-      statusDiv.className = 'status-box ' + (tone || 'info');
-      statusDiv.textContent = message;
-    }
-
-    async function confirmEmbeddedSignup(authResponse) {
-      const code = authResponse && authResponse.code;
-      if (!code) {
-        throw new Error('missing_authorization_code');
-      }
-
-      const response = await fetch('/api/meta/embedded-signup', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json'
-        },
-        body: JSON.stringify({
-          code,
-          grantedScopes: authResponse.grantedScopes || authResponse.granted_scopes || '',
-          requestedScopes
-        })
-      });
-
-      const payload = await response.json().catch(() => ({}));
-      if (!response.ok || !payload.ok) {
-        throw new Error(payload.error || 'embedded_signup_not_confirmed');
-      }
-
-      return payload;
-    }
-
-    window.fbAsyncInit = function() {
-      if (window.FB) {
-        FB.init({
-          appId      : metaAppId,
-          cookie     : true,
-          xfbml      : true,
-          version    : graphApiVersion
-        });
-      }
-    };
-
-    window.launchWhatsAppSignup = function() {
-      const button = document.getElementById('btn-meta-signup');
-      const spinner = button ? button.querySelector('.btn-spinner') : null;
-
-      if (!window.FB) {
-        setSignupStatus('O SDK da Meta ainda está inicializando. Aguarde 2 segundos e tente novamente.', 'error');
-        return;
-      }
-
-      if (button) {
-        button.setAttribute('disabled', 'disabled');
-        if (spinner) spinner.hidden = false;
-      }
-      setSignupStatus('Conectando à API oficial da Meta...', 'info');
-
-      FB.login(function (response) {
-        if (response && response.authResponse) {
-          setSignupStatus('Confirmando vinculação segura com o backend da NEØ FlowOFF...', 'info');
-          confirmEmbeddedSignup(response.authResponse)
-            .then(function() {
-              setSignupStatus('✓ Conexão concluída com sucesso! Sua conta foi vinculada à infraestrutura soberana.', 'success');
-            })
-            .catch(function() {
-              setSignupStatus('A autorização foi concedida na Meta, mas aguarda sincronização final com o servidor.', 'warning');
-            })
-            .finally(function() {
-              if (button) {
-                button.removeAttribute('disabled');
-                if (spinner) spinner.hidden = true;
-              }
-            });
-        } else {
-          setSignupStatus('O fluxo de autorização da Meta foi fechado ou não concluído.', 'error');
-          if (button) {
-            button.removeAttribute('disabled');
-            if (spinner) spinner.hidden = true;
-          }
-        }
-      }, {
-        scope: requestedScopes,
-        return_scopes: true,
-        response_type: 'code'
-      });
-    };
-  </script>
+  <script src="../scripts/meta-signup.ts"></script>
   <script async defer crossorigin="anonymous" src="https://connect.facebook.net/pt_BR/sdk.js"></script>
 </Base>

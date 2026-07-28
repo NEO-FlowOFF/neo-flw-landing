@@ -23,6 +23,7 @@ export function createSpinner(opts: SpinnerOptions): SpinnerInstance {
   spinner.setAttribute('viewBox', '0 0 50 50');
   spinner.setAttribute('width', `${size}`);
   spinner.setAttribute('height', `${size}`);
+  spinner.setAttribute('aria-hidden', 'true');
   spinner.classList.add('spinner');
   spinner.style.color = color;
 
@@ -34,11 +35,17 @@ export function createSpinner(opts: SpinnerOptions): SpinnerInstance {
   circle.setAttribute('stroke', 'currentColor');
   circle.setAttribute('stroke-width', '4');
   circle.setAttribute('stroke-linecap', 'round');
+  circle.setAttribute('stroke-dasharray', '92 150');
+  circle.setAttribute('stroke-dashoffset', '0');
 
   spinner.appendChild(circle);
 
   return {
-    mount() { container.appendChild(spinner); },
-    unmount() { container.removeChild(spinner); },
+    mount() {
+      if (!spinner.parentNode) container.appendChild(spinner);
+    },
+    unmount() {
+      if (spinner.parentNode === container) container.removeChild(spinner);
+    },
   };
 }

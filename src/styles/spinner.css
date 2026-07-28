@@ -3,6 +3,7 @@
 /* Global spinner */
 .spinner {
   display: inline-block;
+  transform-origin: center;
   animation: spin 1s linear infinite;
 }
 

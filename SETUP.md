@@ -158,7 +158,10 @@ substitui o comando de build configurado no dashboard.
 
 ## 8. Variáveis de ambiente
 
-O arquivo `.env.example` documenta as variáveis necessárias.
+O arquivo `.env.example` documenta apenas as variáveis consumidas pelo
+runtime atual deste checkout: Cloudflare Pages Functions para Meta
+Embedded Signup e Data Deletion Callback.
+
 Copie antes de rodar localmente:
 
 ```bash
@@ -171,6 +174,14 @@ cp .env.example .env
 O endpoint `functions/api/meta/data-deletion.js` exige `META_APP_SECRET`
 no ambiente server-side para validar `signed_request` HMAC SHA-256.
 Não exponha esse valor em HTML, logs ou scripts públicos.
+
+Bindings KV como `META_DELETION_REQUESTS` e `META_CONNECTIONS` devem ser
+configurados na Cloudflare ou no `wrangler.jsonc`; eles não são variáveis
+textuais do `.env`.
+
+Pagamentos via FlowPay serão tratados por nó externo de pagamentos quando
+o contrato runtime estiver pronto. Este checkout Astro ainda não consome
+`FLOWPAY_*`, `WOOVI_*` ou `OPENPIX_*`.
 
 ---
 

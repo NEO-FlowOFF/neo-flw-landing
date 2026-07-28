@@ -128,6 +128,8 @@ test('6. HTML compilado de /conectar-whatsapp/ contém os metadados e textos SSR
   assert.ok(html.includes('excluir-dados'), 'O HTML deve conter "excluir-dados"');
   assert.ok(html.includes('Meta Business Messaging'), 'O HTML deve conter "Meta Business Messaging"');
   assert.ok(html.includes('Graph API v25.0'), 'O HTML deve conter "Graph API v25.0"');
+  assert.ok(html.includes('data-spinner-host'), 'O HTML deve conter o host do spinner de conexão');
+  assert.ok(html.includes('stroke-dasharray'), 'O bundle deve incluir o spinner SVG animado');
   
   // Asserções para explicação detalhada
   assert.ok(normalizedHtml.includes('empresas clientes conectam seus próprios ativos meta'), 'O HTML deve explicar que clientes conectam ativos Meta');
