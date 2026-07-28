@@ -2,7 +2,7 @@
   "name": "neo-flowoff-landing",
   "version": "2026.07.16",
   "type": "module",
-  "description": "Premium Landing Page for neoflowoff.agency",
+  "description": "Oficial Services Page for neoflowoff.agency",
   "scripts": {
     "dev": "astro dev",
     "build": "astro build",

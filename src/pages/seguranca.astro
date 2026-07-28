@@ -1,0 +1,87 @@
+---
+import Base from '../layouts/Base.astro';
+---
+
+<Base title="Política de Segurança da Informação — neoflowoff.agency" description="Diretrizes e medidas de segurança de dados e processamento de credenciais na neoflowoff.agency.">
+  <div class="legal-page">
+    <header class="legal-header">
+      <a href="/" class="legal-brand-link" aria-label="neoflowoff.agency">
+        <img src="/assets/neoflowoff-logo-192.webp" alt="neoflowoff.agency" width="192" height="34" loading="eager" decoding="async" />
+      </a>
+      <a href="/" class="legal-back-link">
+        <i data-lucide="chevron-left"></i>
+        <span>Voltar ao site</span>
+      </a>
+    </header>
+
+    <article class="legal-card">
+      <div class="legal-kicker">
+        DIRETRIZES DE SEGURANÇA & CRIPTOGRAFIA
+      </div>
+      <h1>
+        Política de Segurança
+      </h1>
+      <p class="legal-update">
+        Última atualização: Julho de 2026 · v2026.3
+      </p>
+
+      <div class="legal-content">
+        
+        <section>
+          <h2>
+            1. Proteção de Credenciais e Tokens
+          </h2>
+          <p>
+            A <strong>neoflowoff.agency</strong> adota rígidos padrões de segurança para garantir a integridade dos dados e segredos operacionais integrados ao nosso ecossistema. Tokens de acesso de APIs (<em>Access Tokens</em>), segredos de aplicativos (<em>App Secrets</em>) e chaves privadas nunca são expostos no navegador ou armazenados de forma insegura no lado do cliente.
+          </p>
+        </section>
+
+        <section>
+          <h2>
+            2. Processamento Exclusivo no Backend
+          </h2>
+          <p>
+            Todo o fluxo de integração de contas do WhatsApp Business via <strong>Embedded Signup</strong> é projetado para processar os códigos de autorização temporários diretamente em nossa infraestrutura de backend segura. A troca por tokens de longa duração e qualquer requisição subsequente à <strong>Graph API da Meta</strong> ocorrem por meio de canais criptografados server-to-server.
+          </p>
+        </section>
+
+        <section>
+          <h2>
+            3. Comunicação Criptografada
+          </h2>
+          <p>
+            Toda a transmissão de informações entre o navegador do usuário, nossos servidores de aplicação e as APIs oficiais da Meta é obrigatoriamente criptografada utilizando o protocolo <strong>HTTPS (TLS 1.3 ou superior)</strong>, mitigando riscos de interceptação de tráfego.
+          </p>
+        </section>
+
+        <section>
+          <h2>
+            4. Minimização e Descarte de Logs
+          </h2>
+          <p>
+            Logs de requisições e payloads de Webhook recebidos para processamento de mensagens ou status são mantidos de forma restrita, mascarando dados sensíveis e sendo automaticamente descartados após o período necessário para fins de conformidade técnica, depuração operacional e auditoria de segurança.
+          </p>
+        </section>
+
+        <section>
+          <h2>
+            5. Auditoria e Controles de Acesso
+          </h2>
+          <p>
+            O acesso a credenciais e ambientes de nuvem é limitado de acordo com a política de menor privilégio. Apenas operadores e sistemas autorizados possuem acesso de leitura a chaves criptográficas necessárias para a orquestração dos serviços.
+          </p>
+        </section>
+
+      </div>
+    </article>
+
+    <footer class="legal-footer">
+      <a href="/privacidade">Privacidade</a>
+      <span aria-hidden="true">•</span>
+      <a href="/termos">Termos de Serviço</a>
+      <span aria-hidden="true">•</span>
+      <a href="/excluir-dados">Exclusão de Dados</a>
+    </footer>
+
+  </div>
+</Base>

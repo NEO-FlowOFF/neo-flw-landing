@@ -100,6 +100,42 @@ const requestedScopes = metaConfig.requested_scopes.join(',');
           </div>
         </div>
 
+        <!-- CONTEÚDO INFORMATIVO OFICIAL SSR -->
+        <section class="wa-ssr-info" aria-label="Especificações de Conexão">
+          <h2 class="ssr-info-title">Especificações de Conexão</h2>
+          <div class="ssr-spec-grid">
+            <div class="ssr-spec-item">
+              <span class="ssr-spec-label">Aplicação</span>
+              <span class="ssr-spec-value">NEØFLW ENGINE:one</span>
+            </div>
+            <div class="ssr-spec-item">
+              <span class="ssr-spec-label">App ID</span>
+              <span class="ssr-spec-value">1500002841696407</span>
+            </div>
+            <div class="ssr-spec-item">
+              <span class="ssr-spec-label">Tecnologia</span>
+              <span class="ssr-spec-value">Meta Business Messaging</span>
+            </div>
+            <div class="ssr-spec-item">
+              <span class="ssr-spec-label">Provedor</span>
+              <span class="ssr-spec-value">Tech Provider</span>
+            </div>
+            <div class="ssr-spec-item">
+              <span class="ssr-spec-label">Versão da API</span>
+              <span class="ssr-spec-value">Graph API v25.0</span>
+            </div>
+          </div>
+
+          <div class="ssr-explanation">
+            <p>
+              Empresas clientes conectam seus próprios ativos Meta de forma direta. O fluxo utiliza a tecnologia oficial <strong>Embedded Signup</strong>, garantindo que códigos de autenticação e tokens de acesso sejam processados exclusivamente no ambiente seguro do backend, sem nunca expor credenciais sensíveis no navegador.
+            </p>
+            <p>
+              As permissões concedidas são utilizadas estritamente para a configuração inicial, gestão técnica e envio autorizado de mensagens transacionais e comerciais através da <strong>WhatsApp Business Platform</strong>.
+            </p>
+          </div>
+        </section>
+
         <!-- FOOTER INFO DO APP -->
         <footer class="app-info-footer">
           <span>NEØFLW ENGINE:one</span>
@@ -110,11 +146,13 @@ const requestedScopes = metaConfig.requested_scopes.join(',');
 
       <!-- FOOTER DE CONFORMIDADE -->
       <nav class="compliance-footer" aria-label="Links de conformidade">
-        <a href="/privacidade/" class="compliance-link">Política de Privacidade</a>
+        <a href="/privacidade" class="compliance-link">Política de Privacidade</a>
         <span class="compliance-sep" aria-hidden="true">•</span>
-        <a href="/legal/" class="compliance-link">Termos de Serviço</a>
+        <a href="/termos" class="compliance-link">Termos de Serviço</a>
         <span class="compliance-sep" aria-hidden="true">•</span>
-        <a href="/excluir-dados/" class="compliance-link">Exclusão de Dados</a>
+        <a href="/seguranca" class="compliance-link">Segurança</a>
+        <span class="compliance-sep" aria-hidden="true">•</span>
+        <a href="/excluir-dados" class="compliance-link">Exclusão de Dados</a>
       </nav>
     </div>
   </div>
@@ -608,6 +646,75 @@ const requestedScopes = metaConfig.requested_scopes.join(',');
       font-size: 0.5rem;
       color: rgba(255, 255, 255, 0.18);
       line-height: 1;
+    }
+
+    /* ─── SSR INFO SECTION ─── */
+    .wa-ssr-info {
+      margin-top: 1.5rem;
+      padding-top: 1.5rem;
+      border-top: 1px solid rgba(255, 255, 255, 0.06);
+      text-align: left;
+      position: relative;
+      z-index: 1;
+    }
+
+    .ssr-info-title {
+      font-family: var(--mono);
+      font-size: 0.7rem;
+      font-weight: 700;
+      color: rgba(255, 255, 255, 0.4);
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      margin-bottom: 0.8rem;
+    }
+
+    .ssr-spec-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 10px;
+      margin-bottom: 1.2rem;
+    }
+
+    .ssr-spec-item {
+      background: rgba(255, 255, 255, 0.015);
+      border: 1px solid rgba(255, 255, 255, 0.04);
+      border-radius: 8px;
+      padding: 8px 12px;
+    }
+
+    .ssr-spec-item:first-child {
+      grid-column: span 2;
+    }
+
+    .ssr-spec-label {
+      display: block;
+      font-family: var(--mono);
+      font-size: 0.55rem;
+      color: rgba(255, 255, 255, 0.35);
+      text-transform: uppercase;
+      letter-spacing: 0.02em;
+    }
+
+    .ssr-spec-value {
+      display: block;
+      font-size: 0.78rem;
+      font-weight: 600;
+      color: rgba(255, 255, 255, 0.9);
+      margin-top: 2px;
+    }
+
+    .ssr-explanation {
+      font-size: 0.78rem;
+      line-height: 1.5;
+      color: rgba(255, 255, 255, 0.48);
+    }
+
+    .ssr-explanation p {
+      margin-bottom: 8px;
+    }
+
+    .ssr-explanation p:last-child {
+      margin-bottom: 0;
     }
   </style>
 

@@ -149,12 +149,8 @@ export async function onRequestOptions() {
 }
 
 export async function onRequestGet(context) {
-  const origin = new URL(context.request.url).origin;
   return json({
-    ok: true,
-    endpoint: `${origin}/api/meta/data-deletion`,
-    method: 'POST',
-    instructions_url: `${origin}/data-deletion/`,
+    status: 'ok',
   });
 }
 
@@ -172,11 +168,11 @@ export async function onRequestPost(context) {
 
   const parsed = await parseSignedRequest(signedRequest, env.META_APP_SECRET);
   if (parsed.error) {
-    return json({ ok: false, error: parsed.error }, 401);
+    return json({ ok: false, error: parsed.error }, 400);
   }
 
-  const confirmationCode = `meta-del-${crypto.randomUUID()}`;
-  const statusUrl = `${new URL(request.url).origin}/data-deletion/?confirmation_code=${encodeURIComponent(confirmationCode)}`;
+  const confirmationCode = crypto.randomUUID();
+  const statusUrl = `https://neoflowoff.agency/excluir-dados?code=${encodeURIComponent(confirmationCode)}`;
 
   if (env.META_DATA_DELETION_FORWARD_URL && env.META_DATA_DELETION_FORWARD_SECRET) {
     const forwarded = await forwardDeletionRequest({
