@@ -8,7 +8,7 @@
       "Receive Meta webhook callbacks at /webhook",
       "Validate Meta webhook signatures when META_APP_SECRET is configured",
       "Forward inbound message events to the configured internal webhook consumer",
-      "Expose /health for Railway and operational monitoring"
+      "Expose /health for Docker and operational monitoring"
     ],
     "not_responsible_for": [
       "Business decision logic",
@@ -71,7 +71,8 @@
       "App Settings > Basic",
       "WhatsApp > Configuration > Webhooks"
     ],
-    "callback_url": "https://neo-whatsapp-connect-production.up.railway.app/webhook",
+    "callback_url": "REQUIRES_PUBLIC_DOCKER_INGRESS/webhook",
+    "local_docker_callback_url": "http://localhost:3007/webhook",
     "webhook_verify_token_env": "META_WEBHOOK_VERIFY_TOKEN",
     "webhook_subscribed_fields": ["messages"],
     "required_permissions": [
@@ -88,7 +89,7 @@
       "META_APP_SECRET": "Meta app secret used to validate webhook signatures"
     },
     "generated_by_neo": {
-      "META_WEBHOOK_VERIFY_TOKEN": "Random verification token configured both in Meta and Railway",
+      "META_WEBHOOK_VERIFY_TOKEN": "Random verification token configured both in Meta and the Docker runtime",
       "WEBHOOK_SECRET": "Bearer secret used when forwarding inbound events internally",
       "PROVIDER_SECRET": "Bearer secret used by neo-crm-core to call /send"
     },
@@ -161,15 +162,21 @@
     "Confirm Meta Developers, src/data/config.json, docs/meta-app-review.md, and the Embedded Signup adapter all use canonical App ID 1500002841696407.",
     "Configure POST https://neoflowoff.agency/api/meta/data-deletion in Meta Developers as the Data Deletion Callback URL."
   ],
-  "railway": {
+  "docker_runtime": {
+    "compose_project": "neo-growth-system",
     "service": "neo-whatsapp-connect",
-    "builder": "Dockerfile",
+    "container_port": 3007,
+    "local_url": "http://localhost:3007",
     "healthcheck_path": "/health",
     "runtime_command": "node dist/index.js",
     "degraded_mode": {
-      "description": "Service can boot without operational WhatsApp secrets so Railway healthcheck passes",
+      "description": "Service can boot without operational WhatsApp secrets so Docker healthcheck passes",
       "health_http_status": 200,
       "send_behavior_without_config": "POST /send returns 503 whatsapp_not_configured"
     }
+  },
+  "public_ingress": {
+    "status": "required_before_meta_submission",
+    "note": "Meta webhook callback cannot use localhost. Configure and validate a public HTTPS ingress that routes to the Docker service before submitting the webhook URL in Meta Developers."
   }
 }

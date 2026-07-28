@@ -20,8 +20,9 @@
         "whatsapp_business_messaging",
         "business_management"
       ],
-      "webhook_official": "https://neo-whatsapp-connect-production.up.railway.app/webhook",
-      "webhook_rollback": "https://lp.neoflowoff.agency/api/meta-webhook",
+      "webhook_official": "http://localhost:3007/webhook",
+      "webhook_public_status": "requires_public_docker_ingress_before_meta_submission",
+      "webhook_rollback": "",
       "data_deletion_callback": "https://neoflowoff.agency/api/meta/data-deletion"
     },
     "google": {

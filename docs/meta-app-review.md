@@ -101,16 +101,16 @@ Canonical service owner:
 neo-provider-messaging
 ```
 
-Public callback URL currently verified for the WhatsApp Cloud API runtime:
+Current Docker runtime endpoint for the WhatsApp Cloud API gateway:
 
 ```text
-https://neo-whatsapp-connect-production.up.railway.app/webhook
+http://localhost:3007/webhook
 ```
 
-This Railway URL still contains the previous service name. Keep it only while
-it is the active, verified production endpoint. Before submitting or updating
-the Meta webhook callback, confirm the public URL that currently returns
-`/health` with `status: ok` and `whatsappConfigured: true`.
+Before submitting or updating the Meta webhook callback, configure a public
+HTTPS ingress that routes to the Docker service and confirm the public URL
+returns `/health` with `status: ok` and `whatsappConfigured: true`. Do not use
+old platform-specific provider URLs as the production callback.
 
 Required behavior:
 

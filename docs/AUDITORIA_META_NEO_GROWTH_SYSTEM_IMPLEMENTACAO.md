@@ -7,7 +7,8 @@
 
 > Atualização de auditoria — 24/07/2026:
 > este documento preserva a fotografia operacional de 15/07/2026, mas o contrato ativo da landing agora aponta para `https://neoflowoff.agency`, para a página `GET /conectar-whatsapp` e para o adapter server-side `POST /api/meta/embedded-signup`.
-> O webhook oficial de WhatsApp deve ser tratado como `https://neo-whatsapp-connect-production.up.railway.app/webhook`; `https://lp.neoflowoff.agency/api/meta-webhook` é apenas rollback/migração.
+> Atualização operacional — 28/07/2026:
+> o NEØ Growth System não opera mais por provedor externo antigo; o runtime atual é Docker. O gateway local `neo-whatsapp-connect` responde em `http://localhost:3007`, e qualquer callback público da Meta exige um ingresso HTTPS público validado antes da submissão. `https://lp.neoflowoff.agency/api/meta-webhook` é apenas rollback/migração.
 > App ID canônico para esta submissão: `1500002841696407`, conforme painel Meta. `src/data/config.json`, `docs/meta-app-review.md` e `functions/api/meta/embedded-signup.js` devem permanecer alinhados a esse valor.
 
 ---
@@ -260,14 +261,10 @@ Função recomendada:
 - onboarding futuro de WABAs
 - mensagens, templates, qualidade e alertas
 
-O nome definitivo ainda precisa ser decidido antes do Live.
-
-Sugestões coerentes:
+Nome definitivo aprovado para o app:
 
 ```text
-NEØ Agent Operations
-neoflowoff.agency Agents
-NEØ Messaging Engine:one
+NEØFLW ENGINE:one
 ```
 
 Não usar `NΞØ:One` como nome do app, pois NΞØ:One é o agente demonstrador e não a infraestrutura vendida.
@@ -493,7 +490,8 @@ Diretriz:
 ## 8. Webhook atual
 
 ```env
-META_WEBHOOK_URL=https://neo-whatsapp-connect-production.up.railway.app/webhook
+META_WEBHOOK_URL=REQUIRES_PUBLIC_DOCKER_INGRESS/webhook
+META_WEBHOOK_LOCAL_URL=http://localhost:3007/webhook
 META_VERIFY_TOKEN=<SECRET_CONFIGURADO_NO_RUNTIME_DO_GATEWAY>
 ```
 
@@ -874,7 +872,7 @@ Esse arquivo não pode conter secrets ou access tokens.
 
 - [ ] confirmar o app `470678155999569`
 - [ ] localizar e inventariar o primeiro app experimental
-- [ ] confirmar nome definitivo e função do app `1500002841696407`
+- [x] confirmar nome definitivo e função do app `1500002841696407`: `NEØFLW ENGINE:one`
 - [ ] conferir domínios e URLs institucionais nos apps
 - [ ] conferir política de privacidade e exclusão de dados
 - [ ] conferir permissões concedidas aos system users
@@ -993,7 +991,7 @@ O app de Ads deve seguir processo separado de permissões, revisão, onboarding 
 4. **Business ID:** `227957544965390`
 5. **Ad Account principal:** `act_1579803729592779`
 6. **App atual de WhatsApp:** `1500002841696407`
-7. **Endpoint oficial de webhook WhatsApp:** `https://neo-whatsapp-connect-production.up.railway.app/webhook`
+7. **Endpoint oficial de webhook WhatsApp:** pendente de ingresso HTTPS público para o Docker `neo-whatsapp-connect`
 8. **Endpoint rollback/migração:** `https://lp.neoflowoff.agency/api/meta-webhook`
 9. **Campos WABA ativos:** cinco campos listados neste documento
 10. **Provider do `neoflowoff-chat-ui`:** ASI1.one
