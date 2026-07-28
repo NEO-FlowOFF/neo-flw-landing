@@ -1,4 +1,5 @@
 ---
+import { Image } from 'astro:assets';
 import catalogData from '../../data/catalog.json';
 import uiTexts from '../../data/ui_texts.json';
 import Base from '../../layouts/Base.astro';
@@ -86,7 +87,7 @@ const { plano } = Astro.props;
     </section>
 
     <footer class="detail-footer">
-      <img class="detail-footer-logo" src={steelLogoImage.src} alt={uiTexts.footer.brand_name} width={steelLogoImage.width} height={steelLogoImage.height} loading="lazy" decoding="async" />
+      <Image class="detail-footer-logo" src={steelLogoImage} alt={uiTexts.footer.brand_name} loading="lazy" decoding="async" />
       <p>
         {uiTexts.footer.tagline}
       </p>

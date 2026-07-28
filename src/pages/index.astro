@@ -1,4 +1,5 @@
 ---
+import { Image } from 'astro:assets';
 import Base from '../layouts/Base.astro';
 import ProductCard from '../components/ProductCard.astro';
 import HubHeader from '../components/HubHeader.astro';
@@ -213,10 +214,8 @@ const servicos = catalogData.products.filter(p => p.category === 'Serviço' && !
           <!-- AVATAR CIRCULAR DO FOUNDER -->
           <div class="founder-block">
             <div class="founder-avatar">
-              <img
-                src={nodeneoImage.src}
-                width={nodeneoImage.width}
-                height={nodeneoImage.height}
+              <Image
+                src={nodeneoImage}
                 alt="Neo Mello — Founder & Lead Architect"
               />
               <div class="founder-status-shell">
@@ -285,7 +284,7 @@ const servicos = catalogData.products.filter(p => p.category === 'Serviço' && !
 
     <!-- FOOTER -->
     <footer class="brand-footer">
-      <img src={steelLogoImage.src} alt={uiTexts.footer.brand_name} width={steelLogoImage.width} height={steelLogoImage.height} loading="lazy" decoding="async" />
+      <Image src={steelLogoImage} alt={uiTexts.footer.brand_name} loading="lazy" decoding="async" />
       <p>
         {uiTexts.footer.tagline}
       </p>

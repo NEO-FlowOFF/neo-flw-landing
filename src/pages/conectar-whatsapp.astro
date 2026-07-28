@@ -1,4 +1,5 @@
 ---
+import { Image } from 'astro:assets';
 import Base from '../layouts/Base.astro';
 import configData from '../data/config.json';
 import brandLogo from '../assets/logos/neoflowoff-logo26-2.webp';
@@ -48,12 +49,10 @@ const requestedScopes = metaConfig.requested_scopes.join(',');
 
         <!-- TÍTULO & SUBTÍTULO -->
         <h1 class="wa-card-title">
-        <img
-          src={brandLogo.src}
+        <Image
+          src={brandLogo}
           alt="NEØ FlowOFF Agency"
           class="card-brand-logo-img"
-          width={brandLogo.width}
-          height={brandLogo.height}
           loading="eager"
           decoding="async"
         />
