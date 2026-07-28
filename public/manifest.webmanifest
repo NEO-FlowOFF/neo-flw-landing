@@ -1,6 +1,6 @@
 {
-  "name": "neoflow.agency",
-  "short_name": "neoflow.ag",
+  "name": "NEØFLW ENGINE:one",
+  "short_name": "NEØFLW",
   "description": "Agentes de IA, sites, CRM e fluxos comerciais para empresas. Marketing com infraestrutura.",
   "start_url": "/",
   "display": "standalone",
@@ -12,6 +12,24 @@
   "dir": "ltr",
   "categories": ["business", "productivity"],
   "icons": [
+    {
+      "src": "/icons/icon-192x192.webp",
+      "sizes": "192x192",
+      "type": "image/webp",
+      "purpose": "any"
+    },
+    {
+      "src": "/icons/icon-512x512.webp",
+      "sizes": "512x512",
+      "type": "image/webp",
+      "purpose": "any"
+    },
+    {
+      "src": "/icons/maskable-512x512.webp",
+      "sizes": "512x512",
+      "type": "image/webp",
+      "purpose": "maskable"
+    },
     {
       "src": "/icon-192.png",
       "sizes": "192x192",

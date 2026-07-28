@@ -1,8 +1,14 @@
-const CACHE_NAME = 'neo-flw-landing-v3';
+const CACHE_NAME = 'neo-flw-landing-v4';
 const ASSETS_TO_CACHE = [
   '/',
   '/manifest.webmanifest',
   '/favicon.ico',
+  '/favicon-16x16.png',
+  '/favicon-32x32.png',
+  '/apple-touch-icon.png',
+  '/icons/icon-192x192.webp',
+  '/icons/icon-512x512.webp',
+  '/icons/maskable-512x512.webp',
   '/icon-192.png',
   '/icon-512.png',
   '/maskable-512.png',

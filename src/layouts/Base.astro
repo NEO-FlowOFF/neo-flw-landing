@@ -25,6 +25,56 @@ var e=ttq._i[t]||[],n=0;n<ttq.methods.length;n++)ttq.setAndDefer(e,ttq.methods[n
   ttq.page();
 }(window, document, 'ttq');
 ` : '';
+const appleStartupImageTuples: Array<[string, string, string, 'landscape' | 'portrait', string]> = [
+  ['440', '956', '3', 'landscape', 'iPhone_17_Pro_Max__iPhone_16_Pro_Max_landscape.png'],
+  ['402', '874', '3', 'landscape', 'iPhone_17_Pro__iPhone_17__iPhone_16_Pro_landscape.png'],
+  ['430', '932', '3', 'landscape', 'iPhone_16_Plus__iPhone_15_Pro_Max__iPhone_15_Plus__iPhone_14_Pro_Max_landscape.png'],
+  ['420', '912', '3', 'landscape', 'iPhone_Air_landscape.png'],
+  ['393', '852', '3', 'landscape', 'iPhone_16__iPhone_15_Pro__iPhone_15__iPhone_14_Pro_landscape.png'],
+  ['428', '926', '3', 'landscape', 'iPhone_14_Plus__iPhone_13_Pro_Max__iPhone_12_Pro_Max_landscape.png'],
+  ['390', '844', '3', 'landscape', 'iPhone_17e__iPhone_16e__iPhone_14__iPhone_13_Pro__iPhone_13__iPhone_12_Pro__iPhone_12_landscape.png'],
+  ['375', '812', '3', 'landscape', 'iPhone_13_mini__iPhone_12_mini__iPhone_11_Pro__iPhone_XS__iPhone_X_landscape.png'],
+  ['414', '896', '3', 'landscape', 'iPhone_11_Pro_Max__iPhone_XS_Max_landscape.png'],
+  ['414', '896', '2', 'landscape', 'iPhone_11__iPhone_XR_landscape.png'],
+  ['414', '736', '3', 'landscape', 'iPhone_8_Plus__iPhone_7_Plus__iPhone_6s_Plus__iPhone_6_Plus_landscape.png'],
+  ['375', '667', '2', 'landscape', 'iPhone_8__iPhone_7__iPhone_6s__iPhone_6__4.7__iPhone_SE_landscape.png'],
+  ['320', '568', '2', 'landscape', '4__iPhone_SE__iPod_touch_5th_generation_and_later_landscape.png'],
+  ['1032', '1376', '2', 'landscape', '13__iPad_Pro_M4_landscape.png'],
+  ['1024', '1366', '2', 'landscape', '12.9__iPad_Pro_landscape.png'],
+  ['834', '1210', '2', 'landscape', '11__iPad_Pro_M4_landscape.png'],
+  ['834', '1194', '2', 'landscape', '11__iPad_Pro__10.5__iPad_Pro_landscape.png'],
+  ['820', '1180', '2', 'landscape', '10.9__iPad_Air_landscape.png'],
+  ['834', '1112', '2', 'landscape', '10.5__iPad_Air_landscape.png'],
+  ['810', '1080', '2', 'landscape', '10.2__iPad_landscape.png'],
+  ['768', '1024', '2', 'landscape', '9.7__iPad_Pro__7.9__iPad_mini__9.7__iPad_Air__9.7__iPad_landscape.png'],
+  ['744', '1133', '2', 'landscape', '8.3__iPad_Mini_landscape.png'],
+  ['440', '956', '3', 'portrait', 'iPhone_17_Pro_Max__iPhone_16_Pro_Max_portrait.png'],
+  ['402', '874', '3', 'portrait', 'iPhone_17_Pro__iPhone_17__iPhone_16_Pro_portrait.png'],
+  ['430', '932', '3', 'portrait', 'iPhone_16_Plus__iPhone_15_Pro_Max__iPhone_15_Plus__iPhone_14_Pro_Max_portrait.png'],
+  ['420', '912', '3', 'portrait', 'iPhone_Air_portrait.png'],
+  ['393', '852', '3', 'portrait', 'iPhone_16__iPhone_15_Pro__iPhone_15__iPhone_14_Pro_portrait.png'],
+  ['428', '926', '3', 'portrait', 'iPhone_14_Plus__iPhone_13_Pro_Max__iPhone_12_Pro_Max_portrait.png'],
+  ['390', '844', '3', 'portrait', 'iPhone_17e__iPhone_16e__iPhone_14__iPhone_13_Pro__iPhone_13__iPhone_12_Pro__iPhone_12_portrait.png'],
+  ['375', '812', '3', 'portrait', 'iPhone_13_mini__iPhone_12_mini__iPhone_11_Pro__iPhone_XS__iPhone_X_portrait.png'],
+  ['414', '896', '3', 'portrait', 'iPhone_11_Pro_Max__iPhone_XS_Max_portrait.png'],
+  ['414', '896', '2', 'portrait', 'iPhone_11__iPhone_XR_portrait.png'],
+  ['414', '736', '3', 'portrait', 'iPhone_8_Plus__iPhone_7_Plus__iPhone_6s_Plus__iPhone_6_Plus_portrait.png'],
+  ['375', '667', '2', 'portrait', 'iPhone_8__iPhone_7__iPhone_6s__iPhone_6__4.7__iPhone_SE_portrait.png'],
+  ['320', '568', '2', 'portrait', '4__iPhone_SE__iPod_touch_5th_generation_and_later_portrait.png'],
+  ['1032', '1376', '2', 'portrait', '13__iPad_Pro_M4_portrait.png'],
+  ['1024', '1366', '2', 'portrait', '12.9__iPad_Pro_portrait.png'],
+  ['834', '1210', '2', 'portrait', '11__iPad_Pro_M4_portrait.png'],
+  ['834', '1194', '2', 'portrait', '11__iPad_Pro__10.5__iPad_Pro_portrait.png'],
+  ['820', '1180', '2', 'portrait', '10.9__iPad_Air_portrait.png'],
+  ['834', '1112', '2', 'portrait', '10.5__iPad_Air_portrait.png'],
+  ['810', '1080', '2', 'portrait', '10.2__iPad_portrait.png'],
+  ['768', '1024', '2', 'portrait', '9.7__iPad_Pro__7.9__iPad_mini__9.7__iPad_Air__9.7__iPad_portrait.png'],
+  ['744', '1133', '2', 'portrait', '8.3__iPad_Mini_portrait.png'],
+];
+const appleStartupImages = appleStartupImageTuples.map(([width, height, ratio, orientation, file]) => ({
+  media: `screen and (device-width: ${width}px) and (device-height: ${height}px) and (-webkit-device-pixel-ratio: ${ratio}) and (orientation: ${orientation})`,
+  href: `/splash_screens/${file}`,
+}));
 const jsonLd = {
   '@context': 'https://schema.org',
   '@graph': [
@@ -105,7 +155,17 @@ const jsonLd = {
     <meta name="theme-color" content="#16161a" />
     <meta name="facebook-domain-verification" content={metaVerifyToken} />
     <link rel="manifest" href="/manifest.webmanifest" />
+    <link rel="icon" type="image/webp" sizes="512x512" href="/icons/icon-512x512.webp" />
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png" />
     <link rel="icon" type="image/x-icon" href="/favicon.ico" />
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-title" content="NEØFLW" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+    {appleStartupImages.map((image) => (
+      <link rel="apple-touch-startup-image" media={image.media} href={image.href} />
+    ))}
     
     <!-- Google tag (gtag.js) -->
     <script async src="/n4py/gtag/js?id=G-EQRKXQD7FW"></script>

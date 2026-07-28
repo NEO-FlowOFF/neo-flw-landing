@@ -1,77 +1,57 @@
 # 📱 Guia de Ícones PWA - neoflowoff.agency
 
-## 📂 Estrutura Recomendada
+## 📂 Estrutura Ativa
 
 ### **Pasta Principal: `/public/icons/`**
 
-Coloque todos os ícones PWA aqui. Esta pasta já existe e está configurada no manifest.
+Ícones WebP usados pelo `public/manifest.webmanifest`.
 
 ### **Ícones na Raiz: `/`**
 
-Para favicon e apple-touch-icon (referenciados diretamente no HTML)
+Favicons, Apple Touch Icon e fallbacks PNG referenciados no HTML e no
+manifest.
+
+### **Splash screens iOS: `/public/splash_screens/`**
+
+Arquivos PNG declarados como `apple-touch-startup-image` em
+`src/layouts/Base.astro`.
 
 ---
 
 ## 🎯 Ícones Necessários
 
-### **1. Ícones PWA (WebP - Recomendado)**
-
-Coloque em: `/public/icons/`
+### **1. Ícones PWA WebP**
 
 ```text
 /public/icons/
-├── icon-48x48.webp      (48x48px)
-├── icon-72x72.webp      (72x72px)
-├── icon-96x96.webp      (96x96px)
-├── icon-128x128.webp    (128x128px)
-├── icon-144x144.webp    (144x144px)
-├── icon-152x152.webp    (152x152px)
-├── icon-192x192.webp    (192x192px) ⭐ OBRIGATÓRIO
-├── icon-256x256.webp    (256x256px)
-├── icon-384x384.webp    (384x384px)
-└── icon-512x512.webp    (512x512px) ⭐ OBRIGATÓRIO
+├── icon-192x192.webp
+├── icon-512x512.webp
+├── maskable-512x512.webp
+├── logo_app_engine.webp
+├── logo_app_engine_bco.webp
+├── logo_app_engine_pto.webp
+├── logo_app_engine_vde.webp
+└── logo_app_engine_vde.svg
 ```
 
-### **2. Ícones PWA (PNG - Fallback)**
-
-Coloque em: `/public/`
+### **2. Ícones PWA PNG e favicons**
 
 ```text
 /public/
-├── icon-192.png         (192x192px) ⭐ Fallback
-└── icon-512.png         (512x512px) ⭐ Fallback
+├── favicon.ico
+├── favicon-16x16.png
+├── favicon-32x32.png
+├── apple-touch-icon.png
+├── icon-192.png
+├── icon-512.png
+└── maskable-512.png
 ```
 
-### **3. Maskable Icon (Android)**
-
-Coloque em: `/public/`
+### **3. Splash screens**
 
 ```text
-/public/
-└── maskable-512.png     (512x512px) ⭐ Para Android Adaptive Icons
-```
-
-### **4. Favicons (Raiz do Projeto)**
-
-Coloque na raiz: `/`
-
-```text
-/
-├── favicon.ico          (16x16, 32x32, 48x48 - Multi-size ICO)
-├── favicon-16x16.png    (16x16px)
-├── favicon-32x32.png    (32x32px)
-└── apple-touch-icon.png (180x180px) ⭐ iOS
-```
-
-### **5. Android Chrome Icons (Raiz)**
-
-Coloque na raiz: `/`
-
-```text
-/
-├── android-chrome-192x192.png  (192x192px)
-├── android-chrome-512x512.png  (512x512px)
-└── safari-pinned-tab.svg       (SVG para Safari)
+/public/splash_screens/
+└── *.png
 ```
 
 ---
@@ -80,11 +60,17 @@ Coloque na raiz: `/`
 
 Para PWA funcionar corretamente, você precisa de pelo menos:
 
-- ✅ `/public/icons/icon-192x192.webp` ou `/public/icon-192.png`
-- ✅ `/public/icons/icon-512x512.webp` ou `/public/icon-512.png`
+- ✅ `/public/icons/icon-192x192.webp`
+- ✅ `/public/icons/icon-512x512.webp`
+- ✅ `/public/icons/maskable-512x512.webp`
+- ✅ `/public/icon-192.png`
+- ✅ `/public/icon-512.png`
 - ✅ `/public/maskable-512.png` (recomendado para Android)
-- ✅ `/favicon.ico` (raiz)
-- ✅ `/apple-touch-icon.png` (raiz, 180x180px)
+- ✅ `/public/favicon.ico`
+- ✅ `/public/favicon-16x16.png`
+- ✅ `/public/favicon-32x32.png`
+- ✅ `/public/apple-touch-icon.png`
+- ✅ `/public/splash_screens/*.png`
 
 ---
 
@@ -119,29 +105,10 @@ Para PWA funcionar corretamente, você precisa de pelo menos:
 
 ## 📝 Notas Importantes
 
-1. **WebP é preferido** mas PNG funciona como fallback
+1. **WebP é preferido** no manifest, com PNG como fallback
 2. **Maskable icon** é essencial para Android Adaptive Icons
 3. **Apple Touch Icon** deve ser exatamente 180x180px
-4. **Favicon** pode ser ICO multi-size ou PNG simples
+4. **Favicon** deve existir como ICO multi-size e PNGs 16/32px
 5. Todos os ícones devem ter **mesmo design visual** para consistência
-
----
-
-## 🔧 Ferramentas Recomendadas
-
-- **PWA Asset Generator**: <https://github.com/onderceylan/pwa-asset-generator>
-- **RealFaviconGenerator**: <https://realfavicongenerator.net/>
-- **ImageOptim**: Para compressão
-- **TinyPNG**: Para otimização online
-
----
-
-## 📍 Onde Colocar Agora
-
-**Coloque seus novos ícones PWA em:**
-
-```text
-/public/icons/
-```
-
-O manifest já está configurado para usar essa estrutura! 🚀
+6. Em Astro, assets de `public/` devem ser referenciados por caminho
+   absoluto, como `/icons/icon-512x512.webp`
