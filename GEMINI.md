@@ -81,7 +81,7 @@ Rotas legais canonicas para Meta/App Review:
 ```text
 /privacy/
 /terms/
-/data-deletion/
+/excluir-dados/
 ```
 
 Aliases publicos em Portugues:
@@ -89,8 +89,14 @@ Aliases publicos em Portugues:
 ```text
 /legal/
 /privacidade/
+/termos/
+/seguranca/
 /excluir-dados/
 ```
+
+O callback tecnico de exclusao de dados e `/api/meta/data-deletion`.
+Ele valida `signed_request` no server-side e nao substitui a pagina
+publica `/excluir-dados/`.
 
 ────────────────────────────────────────
 

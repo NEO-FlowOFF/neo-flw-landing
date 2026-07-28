@@ -38,9 +38,10 @@ Não trate este repositório como backend autoritativo.
 Credenciais, cobranças, webhooks e dados privados devem
 ficar fora do bundle público.
 
-Exceção atual: `functions/api/meta/embedded-signup.js` recebe o
-authorization code do Embedded Signup e deve falhar fechado quando
-não houver backend soberano ou storage seguro configurado.
+Exceções atuais: `functions/api/meta/embedded-signup.js` recebe o
+authorization code do Embedded Signup e `functions/api/meta/data-deletion.js`
+recebe o callback Meta Data Deletion. Ambos devem falhar fechado quando
+não houver backend soberano, KV ou storage seguro configurado.
 
 ---
 
@@ -79,7 +80,7 @@ neo-flw-landing/
 │   ├── sitemap.xml          # rotas públicas
 │   └── sw.js                # service worker conservador
 ├── functions/
-│   └── api/meta/            # adapter Embedded Signup
+│   └── api/meta/            # adapters Embedded Signup e Data Deletion
 ├── drafts/                  # insumos canônicos do operador
 ├── docs/                    # documentação de suporte
 ├── wrangler.jsonc           # config Cloudflare Pages
@@ -99,8 +100,10 @@ neo-flw-landing/
 /privacidade/             alias pt-BR
 /legal/                   termos
 /terms/                   alias EN
+/termos/                  termos pt-BR
+/seguranca/               política de segurança
 /excluir-dados/           exclusão de dados
-/data-deletion/           alias EN
+/api/meta/data-deletion   callback Meta Data Deletion
 ```
 
 Rotas de `planos` e `checkout` são geradas a partir de `src/data/catalog.json`.
@@ -123,7 +126,7 @@ Rotas de `planos` e `checkout` são geradas a partir de `src/data/catalog.json`.
 make install   # instala dependências (isolado)
 make dev       # servidor local → http://localhost:4321/
 make build     # build de produção → ./dist/
-make verify    # lint + validação
+make verify    # audit/docs/lint local
 make deploy    # wrangler pages deploy
 ```
 

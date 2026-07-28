@@ -79,7 +79,7 @@ Rotas legais canonicas para aprovacao Meta:
 ```text
 /privacy/
 /terms/
-/data-deletion/
+/excluir-dados/
 ```
 
 Aliases publicos em Portugues:
@@ -87,12 +87,16 @@ Aliases publicos em Portugues:
 ```text
 /legal/
 /privacidade/
+/termos/
+/seguranca/
 /excluir-dados/
 ```
 
 `functions/` nao e backend autoritativo de produto.
 Use apenas para adapters server-side estreitos, como o
-Embedded Signup da Meta, sem expor secrets ao navegador.
+Embedded Signup e o callback Meta Data Deletion, sem expor secrets
+ao navegador. O callback tecnico e `/api/meta/data-deletion`; nao
+recrie a pagina Astro legada `/data-deletion/`.
 
 ────────────────────────────────────────
 
@@ -144,6 +148,7 @@ Validacoes focadas:
 ./node_modules/.bin/stylelint 'src/styles/**/*.css'
 node --check public/sw.js
 xmllint --noout public/sitemap.xml
+node --test tests/data-deletion-and-ssr.test.js
 ```
 
 Se uma validacao falhar por ambiente,

@@ -41,9 +41,10 @@ Astro SSG
 │   └── paginas publicas de servicos unitarios
 ├── src/pages/privacy.astro
 ├── src/pages/terms.astro
-├── src/pages/data-deletion.astro
 ├── src/pages/legal.astro
 ├── src/pages/privacidade.astro
+├── src/pages/termos.astro
+├── src/pages/seguranca.astro
 ├── src/pages/excluir-dados.astro
 └── public/
     ├── logo_transp.png
@@ -54,8 +55,10 @@ Astro SSG
     └── sitemap.xml
 
 Cloudflare Pages Functions
-└── functions/api/meta/embedded-signup.js
-    └── server-side adapter for Meta Embedded Signup code handling
+├── functions/api/meta/embedded-signup.js
+│   └── server-side adapter for Meta Embedded Signup code handling
+└── functions/api/meta/data-deletion.js
+    └── validates Meta signed_request and queues/forwards deletion requests
 ```
 
 Google Tag Gateway ativo na zona Cloudflare:
@@ -180,7 +183,7 @@ Superficies legais para Meta/App Review:
 ```text
 /privacy/
 /terms/
-/data-deletion/
+/excluir-dados/
 ```
 
 Aliases publicos em Portugues:
@@ -188,6 +191,8 @@ Aliases publicos em Portugues:
 ```text
 /legal/
 /privacidade/
+/termos/
+/seguranca/
 /excluir-dados/
 ```
 
@@ -202,10 +207,15 @@ Nao inclua segredos, criterios internos,
 precificacao excepcional ou comportamento backend privado
 em nenhuma superficie publica para agentes.
 
-`functions/api/meta/embedded-signup.js` nao torna este repo
-backend autoritativo. Ele deve apenas encaminhar o authorization
-code para backend soberano ou armazenar de forma segura quando
-Cloudflare KV e criptografia estiverem configurados.
+`functions/api/meta/embedded-signup.js` e
+`functions/api/meta/data-deletion.js` nao tornam este repo backend
+autoritativo. Eles devem apenas encaminhar dados para backend soberano
+ou armazenar de forma segura quando Cloudflare KV e criptografia
+estiverem configurados.
+
+O callback publico de exclusao de dados e
+`/api/meta/data-deletion`; a pagina publica de instrucoes e
+`/excluir-dados/`. Nao recrie `src/pages/data-deletion.astro`.
 
 ────────────────────────────────────────
 
@@ -243,6 +253,7 @@ pnpm run build
 ./node_modules/.bin/stylelint 'src/styles/**/*.css'
 node --check public/sw.js
 xmllint --noout public/sitemap.xml
+node --test tests/data-deletion-and-ssr.test.js
 ```
 
 Se `astro check` falhar por erro interno do language server,

@@ -79,7 +79,9 @@ Rotas geradas no build atual:
 /conectar-whatsapp/          connector WhatsApp
 /privacy/  /privacidade/     política EN + pt-BR
 /legal/    /terms/           termos
-/excluir-dados/ /data-deletion/   exclusão de dados
+/termos/                     termos pt-BR
+/seguranca/                  política de segurança
+/excluir-dados/              exclusão de dados
 /404.html
 ```
 
@@ -100,7 +102,10 @@ node --check public/sw.js
 # validação do sitemap
 xmllint --noout public/sitemap.xml
 
-# atalho que roda tudo acima
+# testes do callback Meta Data Deletion e conteúdo SSR/build
+node --test tests/data-deletion-and-ssr.test.js
+
+# atalho local para audit/docs/lint
 make verify
 ```
 
@@ -163,6 +168,10 @@ cp .env.example .env
 
 > Nunca commite `.env`. Credenciais e secrets devem ficar fora do bundle.
 
+O endpoint `functions/api/meta/data-deletion.js` exige `META_APP_SECRET`
+no ambiente server-side para validar `signed_request` HMAC SHA-256.
+Não exponha esse valor em HTML, logs ou scripts públicos.
+
 ---
 
 ## 9. Dependências principais
@@ -170,7 +179,7 @@ cp .env.example .env
 | Pacote                       | Versão        | Função                     |
 |------------------------------|---------------|----------------------------|
 | `astro`                      | ^7.1.3        | static site generator      |
-| `wrangler`                   | ^4.113.0      | deploy CLI Cloudflare       |
+| `wrangler`                   | ^4.113.0      | deploy CLI Cloudflare      |
 | `stylelint`                  | ^17.14.1      | lint CSS                   |
 | `stylelint-config-standard`  | ^40.0.0       | ruleset padrão             |
 | `@astrojs/check`             | ^0.9.3        | typecheck Astro            |
@@ -214,6 +223,6 @@ Para adicionar um plano ou checkout, edite `catalog.json` e rode `make build`.
 
 ```text
 ────────────────────────────
-SETUP · NΞØ FlowOFF Landing
+SETUP · neoflowoff-landing
 ────────────────────────────
 ```

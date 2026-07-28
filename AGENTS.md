@@ -39,9 +39,10 @@ Qualquer agente que atuar neste repositório DEVE seguir estas regras.
 - **URLs para aprovação Meta:** para submissão/App Review use as rotas Astro
   públicas `https://neoflowoff.agency/privacy/`,
   `https://neoflowoff.agency/terms/` e
-  `https://neoflowoff.agency/data-deletion/`. As rotas em português
-  `/privacidade/`, `/legal/` e `/excluir-dados/` permanecem como
-  superfícies públicas equivalentes para usuários.
+  `https://neoflowoff.agency/excluir-dados/`. As rotas em português
+  `/privacidade/`, `/legal/`, `/termos/` e `/seguranca/` permanecem como
+  superfícies públicas equivalentes para usuários. O caminho
+  `/api/meta/data-deletion` é callback técnico, não página pública.
 - **HTMLs legais legados removidos da raiz:** os arquivos
   `privacy/index.html`, `legal/index.html` e `excluir-dados/index.html`
   foram removidos para evitar ambiguidade auditável. Não recriar HTML
@@ -64,6 +65,11 @@ Qualquer agente que atuar neste repositório DEVE seguir estas regras.
   code do browser. Ele deve encaminhar para backend soberano ou usar
   storage seguro configurado; se storage/forward não existir, deve
   falhar fechado e a UI não deve exibir sucesso.
+- **Data Deletion Meta:** `functions/api/meta/data-deletion.js`
+  é callback server-side para `signed_request` da Meta. Deve validar
+  HMAC SHA-256 com `META_APP_SECRET`, nunca logar segredo ou
+  `signed_request` completo, e retornar URL pública em `/excluir-dados`
+  com `confirmation_code`.
 - **Segurança de API:** Nenhuma credencial ou token privado
   (`FLOWPAY_INTERNAL_API_KEY`, `META_APP_SECRET`, chaves OpenAI, etc.) deve ser exposta
   no front-end. Qualquer cobrança real deve passar por backend
@@ -75,8 +81,8 @@ Qualquer agente que atuar neste repositório DEVE seguir estas regras.
 
 - A fonte principal é `src/pages`, `src/components`,
   `src/layouts`, `src/styles` e `src/data`.
-- Rotas públicas como `/privacy/`, `/terms/`, `/data-deletion/`,
-  `/legal/`, `/privacidade/` e `/excluir-dados/` são geradas por
+- Rotas públicas como `/privacy/`, `/terms/`, `/legal/`,
+  `/privacidade/`, `/termos/`, `/seguranca/` e `/excluir-dados/` são geradas por
   Astro a partir de `src/pages`. Diretórios HTML homônimos na raiz do
   projeto não são fonte de publicação e não devem ser reintroduzidos.
 - A única superfície server-side local atual é `functions/`,
@@ -127,7 +133,8 @@ Qualquer agente que atuar neste repositório DEVE seguir estas regras.
 - `public/robots.txt` deve estar semanticamente alinhado ao sitemap
   e ao `llms.txt`.
 - As superfícies legais públicas são `/privacy/`, `/terms/`,
-  `/data-deletion/`, `/legal/`, `/privacidade/` e `/excluir-dados/`.
+  `/legal/`, `/privacidade/`, `/termos/`, `/seguranca/` e `/excluir-dados/`.
+  `/api/meta/data-deletion` é callback de API para a Meta.
 - Rotas públicas de produto incluem `/planos/<slug>/`
   e `/checkout/<slug>/`.
 - Nunca publicar segredos, critérios internos, fluxos privados,
@@ -157,6 +164,7 @@ pnpm run build
 ./node_modules/.bin/stylelint 'src/styles/**/*.css'
 node --check public/sw.js
 xmllint --noout public/sitemap.xml
+node --test tests/data-deletion-and-ssr.test.js
 ```
 
 Se `pnpm exec astro check` falhar por erro interno do language server,
