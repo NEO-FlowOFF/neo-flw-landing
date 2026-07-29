@@ -7,8 +7,8 @@ import '../styles/spinner.css';
 
 const metaConfig = configData.integrations.meta;
 const metaAppId = metaConfig.app_id;
+const metaLoginConfigurationId = metaConfig.login_configuration_id;
 const graphApiVersion = metaConfig.graph_api_version;
-const requestedScopes = metaConfig.requested_scopes.join(',');
 ---
 
 <Base title="Conectar WhatsApp Business | Meta Tech Provider — neoflowoff.agency" description="Conexão oficial via Meta Cloud API para WhatsApp Business.">
@@ -70,8 +70,8 @@ const requestedScopes = metaConfig.requested_scopes.join(',');
             class="btn-meta-blue"
             data-haptic
             data-meta-app-id={metaAppId}
+            data-meta-config-id={metaLoginConfigurationId}
             data-graph-api-version={graphApiVersion}
-            data-requested-scopes={requestedScopes}
             aria-label="Continuar com a Meta"
           >
             <svg class="meta-btn-icon" width="20" height="20" viewBox="0 0 24 24" fill="currentColor">

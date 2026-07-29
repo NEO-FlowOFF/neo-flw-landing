@@ -22,8 +22,8 @@ type MetaSdk = {
   login(
     callback: (response: MetaLoginResponse) => void,
     options: {
-      scope: string;
-      return_scopes: boolean;
+      config_id: string;
+      override_default_response_type: true;
       response_type: 'code';
     }
   ): void;
@@ -44,8 +44,8 @@ const spinner = spinnerHost
   : null;
 
 const metaAppId = button?.dataset.metaAppId || '';
+const metaConfigId = button?.dataset.metaConfigId || '';
 const graphApiVersion = button?.dataset.graphApiVersion || '';
-const requestedScopes = button?.dataset.requestedScopes || '';
 
 function setSignupStatus(message: string, tone: SignupTone = 'info') {
   const statusDiv = document.getElementById('signup-status');
@@ -84,7 +84,6 @@ async function confirmEmbeddedSignup(authResponse: MetaAuthResponse) {
     body: JSON.stringify({
       code,
       grantedScopes: authResponse.grantedScopes || authResponse.granted_scopes || '',
-      requestedScopes,
     }),
   });
 
@@ -113,6 +112,11 @@ window.launchWhatsAppSignup = function () {
     return;
   }
 
+  if (!metaConfigId) {
+    setSignupStatus('A configuração oficial do Login for Business não foi carregada. Tente novamente em instantes.', 'error');
+    return;
+  }
+
   setButtonLoading(true);
   setSignupStatus('Conectando à API oficial da Meta...', 'info');
 
@@ -137,9 +141,9 @@ window.launchWhatsAppSignup = function () {
       setButtonLoading(false);
     },
     {
-      scope: requestedScopes,
-      return_scopes: true,
+      config_id: metaConfigId,
       response_type: 'code',
+      override_default_response_type: true,
     }
   );
 };

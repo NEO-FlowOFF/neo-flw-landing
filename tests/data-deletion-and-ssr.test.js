@@ -124,11 +124,19 @@ test('6. HTML compilado de /conectar-whatsapp/ contém os metadados e textos SSR
   // Asserções para conteúdo SSR
   assert.ok(html.includes('NEØFLW ENGINE:one'), 'O HTML deve conter "NEØFLW ENGINE:one"');
   assert.ok(html.includes('1500002841696407'), 'O HTML deve conter "1500002841696407"');
+  assert.ok(html.includes('1322930417561011'), 'O HTML deve conter o Configuration ID do Facebook Login for Business');
   assert.ok(html.includes('Tech Provider'), 'O HTML deve conter "Tech Provider"');
   assert.ok(html.includes('excluir-dados'), 'O HTML deve conter "excluir-dados"');
   assert.ok(html.includes('Meta Business Messaging'), 'O HTML deve conter "Meta Business Messaging"');
   assert.ok(html.includes('Graph API v25.0'), 'O HTML deve conter "Graph API v25.0"');
   assert.ok(html.includes('data-spinner-host'), 'O HTML deve conter o host do spinner de conexão');
+  assert.ok(html.includes('data-meta-config-id="1322930417561011"'), 'O botao deve carregar data-meta-config-id com o Configuration ID');
+  assert.ok(html.includes('data-meta-app-id="1500002841696407"'), 'O botao deve carregar data-meta-app-id com o App ID');
+  assert.ok(
+    html.indexOf('data-meta-config-id="1322930417561011"') !== html.indexOf('data-meta-app-id="1500002841696407"'),
+    'Configuration ID e App ID devem ser atributos distintos'
+  );
+  assert.ok(!html.includes('data-requested-scopes='), 'O HTML nao deve enviar scope paralelo ao fluxo configurado');
   assert.ok(html.includes('stroke-dasharray'), 'O bundle deve incluir o spinner SVG animado');
   
   // Asserções para explicação detalhada
@@ -144,4 +152,16 @@ test('6. HTML compilado de /conectar-whatsapp/ contém os metadados e textos SSR
   // Nenhuma das palavras banidas no HTML de conexão
   assert.ok(!html.includes('NEØ FLOW E-gine'), 'O HTML não deve conter "NEØ FLOW E-gine"');
   assert.ok(!html.includes('E-gine'), 'O HTML não deve conter "E-gine"');
+});
+
+test('7. Script Meta usa config_id do Login for Business sem scope paralelo', () => {
+  const scriptPath = path.resolve('src/scripts/meta-signup.ts');
+  const script = fs.readFileSync(scriptPath, 'utf8');
+
+  assert.ok(script.includes('const metaConfigId'), 'O script deve ler data-meta-config-id');
+  assert.ok(script.includes('config_id: metaConfigId'), 'FB.login deve receber config_id');
+  assert.ok(script.includes("response_type: 'code'"), 'FB.login deve solicitar authorization code');
+  assert.ok(script.includes('override_default_response_type: true'), 'FB.login deve forcar response_type=code');
+  assert.ok(!script.includes('scope: requestedScopes'), 'FB.login nao deve enviar scope paralelo');
+  assert.ok(!script.includes('data.requestedScopes'), 'O script nao deve depender de data-requested-scopes');
 });
