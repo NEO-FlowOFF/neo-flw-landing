@@ -41,7 +41,7 @@ async function exchangeCode({ code, env, request }) {
   const appId = env.META_APP_ID || PUBLIC_META_APP_ID;
   const appSecret = env.META_APP_SECRET;
   const graphVersion = env.META_GRAPH_API_VERSION || GRAPH_API_VERSION;
-  const redirectUri = env.META_OAUTH_REDIRECT_URI || `${new URL(request.url).origin}/conectar-whatsapp`;
+  const redirectUri = env.META_OAUTH_REDIRECT_URI || `${new URL(request.url).origin}/conectar-whatsapp/`;
 
   if (!appSecret) {
     return { error: 'meta_app_secret_not_configured' };
