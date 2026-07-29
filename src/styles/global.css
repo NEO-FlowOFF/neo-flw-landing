@@ -437,17 +437,56 @@ body::selection {
 }
 
 .home-hero {
-  display: flex;
+  display: grid;
   align-items: center;
+  position: relative;
+  overflow: hidden;
   min-height: clamp(520px, 72vh, 760px);
-  padding: clamp(2rem, 8vw, 5.5rem) 0 clamp(2rem, 5vw, 4rem);
+  border: 1px solid rgb(255 255 255 / 12%);
+  border-radius: 8px;
+  background: #ece5da;
+  box-shadow: 0 22px 68px rgb(0 0 0 / 28%);
+  isolation: isolate;
+}
+
+.home-hero--catalog {
+  min-height: auto;
+  aspect-ratio: 8 / 3;
+}
+
+.home-hero::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  pointer-events: none;
+  background: linear-gradient(
+    90deg,
+    rgb(245 240 232 / 94%) 0%,
+    rgb(245 240 232 / 86%) 28%,
+    rgb(245 240 232 / 42%) 51%,
+    rgb(245 240 232 / 4%) 78%
+  );
+}
+
+.hero-banner-image {
+  grid-area: 1 / 1;
+  z-index: 0;
+  width: 100%;
+  height: auto;
+  object-fit: contain;
+  object-position: center;
 }
 
 .hero-copy {
+  grid-area: 1 / 1;
+  z-index: 2;
   display: flex;
   flex-direction: column;
   justify-content: center;
-  max-width: 780px;
+  max-width: 600px;
+  padding: clamp(1.4rem, 3vw, 2.4rem);
+  color: var(--neo-carbon);
 }
 
 .hero-eyebrow,
@@ -478,6 +517,13 @@ body::selection {
   box-shadow: 0 0 0 4px rgb(143 254 9 / 10%);
 }
 
+.home-hero .hero-eyebrow {
+  border-color: rgb(11 12 11 / 14%);
+  background: rgb(255 255 255 / 56%);
+  color: rgb(11 12 11 / 72%);
+  box-shadow: 0 10px 30px rgb(255 255 255 / 34%);
+}
+
 .hero-title {
   max-width: 900px;
   color: var(--neo-canvas);
@@ -495,7 +541,7 @@ body::selection {
 }
 
 .hero-title-logo {
-  width: min(100%, 920px);
+  width: min(100%, 580px);
 }
 
 .hero-title-logo img {
@@ -503,31 +549,23 @@ body::selection {
   width: 100%;
   height: auto;
   object-fit: contain;
-  filter: drop-shadow(0 18px 36px rgb(0 0 0 / 38%));
+  filter: drop-shadow(0 14px 28px rgb(255 255 255 / 54%));
 }
 
 .hero-lead {
-  max-width: 720px;
-  margin-top: 1.35rem;
-  color: var(--text);
-  font-size: clamp(1.05rem, 2.1vw, 1.45rem);
+  max-width: 580px;
+  margin-top: clamp(0.8rem, 1.6vw, 1.1rem);
+  color: var(--neo-carbon);
+  font-size: clamp(1rem, 1.7vw, 1.28rem);
   font-weight: 650;
   line-height: 1.38;
-}
-
-.hero-body {
-  max-width: 680px;
-  margin-top: 1rem;
-  color: var(--text-2);
-  font-size: clamp(0.95rem, 1.4vw, 1.08rem);
-  line-height: 1.7;
 }
 
 .hero-actions {
   display: flex;
   flex-wrap: wrap;
   gap: 0.75rem;
-  margin-top: 1.6rem;
+  margin-top: clamp(1rem, 2vw, 1.35rem);
 }
 
 .neo-button {
@@ -563,6 +601,43 @@ body::selection {
 .neo-button--secondary {
   background: rgb(255 255 255 / 6%);
   border: 1px solid rgb(255 255 255 / 16%);
+}
+
+.home-hero .neo-button--secondary {
+  border-color: rgb(11 12 11 / 18%);
+  background: rgb(255 255 255 / 54%);
+  color: var(--neo-carbon);
+}
+
+.hero-bottom-bar {
+  width: 100vw;
+  margin: clamp(0.8rem, 1.6vw, 1.15rem) calc(50% - 50vw) 0;
+  overflow: hidden;
+  border-top: 1px solid rgb(255 255 255 / 10%);
+  border-bottom: 1px solid rgb(255 255 255 / 10%);
+  background: #0b0b0e;
+  color: #fff;
+}
+
+.hero-bottom-track {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: clamp(0.7rem, 2vw, 1.4rem);
+  min-height: 38px;
+  padding: 0.45rem 1rem;
+  color: rgb(255 255 255 / 88%);
+  font-family: var(--mono);
+  font-size: clamp(0.58rem, 0.9vw, 0.72rem);
+  font-weight: 850;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+
+.hero-bottom-track span:nth-child(2) {
+  color: var(--acid);
+  font-size: 0.62rem;
 }
 
 .section-band {
@@ -933,6 +1008,17 @@ body::selection {
   color: var(--text-2);
   font-size: 0.84rem;
   line-height: 1.55;
+}
+
+.method-summary {
+  max-width: 760px;
+  margin: clamp(1.2rem, 3vw, 1.7rem) 0 0;
+  padding-top: 1rem;
+  border-top: 1px solid rgb(255 255 255 / 12%);
+  color: var(--text-2);
+  font-size: clamp(0.95rem, 1.4vw, 1.08rem);
+  font-weight: 520;
+  line-height: 1.7;
 }
 
 .about-band {
@@ -1698,6 +1784,32 @@ body::selection {
 @media (width < 860px) {
   .home-hero {
     min-height: auto;
+  }
+
+  .home-hero--catalog {
+    aspect-ratio: auto;
+  }
+
+  .home-hero::before {
+    display: none;
+  }
+
+  .hero-banner-image {
+    grid-area: auto;
+    object-position: center;
+  }
+
+  .hero-copy {
+    grid-area: auto;
+    padding: clamp(1rem, 5vw, 1.5rem);
+  }
+
+  .hero-bottom-track {
+    flex-wrap: wrap;
+    justify-content: center;
+    row-gap: 0.25rem;
+    min-height: 48px;
+    white-space: normal;
   }
 
   .detail-hero {

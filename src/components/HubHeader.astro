@@ -22,7 +22,7 @@ import uiTexts from '../data/ui_texts.json';
     <div class="nav-right">
       <button id="menu-toggle" class="hamburger-btn" aria-label="Abrir menu" aria-expanded="false" aria-controls="mobile-menu">
         <i data-lucide="menu" id="menu-icon-open" class="menu-toggle-icon"></i>
-        <i data-lucide="x" id="menu-icon-close" class="menu-toggle-icon" hidden></i>
+        <i data-lucide="x" id="menu-icon-close" class="menu-toggle-icon"></i>
       </button>
     </div>
   </div>
@@ -200,9 +200,26 @@ import uiTexts from '../data/ui_texts.json';
   }
 
   .menu-toggle-icon {
+    position: absolute;
     width: 18px;
     height: 18px;
     color: var(--acid);
+    transition: opacity 0.18s ease, transform 0.18s ease;
+  }
+
+  #menu-icon-close {
+    opacity: 0;
+    transform: rotate(-45deg) scale(0.74);
+  }
+
+  .hamburger-btn.is-open #menu-icon-open {
+    opacity: 0;
+    transform: rotate(45deg) scale(0.74);
+  }
+
+  .hamburger-btn.is-open #menu-icon-close {
+    opacity: 1;
+    transform: rotate(0deg) scale(1);
   }
 
   /* GLASSMORPHIC DROPDOWN MENU */
@@ -369,8 +386,6 @@ import uiTexts from '../data/ui_texts.json';
 <script>
   const toggleBtn = document.getElementById('menu-toggle');
   const menu = document.getElementById('mobile-menu');
-  const iconOpen = document.getElementById('menu-icon-open');
-  const iconClose = document.getElementById('menu-icon-close');
 
   toggleBtn?.addEventListener('click', () => {
     const isOpen = menu?.classList.toggle('active');
@@ -378,10 +393,6 @@ import uiTexts from '../data/ui_texts.json';
     toggleBtn.classList.toggle('is-open', Boolean(isOpen));
     const backdrop = document.getElementById('menu-backdrop');
     if (backdrop) backdrop.classList.toggle('active', Boolean(isOpen));
-    if (iconOpen && iconClose) {
-      iconOpen.hidden = Boolean(isOpen);
-      iconClose.hidden = !isOpen;
-    }
   });
 
   document.querySelectorAll('.menu-item').forEach(item => {
@@ -389,10 +400,6 @@ import uiTexts from '../data/ui_texts.json';
       menu?.classList.remove('active');
       toggleBtn?.setAttribute('aria-expanded', 'false');
       toggleBtn?.classList.remove('is-open');
-      if (iconOpen && iconClose) {
-        iconOpen.hidden = false;
-        iconClose.hidden = true;
-      }
       const backdrop = document.getElementById('menu-backdrop');
       if (backdrop) backdrop.classList.remove('active');
     });
@@ -403,8 +410,6 @@ import uiTexts from '../data/ui_texts.json';
     menu.classList.remove('active');
     toggleBtn?.setAttribute('aria-expanded', 'false');
     toggleBtn?.classList.remove('is-open');
-    if (iconOpen) iconOpen.hidden = false;
-    if (iconClose) iconClose.hidden = true;
     const backdrop = document.getElementById('menu-backdrop');
     if (backdrop) backdrop.classList.remove('active');
     toggleBtn?.focus();

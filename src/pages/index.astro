@@ -22,12 +22,12 @@ const servicos = catalogData.products.filter(p => p.category === 'Serviço' && !
         <div class="ticker-track" style="display: flex; width: max-content; animation: ticker-loop 24s linear infinite; gap: 2.5rem;">
           <span style="font-family: var(--mono); font-size: 0.72rem; font-weight: 800; color: #ffffff; text-transform: uppercase; letter-spacing: 0.05em; white-space: nowrap; display: inline-flex; align-items: center; gap: 0.7rem;">
             <span style="background: var(--acid); color: #000; font-size: 0.58rem; padding: 2px 6px; border-radius: 4px; font-weight: 900; letter-spacing: 0.08em;">LATEST</span>
-            <span>Agentes de IA, páginas, CRM e flows comerciais para empresas. Marketing com infraestrutura.</span>
+            <span>Em implementação: ajustes finais para avaliação e aprovação do app via Meta Developers.</span>
             <span style="color: var(--acid); font-size: 0.6rem;">◆</span>
           </span>
           <span style="font-family: var(--mono); font-size: 0.72rem; font-weight: 800; color: #ffffff; text-transform: uppercase; letter-spacing: 0.05em; white-space: nowrap; display: inline-flex; align-items: center; gap: 0.7rem;">
             <span style="background: var(--acid); color: #000; font-size: 0.58rem; padding: 2px 6px; border-radius: 4px; font-weight: 900; letter-spacing: 0.08em;">LATEST</span>
-            <span>Agentes de IA, páginas, CRM e flows comerciais para empresas. Marketing com infraestrutura.</span>
+            <span>neoflowoff.agency opera como Meta Tech Provider para WhatsApp Business, APIs e governança.</span>
             <span style="color: var(--acid); font-size: 0.6rem;">◆</span>
           </span>
         </div>
@@ -37,7 +37,17 @@ const servicos = catalogData.products.filter(p => p.category === 'Serviço' && !
     <!-- HUB HEADER -->
     <HubHeader />
 
-    <section class="home-hero" aria-labelledby="home-title">
+    <section class="home-hero home-hero--catalog" aria-labelledby="home-title">
+      <img
+        class="hero-banner-image"
+        src="/assets/banners/home/neo-growth-system.webp"
+        alt="NEØ Growth System conectado a agentes, CRM, eventos, mensagens, dados e Meta Tech Provider"
+        width="1920"
+        height="720"
+        loading="eager"
+        decoding="async"
+        fetchpriority="high"
+      />
       <div class="hero-copy">
         <div class="hero-eyebrow">
           <span class="hero-status-dot" aria-hidden="true"></span>
@@ -45,17 +55,15 @@ const servicos = catalogData.products.filter(p => p.category === 'Serviço' && !
         </div>
         <div id="home-title" class="hero-title hero-title-logo" role="img" aria-label="NEØ FlowOFF">
           <img
-            src="/logo_transp.png"
+            src="/logo_transp.svg"
             alt="NEØ FlowOFF"
-            width="2618"
-            height="463"
+            width="656"
+            height="72"
             loading="eager"
             decoding="async"
-            fetchpriority="high"
           />
         </div>
         <p class="hero-lead">{uiTexts.header.subtitle}</p>
-        <p class="hero-body">{uiTexts.header.body}</p>
         <div class="hero-actions">
           <a class="neo-button neo-button--primary" href="#solucoes">
             {uiTexts.header.primary_cta}
@@ -67,6 +75,18 @@ const servicos = catalogData.products.filter(p => p.category === 'Serviço' && !
       </div>
 
     </section>
+
+    <div class="hero-bottom-bar" aria-hidden="true">
+      <div class="hero-bottom-track">
+        <span>AGENTES DE IA</span>
+        <span>◆</span>
+        <span>WHATSAPP BUSINESS</span>
+        <span>CRM & AUTOMAÇÕES</span>
+        <span>DADOS & DASHBOARDS</span>
+        <span>LANDING PAGES</span>
+        <span>META TECH PROVIDER</span>
+      </div>
+    </div>
 
     <!-- SOLUÇÕES (GRID) -->
     <div id="solucoes">
@@ -198,6 +218,7 @@ const servicos = catalogData.products.filter(p => p.category === 'Serviço' && !
           );
         })}
       </div>
+      <p class="method-summary">{uiTexts.header.body}</p>
     </section>
 
     <!-- SEÇÃO SOBRE & CLOSING (SEÇÃO CLARA FULL-BLEED FULL RHYTHM) -->

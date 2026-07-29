@@ -84,6 +84,36 @@ canonica para SEO, AEO, LGPD e revisao Meta.
 
 ────────────────────────────────────────
 
+## ⧆ Pos-aprovacao Meta: Hero de catalogo
+
+Status: pendente para desenvolvimento.
+
+Responsavel pela retomada: Netto Mello.
+
+A home deve evoluir para uma estrutura mais proxima de catalogo de servicos,
+com leitura de e-commerce e banners editoriais no topo. Esta frente fica fora
+do caminho critico da avaliacao e aprovacao Meta.
+
+Asset ja disponivel para a retomada:
+
+```text
+public/assets/banners/home/neo-growth-system.webp
+```
+
+Quando retomar:
+
+- avaliar hero com banners rotativos em intervalo aproximado de 5 segundos
+- preservar LCP, CLS e nota Lighthouse
+- manter primeiro banner com dimensoes explicitas, `loading="eager"`,
+  `decoding="async"` e `fetchpriority="high"`
+- carregar banners secundarios sem prioridade alta
+- manter a identidade `NEØFLW ENGINE:one`
+- validar mobile e desktop antes de publicar
+
+Nao implementar esta mudanca antes da conclusao da prioridade Meta atual.
+
+────────────────────────────────────────
+
 ## ⧆ Pos-aprovacao Meta: Agent Readiness
 
 Status: backlog local. Nao implementar antes da aprovacao Meta.
