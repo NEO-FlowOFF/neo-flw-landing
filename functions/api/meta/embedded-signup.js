@@ -54,12 +54,18 @@ async function exchangeCode({ code, env, request }) {
     redirect_uri: redirectUri,
   });
 
-  const response = await fetch(`https://graph.facebook.com/${graphVersion}/oauth/access_token?${params.toString()}`, {
-    method: 'GET',
-    headers: {
-      Accept: 'application/json',
-    },
-  });
+  let response;
+
+  try {
+    response = await fetch(`https://graph.facebook.com/${graphVersion}/oauth/access_token?${params.toString()}`, {
+      method: 'GET',
+      headers: {
+        Accept: 'application/json',
+      },
+    });
+  } catch {
+    return { error: 'meta_code_exchange_failed', status: 502, meta_error_code: null };
+  }
 
   const payload = await response.json().catch(() => ({}));
   if (!response.ok) {
@@ -140,7 +146,8 @@ export async function onRequestPost(context) {
 
   const exchange = await exchangeCode({ code, env, request });
   if (exchange.error) {
-    return json({ ok: false, error: exchange.error, meta_error_code: exchange.meta_error_code || null }, 502);
+    const status = exchange.status && exchange.status < 500 ? 400 : 502;
+    return json({ ok: false, error: exchange.error, meta_error_code: exchange.meta_error_code || null }, status);
   }
 
   const keyVersion = env.META_TOKEN_ENCRYPTION_KEY_VERSION || 'v1';

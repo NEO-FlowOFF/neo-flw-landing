@@ -7,6 +7,10 @@
     {
       "binding": "META_DELETION_REQUESTS",
       "id": "afe76b8c5bf44e2cb4b19f20ebe60081"
+    },
+    {
+      "binding": "META_CONNECTIONS",
+      "id": "f5f62f9206054f7e8191d5a10cd16db8"
     }
   ]
 }
