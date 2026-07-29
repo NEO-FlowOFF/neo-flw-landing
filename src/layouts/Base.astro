@@ -166,6 +166,7 @@ const jsonLd = {
     {appleStartupImages.map((image) => (
       <link rel="apple-touch-startup-image" media={image.media} href={image.href} />
     ))}
+    <slot name="head" />
     
     <!-- Google tag (gtag.js) -->
     <script async src="/n4py/gtag/js?id=G-EQRKXQD7FW"></script>
