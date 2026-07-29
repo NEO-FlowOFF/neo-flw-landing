@@ -98,6 +98,19 @@ O callback tecnico de exclusao de dados e `/api/meta/data-deletion`.
 Ele valida `signed_request` no server-side e nao substitui a pagina
 publica `/excluir-dados/`.
 
+Embedded Signup canonico:
+
+```text
+Configuration ID publico: 1322930417561011
+Fonte Astro: src/data/config.json -> integrations.meta.login_configuration_id
+Browser: FB.login({ config_id, response_type: "code", override_default_response_type: true })
+Adapter: POST /api/meta/embedded-signup
+```
+
+Nao confundir Configuration ID com App ID. Nao trocar authorization code no
+browser e nao enviar `scope` paralelo ao `FB.login` sem nova validacao atual da
+Meta.
+
 ────────────────────────────────────────
 
 ## ⨷ Performance

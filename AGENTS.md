@@ -65,6 +65,15 @@ Qualquer agente que atuar neste repositório DEVE seguir estas regras.
   code do browser. Ele deve encaminhar para backend soberano ou usar
   storage seguro configurado; se storage/forward não existir, deve
   falhar fechado e a UI não deve exibir sucesso.
+- **Facebook Login for Business:** o Configuration ID publico canonico e
+  `1322930417561011`. A fonte consumida pelo Astro e
+  `src/data/config.json` em
+  `integrations.meta.login_configuration_id`. A pagina
+  `/conectar-whatsapp/` deve passar esse valor como `data-meta-config-id`
+  e `src/scripts/meta-signup.ts` deve chamar `FB.login` com
+  `config_id`, `response_type: 'code'` e
+  `override_default_response_type: true`. Nao enviar `scope` paralelo sem
+  nova validacao explicita no painel/docs da Meta.
 - **Data Deletion Meta:** `functions/api/meta/data-deletion.js`
   é callback server-side para `signed_request` da Meta. Deve validar
   HMAC SHA-256 com `META_APP_SECRET`, nunca logar segredo ou

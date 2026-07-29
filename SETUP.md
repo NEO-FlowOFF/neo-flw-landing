@@ -175,6 +175,23 @@ O endpoint `functions/api/meta/data-deletion.js` exige `META_APP_SECRET`
 no ambiente server-side para validar `signed_request` HMAC SHA-256.
 Não exponha esse valor em HTML, logs ou scripts públicos.
 
+`META_LOGIN_CONFIGURATION_ID=1322930417561011` e publico e representa a
+configuracao oficial do Facebook Login for Business. No build Astro, a fonte
+real e `src/data/config.json`; manter `.env.example` e o JSON alinhados quando
+o Configuration ID mudar.
+
+O fluxo esperado em `/conectar-whatsapp/`:
+
+```text
+button[data-meta-config-id]
+  → FB.login({ config_id, response_type: "code", override_default_response_type: true })
+  → POST /api/meta/embedded-signup
+  → backend soberano / storage seguro troca e guarda o token
+```
+
+Nao adicionar `scope` paralelo ao `FB.login` enquanto a configuracao do Login
+for Business for a fonte canonica de ativos e permissoes.
+
 Bindings KV como `META_DELETION_REQUESTS` e `META_CONNECTIONS` devem ser
 configurados na Cloudflare ou no `wrangler.jsonc`; eles não são variáveis
 textuais do `.env`.

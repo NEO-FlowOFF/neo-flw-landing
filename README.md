@@ -43,6 +43,12 @@ authorization code do Embedded Signup e `functions/api/meta/data-deletion.js`
 recebe o callback Meta Data Deletion. Ambos devem falhar fechado quando
 não houver backend soberano, KV ou storage seguro configurado.
 
+O fluxo publico de `/conectar-whatsapp/` usa Facebook Login for Business com
+Configuration ID `1322930417561011`, mantido em `src/data/config.json` como
+`integrations.meta.login_configuration_id`. Esse ID nao e secreto. O navegador
+deve solicitar `response_type: "code"` via `config_id`; a troca do
+authorization code permanece exclusivamente server-side.
+
 ---
 
 ## ⧉ Stack

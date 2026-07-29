@@ -101,6 +101,24 @@ drafts/catalog_v2026_2.json  insumo canonico do operador
 
 Nao edite `drafts/catalog_v2026_2.json` sem pedido explicito.
 
+Meta Embedded Signup:
+
+```text
+src/data/config.json
+└─ integrations.meta.login_configuration_id = 1322930417561011
+
+src/pages/conectar-whatsapp.astro
+└─ button[data-meta-config-id]
+
+src/scripts/meta-signup.ts
+└─ FB.login({ config_id, response_type: "code", override_default_response_type: true })
+```
+
+O Configuration ID nao e secret nem App ID. Nao enviar `scope` paralelo ao
+`FB.login` sem revalidar exigencia atual da Meta. O authorization code nunca
+deve ser trocado no browser; o adapter `/api/meta/embedded-signup` continua
+server-side.
+
 Quando o operador perguntar se todos os produtos estao veiculados,
 compare o draft canonico com `src/data/catalog.json`,
 com a home e com as rotas geradas.

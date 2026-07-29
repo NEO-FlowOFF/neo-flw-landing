@@ -98,6 +98,13 @@ Embedded Signup e o callback Meta Data Deletion, sem expor secrets
 ao navegador. O callback tecnico e `/api/meta/data-deletion`; nao
 recrie a pagina Astro legada `/data-deletion/`.
 
+O Embedded Signup publico usa Facebook Login for Business Configuration ID
+`1322930417561011` em `src/data/config.json`. Esse ID e publico e diferente do
+App ID. O script `src/scripts/meta-signup.ts` deve chamar `FB.login` com
+`config_id`, `response_type: 'code'` e
+`override_default_response_type: true`, sem `scope` paralelo enquanto a
+configuracao do Login for Business for canonica.
+
 ────────────────────────────────────────
 
 ## ◬ Estilo
