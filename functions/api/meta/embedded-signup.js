@@ -21,7 +21,7 @@ function base64Url(bytes) {
   return btoa(binary).replace(/\+/g, '-').replace(/\//g, '_').replace(/=+$/, '');
 }
 
-async function encryptJson(value, secret) {
+async function encryptJson(value, secret, keyVersion) {
   const encoder = new TextEncoder();
   const iv = crypto.getRandomValues(new Uint8Array(12));
   const keyHash = await crypto.subtle.digest('SHA-256', encoder.encode(secret));
@@ -31,6 +31,7 @@ async function encryptJson(value, secret) {
   return {
     alg: 'AES-GCM',
     enc: 'A256GCM',
+    key_version: keyVersion,
     iv: base64Url(iv),
     ciphertext: base64Url(ciphertext),
   };
@@ -142,12 +143,22 @@ export async function onRequestPost(context) {
     return json({ ok: false, error: exchange.error, meta_error_code: exchange.meta_error_code || null }, 502);
   }
 
+  const keyVersion = env.META_TOKEN_ENCRYPTION_KEY_VERSION || 'v1';
+  const securePayload = {
+    connection_id: connectionId,
+    event: 'meta.embedded_signup.token_stored',
+    granted_scopes: normalized.granted_scopes,
+    requested_scopes: normalized.requested_scopes,
+    received_at: receivedAt,
+    exchanged_at: new Date().toISOString(),
+    source: normalized.source,
+    token_payload: exchange.tokenPayload,
+  };
+
   const encrypted = await encryptJson(
-    {
-      ...normalized,
-      token_payload: exchange.tokenPayload,
-    },
-    env.META_TOKEN_ENCRYPTION_KEY
+    securePayload,
+    env.META_TOKEN_ENCRYPTION_KEY,
+    keyVersion
   );
 
   await kv.put(`meta:embedded-signup:${connectionId}`, JSON.stringify(encrypted), {
@@ -155,6 +166,7 @@ export async function onRequestPost(context) {
     metadata: {
       source: 'neo-flw-landing',
       received_at: receivedAt,
+      key_version: keyVersion,
     },
   });
 

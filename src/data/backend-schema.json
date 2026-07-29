@@ -157,7 +157,7 @@
           "Meta Embedded Signup"
         ],
         "summary": "Recebe authorization code do Meta Embedded Signup",
-        "description": "Adapter server-side estreito para encaminhar o code ao backend soberano ou armazenar payload criptografado quando KV e chave de criptografia estiverem configurados.",
+        "description": "Adapter server-side estreito para encaminhar o code ao backend soberano ou trocar o code imediatamente e armazenar somente o payload de token criptografado quando KV e chave de criptografia estiverem configurados. O authorization code nao deve ser persistido no fallback KV.",
         "requestBody": {
           "required": true,
           "content": {
