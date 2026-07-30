@@ -5,7 +5,8 @@
   "compatibility_date": "2026-07-23",
   "vars": {
     "META_GRAPH_API_VERSION": "v25.0",
-    "META_OAUTH_REDIRECT_URI": "https://neoflowoff.agency/conectar-whatsapp/"
+    "META_OAUTH_REDIRECT_URI": "https://neoflowoff.agency/conectar-whatsapp/",
+    "META_TOKEN_ENCRYPTION_KEY_VERSION": "v1"
   },
   "kv_namespaces": [
     {
