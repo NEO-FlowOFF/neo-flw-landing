@@ -12,9 +12,10 @@ WHITE   := \033[1;37m
 RESET   := \033[0m
 
 PNPM := pnpm
+PNPM_INSTALL := $(PNPM) install --lockfile-dir .
 
 .DEFAULT_GOAL := help
-.PHONY: help install repair dev build deploy cloudflare-whoami preview clean audit docs verify commit check-node
+.PHONY: help workspace-guard install repair dev build deploy cloudflare-whoami preview clean audit docs verify commit check-node
 
 help: ## Exibe os comandos disponíveis
 	@printf "$(CYAN)╔══════════════════════════════════════════╗$(RESET)\n"
@@ -30,7 +31,7 @@ help: ## Exibe os comandos disponíveis
 	@printf "  Uso: $(CYAN)make$(RESET) $(WHITE)[comando]$(RESET)\n"
 	@printf "\n"
 	@printf "$(DIM)  ·─── AMBIENTE ──────────────────────────────$(RESET)\n"
-	@grep -E '^(install|repair|check-node|cloudflare-whoami):.*## ' Makefile \
+	@grep -E '^(install|repair|workspace-guard|check-node|cloudflare-whoami):.*## ' Makefile \
 		| sort \
 		| awk 'BEGIN {FS = ":.*## "}; {printf "  \033[0;36m◆ %-16s\033[0m \033[0;90m%s\033[0m\n", $$1, $$2}'
 	@printf "\n"
@@ -56,21 +57,32 @@ check-node: ## Valida versão do Node.js
 	@node --version > /dev/null || (printf "$(RED)  ✗ Node.js não instalado$(RESET)\n" && exit 1)
 	@printf "$(GREEN)  ✓ Node.js detectado: $$(node --version)$(RESET)\n"
 
-install: ## Instala dependências
+workspace-guard: ## Confirma isolamento pnpm local
+	@printf "$(CYAN)╭──────────────────────────────────────────╮$(RESET)\n"
+	@printf "$(CYAN)│$(RESET)  $(WHITE)⬢  WORKSPACE-GUARD$(RESET)%-21s$(CYAN)│$(RESET)\n" ""
+	@printf "$(CYAN)│$(RESET)  $(DIM)Ignora workspace pai e projetos irmãos$(RESET)%-5s$(CYAN)│$(RESET)\n" ""
+	@printf "$(CYAN)╰──────────────────────────────────────────╯$(RESET)\n"
+	@test -f pnpm-workspace.yaml || (printf "$(RED)  ✗ pnpm-workspace.yaml local ausente$(RESET)\n" && exit 1)
+	@node -e "const fs=require('fs'); const y=fs.readFileSync('pnpm-workspace.yaml','utf8'); if(!/^packages:\s*\[\]\s*$$/m.test(y.trim())) { console.error('pnpm-workspace.yaml deve conter packages: []'); process.exit(1); }"
+	@grep -qx 'ignore-workspace=true' .npmrc || (printf "$(RED)  ✗ .npmrc precisa definir ignore-workspace=true$(RESET)\n" && exit 1)
+	@grep -qx 'shared-workspace-lockfile=false' .npmrc || (printf "$(RED)  ✗ .npmrc precisa definir shared-workspace-lockfile=false$(RESET)\n" && exit 1)
+	@printf "$(GREEN)  ✓ Workspace local isolado de ../pnpm-workspace.yaml.$(RESET)\n"
+
+install: workspace-guard ## Instala dependências
 	@printf "$(CYAN)╭──────────────────────────────────────────╮$(RESET)\n"
 	@printf "$(CYAN)│$(RESET)  $(WHITE)▼  INSTALL$(RESET)%-31s$(CYAN)│$(RESET)\n" ""
-	@printf "$(CYAN)│$(RESET)  $(DIM)pnpm install --filter .$(RESET)%-17s$(CYAN)│$(RESET)\n" ""
+	@printf "$(CYAN)│$(RESET)  $(DIM)pnpm install --lockfile-dir .$(RESET)%-11s$(CYAN)│$(RESET)\n" ""
 	@printf "$(CYAN)╰──────────────────────────────────────────╯$(RESET)\n"
-	@$(PNPM) install --filter .
+	@$(PNPM_INSTALL)
 	@printf "$(GREEN)  ✓ Instalação concluída.$(RESET)\n"
 
-repair: ## Limpa node_modules e reinstala
+repair: workspace-guard ## Limpa node_modules e reinstala
 	@printf "$(YELLOW)╭──────────────────────────────────────────╮$(RESET)\n"
 	@printf "$(YELLOW)│$(RESET)  $(WHITE)⚙  REPAIR$(RESET)%-32s$(YELLOW)│$(RESET)\n" ""
 	@printf "$(YELLOW)│$(RESET)  $(DIM)Remove node_modules e reinstala$(RESET)%-9s$(YELLOW)│$(RESET)\n" ""
 	@printf "$(YELLOW)╰──────────────────────────────────────────╯$(RESET)\n"
 	@rm -rf node_modules
-	@$(PNPM) install --filter .
+	@$(PNPM_INSTALL)
 	@printf "$(GREEN)  ✓ Reparo concluído.$(RESET)\n"
 
 dev: ## Inicia o servidor de desenvolvimento
@@ -155,10 +167,11 @@ docs: ## Valida estrutura de documentação
 	@printf "$(CYAN)╭──────────────────────────────────────────╮$(RESET)\n"
 	@printf "$(CYAN)│$(RESET)  $(WHITE)✧  DOCS$(RESET)%-34s$(CYAN)│$(RESET)\n" ""
 	@printf "$(CYAN)╰──────────────────────────────────────────╯$(RESET)\n"
-	@test -d ../docs/ || test -f README.md || (printf "$(RED)  ✗ Documentação não encontrada$(RESET)\n" && exit 1)
+	@test -f README.md || (printf "$(RED)  ✗ README.md não encontrado$(RESET)\n" && exit 1)
+	@test -f SETUP.md || (printf "$(RED)  ✗ SETUP.md não encontrado$(RESET)\n" && exit 1)
 	@printf "$(GREEN)  ✓ Estrutura de documentação íntegra.$(RESET)\n"
 
-verify: audit docs ## Pipeline de verificação (lint, audit)
+verify: workspace-guard audit docs ## Pipeline de verificação (lint, audit)
 	@printf "$(CYAN)╭──────────────────────────────────────────╮$(RESET)\n"
 	@printf "$(CYAN)│$(RESET)  $(WHITE)⬡  VERIFY$(RESET)%-32s$(CYAN)│$(RESET)\n" ""
 	@printf "$(CYAN)╰──────────────────────────────────────────╯$(RESET)\n"

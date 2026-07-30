@@ -6,7 +6,7 @@
        SETUP · NEO-FLW-LANDING
 ========================================
 Runtime: Astro v7 + Cloudflare Pages + Functions
-Package Manager: pnpm (monorepo-aware)
+Package Manager: pnpm local isolado
 Node: via mise / corepack
 ========================================
 ```
@@ -18,9 +18,9 @@ Este documento cobre ambiente local, build, deploy e validação.
 ## 1. Pré-requisitos
 
 ```text
-pnpm        >= 9
+pnpm        >= 11
 Node        >= 20 (via mise ou .nvmrc)
-wrangler    >= 4.113 (devDependency, usar via pnpm exec)
+wrangler    >= 4.115 (devDependency, usar via pnpm exec)
 ```
 
 > **Monorepo:** Este repositório é um child do workspace `NEO-FlowOFF`.
@@ -30,12 +30,18 @@ wrangler    >= 4.113 (devDependency, usar via pnpm exec)
 
 ## 2. Instalação isolada
 
+Este checkout é um child repo soberano. O `pnpm-workspace.yaml` local usa
+`packages: []`, o `pnpm-lock.yaml` local deve ser versionado e o Makefile
+usa `--lockfile-dir .`. O isolamento contra projetos irmãos ou workspaces acima
+fica registrado em `.npmrc` por `ignore-workspace=true` e
+`shared-workspace-lockfile=false`.
+
 ```bash
 # correto — instala apenas as dependências deste projeto
 make install
 
 # equivalente direto
-pnpm install --filter .
+pnpm install --lockfile-dir .
 ```
 
 Se o pnpm global falhar por `EPERM` (corepack/mise), use o binário local:
@@ -147,6 +153,8 @@ substitui o comando de build configurado no dashboard.
 | Compatibility date       | `2026-07-23`                              |
 | KV binding               | `META_DELETION_REQUESTS`                  |
 | KV namespace ID          | `afe76b8c5bf44e2cb4b19f20ebe60081`        |
+| KV binding               | `META_CONNECTIONS`                        |
+| KV namespace ID          | `f5f62f9206054f7e8191d5a10cd16db8`        |
 | Functions dir            | `functions/`                              |
 | Google Tag Gateway       | `enabled`                                 |
 | Google Tag endpoint      | `/n4py`                                   |
@@ -207,7 +215,7 @@ o contrato runtime estiver pronto. Este checkout Astro ainda não consome
 | Pacote                       | Versão        | Função                     |
 |------------------------------|---------------|----------------------------|
 | `astro`                      | ^7.1.3        | static site generator      |
-| `wrangler`                   | ^4.113.0      | deploy CLI Cloudflare      |
+| `wrangler`                   | ^4.115.0      | deploy CLI Cloudflare      |
 | `stylelint`                  | ^17.14.1      | lint CSS                   |
 | `stylelint-config-standard`  | ^40.0.0       | ruleset padrão             |
 | `@astrojs/check`             | ^0.9.3        | typecheck Astro            |

@@ -21,6 +21,8 @@ para tráfego pago, busca, crawlers e agentes de IA.
 ## ⟠ Contrato
 
 - child repo soberano dentro do workspace `NEO-FlowOFF`
+- lockfile pnpm local versionado; `.npmrc` define `ignore-workspace=true`
+  para não herdar o workspace pai
 - frontend estático em Astro, sem SSR
 - adapter server-side mínimo em `functions/`
 - catálogo publicado em `src/data/catalog.json`
@@ -89,6 +91,8 @@ neo-flw-landing/
 │   └── api/meta/            # adapters Embedded Signup e Data Deletion
 ├── drafts/                  # insumos canônicos do operador
 ├── docs/                    # documentação de suporte
+├── pnpm-workspace.yaml      # workspace local vazio: packages: []
+├── pnpm-lock.yaml           # lockfile soberano deste child repo
 ├── wrangler.jsonc           # config Cloudflare Pages
 └── Makefile                 # comandos locais
 ```
@@ -129,7 +133,7 @@ Rotas de `planos` e `checkout` são geradas a partir de `src/data/catalog.json`.
 ## ⨷ Início rápido
 
 ```bash
-make install   # instala dependências (isolado)
+make install   # instala dependências no lockfile local
 make dev       # servidor local → http://localhost:4321/
 make build     # build de produção → ./dist/
 make verify    # audit/docs/lint local
