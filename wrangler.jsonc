@@ -4,7 +4,6 @@
   "pages_build_output_dir": "./dist",
   "compatibility_date": "2026-07-23",
   "vars": {
-    "META_APP_ID": "1500002841696407",
     "META_GRAPH_API_VERSION": "v25.0",
     "META_OAUTH_REDIRECT_URI": "https://neoflowoff.agency/conectar-whatsapp/"
   },
