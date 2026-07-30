@@ -936,6 +936,95 @@ body::selection {
   height: 12px;
 }
 
+.lc--light:hover,
+.lc--light:focus-visible {
+  background:
+    linear-gradient(180deg, rgb(255 255 255 / 96%) 0%, rgb(247 248 245 / 98%) 100%);
+  border-color: rgb(11 12 11 / 18%);
+  box-shadow:
+    0 14px 34px rgb(0 0 0 / 12%),
+    0 0 0 1px rgb(143 254 9 / 16%),
+    inset 0 1px 0 rgb(255 255 255 / 86%);
+}
+
+.lc--light:hover .lc-title,
+.lc--light:focus-visible .lc-title {
+  color: var(--neo-carbon);
+}
+
+.lc--light:hover .lc-sub,
+.lc--light:focus-visible .lc-sub,
+.lc--light:hover .product-card-category,
+.lc--light:focus-visible .product-card-category {
+  color: rgb(11 12 11 / 66%);
+}
+
+.lc--light:hover .lc-desc,
+.lc--light:focus-visible .lc-desc {
+  color: rgb(11 12 11 / 72%);
+}
+
+.lc--light:hover .lc-icon,
+.lc--light:focus-visible .lc-icon {
+  background: rgb(11 12 11 / 5%);
+  border-color: rgb(24 119 242 / 24%);
+  box-shadow:
+    0 4px 10px rgb(24 119 242 / 10%),
+    inset 0 1px 0 rgb(255 255 255 / 74%);
+}
+
+.lc--light:hover .card-action,
+.lc--light:focus-visible .card-action {
+  border-color: rgb(11 12 11 / 18%);
+  background: #050605;
+  color: #fff;
+}
+
+.home-page .meta-link-grid .lc--meta {
+  background:
+    linear-gradient(180deg, rgb(255 255 255 / 8%) 0%, rgb(255 255 255 / 1%) 42%),
+    linear-gradient(135deg, #181a18 0%, #101210 100%);
+  border-color: rgb(255 255 255 / 14%);
+}
+
+.home-page .meta-link-grid .lc--meta:hover,
+.home-page .meta-link-grid .lc--meta:focus-visible {
+  background:
+    linear-gradient(180deg, rgb(255 255 255 / 12%) 0%, rgb(255 255 255 / 2%) 46%),
+    linear-gradient(135deg, #1f221e 0%, #111410 100%);
+  border-color: rgb(143 254 9 / 42%);
+  box-shadow:
+    0 16px 42px rgb(0 0 0 / 24%),
+    0 0 0 1px rgb(143 254 9 / 12%),
+    0 0 26px rgb(24 119 242 / 12%),
+    inset 0 1px 0 rgb(255 255 255 / 10%);
+}
+
+.home-page .meta-link-grid .lc--meta .lc-title {
+  color: #f7f8f5;
+}
+
+.home-page .meta-link-grid .lc--meta .lc-sub,
+.home-page .meta-link-grid .lc--meta .product-card-category {
+  color: rgb(247 248 245 / 62%);
+}
+
+.home-page .meta-link-grid .lc--meta .lc-desc {
+  color: rgb(247 248 245 / 70%);
+}
+
+.home-page .meta-link-grid .lc--meta:hover .lc-desc,
+.home-page .meta-link-grid .lc--meta:focus-visible .lc-desc {
+  color: rgb(255 255 255 / 82%);
+}
+
+.home-page .meta-link-grid .lc--meta:hover .card-action,
+.home-page .meta-link-grid .lc--meta:focus-visible .card-action {
+  border-color: rgb(24 119 242 / 42%);
+  background: #050605;
+  color: #fff;
+}
+
 /* ── Home editorial sections ── */
 .method-section {
   margin-bottom: clamp(2.6rem, 6vw, 4rem);

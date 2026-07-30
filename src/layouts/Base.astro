@@ -169,14 +169,21 @@ const jsonLd = {
     ))}
     <slot name="head" />
     
-    <!-- Google tag (gtag.js) -->
-    <script async src="/n4py/gtag/js?id=G-EQRKXQD7FW"></script>
     <script is:inline>
-      window.dataLayer = window.dataLayer || [];
-      function gtag(){dataLayer.push(arguments);}
-      gtag('js', new Date());
+      const isProductionHost = window.location.hostname === 'neoflowoff.agency' || window.location.hostname === 'www.neoflowoff.agency';
 
-      gtag('config', 'G-EQRKXQD7FW');
+      if (isProductionHost) {
+        const gtagScript = document.createElement('script');
+        gtagScript.async = true;
+        gtagScript.src = '/n4py/gtag/js?id=G-EQRKXQD7FW';
+        document.head.appendChild(gtagScript);
+
+        window.dataLayer = window.dataLayer || [];
+        window.gtag = function(){ window.dataLayer.push(arguments); };
+        window.gtag('js', new Date());
+
+        window.gtag('config', 'G-EQRKXQD7FW');
+      }
     </script>
     <script type="application/ld+json" is:inline set:html={JSON.stringify(jsonLd)}></script>
     {tiktokPixelScript && <script is:inline set:html={tiktokPixelScript}></script>}
@@ -262,10 +269,20 @@ const jsonLd = {
       });
 
 
-      // Register PWA Service Worker
+      // Register PWA Service Worker only on the production domain.
       if ('serviceWorker' in navigator) {
         window.addEventListener('load', () => {
-          navigator.serviceWorker.register('/sw.js').catch(() => {});
+          const isProductionHost = window.location.hostname === 'neoflowoff.agency' || window.location.hostname === 'www.neoflowoff.agency';
+
+          if (isProductionHost) {
+            navigator.serviceWorker.register('/sw.js').catch(() => {});
+            return;
+          }
+
+          navigator.serviceWorker.getRegistrations()
+            .then((registrations) => Promise.all(registrations.map((registration) => registration.unregister())))
+            .then(() => ('caches' in window ? caches.keys().then((keys) => Promise.all(keys.map((key) => caches.delete(key)))) : undefined))
+            .catch(() => {});
         });
       }
     </script>
