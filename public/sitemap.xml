@@ -91,34 +91,10 @@
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://neoflowoff.agency/privacidade/</loc>
-    <lastmod>2026-07-26</lastmod>
-    <changefreq>yearly</changefreq>
-    <priority>0.4</priority>
-  </url>
-  <url>
-    <loc>https://neoflowoff.agency/legal/</loc>
-    <lastmod>2026-07-26</lastmod>
+    <loc>https://neoflowoff.agency/terms/</loc>
+    <lastmod>2026-07-30</lastmod>
     <changefreq>yearly</changefreq>
     <priority>0.6</priority>
-  </url>
-  <url>
-    <loc>https://neoflowoff.agency/terms/</loc>
-    <lastmod>2026-07-26</lastmod>
-    <changefreq>yearly</changefreq>
-    <priority>0.4</priority>
-  </url>
-  <url>
-    <loc>https://neoflowoff.agency/termos/</loc>
-    <lastmod>2026-07-26</lastmod>
-    <changefreq>yearly</changefreq>
-    <priority>0.4</priority>
-  </url>
-  <url>
-    <loc>https://neoflowoff.agency/seguranca/</loc>
-    <lastmod>2026-07-26</lastmod>
-    <changefreq>yearly</changefreq>
-    <priority>0.4</priority>
   </url>
   <url>
     <loc>https://neoflowoff.agency/excluir-dados/</loc>
