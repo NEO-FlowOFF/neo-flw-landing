@@ -41,10 +41,6 @@ Astro SSG
 │   └── paginas publicas de servicos unitarios
 ├── src/pages/privacy.astro
 ├── src/pages/terms.astro
-├── src/pages/legal.astro
-├── src/pages/privacidade.astro
-├── src/pages/termos.astro
-├── src/pages/seguranca.astro
 ├── src/pages/excluir-dados.astro
 └── public/
     ├── logo_transp.png
@@ -204,15 +200,7 @@ Superficies legais para Meta/App Review:
 /excluir-dados/
 ```
 
-Aliases publicos em Portugues:
-
-```text
-/legal/
-/privacidade/
-/termos/
-/seguranca/
-/excluir-dados/
-```
+Todas as rotas legadas duplicadas (/legal/, /privacidade/, /termos/, /seguranca/) foram removidas para garantir correspondencia 1-para-1 com o painel da Meta.
 
 `llms.txt` deve ser Markdown,
 ter pelo menos um H1,

@@ -76,7 +76,7 @@ Para bugs de runtime:
 9. service worker/cache
 10. teste reproduzivel
 
-Rotas legais canonicas para Meta/App Review:
+Rotas legais canonicas e unicas para Meta/App Review:
 
 ```text
 /privacy/
@@ -84,15 +84,7 @@ Rotas legais canonicas para Meta/App Review:
 /excluir-dados/
 ```
 
-Aliases publicos em Portugues:
-
-```text
-/legal/
-/privacidade/
-/termos/
-/seguranca/
-/excluir-dados/
-```
+Todas as rotas legadas duplicadas (/legal/, /privacidade/, /termos/, /seguranca/) foram completamente removidas para garantir correspondencia 1-para-1 com o painel da Meta.
 
 O callback tecnico de exclusao de dados e `/api/meta/data-deletion`.
 Ele valida `signed_request` no server-side e nao substitui a pagina

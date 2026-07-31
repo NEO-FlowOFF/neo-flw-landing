@@ -107,11 +107,7 @@ neo-flw-landing/
 /checkout/[slug]/         serviços unitários públicos
 /conectar-whatsapp/       conector WhatsApp via Meta
 /privacy/                 privacy policy
-/privacidade/             alias pt-BR
-/legal/                   termos
-/terms/                   alias EN
-/termos/                  termos pt-BR
-/seguranca/               política de segurança
+/terms/                   termos de serviço
 /excluir-dados/           exclusão de dados
 /api/meta/data-deletion   callback Meta Data Deletion
 ```

@@ -82,15 +82,7 @@ Rotas legais canonicas para aprovacao Meta:
 /excluir-dados/
 ```
 
-Aliases publicos em Portugues:
-
-```text
-/legal/
-/privacidade/
-/termos/
-/seguranca/
-/excluir-dados/
-```
+Todas as rotas legadas duplicadas (/legal/, /privacidade/, /termos/, /seguranca/) foram removidas para evitar ruido auditavel e garantir correspondencia 1-para-1 com o painel da Meta.
 
 `functions/` nao e backend autoritativo de produto.
 Use apenas para adapters server-side estreitos, como o

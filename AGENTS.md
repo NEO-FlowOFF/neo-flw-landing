@@ -36,13 +36,13 @@ Qualquer agente que atuar neste repositório DEVE seguir estas regras.
 - **Verificação de Domínio Meta:** O token ativo é `zq0xygs8v9s714m5039mijjh0wowyj`. Ele é carregado em `src/layouts/Base.astro` a partir de `src/data/config.json` e deve permanecer no `<head>` das rotas Astro.
 - **Safe Page Legada Removida:** `middleware.js` foi removido deste checkout. Não reativar fluxo de crawler/safe-page, renderização condicional por User-Agent ou proxy silencioso sem decisão explícita de arquitetura e revisão de compliance.
 - **WhatsApp do Agent:** O contato oficial ativo é o **`+55 62 9478-9032`**. Em links de redirecionamento, use estritamente o formato internacional limpo: `https://wa.me/556294789032` (sem o caractere `+`).
-- **URLs para aprovação Meta:** para submissão/App Review use as rotas Astro
+- **URLs para aprovação Meta:** para submissão/App Review use estritamente as rotas Astro
   públicas `https://neoflowoff.agency/privacy/`,
   `https://neoflowoff.agency/terms/` e
-  `https://neoflowoff.agency/excluir-dados/`. As rotas em português
-  `/privacidade/`, `/legal/`, `/termos/` e `/seguranca/` permanecem como
-  superfícies públicas equivalentes para usuários. O caminho
-  `/api/meta/data-deletion` é callback técnico, não página pública.
+  `https://neoflowoff.agency/excluir-dados/`. As rotas legadas duplicadas
+  (`/privacidade/`, `/legal/`, `/termos/`, `/seguranca/`) foram completamente removidas
+  para eliminar ruído e garantir correspondência 1-para-1 com o App Dashboard da Meta.
+  O caminho `/api/meta/data-deletion` é callback técnico, não página pública.
 - **HTMLs legais legados removidos da raiz:** os arquivos
   `privacy/index.html`, `legal/index.html` e `excluir-dados/index.html`
   foram removidos para evitar ambiguidade auditável. Não recriar HTML
@@ -90,8 +90,7 @@ Qualquer agente que atuar neste repositório DEVE seguir estas regras.
 
 - A fonte principal é `src/pages`, `src/components`,
   `src/layouts`, `src/styles` e `src/data`.
-- Rotas públicas como `/privacy/`, `/terms/`, `/legal/`,
-  `/privacidade/`, `/termos/`, `/seguranca/` e `/excluir-dados/` são geradas por
+- Rotas públicas como `/privacy/`, `/terms/` e `/excluir-dados/` são geradas por
   Astro a partir de `src/pages`. Diretórios HTML homônimos na raiz do
   projeto não são fonte de publicação e não devem ser reintroduzidos.
 - A única superfície server-side local atual é `functions/`,
@@ -141,8 +140,7 @@ Qualquer agente que atuar neste repositório DEVE seguir estas regras.
 - `public/sitemap.xml` deve listar apenas rotas públicas reais.
 - `public/robots.txt` deve estar semanticamente alinhado ao sitemap
   e ao `llms.txt`.
-- As superfícies legais públicas são `/privacy/`, `/terms/`,
-  `/legal/`, `/privacidade/`, `/termos/`, `/seguranca/` e `/excluir-dados/`.
+- As superfícies legais públicas são `/privacy/`, `/terms/` e `/excluir-dados/`.
   `/api/meta/data-deletion` é callback de API para a Meta.
 - Rotas públicas de produto incluem `/planos/<slug>/`
   e `/checkout/<slug>/`.

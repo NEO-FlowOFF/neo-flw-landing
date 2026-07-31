@@ -80,14 +80,12 @@ Rotas geradas no build atual:
 
 ```text
 /                            home
-/planos/[slug]/              6 planos
-/checkout/[slug]/            5 checkouts
-/conectar-whatsapp/          connector WhatsApp
-/privacy/  /privacidade/     política EN + pt-BR
-/legal/    /terms/           termos
-/termos/                     termos pt-BR
-/seguranca/                  política de segurança
-/excluir-dados/              exclusão de dados
+/planos/[slug]/              6 planos completos
+/checkout/[slug]/            6 serviços unitários
+/conectar-whatsapp/          conector WhatsApp via Meta
+/privacy/                    política de privacidade única
+/terms/                      termos de serviço único
+/excluir-dados/              instruções de exclusão de dados
 /404.html
 ```
 
