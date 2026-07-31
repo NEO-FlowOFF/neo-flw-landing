@@ -1,0 +1,124 @@
+{
+  "scenario": "NΞØ FlowOFF 2026 - Ticket Médio Atualizado (R$ 3.300+)",
+  "timeframe": "6 meses",
+  "base_metrics": {
+    "current_debt": 170000,
+    "current_monthly_income": 1000,
+    "current_monthly_expense": 500,
+    "current_net": 500
+  },
+  "catalog_highlights": {
+    "plano_agente_sdr": 3500,
+    "plano_ecossistema_ia": 6000,
+    "plano_crm_inteligente": 3000,
+    "servico_app_meta": 2500,
+    "servico_api_whatsapp": 1500
+  },
+  "projections": {
+    "month_1": {
+      "sales_volume": 5,
+      "avg_ticket": 3300,
+      "service_revenue": 16500,
+      "flowpay_recurring_base": 0,
+      "meta_ad_spend": 500,
+      "other_expenses": 500,
+      "net_income": 15500,
+      "cumulative_available": 15500,
+      "debt_remaining": 154500
+    },
+    "month_2": {
+      "sales_volume": 6,
+      "avg_ticket": 3500,
+      "service_revenue": 21000,
+      "flowpay_recurring_base": 2500,
+      "meta_ad_spend": 1000,
+      "other_expenses": 500,
+      "net_income": 22000,
+      "cumulative_available": 37500,
+      "debt_remaining": 132500
+    },
+    "month_3": {
+      "sales_volume": 7,
+      "avg_ticket": 3800,
+      "service_revenue": 26600,
+      "flowpay_recurring_base": 5000,
+      "meta_ad_spend": 1500,
+      "other_expenses": 500,
+      "net_income": 29600,
+      "cumulative_available": 67100,
+      "debt_remaining": 102900
+    },
+    "month_4": {
+      "sales_volume": 8,
+      "avg_ticket": 3800,
+      "service_revenue": 30400,
+      "flowpay_recurring_base": 7500,
+      "meta_ad_spend": 2000,
+      "other_expenses": 500,
+      "net_income": 35400,
+      "cumulative_available": 102500,
+      "debt_remaining": 67500
+    },
+    "month_5": {
+      "sales_volume": 8,
+      "avg_ticket": 4000,
+      "service_revenue": 32000,
+      "flowpay_recurring_base": 10000,
+      "meta_ad_spend": 2000,
+      "other_expenses": 500,
+      "net_income": 39500,
+      "cumulative_available": 142000,
+      "debt_remaining": 28000
+    },
+    "month_6": {
+      "sales_volume": 8,
+      "avg_ticket": 4000,
+      "service_revenue": 32000,
+      "flowpay_recurring_base": 12500,
+      "meta_ad_spend": 2000,
+      "other_expenses": 500,
+      "net_income": 42000,
+      "cumulative_available": 184000,
+      "debt_remaining": 0
+    }
+  },
+  "debt_priority": [
+    {
+      "creditor": "Mercado Pago",
+      "amount": 28637,
+      "priority": 1,
+      "reason": "Maior credor individual, impacto de curto prazo"
+    },
+    {
+      "creditor": "Vencido (R$ 57k)",
+      "amount": 57052,
+      "priority": 2,
+      "reason": "Vencido em atraso, prioridade de quitação para liberar score"
+    },
+    {
+      "creditor": "Itaú",
+      "amount": 30771,
+      "priority": 3,
+      "reason": "Valor relevante, negociável na fase 2"
+    },
+    {
+      "creditor": "Outros (< R$ 15k total)",
+      "amount": 53540,
+      "priority": 4,
+      "reason": "Divididos em pequenos contratos, negociação de encerramento"
+    }
+  ],
+  "payoff_strategy": {
+    "months_1_2": "Pagar Mercado Pago (R$ 28.6k) + iniciar abatimento do vencido (R$ 57k)",
+    "months_3_4": "Liquidar R$ 57k vencido completamente + iniciar negociação Itaú",
+    "months_5_6": "Quitação total do Itaú e renegociação com desconto dos demais contratos",
+    "outcome_month_6": "Dívida zerada ou reduzida para menos de R$ 20k com Fundo de Reserva"
+  },
+  "assumptions": [
+    "5-8 vendas de soluções por mês",
+    "Ticket médio R$ 3.300 a R$ 4.000 (foco em Agente SDR e Ecossistemas de IA)",
+    "FlowPay gera recorrência incremental a partir do Mês 2",
+    "Domínio soberano: neoflowoff.agency",
+    "Prospecção ativa via Hunter.io + Meta Ads + Resend Outbound"
+  ]
+}
