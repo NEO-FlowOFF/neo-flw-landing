@@ -1,5 +1,4 @@
 ---
-import { Image } from 'astro:assets';
 import Base from '../../layouts/Base.astro';
 import catalogData from '../../data/catalog.json';
 import uiTexts from '../../data/ui_texts.json';
@@ -82,13 +81,15 @@ const { servico } = Astro.props;
     </section>
 
     <footer class="detail-footer">
-      <Image class="detail-footer-logo" src={steelLogoImage} alt={uiTexts.footer.brand_name} loading="lazy" decoding="async" />
+      <img class="detail-footer-logo" src={steelLogoImage.src} width={steelLogoImage.width} height={steelLogoImage.height} alt={uiTexts.footer.brand_name} loading="lazy" decoding="async" />
       <p>
         {uiTexts.footer.tagline}
       </p>
       <img class="detail-footer-badge" src="/assets/badge_meta_tech_provider.webp" alt="Meta Tech Provider" loading="lazy" decoding="async" width="1400" height="401" />
       <p class="footer-legal-entity">
-        {uiTexts.footer.legal_entity}
+        <span>Flowoff Marketing e Assessoria Digital LTDA</span>
+        <span class="footer-legal-nobreak">• CNPJ: 43.376.355/0001-92</span>
+        <span class="footer-legal-nobreak">• neo@neoflowoff.agency</span>
       </p>
     </footer>
   </div>

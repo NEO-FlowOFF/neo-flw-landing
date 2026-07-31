@@ -1,5 +1,4 @@
 ---
-import { Image, getImage } from 'astro:assets';
 import Base from '../layouts/Base.astro';
 import configData from '../data/config.json';
 import brandLogo from '../assets/logos/neoflowoff-logo26-2.webp';
@@ -9,12 +8,11 @@ const metaConfig = configData.integrations.meta;
 const metaAppId = metaConfig.app_id;
 const metaLoginConfigurationId = metaConfig.login_configuration_id;
 const graphApiVersion = metaConfig.graph_api_version;
-const brandLogoLcp = await getImage({ src: brandLogo, width: 420, quality: 72 });
 ---
 
 <Base title="Conectar WhatsApp Business | Meta Tech Provider — neoflowoff.agency" description="Conexão oficial via Meta Cloud API para WhatsApp Business.">
   <Fragment slot="head">
-    <link rel="preload" as="image" href={brandLogoLcp.src} fetchpriority="high" type="image/webp" />
+    <link rel="preload" as="image" href={brandLogo.src} fetchpriority="high" type="image/webp" />
   </Fragment>
   <div class="wa-page-wrapper">
     <div class="wa-page-container">
@@ -54,13 +52,15 @@ const brandLogoLcp = await getImage({ src: brandLogo, width: 420, quality: 72 })
 
         <!-- TÍTULO & SUBTÍTULO -->
         <h1 class="wa-card-title">
-        <Image
-          src={brandLogo}
+        <img
+          src={brandLogo.src}
+          width={brandLogo.width}
+          height={brandLogo.height}
           alt="neoflowoff agency"
           class="card-brand-logo-img"
-          width={420}
-          quality={72}
-          priority
+          loading="eager"
+          decoding="async"
+          fetchpriority="high"
         />
         </h1>
         <p class="wa-card-desc">

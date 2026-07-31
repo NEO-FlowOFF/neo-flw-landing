@@ -1,5 +1,4 @@
 ---
-import { Image } from 'astro:assets';
 import Base from '../layouts/Base.astro';
 import ProductCard from '../components/ProductCard.astro';
 import HubHeader from '../components/HubHeader.astro';
@@ -40,7 +39,7 @@ const servicos = catalogData.products.filter(p => p.category === 'Serviço' && !
     <section class="home-hero home-hero--catalog" aria-labelledby="home-title">
       <img
         class="hero-banner-image"
-        src="/assets/banners/home/neo-growth-system.webp"
+        src="/assets/banners/home/banner-site-services.gif"
         alt="NEØ Growth System conectado a agentes, CRM, eventos, mensagens, dados e Meta Tech Provider"
         width="1920"
         height="720"
@@ -235,9 +234,13 @@ const servicos = catalogData.products.filter(p => p.category === 'Serviço' && !
           <!-- AVATAR CIRCULAR DO FOUNDER -->
           <div class="founder-block">
             <div class="founder-avatar">
-              <Image
-                src={nodeneoImage}
+              <img
+                src={nodeneoImage.src}
+                width={nodeneoImage.width}
+                height={nodeneoImage.height}
                 alt="Neo Mello — Founder & Lead Architect"
+                loading="lazy"
+                decoding="async"
               />
               <div class="founder-status-shell">
                 <div class="founder-status-dot"></div>
@@ -305,7 +308,7 @@ const servicos = catalogData.products.filter(p => p.category === 'Serviço' && !
 
     <!-- FOOTER -->
     <footer class="brand-footer">
-      <Image src={steelLogoImage} alt={uiTexts.footer.brand_name} loading="lazy" decoding="async" />
+      <img src={steelLogoImage.src} width={steelLogoImage.width} height={steelLogoImage.height} alt={uiTexts.footer.brand_name} loading="lazy" decoding="async" />
       <p>
         {uiTexts.footer.tagline}
       </p>
@@ -322,7 +325,9 @@ const servicos = catalogData.products.filter(p => p.category === 'Serviço' && !
         <a href="https://neoflowoff.agency/excluir-dados" class="footer-governance-link">Exclusão de Dados</a>
       </div>
       <p class="footer-legal-entity">
-        {uiTexts.footer.legal_entity}
+        <span>Flowoff Marketing e Assessoria Digital LTDA</span>
+        <span class="footer-legal-nobreak">• CNPJ: 43.376.355/0001-92</span>
+        <span class="footer-legal-nobreak">• neo@neoflowoff.agency</span>
       </p>
     </footer>
   </div>

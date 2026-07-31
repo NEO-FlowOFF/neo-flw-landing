@@ -444,8 +444,8 @@ body::selection {
   min-height: clamp(520px, 72vh, 760px);
   border: 1px solid rgb(255 255 255 / 12%);
   border-radius: 8px;
-  background: #ece5da;
-  box-shadow: 0 22px 68px rgb(0 0 0 / 28%);
+  background: #09090b;
+  box-shadow: 0 22px 68px rgb(0 0 0 / 50%);
   isolation: isolate;
 }
 
@@ -460,13 +460,11 @@ body::selection {
   inset: 0;
   z-index: 1;
   pointer-events: none;
-  background: linear-gradient(
-    90deg,
-    rgb(245 240 232 / 94%) 0%,
-    rgb(245 240 232 / 86%) 28%,
-    rgb(245 240 232 / 42%) 51%,
-    rgb(245 240 232 / 4%) 78%
-  );
+  background: linear-gradient(90deg,
+      rgb(9 9 11 / 94%) 0%,
+      rgb(9 9 11 / 85%) 35%,
+      rgb(9 9 11 / 45%) 60%,
+      rgb(9 9 11 / 10%) 85%);
 }
 
 .hero-banner-image {
@@ -486,7 +484,7 @@ body::selection {
   justify-content: center;
   max-width: 600px;
   padding: clamp(1.4rem, 3vw, 2.4rem);
-  color: var(--neo-carbon);
+  color: #fff;
 }
 
 .hero-eyebrow,
@@ -518,10 +516,10 @@ body::selection {
 }
 
 .home-hero .hero-eyebrow {
-  border-color: rgb(11 12 11 / 14%);
-  background: rgb(255 255 255 / 56%);
-  color: rgb(11 12 11 / 72%);
-  box-shadow: 0 10px 30px rgb(255 255 255 / 34%);
+  border-color: rgb(255 255 255 / 16%);
+  background: rgb(255 255 255 / 8%);
+  color: #fff;
+  box-shadow: 0 4px 14px rgb(0 0 0 / 40%);
 }
 
 .hero-title {
@@ -549,13 +547,13 @@ body::selection {
   width: 100%;
   height: auto;
   object-fit: contain;
-  filter: drop-shadow(0 14px 28px rgb(255 255 255 / 54%));
+  filter: brightness(0) invert(1);
 }
 
 .hero-lead {
   max-width: 580px;
   margin-top: clamp(0.8rem, 1.6vw, 1.1rem);
-  color: var(--neo-carbon);
+  color: rgb(255 255 255 / 85%);
   font-size: clamp(1rem, 1.7vw, 1.28rem);
   font-weight: 650;
   line-height: 1.38;
@@ -604,9 +602,9 @@ body::selection {
 }
 
 .home-hero .neo-button--secondary {
-  border-color: rgb(11 12 11 / 18%);
-  background: rgb(255 255 255 / 54%);
-  color: var(--neo-carbon);
+  border-color: rgb(255 255 255 / 20%);
+  background: rgb(255 255 255 / 10%);
+  color: #fff;
 }
 
 .hero-bottom-bar {
@@ -1355,14 +1353,18 @@ body::selection {
 }
 
 .footer-legal-entity {
-  max-width: 520px;
+  max-width: 600px;
   margin: 0.15rem 0 0;
-  color: var(--neo-smoke);
+  color: rgb(255 255 255 / 45%);
   font-family: var(--display);
-  font-size: 0.72rem;
+  font-size: 0.75rem;
   font-style: normal;
   font-weight: 400;
-  line-height: 1.55;
+  line-height: 1.6;
+}
+
+.footer-legal-nobreak {
+  white-space: nowrap;
 }
 
 .brand-footer-links {
@@ -1885,12 +1887,16 @@ body::selection {
 
   .hero-banner-image {
     grid-area: auto;
-    object-position: center;
+    width: 100%;
+    height: clamp(260px, 44vh, 380px);
+    object-fit: cover;
+    object-position: 85% center;
+    border-bottom: 1px solid rgb(255 255 255 / 10%);
   }
 
   .hero-copy {
     grid-area: auto;
-    padding: clamp(1rem, 5vw, 1.5rem);
+    padding: clamp(1.2rem, 5vw, 1.8rem);
   }
 
   .hero-bottom-track {
@@ -1969,6 +1975,7 @@ body::selection {
 }
 
 @media (prefers-reduced-motion: reduce) {
+
   *,
   *::before,
   *::after {
