@@ -47,7 +47,7 @@ review geral ou scripts simples.
 
 - investigue o caminho real antes de editar
 - preserve diffs locais do operador
-- nunca exponha secrets ou valores de `.env`
+- nao edite `~/neomello/_standards/services_canonical.json` sem pedido explicito do operador
 - nao edite `drafts/catalog_v2026_2.json` sem pedido explicito
 - nao trate `dist/` como fonte
 - nao recrie HTMLs legais legados na raiz:
