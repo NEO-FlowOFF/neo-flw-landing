@@ -12,6 +12,12 @@ const isMeta = (slug: string) => slug?.includes('meta') || slug?.includes('whats
 const metaProdutos = catalogData.products.filter(p => isMeta(p.slug));
 const planos = catalogData.products.filter(p => p.category === 'Plano' && !isMeta(p.slug));
 const servicos = catalogData.products.filter(p => p.category === 'Serviço' && !isMeta(p.slug));
+const tickerItems = [
+  'App Review Meta: ajustes finais do NEØFLW ENGINE:one em validação para submissão.',
+  'Meta Tech Provider: infraestrutura WhatsApp Business, Graph API e webhooks em operação.',
+];
+const tickerLoopItems = [...tickerItems, ...tickerItems];
+
 ---
 <Base>
   <div class="home-page">
@@ -19,16 +25,13 @@ const servicos = catalogData.products.filter(p => p.category === 'Serviço' && !
     <div class="top-telenoticias-bar" style="width: 100vw; position: relative; left: 50%; right: 50%; margin-left: -50vw; margin-right: -50vw; background: #0b0b0e; color: #ffffff; padding: 7px 0; border-bottom: 1px solid rgba(255, 255, 255, 0.12); overflow: hidden; z-index: 1000;">
       <div class="digital-ticker-portal" style="position: relative; width: 100%; overflow: hidden; -webkit-mask-image: linear-gradient(90deg, transparent 0px, transparent 1px, #000 2px, #000 calc(100% - 2px), transparent calc(100% - 1px), transparent 100%); mask-image: linear-gradient(90deg, transparent 0px, transparent 1px, #000 2px, #000 calc(100% - 2px), transparent calc(100% - 1px), transparent 100%);">
         <div class="ticker-track" style="display: flex; width: max-content; animation: ticker-loop 24s linear infinite; gap: 2.5rem;">
-          <span style="font-family: var(--mono); font-size: 0.72rem; font-weight: 800; color: #ffffff; text-transform: uppercase; letter-spacing: 0.05em; white-space: nowrap; display: inline-flex; align-items: center; gap: 0.7rem;">
-            <span style="background: var(--acid); color: #000; font-size: 0.58rem; padding: 2px 6px; border-radius: 4px; font-weight: 900; letter-spacing: 0.08em;">LATEST</span>
-            <span>Em implementação: ajustes finais para avaliação e aprovação do app via Meta Developers.</span>
-            <span style="color: var(--acid); font-size: 0.6rem;">◆</span>
-          </span>
-          <span style="font-family: var(--mono); font-size: 0.72rem; font-weight: 800; color: #ffffff; text-transform: uppercase; letter-spacing: 0.05em; white-space: nowrap; display: inline-flex; align-items: center; gap: 0.7rem;">
-            <span style="background: var(--acid); color: #000; font-size: 0.58rem; padding: 2px 6px; border-radius: 4px; font-weight: 900; letter-spacing: 0.08em;">LATEST</span>
-            <span>neoflowoff.agency opera como Meta Tech Provider para WhatsApp Business, APIs e governança.</span>
-            <span style="color: var(--acid); font-size: 0.6rem;">◆</span>
-          </span>
+          {tickerLoopItems.map((item) => (
+            <span style="font-family: var(--mono); font-size: 0.72rem; font-weight: 800; color: #ffffff; text-transform: uppercase; letter-spacing: 0.05em; white-space: nowrap; display: inline-flex; align-items: center; gap: 0.7rem;">
+              <span style="background: var(--acid); color: #000; font-size: 0.58rem; padding: 2px 6px; border-radius: 4px; font-weight: 900; letter-spacing: 0.08em;">AO VIVO</span>
+              <span>{item}</span>
+              <span style="color: var(--acid); font-size: 0.6rem;">◆</span>
+            </span>
+          ))}
         </div>
       </div>
     </div>
@@ -40,7 +43,7 @@ const servicos = catalogData.products.filter(p => p.category === 'Serviço' && !
       <img
         class="hero-banner-image"
         src="/assets/banners/home/banner-site-services.gif"
-        alt="NEØ Growth System conectado a agentes, CRM, eventos, mensagens, dados e Meta Tech Provider"
+        alt="Neo FlowOFF Agency - infraestrutura comercial com IA, CRM, WhatsApp Business e automação em Goiânia"
         width="1920"
         height="720"
         loading="eager"
@@ -55,7 +58,7 @@ const servicos = catalogData.products.filter(p => p.category === 'Serviço' && !
         <div id="home-title" class="hero-title hero-title-logo" role="img" aria-label="NEØ FlowOFF">
           <img
             src="/logo_transp.svg"
-            alt="NEØ FlowOFF"
+            alt="Logotipo Neo FlowOFF Agency - Infraestrutura de IA em Goiânia"
             width="656"
             height="72"
             loading="eager"
@@ -88,6 +91,7 @@ const servicos = catalogData.products.filter(p => p.category === 'Serviço' && !
     </div>
 
     <!-- SOLUÇÕES (GRID) -->
+
     <div id="solucoes">
       <!-- ECOSSISTEMA & TECNOLOGIA META (Fundo Claro Full-Bleed do Topo ao Badge Meta com Bordas Inferiores Arredondadas) -->
       <section class="section section-band section-band--meta">
@@ -127,7 +131,7 @@ const servicos = catalogData.products.filter(p => p.category === 'Serviço' && !
           <div class="partner-proof">
             <img
               src="/assets/badge_meta_tech_provider.webp"
-              alt="Meta Tech Provider — Official Partner"
+              alt="Neo FlowOFF Agency - Meta Tech Provider para WhatsApp Business API"
               loading="lazy"
               decoding="async"
               width="1400"
@@ -238,7 +242,7 @@ const servicos = catalogData.products.filter(p => p.category === 'Serviço' && !
                 src={nodeneoImage.src}
                 width={nodeneoImage.width}
                 height={nodeneoImage.height}
-                alt="Neo Mello — Founder & Lead Architect"
+                alt="Neo Mello - fundador da Neo FlowOFF Agency em Goiânia"
                 loading="lazy"
                 decoding="async"
               />
@@ -308,7 +312,7 @@ const servicos = catalogData.products.filter(p => p.category === 'Serviço' && !
 
     <!-- FOOTER -->
     <footer class="brand-footer">
-      <img src={steelLogoImage.src} width={steelLogoImage.width} height={steelLogoImage.height} alt={uiTexts.footer.brand_name} loading="lazy" decoding="async" />
+      <img src={steelLogoImage.src} width={steelLogoImage.width} height={steelLogoImage.height} alt="Logotipo Neo FlowOFF Agency - infraestrutura comercial e IA" loading="lazy" decoding="async" />
       <p>
         {uiTexts.footer.tagline}
       </p>

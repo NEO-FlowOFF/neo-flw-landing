@@ -67,6 +67,9 @@ Qualquer agente que atuar neste repositório DEVE seguir estas regras.
   code do browser. Ele deve encaminhar para backend soberano ou usar
   storage seguro configurado; se storage/forward não existir, deve
   falhar fechado e a UI não deve exibir sucesso.
+  A troca do code usa Graph API `v25.0` fixa; não reintroduzir override
+  por variável de ambiente para `v26.0` ou versões futuras sem revisão
+  explícita.
 - **Facebook Login for Business:** o Configuration ID publico canonico e
   `1322930417561011`. A fonte consumida pelo Astro e
   `src/data/config.json` em
@@ -81,6 +84,19 @@ Qualquer agente que atuar neste repositório DEVE seguir estas regras.
   HMAC SHA-256 com `META_APP_SECRET`, nunca logar segredo ou
   `signed_request` completo, e retornar URL pública em `/excluir-dados`
   com `confirmation_code`.
+- **Webhook Meta:** `functions/api/meta-webhook.js` é o callback público
+  atual usado no App Review. O GET deve validar `hub.verify_token` e
+  retornar o `hub.challenge` puro. O POST deve validar
+  `X-Hub-Signature-256` com `META_APP_SECRET` quando configurado,
+  parsear `messages.value.statuses` e os campos assinados:
+  `message_template_status_update`, `message_template_quality_update`,
+  `phone_number_quality_update`, `business_status_update`,
+  `business_capability_update`, `flows` e `account_alerts`.
+- **Rotas de demonstração Meta:** `/api/whatsapp/send`,
+  `/api/whatsapp/templates` e `/api/health/meta` são Functions
+  server-side para App Review. Envio/listagem exigem Bearer via
+  `META_REVIEW_DEMO_SECRET` e System User Token server-side. Nunca
+  expor tokens no frontend.
 - **Segurança de API:** Nenhuma credencial ou token privado
   (`FLOWPAY_INTERNAL_API_KEY`, `META_APP_SECRET`, chaves OpenAI, etc.) deve ser exposta
   no front-end. Qualquer cobrança real deve passar por backend
@@ -97,6 +113,10 @@ Qualquer agente que atuar neste repositório DEVE seguir estas regras.
   projeto não são fonte de publicação e não devem ser reintroduzidos.
 - A única superfície server-side local atual é `functions/`,
   deployada como Cloudflare Pages Functions.
+- Não crie helpers, bibliotecas ou módulos compartilhados dentro de
+  `functions/`, porque Cloudflare Pages gera rotas por estrutura de
+  arquivos. Código server-side compartilhado deste checkout deve viver
+  em `src/server/`; `functions/` deve conter apenas endpoints reais.
 - `dist/` é artefato de build e não deve ser editado como fonte.
 - `wrangler.jsonc` versiona `pages_build_output_dir: "./dist"`.
 - Deploy local usa `make deploy`.
@@ -158,6 +178,12 @@ Qualquer agente que atuar neste repositório DEVE seguir estas regras.
 - Ajustes visuais devem preservar contraste suficiente.
 - O ticker `TOP TELENOTÍCIAS` no topo da home é elemento editorial
   existente e deve ser preservado, salvo pedido explícito de remoção.
+  Ele funciona como letreiro de notícias operacionais atuais sobre o que
+  a neoflowoff.agency está trabalhando no momento. Atualize com fatos
+  vivos e auditáveis, como App Review Meta, Meta Tech Provider,
+  WhatsApp Business, Graph API, webhooks e NEØ Growth System. Não use
+  esse espaço para tutorial, copy genérica, promessa futura sem lastro
+  ou explicação de funcionalidade.
 - O selo `OPERAÇÃO PRINCIPAL` em card bege deve manter contraste
   alto; não usar texto verde acid diretamente sobre bege claro.
 - Logo steel do footer vem de `src/assets/images/steel_flw.webp`.
@@ -173,7 +199,7 @@ pnpm run build
 ./node_modules/.bin/stylelint 'src/styles/**/*.css'
 node --check public/sw.js
 xmllint --noout public/sitemap.xml
-node --test tests/data-deletion-and-ssr.test.js
+node --test tests/data-deletion-and-ssr.test.js tests/embedded-signup-storage.test.js tests/meta-webhook.test.js
 ```
 
 Se `pnpm exec astro check` falhar por erro interno do language server,

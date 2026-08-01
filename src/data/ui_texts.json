@@ -1,8 +1,9 @@
 {
   "brand": {
-    "name": "neoflowoff.agency",
-    "positioning": "Agentes de IA, páginas, CRM e fluxos comerciais para empresas. Marketing com infraestrutura.",
-    "short_positioning": "Marketing com infraestrutura."
+    "name": "NEØ FlowOFF",
+    "search_name": "Neo FlowOFF Agency",
+    "positioning": "Infraestrutura comercial, automação de processos, integração de CRM e agentes de IA customizados para empresas. Base em Goiânia, GO.",
+    "short_positioning": "Infraestrutura comercial com IA."
   },
   "header": {
     "eyebrow": "MARKETING COM INFRAESTRUTURA",
@@ -23,7 +24,7 @@
       "eyebrow": "SOBRE A NEOFLOWOFF.AGENCY",
       "title": "Não entregamos ferramentas soltas. Construímos a operação entre elas.",
       "paragraphs": [
-        "Somos uma agência de infraestrutura comercial. Unimos estratégia, software, dados e automação para transformar ferramentas dispersas em uma operação que responde, registra, encaminha e aprende.",
+        "A NEØ FlowOFF, também encontrada como Neo FlowOFF Agency ou NeoFlowOFF, é uma agência de infraestrutura comercial com base em Goiânia, GO. Unimos estratégia, software, dados e automação para transformar ferramentas dispersas em uma operação que responde, registra, encaminha e aprende.",
         "Construímos agentes de IA, páginas, CRM, integrações, mídia e dashboards como partes de um mesmo sistema. Porque conversa sem integração vira fila. Tráfego sem dados vira aposta. Automação sem arquitetura vira retrabalho.",
         "Nosso trabalho é fazer tudo circular com contexto, rastreabilidade e controle humano onde ele realmente importa."
       ],
@@ -80,14 +81,21 @@
     "legal_entity": "Flowoff Marketing e Assessoria Digital LTDA - 43.376.355/0001-92 · neo@neoflowoff.agency"
   },
   "meta": {
-    "default_title": "Agentes de IA, CRM, automação e dados | neoflowoff.agency",
-    "default_description": "A neoflowoff.agency implanta agentes de IA, páginas, CRM, WhatsApp API, automações, mídia e dados conectados à operação comercial de empresas.",
-    "og_title": "neoflowoff.agency — Marketing com infraestrutura",
-    "og_description": "Agentes de IA, páginas, CRM, dados e fluxos comerciais projetados para trabalhar juntos.",
+    "default_title": "NEØ FlowOFF | Neo FlowOFF Agency: IA e Infraestrutura Comercial",
+    "default_description": "Neo FlowOFF Agency em Goiânia: infraestrutura comercial, automação de processos, integração de CRM e agentes de IA customizados.",
+    "og_title": "NEØ FlowOFF — Neo FlowOFF Agency em Goiânia",
+    "og_description": "Infraestrutura comercial, agentes de IA, CRM, automações e dados para empresas que precisam integrar operação e crescimento.",
     "keywords": [
+      "NEØ FlowOFF",
+      "Neo FlowOFF Agency",
+      "NeoFlowOFF",
+      "Infraestrutura Comercial Goiânia",
       "agentes de IA",
+      "Agentes de IA Customizados",
       "Agente SDR IA",
+      "Automação de Processos",
       "automação comercial",
+      "Integração de CRM",
       "CRM",
       "WhatsApp Business API",
       "Meta Developers",

@@ -107,7 +107,7 @@ node --check public/sw.js
 xmllint --noout public/sitemap.xml
 
 # testes do callback Meta Data Deletion e conteúdo SSR/build
-node --test tests/data-deletion-and-ssr.test.js
+node --test tests/data-deletion-and-ssr.test.js tests/embedded-signup-storage.test.js tests/meta-webhook.test.js
 
 # atalho local para audit/docs/lint
 make verify
@@ -181,6 +181,24 @@ O endpoint `functions/api/meta/data-deletion.js` exige `META_APP_SECRET`
 no ambiente server-side para validar `signed_request` HMAC SHA-256.
 Não exponha esse valor em HTML, logs ou scripts públicos.
 
+O webhook Meta publico atual e `functions/api/meta-webhook.js`.
+Ele exige `META_WEBHOOK_VERIFY_TOKEN` para o handshake GET
+e usa `META_APP_SECRET` para validar `X-Hub-Signature-256` no POST
+quando configurado.
+O POST deve reconhecer `statuses` dentro de `messages.value.statuses`.
+
+As rotas de demonstracao para App Review usam System User Token
+somente server-side:
+
+```text
+/api/whatsapp/send       exige Bearer e whatsapp_business_messaging
+/api/whatsapp/templates  exige Bearer e whatsapp_business_management
+/api/health/meta         diagnostico sanitizado de WABA/App/webhooks
+```
+
+Configure `META_SYSTEM_USER_TOKEN` e `META_REVIEW_DEMO_SECRET`
+como secrets na Cloudflare antes de testar envio/listagem real.
+
 `META_LOGIN_CONFIGURATION_ID=1322930417561011` e publico e representa a
 configuracao oficial do Facebook Login for Business. No build Astro, a fonte
 real e `src/data/config.json`; manter `.env.example` e o JSON alinhados quando
@@ -201,6 +219,10 @@ for Business for a fonte canonica de ativos e permissoes.
 Bindings KV como `META_DELETION_REQUESTS` e `META_CONNECTIONS` devem ser
 configurados na Cloudflare ou no `wrangler.jsonc`; eles não são variáveis
 textuais do `.env`.
+
+Helpers server-side compartilhados vivem em `src/server/`.
+Nao crie helpers dentro de `functions/`, pois Cloudflare Pages Functions
+gera rotas a partir da estrutura de arquivos.
 
 Pagamentos via FlowPay serão tratados por nó externo de pagamentos quando
 o contrato runtime estiver pronto. Este checkout Astro ainda não consome

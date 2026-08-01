@@ -90,12 +90,33 @@ Embedded Signup e o callback Meta Data Deletion, sem expor secrets
 ao navegador. O callback tecnico e `/api/meta/data-deletion`; nao
 recrie a pagina Astro legada `/data-deletion/`.
 
+Nao crie helpers dentro de `functions/`.
+Cloudflare Pages gera rotas pela estrutura de arquivos.
+Helpers server-side compartilhados vivem em `src/server/`.
+
 O Embedded Signup publico usa Facebook Login for Business Configuration ID
 `1322930417561011` em `src/data/config.json`. Esse ID e publico e diferente do
 App ID. O script `src/scripts/meta-signup.ts` deve chamar `FB.login` com
 `config_id`, `response_type: 'code'` e
 `override_default_response_type: true`, sem `scope` paralelo enquanto a
 configuracao do Login for Business for canonica.
+
+O adapter Meta usa Graph API `v25.0` fixa.
+Nao reintroduza override para `v26.0` via env sem revisao explicita.
+
+O webhook publico atual e `/api/meta-webhook`.
+Ele deve validar challenge no GET, assinatura HMAC no POST e classificar
+`statuses` dentro de `messages.value.statuses`.
+
+Rotas de demonstracao do App Review:
+
+```text
+/api/whatsapp/send       whatsapp_business_messaging
+/api/whatsapp/templates  whatsapp_business_management
+/api/health/meta         diagnostico sanitizado Meta
+```
+
+`send` e `templates` exigem Bearer interno via `META_REVIEW_DEMO_SECRET`.
 
 ────────────────────────────────────────
 
@@ -110,6 +131,11 @@ configuracao do Login for Business for canonica.
 - use acid, cinza, preto e branco nas demais secoes
 - preserve o ticker editorial `TOP TELENOTICIAS` no topo da home,
   salvo pedido explicito de remocao
+- trate o ticker como letreiro de noticias operacionais atuais:
+  App Review Meta, Meta Tech Provider, WhatsApp Business, Graph API,
+  webhooks e NEØ Growth System
+- nao use o ticker para tutorial, copy generica ou promessa futura sem
+  lastro operacional
 - nao use texto acid diretamente sobre bege claro; o selo
   `OPERACAO PRINCIPAL` deve permanecer em alto contraste
 - a hero da home usa `/logo_transp.png` no lugar do titulo textual
@@ -147,7 +173,7 @@ Validacoes focadas:
 ./node_modules/.bin/stylelint 'src/styles/**/*.css'
 node --check public/sw.js
 xmllint --noout public/sitemap.xml
-node --test tests/data-deletion-and-ssr.test.js
+node --test tests/data-deletion-and-ssr.test.js tests/embedded-signup-storage.test.js tests/meta-webhook.test.js
 ```
 
 Se uma validacao falhar por ambiente,

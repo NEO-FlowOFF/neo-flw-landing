@@ -17,6 +17,9 @@ Estado do checkout vence memoria.
 Arquivos publicos nao sao autoridade de backend.
 `functions/` existe apenas como adapter server-side minimo;
 nao coloque regra de produto, secrets ou persistencia soberana nele.
+Nao coloque helpers dentro de `functions/`.
+Cloudflare Pages gera rotas pela estrutura de arquivos.
+Helpers server-side compartilhados vivem em `src/server/`.
 
 ────────────────────────────────────────
 
@@ -103,6 +106,34 @@ Nao confundir Configuration ID com App ID. Nao trocar authorization code no
 browser e nao enviar `scope` paralelo ao `FB.login` sem nova validacao atual da
 Meta.
 
+Graph API para adapters Meta permanece fixa em `v25.0`.
+Nao reintroduzir override para `v26.0` por variavel de ambiente sem
+decisao explicita.
+
+Webhook publico atual:
+
+```text
+/api/meta-webhook
+```
+
+Contrato minimo:
+
+- GET valida `hub.verify_token` e retorna `hub.challenge` puro
+- POST valida `X-Hub-Signature-256` quando `META_APP_SECRET` existe
+- POST classifica `messages.value.statuses` como `statuses`
+- POST suporta campos assinados de templates, qualidade, flows,
+  capability, status business e account alerts
+
+Rotas de demonstracao para App Review:
+
+```text
+/api/whatsapp/send
+/api/whatsapp/templates
+/api/health/meta
+```
+
+`send` e `templates` exigem Bearer interno via `META_REVIEW_DEMO_SECRET`.
+
 ────────────────────────────────────────
 
 ## ⨷ Performance
@@ -137,6 +168,12 @@ Nao force relatorio longo quando uma resposta curta resolve.
 Em alteracoes visuais, preserve o ticker editorial do topo da home,
 mantenha azul restrito ao bloco Meta e verifique contraste quando
 texto acid aparece sobre fundo claro.
+
+O ticker do topo e um letreiro de noticias operacionais atuais.
+Use-o para mostrar o que esta em andamento agora:
+App Review Meta, Meta Tech Provider, WhatsApp Business,
+Graph API, webhooks e NEØ Growth System.
+Nao transforme em tutorial, copy generica ou promessa futura sem lastro.
 
 ```text
 ────────────────────────────

@@ -12,6 +12,10 @@ const tiktokPixelId = String(configData.integrations.tiktok?.pixel_id || '');
 const platformBaseUrl = String(configData.platform.base_url || 'https://neoflowoff.agency').replace(/\/$/, '');
 const canonicalUrl = new URL(Astro.url.pathname, platformBaseUrl).toString();
 const ogImageUrl = new URL('/assets/og-image.png', platformBaseUrl).toString();
+const brandOfficialName = 'NEØ FlowOFF';
+const brandSearchName = 'Neo FlowOFF Agency';
+const brandAlternateNames = [brandOfficialName, 'NeoFlowOFF', 'NEO FlowOFF', 'neoflowoff.agency'];
+const brandCategoryDescription = 'Infraestrutura Comercial, Automação de Processos, Integração de CRM e Agentes de IA Customizados em Goiânia, GO.';
 const title = Astro.props.title || uiTexts.meta.default_title;
 const description = Astro.props.description || uiTexts.meta.default_description;
 const keywords = uiTexts.meta.keywords.join(', ');
@@ -75,18 +79,55 @@ const appleStartupImages = appleStartupImageTuples.map(([width, height, ratio, o
   media: `screen and (device-width: ${width}px) and (device-height: ${height}px) and (-webkit-device-pixel-ratio: ${ratio}) and (orientation: ${orientation})`,
   href: `/splash_screens/${file}`,
 }));
+// Search schema uses the keyboard-friendly name and maps NEØ as alternateName.
 const jsonLd = {
   '@context': 'https://schema.org',
   '@graph': [
     {
-      '@type': 'Organization',
+      '@type': 'ProfessionalService',
       '@id': `${platformBaseUrl}/#organization`,
-      name: 'NEØ FlowOFF',
-      alternateName: ['Neo FlowOFF Agency', 'NEO FlowOFF'],
+      name: brandSearchName,
+      alternateName: brandAlternateNames,
+      legalName: 'Flowoff Marketing e Assessoria Digital LTDA',
       url: platformBaseUrl,
-      logo: `${platformBaseUrl}/icon-512.png`,
-      description,
+      logo: {
+        '@type': 'ImageObject',
+        url: `${platformBaseUrl}/icon-512.png`,
+        contentUrl: `${platformBaseUrl}/icon-512.png`,
+        width: 512,
+        height: 512,
+        caption: 'Logotipo Neo FlowOFF Agency'
+      },
+      image: ogImageUrl,
+      description: `Neo FlowOFF Agency, marca ${brandOfficialName}, atua com ${brandCategoryDescription}`,
+      slogan: 'Marketing com infraestrutura.',
       telephone: '+55-62-94789032',
+      email: 'neo@neoflowoff.agency',
+      priceRange: '$$',
+      address: {
+        '@type': 'PostalAddress',
+        addressLocality: 'Goiânia',
+        addressRegion: 'GO',
+        addressCountry: 'BR'
+      },
+      areaServed: [
+        {
+          '@type': 'City',
+          name: 'Goiânia'
+        },
+        {
+          '@type': 'Country',
+          name: 'Brasil'
+        }
+      ],
+      knowsAbout: [
+        'Infraestrutura Comercial',
+        'Automação de Processos',
+        'Integração de CRM',
+        'Agentes de IA Customizados',
+        'WhatsApp Business API',
+        'Meta Tech Provider'
+      ],
       sameAs: [
         'https://neoflowoff.agency',
         'https://wa.me/556294789032'
@@ -103,15 +144,11 @@ const jsonLd = {
       '@type': 'WebSite',
       '@id': `${platformBaseUrl}/#website`,
       url: platformBaseUrl,
-      name: 'neoflowoff.agency',
+      name: brandSearchName,
+      alternateName: brandAlternateNames,
       inLanguage: 'pt-BR',
       publisher: {
         '@id': `${platformBaseUrl}/#organization`
-      },
-      potentialAction: {
-        '@type': 'SearchAction',
-        target: `${platformBaseUrl}/sitemap.xml`,
-        'query-input': 'required name=search_term_string'
       }
     },
     {
@@ -141,16 +178,21 @@ const jsonLd = {
     <meta name="description" content={description} />
     <meta name="keywords" content={keywords} />
     <link rel="canonical" href={canonicalUrl} />
-    <meta property="og:title" content={uiTexts.meta.og_title} />
-    <meta property="og:description" content={uiTexts.meta.og_description} />
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content={brandSearchName} />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
     <meta property="og:url" content={canonicalUrl} />
     <meta property="og:image" content={ogImageUrl} />
     <meta property="og:image:secure_url" content={ogImageUrl} />
     <meta property="og:image:type" content="image/png" />
     <meta property="og:image:width" content="1731" />
     <meta property="og:image:height" content="909" />
-    <meta property="og:image:alt" content="neoflowoff.agency — Marketing com infraestrutura" />
+    <meta property="og:image:alt" content="Neo FlowOFF Agency - Infraestrutura Comercial, CRM e IA em Goiânia" />
     <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:url" content={canonicalUrl} />
     <meta name="twitter:image" content={ogImageUrl} />
     <meta name="theme-color" content="#16161a" />
     <meta name="facebook-domain-verification" content={metaVerifyToken} />
@@ -168,7 +210,7 @@ const jsonLd = {
       <link rel="apple-touch-startup-image" media={image.media} href={image.href} />
     ))}
     <slot name="head" />
-    
+
     <script is:inline>
       const isProductionHost = window.location.hostname === 'neoflowoff.agency' || window.location.hostname === 'www.neoflowoff.agency';
 

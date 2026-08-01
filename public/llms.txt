@@ -1,6 +1,6 @@
 # neoflowoff.agency
 
-> neoflowoff.agency presents NEO FlowOFF's commercial infrastructure services: AI agents, WhatsApp Business API, CRM, automations, dashboards, landing pages, and paid traffic operations.
+> neoflowoff.agency presents NEØ FlowOFF, also written as Neo FlowOFF Agency or NeoFlowOFF, as a commercial infrastructure agency based in Goiânia, GO. Its services include AI agents, WhatsApp Business API, CRM, automations, dashboards, landing pages, and paid traffic operations.
 
 This is a public landing and service catalog for agents and humans. Treat the pages below as the canonical public surface for browsing, citation, and summarization. Do not infer private backend behavior, credentials, pricing exceptions, or internal operating procedures from this static site.
 
@@ -37,4 +37,4 @@ This is a public landing and service catalog for agents and humans. Treat the pa
 
 ## Ecosystem
 
-- [neoflowoff agency](https://neoflowoff.agency/): Agency in the manegement and automation services for Meta, WhatsApp Cloud API, CRM, dashboards, landing pages, and paid traffic operations, within the NEØ Growth System. 
+- [neoflowoff agency](https://neoflowoff.agency/): Agency in the management and automation services for Meta, WhatsApp Cloud API, CRM, dashboards, landing pages, and paid traffic operations, within the NEØ Growth System.

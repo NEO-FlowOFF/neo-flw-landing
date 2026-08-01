@@ -33,7 +33,7 @@ Astro SSG
 │   └── registro do service worker
 ├── src/pages/index.astro
 │   ├── home comercial alimentada por catalogo
-│   ├── ticker editorial TOP TELENOTICIAS
+│   ├── ticker editorial TOP TELENOTICIAS com status operacional atual
 │   └── hero com imagem estatica /logo_transp.png
 ├── src/pages/planos/[slug].astro
 │   └── paginas de planos
@@ -42,6 +42,8 @@ Astro SSG
 ├── src/pages/privacy.astro
 ├── src/pages/terms.astro
 ├── src/pages/excluir-dados.astro
+├── src/server/meta-graph.js
+│   └── helpers server-side para Graph API Meta v25.0
 └── public/
     ├── logo_transp.png
     ├── manifest.webmanifest
@@ -51,10 +53,18 @@ Astro SSG
     └── sitemap.xml
 
 Cloudflare Pages Functions
+├── functions/api/meta-webhook.js
+│   └── webhook Meta com challenge, assinatura e parsing de statuses
 ├── functions/api/meta/embedded-signup.js
 │   └── server-side adapter for Meta Embedded Signup code handling
-└── functions/api/meta/data-deletion.js
-    └── validates Meta signed_request and queues/forwards deletion requests
+├── functions/api/meta/data-deletion.js
+│   └── validates Meta signed_request and queues/forwards deletion requests
+├── functions/api/whatsapp/send.js
+│   └── demonstra whatsapp_business_messaging com Bearer interno
+├── functions/api/whatsapp/templates.js
+│   └── demonstra whatsapp_business_management com Bearer interno
+└── functions/api/health/meta.js
+    └── diagnostico sanitizado de WABA, app association e webhooks
 ```
 
 Google Tag Gateway ativo na zona Cloudflare:
@@ -72,6 +82,11 @@ da zona.
 
 `dist/` e apenas saida de build.
 Nao edite `dist/` como fonte.
+
+`functions/` deve conter apenas endpoints reais.
+Nao coloque helpers em subpastas de `functions/`, pois Cloudflare Pages
+gera rotas por estrutura de arquivos.
+Helpers server-side compartilhados vivem em `src/server/`.
 
 Os HTMLs legais legados da raiz foram removidos:
 
@@ -181,6 +196,26 @@ em ambiente nao-dev.
 
 ────────────────────────────────────────
 
+## ◭ Ticker Editorial
+
+O topo da home possui um letreiro de noticias operacionais atuais.
+Ele deve comunicar, de forma curta, o que a neoflowoff.agency esta
+trabalhando agora.
+
+Conteudo apropriado:
+
+- App Review Meta
+- Meta Tech Provider
+- WhatsApp Business
+- Graph API e webhooks
+- NEØ Growth System
+- infraestrutura comercial em validacao
+
+Nao transformar o ticker em tutorial, claim generico, changelog interno
+ou promessa futura sem evidência operacional.
+
+────────────────────────────────────────
+
 ## ⍟ Agentes
 
 Superficies publicas para agentes:
@@ -218,6 +253,19 @@ em nenhuma superficie publica para agentes.
 autoritativo. Eles devem apenas encaminhar dados para backend soberano
 ou armazenar de forma segura quando Cloudflare KV e criptografia
 estiverem configurados.
+
+O adapter Meta usa Graph API `v25.0` fixa.
+Nao reintroduza override por env para `v26.0` sem decisao explicita.
+
+O webhook publico atual e `/api/meta-webhook`.
+Ele deve validar challenge no GET, validar `X-Hub-Signature-256`
+no POST quando `META_APP_SECRET` existir e classificar `statuses`
+dentro de `messages.value.statuses`.
+
+As rotas `/api/whatsapp/send` e `/api/whatsapp/templates`
+existem para demonstracao de App Review.
+Elas exigem Bearer via `META_REVIEW_DEMO_SECRET`
+e token de System User server-side.
 
 O callback publico de exclusao de dados e
 `/api/meta/data-deletion`; a pagina publica de instrucoes e

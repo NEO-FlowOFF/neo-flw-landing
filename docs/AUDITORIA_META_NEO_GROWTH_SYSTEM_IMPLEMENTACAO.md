@@ -8,7 +8,9 @@
 > Atualização de auditoria — 24/07/2026:
 > este documento preserva a fotografia operacional de 15/07/2026, mas o contrato ativo da landing agora aponta para `https://neoflowoff.agency`, para a página `GET /conectar-whatsapp` e para o adapter server-side `POST /api/meta/embedded-signup`.
 > Atualização operacional — 28/07/2026:
-> o NEØ Growth System não opera mais por provedor externo antigo; o runtime atual é Docker. O gateway local `neo-whatsapp-connect` responde em `http://localhost:3007`, e qualquer callback público da Meta exige um ingresso HTTPS público validado antes da submissão. `https://lp.neoflowoff.agency/api/meta-webhook` é apenas rollback/migração.
+> o NEØ Growth System não opera mais por provedor externo antigo; o runtime atual é Docker. O gateway local `neo-whatsapp-connect` responde em `http://localhost:3007`, e qualquer callback público da Meta exige um ingresso HTTPS público validado antes da submissão.
+> Atualização operacional — 01/08/2026:
+> para App Review, o callback público ativo é `https://neoflowoff.agency/api/meta-webhook`. Não usar `lp.neoflowoff.agency` como rollback ou callback de submissão.
 > App ID canônico para esta submissão: `1500002841696407`, conforme painel Meta. `src/data/config.json`, `docs/meta-app-review.md` e `functions/api/meta/embedded-signup.js` devem permanecer alinhados a esse valor.
 
 ---
@@ -104,7 +106,7 @@ Situação atual:
   `https://neoflowoff.agency/api/meta/embedded-signup`
 - o adapter deve falhar fechado quando não houver storage/forward seguro configurado
 - a landing page não deve receber, registrar ou persistir secrets Meta no frontend
-- o endpoint antigo `https://lp.neoflowoff.agency/api/meta-webhook` deve ser tratado somente como rollback/migração
+- o endpoint antigo `lp.neoflowoff.agency` não deve ser usado como rollback ou callback de submissão
 
 #### `neoflowoff-chat-ui`
 
@@ -490,16 +492,13 @@ Diretriz:
 ## 8. Webhook atual
 
 ```env
-META_WEBHOOK_URL=REQUIRES_PUBLIC_DOCKER_INGRESS/webhook
+META_WEBHOOK_URL=https://neoflowoff.agency/api/meta-webhook
 META_WEBHOOK_LOCAL_URL=http://localhost:3007/webhook
 META_VERIFY_TOKEN=<SECRET_CONFIGURADO_NO_RUNTIME_DO_GATEWAY>
 ```
 
-Rollback/migração:
-
-```env
-META_WEBHOOK_ROLLBACK_URL=https://lp.neoflowoff.agency/api/meta-webhook
-```
+Não configurar rollback para `lp.neoflowoff.agency`.
+Esse host não é callback válido para submissão atual.
 
 Objeto ativo:
 
@@ -515,7 +514,13 @@ account_alerts
 message_template_status_update
 message_template_quality_update
 phone_number_quality_update
+business_status_update
+business_capability_update
+flows
 ```
+
+`statuses` chega em `messages.value.statuses`.
+Não adicionar campo assinado separado chamado `statuses`.
 
 Validações históricas concluídas no endpoint antigo:
 
@@ -910,7 +915,7 @@ Esse arquivo não pode conter secrets ou access tokens.
 - [ ] testar `messages v25.0`
 - [ ] testar alertas e qualidade
 - [ ] trocar callback na Meta
-- [ ] manter rollback para `lp.neoflowoff.agency/api/meta-webhook`
+- [ ] manter apenas `https://neoflowoff.agency/api/meta-webhook` na submissão
 - [ ] observar eventos
 - [ ] remover endpoint e secrets Meta da landing após estabilidade
 
@@ -991,9 +996,9 @@ O app de Ads deve seguir processo separado de permissões, revisão, onboarding 
 4. **Business ID:** `227957544965390`
 5. **Ad Account principal:** `act_1579803729592779`
 6. **App atual de WhatsApp:** `1500002841696407`
-7. **Endpoint oficial de webhook WhatsApp:** pendente de ingresso HTTPS público para o Docker `neo-whatsapp-connect`
-8. **Endpoint rollback/migração:** `https://lp.neoflowoff.agency/api/meta-webhook`
-9. **Campos WABA ativos:** cinco campos listados neste documento
+7. **Endpoint oficial de webhook WhatsApp para App Review:** `https://neoflowoff.agency/api/meta-webhook`
+8. **Endpoint rollback/migração:** não usar `lp.neoflowoff.agency`
+9. **Campos WABA ativos:** campos listados neste documento, com `statuses` dentro de `messages.value.statuses`
 10. **Provider do `neoflowoff-chat-ui`:** ASI1.one
 11. **Provider previsto para o chat da `neo-flw-landing`:** OpenAI
 12. **Ingressor WhatsApp atual:** `neo-whatsapp-connect`

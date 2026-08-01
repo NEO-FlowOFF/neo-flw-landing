@@ -8,14 +8,14 @@ It must not contain access tokens, app secrets, bearer secrets, private keys, or
 - Canonical domain: `https://neoflowoff.agency`
 - Privacy Policy: `https://neoflowoff.agency/privacy/`
 - Terms of Service: `https://neoflowoff.agency/terms/`
-- Data Deletion: `https://neoflowoff.agency/data-deletion/`
+- Data Deletion: `https://neoflowoff.agency/excluir-dados/`
 - Data Deletion Callback: `https://neoflowoff.agency/api/meta/data-deletion`
 - Embedded Signup page: `https://neoflowoff.agency/conectar-whatsapp/`
+- Webhook Callback: `https://neoflowoff.agency/api/meta-webhook`
 
 Do not use `lp.neoflowoff.agency`, `ipfs.neoflowoff.agency`, or legacy
 Portuguese aliases as primary URLs in the Meta App Review form. The aliases
-remain public for compatibility, but the approval submission should use the
-canonical URLs above.
+must not be used for the approval submission.
 
 ## App Review Scope
 
@@ -59,9 +59,11 @@ The adapter supports two safe modes:
    - `META_APP_SECRET`
    - `META_TOKEN_ENCRYPTION_KEY`
    - `META_CONNECTIONS` KV binding
-   - optional `META_APP_ID`
-   - optional `META_GRAPH_API_VERSION`
    - optional `META_OAUTH_REDIRECT_URI`
+
+The Graph API version is fixed at `v25.0` in the adapter.
+Do not reintroduce environment overrides to `v26.0` or future versions
+without an explicit review decision.
 
 If neither mode is configured, the adapter must return `503 secure_storage_not_configured`, and the frontend must not display a successful connection.
 
@@ -77,7 +79,7 @@ The callback must receive Meta's `signed_request`, validate it with `META_APP_SE
 
 ```json
 {
-  "url": "https://neoflowoff.agency/data-deletion/?confirmation_code=...",
+  "url": "https://neoflowoff.agency/excluir-dados?code=...",
   "confirmation_code": "..."
 }
 ```
@@ -95,39 +97,73 @@ Supported secure handlers:
 
 ## Webhook Endpoint Decision
 
-Canonical service owner:
+Current public App Review callback:
+
+```text
+https://neoflowoff.agency/api/meta-webhook
+```
+
+Long-term service owner:
 
 ```text
 neo-provider-messaging
 ```
 
-Current Docker runtime endpoint for the WhatsApp Cloud API gateway:
-
-```text
-http://localhost:3007/webhook
-```
-
-Before submitting or updating the Meta webhook callback, configure a public
-HTTPS ingress that routes to the Docker service and confirm the public URL
-returns `/health` with `status: ok` and `whatsappConfigured: true`. Do not use
-old platform-specific provider URLs as the production callback.
+The landing callback exists to support App Review while the sovereign
+backend is being hardened. Do not use old platform-specific provider URLs
+as the production callback.
 
 Required behavior:
 
-- `GET /webhook` returns the raw challenge when `hub.verify_token` matches.
-- `POST /webhook` validates `X-Hub-Signature-256` with `META_APP_SECRET`.
-- The service responds quickly to Meta and processes inbound events asynchronously.
-- Inbound events must be forwarded to the internal consumer without exposing secrets to the static landing.
+- `GET /api/meta-webhook` returns the raw challenge when
+  `hub.verify_token` matches.
+- `POST /api/meta-webhook` validates `X-Hub-Signature-256`
+  with `META_APP_SECRET` when configured.
+- `POST /api/meta-webhook` classifies `messages.value.statuses`
+  as `statuses`.
+- The service responds quickly to Meta and never logs secrets,
+  access tokens, raw authorization codes or full signed requests.
 
-Legacy rollback endpoint during migration only:
+Subscribed fields expected during App Review:
 
 ```text
-https://lp.neoflowoff.agency/api/meta-webhook
+messages
+message_template_quality_update
+message_template_status_update
+phone_number_quality_update
+account_alerts
+business_capability_update
+business_status_update
+flows
 ```
 
-Do not use the rollback endpoint in the Meta App Review form unless there is an
-active incident on the production provider. The landing should not be the
-long-term owner of Meta webhook processing.
+In Graph API v25.0, delivery/read statuses arrive under the `messages`
+field payload as `value.statuses`; do not add a separate subscribed
+field named `statuses`.
+
+## App Review Demo Endpoints
+
+Use these only with server-side secrets configured in Cloudflare:
+
+```text
+POST /api/whatsapp/send
+GET  /api/whatsapp/templates
+POST /api/whatsapp/templates
+GET  /api/health/meta
+```
+
+`/api/whatsapp/send` demonstrates `whatsapp_business_messaging`.
+`/api/whatsapp/templates` demonstrates `whatsapp_business_management`.
+Both require `Authorization: Bearer <META_REVIEW_DEMO_SECRET>`.
+
+`/api/health/meta` returns a sanitized status for:
+
+- Graph API version
+- WABA access
+- phone number lookup
+- app association
+- webhook field contract
+- server-side secret presence as booleans only
 
 ## Data Handling
 

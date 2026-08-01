@@ -25,8 +25,11 @@ para tráfego pago, busca, crawlers e agentes de IA.
   para não herdar o workspace pai
 - frontend estático em Astro, sem SSR
 - adapter server-side mínimo em `functions/`
+- helpers server-side compartilhados em `src/server/`, nunca dentro de
+  `functions/`
 - catálogo publicado em `src/data/catalog.json`
 - textos de interface em `src/data/ui_texts.json`
+- ticker editorial no topo da home com notícias operacionais atuais
 - build de produção em `dist/`
 - deploy em Cloudflare Pages via Wrangler
 - superfícies públicas para agentes: `public/llms.txt`,
@@ -44,6 +47,14 @@ Exceções atuais: `functions/api/meta/embedded-signup.js` recebe o
 authorization code do Embedded Signup e `functions/api/meta/data-deletion.js`
 recebe o callback Meta Data Deletion. Ambos devem falhar fechado quando
 não houver backend soberano, KV ou storage seguro configurado.
+
+O callback publico `/api/meta-webhook` existe para o App Review Meta.
+Ele valida challenge, assinatura HMAC e classifica `statuses` dentro de
+`messages.value.statuses`.
+
+As rotas `/api/whatsapp/send`, `/api/whatsapp/templates` e
+`/api/health/meta` demonstram permissoes de WhatsApp no App Review.
+Envio e templates exigem Bearer server-side via `META_REVIEW_DEMO_SECRET`.
 
 O fluxo publico de `/conectar-whatsapp/` usa Facebook Login for Business com
 Configuration ID `1322930417561011`, mantido em `src/data/config.json` como
@@ -79,6 +90,7 @@ neo-flw-landing/
 │   ├── data/                # catálogo, config e textos
 │   ├── layouts/             # Base Astro compartilhado
 │   ├── pages/               # home, planos, checkout, compliance
+│   ├── server/              # helpers server-side usados por Functions
 │   └── styles/              # design system global
 ├── public/
 │   ├── assets/              # assets estáticos otimizados
@@ -88,7 +100,7 @@ neo-flw-landing/
 │   ├── sitemap.xml          # rotas públicas
 │   └── sw.js                # service worker conservador
 ├── functions/
-│   └── api/meta/            # adapters Embedded Signup e Data Deletion
+│   └── api/                 # endpoints Cloudflare Pages Functions
 ├── drafts/                  # insumos canônicos do operador
 ├── docs/                    # documentação de suporte
 ├── pnpm-workspace.yaml      # workspace local vazio: packages: []
@@ -110,9 +122,18 @@ neo-flw-landing/
 /terms/                   termos de serviço
 /excluir-dados/           exclusão de dados
 /api/meta/data-deletion   callback Meta Data Deletion
+/api/meta-webhook         callback Meta Webhooks
+/api/whatsapp/send        demo App Review: envio
+/api/whatsapp/templates   demo App Review: templates
+/api/health/meta          diagnóstico sanitizado Meta
 ```
 
 Rotas de `planos` e `checkout` são geradas a partir de `src/data/catalog.json`.
+
+O ticker superior da home deve comunicar o que está em andamento agora,
+como App Review Meta, Meta Tech Provider, WhatsApp Business, Graph API,
+webhooks e NEØ Growth System.
+Não use esse espaço para tutorial ou copy genérica.
 
 ---
 

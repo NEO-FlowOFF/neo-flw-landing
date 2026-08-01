@@ -71,10 +71,20 @@
       "App Settings > Basic",
       "WhatsApp > Configuration > Webhooks"
     ],
-    "callback_url": "REQUIRES_PUBLIC_DOCKER_INGRESS/webhook",
+    "callback_url": "https://neoflowoff.agency/api/meta-webhook",
     "local_docker_callback_url": "http://localhost:3007/webhook",
     "webhook_verify_token_env": "META_WEBHOOK_VERIFY_TOKEN",
-    "webhook_subscribed_fields": ["messages"],
+    "webhook_subscribed_fields": [
+      "messages",
+      "message_template_quality_update",
+      "message_template_status_update",
+      "phone_number_quality_update",
+      "account_alerts",
+      "business_capability_update",
+      "business_status_update",
+      "flows"
+    ],
+    "statuses_location": "messages.value.statuses",
     "required_permissions": [
       "whatsapp_business_messaging",
       "whatsapp_business_management",
@@ -160,7 +170,9 @@
   },
   "pre_review_checks": [
     "Confirm Meta Developers, src/data/config.json, docs/meta-app-review.md, and the Embedded Signup adapter all use canonical App ID 1500002841696407.",
-    "Configure POST https://neoflowoff.agency/api/meta/data-deletion in Meta Developers as the Data Deletion Callback URL."
+    "Configure POST https://neoflowoff.agency/api/meta/data-deletion in Meta Developers as the Data Deletion Callback URL.",
+    "Configure https://neoflowoff.agency/api/meta-webhook as the Meta Webhook Callback URL for App Review.",
+    "Validate that statuses are parsed from messages.value.statuses, not from a standalone subscribed field named statuses."
   ],
   "docker_runtime": {
     "compose_project": "neo-growth-system",
