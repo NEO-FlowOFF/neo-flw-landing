@@ -1,7 +1,7 @@
 # neoflowoff.agency — Branding System
 
-**Versão:** 1.0  
-**Data:** 26 de julho de 2026  
+**Versão:** 1.0
+**Data:** 26 de julho de 2026
 **Escopo:** marca, linguagem, identidade visual e aplicação em produtos digitais
 
 > Este documento define a marca e seu comportamento. Não determina cenas, campanhas, fotografia, renders ou direção de arte.
@@ -189,6 +189,7 @@ A identidade combina **clareza editorial**, **materialidade premium** e **sinais
 
 ### Paleta principal
 
+```text
 | Token | Hex | Função |
 |---|---:|---|
 | Acid Green | `#8FFE09` | Ativação, conexão, ação e estado |
@@ -199,16 +200,19 @@ A identidade combina **clareza editorial**, **materialidade premium** e **sinais
 | Brushed Silver | `#B9BAB5` | Estrutura, bordas e detalhes materiais |
 | Smoke | `#686B67` | Texto secundário e ícones |
 | White | `#FFFFFF` | Contraste, respiro e superfícies translúcidas |
+```
 
 ### Cores funcionais digitais
 
+```text
 | Token | Hex | Uso |
-|---|---:|---|
+| --- | ---: | --- |
 | Acid Ink | `#3F7900` | Texto verde acessível sobre fundo claro |
 | Success | `#4C9B00` | Confirmações |
 | Warning | `#B56A00` | Atenção |
 | Error | `#C93B35` | Erros e bloqueios |
 | Info | `#316B8F` | Informação neutra |
+```
 
 O `#8FFE09` não deve ser usado para texto pequeno sobre branco. Nessas situações, usar **Acid Ink**.
 
@@ -431,7 +435,7 @@ Mais camadas reduzem a clareza e transformam a interface em efeito.
 
 ## 11. Bento grid
 
-### Função
+> Função
 
 O bento grid organiza capacidades diferentes sem transformar a página em uma lista homogênea de serviços.
 
@@ -444,22 +448,26 @@ Cada bloco deve responder a uma pergunta:
 
 ### Grade responsiva
 
+```text
 | Contexto | Colunas | Gap |
-|---|---:|---:|
+| --- | ---: | ---: |
 | Mobile | 4 | 12–16 px |
 | Tablet | 8 | 16–20 px |
 | Desktop | 12 | 20–24 px |
 | Wide | 12 | 24–32 px |
+```
 
-### Escalas de card
+> Escalas de card
 
+```text
 - **Hero:** 8–12 colunas.
 - **Principal:** 6–8 colunas.
 - **Operacional:** 4–6 colunas.
 - **Status:** 2–4 colunas.
 - **CTA:** 4–6 colunas.
+```
 
-### Hierarquia
+> Hierarquia
 
 Uma tela deve ter:
 
@@ -469,7 +477,7 @@ Uma tela deve ter:
 
 Evitar grades em que todos os cards têm o mesmo tamanho e competem pela mesma atenção.
 
-### Comportamento mobile
+> Comportamento mobile
 
 - Reordenar por prioridade, não apenas empilhar.
 - Manter CTA principal acessível.
@@ -481,7 +489,7 @@ Evitar grades em que todos os cards têm o mesmo tamanho e competem pela mesma a
 
 ## 12. Componentes de interface
 
-### App shell
+> App shell
 
 - Header compacto.
 - Conteúdo com largura controlada.
@@ -489,7 +497,7 @@ Evitar grades em que todos os cards têm o mesmo tamanho e competem pela mesma a
 - Sidebar ou navigation rail no desktop.
 - Área principal baseada em bento grid.
 
-### Navegação
+> Navegação
 
 Itens recomendados:
 
@@ -502,7 +510,7 @@ Itens recomendados:
 
 O rótulo depende do produto. Nunca expor a arquitetura interna como navegação para o cliente.
 
-### Cards
+> Cards
 
 Tipos:
 
@@ -513,7 +521,7 @@ Tipos:
 - **Integração:** origem, destino, permissão e saúde.
 - **Próxima ação:** responsável, prazo e comando.
 
-### Botões
+> Botões
 
 - Primário: Graphite ou Carbon com texto claro.
 - Ativação: Acid Green com texto Carbon.
@@ -536,17 +544,17 @@ Não usar Acid Green para erro, alerta ou ação destrutiva.
 
 ## 13. Movimento e feedback
 
-### Princípio
+> Princípio
 
 Movimento confirma relação e continuidade. Não deve ser espetáculo.
 
-### Tempos
+> Tempos
 
 - Microinteração: **120–180 ms**
 - Transição de componente: **180–260 ms**
 - Mudança de contexto: **260–420 ms**
 
-### Comportamento
+> Comportamento
 
 - Preferir deslocamentos curtos, escala sutil e dissolução.
 - Usar física de mola apenas em controles diretos.
@@ -558,7 +566,7 @@ Movimento confirma relação e continuidade. Não deve ser espetáculo.
 
 ## 14. Acessibilidade
 
-Requisitos mínimos:
+> Requisitos mínimos:
 
 - WCAG 2.2 AA.
 - Contraste de texto validado.
@@ -592,7 +600,7 @@ O usuário pode escolher o tema. O sistema também pode respeitar `prefers-color
 
 ## 16. Regras de consistência
 
-### Sempre
+> Sempre
 
 - Começar pela operação.
 - Dar função ao Acid Green.
