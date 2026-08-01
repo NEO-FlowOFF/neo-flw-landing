@@ -610,7 +610,7 @@ O usuário pode escolher o tema. O sistema também pode respeitar `prefers-color
 - Testar mobile primeiro.
 - Tratar integrações como relações com estado e responsabilidade.
 
-### Nunca
+> Nunca
 
 - Transformar a marca em estética cyberpunk.
 - Usar circuitos, terminais ou código como linguagem padrão.
@@ -624,14 +624,14 @@ O usuário pode escolher o tema. O sistema também pode respeitar `prefers-color
 
 ## 17. Checklist de aprovação
 
-### Marca
+> Marca
 
 - [ ] A comunicação começa pelo problema ou resultado?
 - [ ] A marca aparece como organizadora da operação?
 - [ ] A promessa é tecnicamente defensável?
 - [ ] O texto evita hype e jargão acumulado?
 
-### Visual
+> Visual
 
 - [ ] O Acid Green está funcionando como sinal?
 - [ ] Existe um elemento dominante?
@@ -639,7 +639,7 @@ O usuário pode escolher o tema. O sistema também pode respeitar `prefers-color
 - [ ] O endereço técnico usa `neoflowoff.agency`?
 - [ ] Selos de parceiros permanecem independentes?
 
-### Produto
+> Produto
 
 - [ ] A PWA funciona como app sem copiar o iOS?
 - [ ] O glassmorphism preserva contraste e fallback?
@@ -652,7 +652,7 @@ O usuário pode escolher o tema. O sistema também pode respeitar `prefers-color
 
 ## 18. Síntese
 
-**neoflowoff.agency** é uma marca de operação.
+> *neoflowoff.agency* é uma marca de operação.
 
 Sua identidade deve parecer:
 
