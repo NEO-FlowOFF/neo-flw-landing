@@ -175,6 +175,8 @@ Qualquer agente que atuar neste repositório DEVE seguir estas regras.
 
 - Azul fica restrito ao trecho Meta no topo.
 - Demais seções usam acid, cinza, preto e branco.
+- **Cor Acid Oficial:** A variável global `--neo-acid` é `#e0ff00` (Amarelo Ácido / Chartreuse Neon) e `--neo-acid-ink` é `#560`. Todos os glows, bordas e badges devem acompanhar essa tonalidade.
+- **Busto 3D Origami do Founder:** O elemento visual na seção *Sobre a Agência* é o busto 3D de papel (`/assets/neo-3d-paper.gif` ou `neo-3d-paper.webp`), exibido em escala ampliada (`clamp(180px, 25vw, 240px)`). A sustentação 3D provém exclusivamente de uma sombra de chão elíptica na base (`::before`). Não recriar contêineres circulados antigos, selos/pontos acid laterais nem auras/sombras difusas atrás da cabeça/corpo.
 - Ajustes visuais devem preservar contraste suficiente.
 - O ticker `TOP TELENOTÍCIAS` no topo da home é elemento editorial
   existente e deve ser preservado, salvo pedido explícito de remoção.

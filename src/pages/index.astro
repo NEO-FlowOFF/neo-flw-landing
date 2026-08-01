@@ -235,20 +235,18 @@ const tickerLoopItems = [...tickerItems, ...tickerItems];
             {uiTexts.home.about.title}
           </h2>
 
-          <!-- AVATAR CIRCULAR DO FOUNDER -->
+          <!-- BUSTO 3D ORIGAMI DO FOUNDER -->
           <div class="founder-block">
-            <div class="founder-avatar">
+            <div class="founder-avatar founder-bust-wrapper">
               <img
-                src={nodeneoImage.src}
-                width={nodeneoImage.width}
-                height={nodeneoImage.height}
-                alt="Neo Mello - fundador da Neo FlowOFF Agency em Goiânia"
+                src="/assets/neo-3d-paper.gif"
+                width="1000"
+                height="1250"
+                alt="Neo Mello - Busto 3D Origami em Papel - Fundador da Neo FlowOFF Agency"
                 loading="lazy"
                 decoding="async"
+                class="founder-bust-img"
               />
-              <div class="founder-status-shell">
-                <div class="founder-status-dot"></div>
-              </div>
             </div>
 
             <!-- FALA DO FOUNDER -->
@@ -278,11 +276,13 @@ const tickerLoopItems = [...tickerItems, ...tickerItems];
           </div>
 
           <!-- TEXTOS SOBRE A AGÊNCIA -->
-          <div class="about-copy">
-            {uiTexts.home.about.paragraphs.map(p => (
-              <p>{p}</p>
-            ))}
-          </div>
+          {uiTexts.home.about.paragraphs.length > 0 && (
+            <div class="about-copy">
+              {uiTexts.home.about.paragraphs.map(p => (
+                <p>{p}</p>
+              ))}
+            </div>
+          )}
         </div>
 
         <!-- CLOSING / CTA FINAL -->

@@ -166,8 +166,9 @@ Cubra naturalmente:
 Nao force relatorio longo quando uma resposta curta resolve.
 
 Em alteracoes visuais, preserve o ticker editorial do topo da home,
-mantenha azul restrito ao bloco Meta e verifique contraste quando
-texto acid aparece sobre fundo claro.
+mantenha azul restrito ao bloco Meta, utilize `#e0ff00` como a cor `--neo-acid` global
+e preserve o busto 3D de papel (`/assets/neo-3d-paper.gif` ou `.webp`) com sua sombra
+de piso eliptica na base, sem recriar halos/sombras atras da cabeca ou conteineres circulados.
 
 O ticker do topo e um letreiro de noticias operacionais atuais.
 Use-o para mostrar o que esta em andamento agora:
