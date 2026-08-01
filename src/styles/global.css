@@ -1,7 +1,7 @@
 /* ── NEØ FlowOFF ── */
 :root {
-  --neo-acid: #8ffe09;
-  --neo-acid-ink: #3f7900;
+  --neo-acid: #e0ff00;
+  --neo-acid-ink: #560;
   --neo-graphite: #171817;
   --neo-carbon: #0b0c0b;
   --neo-canvas: #f1eee8;
@@ -16,9 +16,9 @@
   --border: rgb(255 255 255 / 10%);
   --pink: var(--neo-acid);
   --pink-s: var(--neo-acid);
-  --pink-glow: rgb(143 254 9 / 20%);
+  --pink-glow: rgb(224 255 0 / 20%);
   --neon: var(--neo-acid);
-  --neon-glow: rgb(143 254 9 / 24%);
+  --neon-glow: rgb(224 255 0 / 24%);
   --acid: var(--neo-acid);
   --acid-ink: var(--neo-acid-ink);
   --acqua: var(--neo-acid);
@@ -61,7 +61,7 @@ body {
 }
 
 body::selection {
-  background: rgb(143 254 9 / 28%);
+  background: rgb(224 255 0 / 28%);
   color: var(--neo-canvas);
 }
 
@@ -81,7 +81,7 @@ body::selection {
   left: 0.75rem;
   z-index: 10000;
   padding: 0.55rem 0.75rem;
-  border: 1px solid rgb(143 254 9 / 48%);
+  border: 1px solid rgb(224 255 0 / 48%);
   border-radius: 8px;
   background: var(--neo-carbon);
   color: var(--acid);
@@ -95,7 +95,7 @@ body::selection {
 }
 
 .skip-link:focus {
-  outline: 2px solid rgb(143 254 9 / 56%);
+  outline: 2px solid rgb(224 255 0 / 56%);
   outline-offset: 3px;
   transform: translateY(0);
 }
@@ -114,7 +114,7 @@ body::selection {
   pointer-events: none;
   z-index: 0;
   background-image:
-    radial-gradient(ellipse 55% 36% at 50% 0%, rgb(143 254 9 / 8%) 0%, transparent 62%),
+    radial-gradient(ellipse 55% 36% at 50% 0%, rgb(224 255 0 / 8%) 0%, transparent 62%),
     radial-gradient(circle 430px at 14% 36%, rgb(255 255 255 / 5%) 0%, transparent 74%),
     radial-gradient(circle 500px at 86% 75%, rgb(185 186 181 / 7%) 0%, transparent 78%),
     radial-gradient(ellipse 80% 54% at 50% 100%, #000 0%, transparent 84%),
@@ -283,9 +283,9 @@ body::selection {
 
 .lc:hover .lc-icon {
   background: rgb(255 255 255 / 8%);
-  border-color: rgb(143 254 9 / 30%);
+  border-color: rgb(224 255 0 / 30%);
   transform: translateY(-1px);
-  box-shadow: 0 3px 8px rgb(143 254 9 / 15%), inset 0 1px 0 rgb(255 255 255 / 8%);
+  box-shadow: 0 3px 8px rgb(224 255 0 / 15%), inset 0 1px 0 rgb(255 255 255 / 8%);
 }
 
 /* ── TEXT ── */
@@ -377,7 +377,7 @@ body::selection {
 .soon-toast {
   position: fixed;
   transform: translate(-50%, -100%);
-  background: rgb(143 254 9 / 92%);
+  background: rgb(224 255 0 / 92%);
   color: var(--neo-carbon);
   font-family: var(--mono);
   font-size: 0.65rem;
@@ -386,7 +386,7 @@ body::selection {
   border-radius: 4px;
   pointer-events: none;
   z-index: 9999;
-  box-shadow: 0 0 15px rgb(143 254 9 / 32%);
+  box-shadow: 0 0 15px rgb(224 255 0 / 32%);
   animation: toast-fade 1.3s ease forwards;
 }
 
@@ -512,7 +512,7 @@ body::selection {
   height: 0.45rem;
   border-radius: 50%;
   background: var(--acid);
-  box-shadow: 0 0 0 4px rgb(143 254 9 / 10%);
+  box-shadow: 0 0 0 4px rgb(224 255 0 / 10%);
 }
 
 .home-hero .hero-eyebrow {
@@ -586,14 +586,14 @@ body::selection {
 .neo-button:hover,
 .neo-button:focus-visible {
   transform: translateY(-1px);
-  outline: 2px solid rgb(143 254 9 / 42%);
+  outline: 2px solid rgb(224 255 0 / 42%);
   outline-offset: 3px;
 }
 
 .neo-button--primary {
   background: var(--neo-acid);
   color: var(--neo-carbon);
-  border: 1px solid rgb(143 254 9 / 70%);
+  border: 1px solid rgb(224 255 0 / 70%);
 }
 
 .neo-button--secondary {
@@ -941,7 +941,7 @@ body::selection {
   border-color: rgb(11 12 11 / 18%);
   box-shadow:
     0 14px 34px rgb(0 0 0 / 12%),
-    0 0 0 1px rgb(143 254 9 / 16%),
+    0 0 0 1px rgb(224 255 0 / 16%),
     inset 0 1px 0 rgb(255 255 255 / 86%);
 }
 
@@ -990,10 +990,10 @@ body::selection {
   background:
     linear-gradient(180deg, rgb(255 255 255 / 12%) 0%, rgb(255 255 255 / 2%) 46%),
     linear-gradient(135deg, #1f221e 0%, #111410 100%);
-  border-color: rgb(143 254 9 / 42%);
+  border-color: rgb(224 255 0 / 42%);
   box-shadow:
     0 16px 42px rgb(0 0 0 / 24%),
-    0 0 0 1px rgb(143 254 9 / 12%),
+    0 0 0 1px rgb(224 255 0 / 12%),
     0 0 26px rgb(24 119 242 / 12%),
     inset 0 1px 0 rgb(255 255 255 / 10%);
 }
@@ -1149,7 +1149,7 @@ body::selection {
   border: 2px solid var(--acid);
   border-radius: 50%;
   background: var(--neo-carbon);
-  box-shadow: 0 8px 25px rgb(143 254 9 / 20%);
+  box-shadow: 0 8px 25px rgb(224 255 0 / 20%);
 }
 
 .founder-avatar img {
@@ -1458,9 +1458,9 @@ body::selection {
   width: fit-content;
   margin-bottom: 0.75rem;
   padding: 0.38rem 0.56rem;
-  border: 1px solid rgb(143 254 9 / 24%);
+  border: 1px solid rgb(224 255 0 / 24%);
   border-radius: 6px;
-  background: rgb(143 254 9 / 8%);
+  background: rgb(224 255 0 / 8%);
   color: var(--acid);
   font-family: var(--mono);
   font-size: 0.68rem;
@@ -1617,12 +1617,12 @@ body::selection {
 .detail-action:hover,
 .detail-action:focus-visible {
   transform: translateY(-1px);
-  outline: 2px solid rgb(143 254 9 / 36%);
+  outline: 2px solid rgb(224 255 0 / 36%);
   outline-offset: 3px;
 }
 
 .detail-action--primary {
-  border: 1px solid rgb(143 254 9 / 72%);
+  border: 1px solid rgb(224 255 0 / 72%);
   background: var(--acid);
   color: var(--neo-carbon);
 }
@@ -1677,7 +1677,7 @@ body::selection {
 .legal-brand-link img {
   width: auto;
   height: 28px;
-  filter: drop-shadow(0 0 10px rgb(143 254 9 / 18%));
+  filter: drop-shadow(0 0 10px rgb(224 255 0 / 18%));
 }
 
 .legal-card {
@@ -1731,7 +1731,7 @@ body::selection {
   color: var(--acid);
   font-weight: 750;
   text-decoration: underline;
-  text-decoration-color: rgb(143 254 9 / 45%);
+  text-decoration-color: rgb(224 255 0 / 45%);
   text-underline-offset: 0.18em;
 }
 
@@ -1766,9 +1766,9 @@ body::selection {
 .legal-endpoint {
   margin-top: 0.65rem;
   padding: 0.75rem;
-  border: 1px solid rgb(143 254 9 / 22%);
+  border: 1px solid rgb(224 255 0 / 22%);
   border-radius: 6px;
-  background: rgb(143 254 9 / 7%);
+  background: rgb(224 255 0 / 7%);
   color: var(--acid);
   font-family: var(--mono);
   font-size: 0.72rem;
@@ -1816,9 +1816,9 @@ body::selection {
   width: 54px;
   height: 54px;
   margin-bottom: 1rem;
-  border: 1px solid rgb(143 254 9 / 28%);
+  border: 1px solid rgb(224 255 0 / 28%);
   border-radius: 8px;
-  background: rgb(143 254 9 / 9%);
+  background: rgb(224 255 0 / 9%);
   color: var(--acid);
 }
 
