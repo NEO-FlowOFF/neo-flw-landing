@@ -1,12 +1,8 @@
 ---
 import '../styles/global.css';
-import fs from 'node:fs';
-import path from 'node:path';
 import uiTexts from '../data/ui_texts.json';
+import configData from '../data/config.json';
 
-// Read config to get meta verification token
-const configPath = path.join(process.cwd(), 'src/data/config.json');
-const configData = JSON.parse(fs.readFileSync(configPath, 'utf8'));
 const metaVerifyToken = configData.integrations.meta.domain_verification;
 const metaPixelId = String(configData.integrations.meta?.pixel_id || '');
 const tiktokPixelId = String(configData.integrations.tiktok?.pixel_id || '');
