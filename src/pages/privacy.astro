@@ -1,18 +1,12 @@
 ---
 import Base from '../layouts/Base.astro';
+import BrandFooter from '../components/BrandFooter.astro';
+import HubHeader from '../components/HubHeader.astro';
 ---
 
 <Base title="Política de Privacidade | Neo FlowOFF Agency" description="Política de Privacidade da NEØ FlowOFF para infraestrutura comercial, agentes de IA, WhatsApp Cloud API e governança de dados.">
   <div class="legal-page">
-    <header class="legal-header">
-      <a href="/" class="legal-brand-link" aria-label="neoflowoff.agency">
-        <img src="/assets/neoflowoff-logo-192.webp" alt="Logotipo Neo FlowOFF Agency - Infraestrutura de IA em Goiânia" width="192" height="34" loading="eager" decoding="async" />
-      </a>
-      <a href="/" class="legal-back-link">
-        <i data-lucide="chevron-left"></i>
-        <span>Voltar ao site</span>
-      </a>
-    </header>
+    <HubHeader homeHref="/" anchorBase="/" />
 
     <article class="legal-card">
       <div class="legal-kicker">
@@ -80,16 +74,18 @@ import Base from '../layouts/Base.astro';
           </p>
         </section>
 
+        <section>
+          <h2>
+            6. Termos Oficiais Meta e WhatsApp
+          </h2>
+          <p>
+            A integração utiliza a WhatsApp Business Platform / Cloud API oficial da Meta e está sujeita aos termos aplicáveis da Meta e do WhatsApp, incluindo os <a href="https://www.whatsapp.com/legal/meta-terms-whatsapp-business/" target="_blank" rel="noopener noreferrer">Meta Terms for WhatsApp Business</a> e os <a href="https://www.facebook.com/legal/WhatsApp-Business-Platform-Cloud-API" target="_blank" rel="noopener noreferrer">WhatsApp Business Platform Cloud API Terms</a>.
+          </p>
+        </section>
+
       </div>
     </article>
 
-    <footer class="legal-footer">
-      <a href="/privacy" aria-current="page">Privacidade</a>
-      <span aria-hidden="true">•</span>
-      <a href="/terms">Termos de Serviço</a>
-      <span aria-hidden="true">•</span>
-      <a href="/excluir-dados">Exclusão de Dados</a>
-    </footer>
-
+    <BrandFooter />
   </div>
 </Base>

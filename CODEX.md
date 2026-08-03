@@ -194,6 +194,19 @@ Se DevTools apontar `/_image` em producao,
 trate como cheiro de uso indevido do endpoint de imagem
 em ambiente nao-dev.
 
+Referencia interna de engenharia:
+
+```text
+Meta Engineering — Investing in Infrastructure:
+https://engineering.fb.com/2026/03/02/data-infrastructure/investing-in-infrastructure-metas-renewed-commitment-to-jemalloc/
+```
+
+Use essa referencia apenas como orientacao conceitual sobre
+infraestrutura de base, reducao de divida tecnica, eficiencia e
+confiabilidade. Ela nao e requisito de App Review, nao e termo juridico
+Meta/WhatsApp e nao deve justificar alteracao automatica de runtime,
+allocator, imagem Docker ou dependencia sem auditoria especifica.
+
 ────────────────────────────────────────
 
 ## ◭ Ticker Editorial

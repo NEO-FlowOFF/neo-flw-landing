@@ -8,6 +8,7 @@ import uiTexts from '../data/ui_texts.json';
 const configPath = path.join(process.cwd(), 'src/data/config.json');
 const configData = JSON.parse(fs.readFileSync(configPath, 'utf8'));
 const metaVerifyToken = configData.integrations.meta.domain_verification;
+const metaPixelId = String(configData.integrations.meta?.pixel_id || '');
 const tiktokPixelId = String(configData.integrations.tiktok?.pixel_id || '');
 const platformBaseUrl = String(configData.platform.base_url || 'https://neoflowoff.agency').replace(/\/$/, '');
 const canonicalUrl = new URL(Astro.url.pathname, platformBaseUrl).toString();
@@ -28,6 +29,18 @@ var e=ttq._i[t]||[],n=0;n<ttq.methods.length;n++)ttq.setAndDefer(e,ttq.methods[n
   ttq.load(${JSON.stringify(tiktokPixelId)});
   ttq.page();
 }(window, document, 'ttq');
+` : '';
+const metaPixelScript = metaPixelId ? `
+!function(f,b,e,v,n,t,s)
+{if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+n.queue=[];t=b.createElement(e);t.async=!0;
+t.src=v;s=b.getElementsByTagName(e)[0];
+s.parentNode.insertBefore(t,s)}(window, document,'script',
+'https://connect.facebook.net/en_US/fbevents.js');
+fbq('init', ${JSON.stringify(metaPixelId)});
+fbq('track', 'PageView');
 ` : '';
 const appleStartupImageTuples: Array<[string, string, string, 'landscape' | 'portrait', string]> = [
   ['440', '956', '3', 'landscape', 'iPhone_17_Pro_Max__iPhone_16_Pro_Max_landscape.png'],
@@ -229,6 +242,7 @@ const jsonLd = {
     </script>
     <script type="application/ld+json" is:inline set:html={JSON.stringify(jsonLd)}></script>
     {tiktokPixelScript && <script is:inline set:html={tiktokPixelScript}></script>}
+    {metaPixelScript && <script is:inline set:html={metaPixelScript}></script>}
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>

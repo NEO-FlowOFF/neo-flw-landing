@@ -1,10 +1,17 @@
 ---
-import uiTexts from '../data/ui_texts.json';
+interface Props {
+  anchorBase?: string;
+  homeHref?: string;
+}
+
+const { anchorBase = '', homeHref = '#' } = Astro.props;
+const solutionsHref = `${anchorBase}#solucoes`;
+const aboutHref = `${anchorBase}#sobre`;
 ---
 <header class="hub-header">
   <!-- FLOATING STICKY GLASSBAR -->
   <div class="glass-navbar">
-    <a href="#" class="nav-brand">
+    <a href={homeHref} class="nav-brand">
       <img
         src="/assets/neoflowoff-logo-192.webp"
         srcset="/assets/neoflowoff-logo-192.webp 192w, /assets/neoflowoff-logo-384.webp 384w"
@@ -34,21 +41,21 @@ import uiTexts from '../data/ui_texts.json';
       <span>neoflowoff.agency</span>
     </div>
     <nav class="menu-nav">
-      <a href="#" class="menu-item">
+      <a href={homeHref} class="menu-item">
         <span class="menu-icon"><i data-lucide="home"></i></span>
         <span class="menu-copy">
           <span>Início</span>
           <small>Visão geral</small>
         </span>
       </a>
-      <a href="#solucoes" class="menu-item">
+      <a href={solutionsHref} class="menu-item">
         <span class="menu-icon"><i data-lucide="grid"></i></span>
         <span class="menu-copy">
           <span>Soluções & Implementações</span>
           <small>Planos e serviços</small>
         </span>
       </a>
-      <a href="#sobre" class="menu-item">
+      <a href={aboutHref} class="menu-item">
         <span class="menu-icon"><i data-lucide="shield"></i></span>
         <span class="menu-copy">
           <span>Sobre a Agência</span>

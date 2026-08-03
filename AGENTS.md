@@ -34,6 +34,7 @@ Qualquer agente que atuar neste repositório DEVE seguir estas regras.
 
 ## 2. Regras de Negócio e Integração Meta (Decisões Congeladas)
 - **Verificação de Domínio Meta:** O token ativo é `zq0xygs8v9s714m5039mijjh0wowyj`. Ele é carregado em `src/layouts/Base.astro` a partir de `src/data/config.json` e deve permanecer no `<head>` das rotas Astro.
+- **Rastreamento de Pixels:** Meta Pixel ID (`2051453138833455`) e TikTok Pixel ID (`D9IQURBC77U84G6G883G`) são carregados em `src/layouts/Base.astro` a partir de `src/data/config.json`. Eventos do funil de conversão (`ViewContent`, `InitiateCheckout`, `CompletePayment`/`Purchase`) nas rotas dinâmicas de planos e serviços são disparados via tags de script inline no cliente.
 - **Safe Page Legada Removida:** `middleware.js` foi removido deste checkout. Não reativar fluxo de crawler/safe-page, renderização condicional por User-Agent ou proxy silencioso sem decisão explícita de arquitetura e revisão de compliance.
 - **WhatsApp do Agent:** O contato oficial ativo é o **`+55 62 9478-9032`**. Em links de redirecionamento, use estritamente o formato internacional limpo: `https://wa.me/556294789032` (sem o caractere `+`).
 - **URLs para aprovação Meta:** para submissão/App Review use estritamente as rotas Astro

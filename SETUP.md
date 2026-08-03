@@ -277,6 +277,35 @@ cache de arquivos dinâmicos:
 
 Para adicionar um plano ou checkout, edite `catalog.json` e rode `make build`.
 
+---
+
+## 13. Rastreamento e Parâmetros (Pixels & UTMs)
+
+### Pixels Configurados
+Tanto o TikTok Pixel quanto o Meta Pixel são inicializados dinamicamente a partir dos IDs definidos no `src/data/config.json`:
+* **Meta Pixel ID:** `2051453138833455` (configurado sob `integrations.meta.pixel_id`)
+* **TikTok Pixel ID:** `D9IQURBC77U84G6G883G` (configurado sob `integrations.tiktok.pixel_id`)
+
+### Eventos Mapeados (Funil Dinâmico)
+Nas páginas `/planos/[slug]` e `/checkout/[slug]`, os seguintes eventos de conversão são disparados:
+* **Visualização:** `ViewContent` (Meta/TikTok) no carregamento.
+* **Clique no Botão de Contratação:** `InitiateCheckout` (Meta/TikTok) no clique do botão primário `.detail-action--primary`.
+* **Clique no WhatsApp:** `Purchase` (Meta) e `CompletePayment` (TikTok) no clique do botão `.detail-action--secondary`, representando a intenção real de contratação.
+
+### Padrão Sugerido de UTMs
+Para garantir a rastreabilidade perfeita das campanhas pagas, siga o padrão de nomenclatura abaixo:
+
+| Parâmetro | Valor Sugerido | Descrição | Exemplo |
+| :--- | :--- | :--- | :--- |
+| `utm_source` | `meta` \| `tiktok` \| `google` | Origem do tráfego (sempre minúsculo) | `utm_source=meta` |
+| `utm_medium` | `cpc` \| `paid` | Canal/mídia de veiculação | `utm_medium=cpc` |
+| `utm_campaign` | `<slug_do_plano_ou_servico>` | Alinhado com o slug do catálogo | `utm_campaign=agente-sdr` |
+| `utm_content` | `<posicionamento_ou_criativo>` | Variante do anúncio/criativo | `utm_content=video-busto-3d` |
+| `utm_term` | `<publico_alvo>` | Segmentação/audiência | `utm_term=empresarios-goiania` |
+
+**Exemplo de link parametrizado:**
+`https://neoflowoff.agency/planos/agente-sdr?utm_source=meta&utm_medium=cpc&utm_campaign=agente-sdr&utm_content=video-busto-3d`
+
 ```text
 ────────────────────────────
 SETUP · neoflowoff-landing

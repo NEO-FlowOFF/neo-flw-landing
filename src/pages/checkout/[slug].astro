@@ -93,4 +93,88 @@ const { servico } = Astro.props;
       </p>
     </footer>
   </div>
+
+  <script is:inline define:vars={{
+    title: servico.title,
+    id: servico.slug,
+    price: servico.price.value
+  }}>
+    // 1. ViewContent
+    if (typeof ttq !== 'undefined') {
+      ttq.track('ViewContent', {
+        contents: [{
+          content_id: id,
+          content_name: title,
+          content_type: 'product'
+        }],
+        value: price,
+        currency: 'BRL'
+      });
+    }
+    if (typeof fbq !== 'undefined') {
+      fbq('track', 'ViewContent', {
+        content_name: title,
+        content_ids: [id],
+        content_type: 'product',
+        value: price,
+        currency: 'BRL'
+      });
+    }
+
+    // 2. Click tracking for CTA buttons
+    document.addEventListener('DOMContentLoaded', () => {
+      const checkoutBtn = document.querySelector('.detail-action--primary');
+      const whatsappBtn = document.querySelector('.detail-action--secondary');
+
+      if (checkoutBtn) {
+        checkoutBtn.addEventListener('click', () => {
+          if (typeof ttq !== 'undefined') {
+            ttq.track('InitiateCheckout', {
+              contents: [{
+                content_id: id,
+                content_name: title,
+                content_type: 'product'
+              }],
+              value: price,
+              currency: 'BRL'
+            });
+          }
+          if (typeof fbq !== 'undefined') {
+            fbq('track', 'InitiateCheckout', {
+              content_name: title,
+              content_ids: [id],
+              content_type: 'product',
+              value: price,
+              currency: 'BRL'
+            });
+          }
+        });
+      }
+
+      if (whatsappBtn) {
+        whatsappBtn.addEventListener('click', () => {
+          if (typeof ttq !== 'undefined') {
+            ttq.track('CompletePayment', {
+              contents: [{
+                content_id: id,
+                content_name: title,
+                content_type: 'product'
+              }],
+              value: price,
+              currency: 'BRL'
+            });
+          }
+          if (typeof fbq !== 'undefined') {
+            fbq('track', 'Purchase', {
+              content_name: title,
+              content_ids: [id],
+              content_type: 'product',
+              value: price,
+              currency: 'BRL'
+            });
+          }
+        });
+      }
+    });
+  </script>
 </Base>

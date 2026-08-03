@@ -1,18 +1,12 @@
 ---
 import Base from '../layouts/Base.astro';
+import BrandFooter from '../components/BrandFooter.astro';
+import HubHeader from '../components/HubHeader.astro';
 ---
 
 <Base title="Termos de Serviço | NEØ FlowOFF" description="Termos de Serviço da Neo FlowOFF Agency para infraestrutura comercial, automação de processos, CRM e APIs do ecossistema Meta.">
   <div class="legal-page">
-    <header class="legal-header">
-      <a href="/" class="legal-brand-link" aria-label="neoflowoff.agency">
-        <img src="/assets/neoflowoff-logo-192.webp" alt="Logotipo Neo FlowOFF Agency - Infraestrutura de IA em Goiânia" width="192" height="34" loading="eager" decoding="async" />
-      </a>
-      <a href="/" class="legal-back-link">
-        <i data-lucide="chevron-left"></i>
-        <span>Voltar ao site</span>
-      </a>
-    </header>
+    <HubHeader homeHref="/" anchorBase="/" />
 
     <article class="legal-card">
       <div class="legal-kicker">
@@ -49,7 +43,7 @@ import Base from '../layouts/Base.astro';
             3. Responsabilidades do Cliente
           </h2>
           <p>
-            O cliente é o único responsável pelo conteúdo das mensagens transmitidas e pelo consentimento prévio (<em>opt-in</em>) de seus usuários finais. O cliente compromete-se a cumprir integralmente a Política do WhatsApp Business e as Políticas Comerciais da Meta.
+            O cliente é o único responsável pelo conteúdo das mensagens transmitidas e pelo consentimento prévio (<em>opt-in</em>) de seus usuários finais. O cliente compromete-se a cumprir integralmente os termos oficiais aplicáveis ao WhatsApp Business, incluindo os <a href="https://www.whatsapp.com/legal/meta-terms-whatsapp-business/" target="_blank" rel="noopener noreferrer">Meta Terms for WhatsApp Business</a> e os <a href="https://www.facebook.com/legal/WhatsApp-Business-Platform-Cloud-API" target="_blank" rel="noopener noreferrer">WhatsApp Business Platform Cloud API Terms</a>.
           </p>
         </section>
 
@@ -70,15 +64,18 @@ import Base from '../layouts/Base.astro';
             O cliente pode encerrar a integração a qualquer momento desconectando a aplicação no painel de permissões da Meta ou solicitando a remoção operacional à equipe da neoflowoff.agency. Para mais detalhes sobre remoção de dados, consulte nossa política de <a href="/excluir-dados">Instruções de Exclusão de Dados</a>.
           </p>
         </section>
+
+        <section>
+          <h2>
+            6. Termos Incorporados por Referência
+          </h2>
+          <p>
+            O uso da WhatsApp Business Platform / Cloud API oficial da Meta permanece sujeito às versões vigentes dos termos, políticas, rate cards, requisitos técnicos e regras operacionais publicados pela Meta e pelo WhatsApp.
+          </p>
+        </section>
       </div>
     </article>
 
-    <footer class="legal-footer">
-      <a href="/privacy">Privacidade</a>
-      <span aria-hidden="true">•</span>
-      <a href="/terms" aria-current="page">Termos de Serviço</a>
-      <span aria-hidden="true">•</span>
-      <a href="/excluir-dados">Exclusão de Dados</a>
-    </footer>
+    <BrandFooter />
   </div>
 </Base>

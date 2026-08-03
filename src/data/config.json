@@ -11,6 +11,7 @@
       "graph_api_version": "v25.0",
       "login_configuration_id": "1322930417561011",
       "domain_verification": "zq0xygs8v9s714m5039mijjh0wowyj",
+      "pixel_id": "2051453138833455",
       "pixel_events": [
         "begin_checkout",
         "add_payment_info",
