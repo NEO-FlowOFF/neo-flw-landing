@@ -6,6 +6,7 @@
   "vars": {
     "META_GRAPH_API_VERSION": "v25.0",
     "META_OAUTH_REDIRECT_URI": "https://neoflowoff.agency/conectar-whatsapp/",
+    "META_EMBEDDED_SIGNUP_FORWARD_URL": "https://whatsapp.neoflowoff.agency/meta/embedded-signup",
     "META_TOKEN_ENCRYPTION_KEY_VERSION": "v1"
   },
   "kv_namespaces": [
