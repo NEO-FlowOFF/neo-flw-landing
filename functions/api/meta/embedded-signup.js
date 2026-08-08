@@ -1,6 +1,3 @@
-const GRAPH_API_VERSION = 'v25.0';
-const PUBLIC_META_APP_ID = '1500002841696407';
-
 const JSON_HEADERS = {
   'Content-Type': 'application/json; charset=utf-8',
   'Cache-Control': 'no-store',
@@ -13,108 +10,44 @@ function json(body, status = 200) {
   });
 }
 
-function base64Url(bytes) {
-  let binary = '';
-  for (const byte of new Uint8Array(bytes)) {
-    binary += String.fromCharCode(byte);
+function parseScopes(value) {
+  if (Array.isArray(value)) {
+    return value
+      .map((scope) => String(scope).trim())
+      .filter(Boolean);
   }
-  return btoa(binary)
-    .replace(/\+/g, '-')
-    .replace(/\//g, '_')
-    .replace(/=+$/, '');
+
+  return String(value || '')
+    .split(',')
+    .map((scope) => scope.trim())
+    .filter(Boolean);
 }
 
-async function encryptJson(value, secret, keyVersion) {
-  const encoder = new TextEncoder();
-  const iv = crypto.getRandomValues(new Uint8Array(12));
-  const keyHash = await crypto.subtle.digest('SHA-256', encoder.encode(secret));
-  const key = await crypto.subtle.importKey(
-    'raw',
-    keyHash,
-    { name: 'AES-GCM' },
-    false,
-    ['encrypt']
-  );
-  const ciphertext = await crypto.subtle.encrypt(
-    { name: 'AES-GCM', iv },
-    key,
-    encoder.encode(JSON.stringify(value))
-  );
-
-  return {
-    alg: 'AES-GCM',
-    enc: 'A256GCM',
-    key_version: keyVersion,
-    iv: base64Url(iv),
-    ciphertext: base64Url(ciphertext),
-  };
-}
-
-async function exchangeCode({ code, env, request }) {
-  const appId = env.META_APP_ID || PUBLIC_META_APP_ID;
-  const appSecret = env.META_APP_SECRET;
-  const redirectUri =
-    env.META_OAUTH_REDIRECT_URI ||
-    `${new URL(request.url).origin}/conectar-whatsapp/`;
-
-  if (!appSecret) {
-    return { error: 'meta_app_secret_not_configured' };
-  }
-
-  const params = new URLSearchParams({
-    client_id: appId,
-    client_secret: appSecret,
-    code,
-    redirect_uri: redirectUri,
-  });
-
-  let response;
-
-  try {
-    response = await fetch(
-      `https://graph.facebook.com/${GRAPH_API_VERSION}/oauth/access_token?${params.toString()}`,
-      {
-        method: 'GET',
-        headers: {
-          Accept: 'application/json',
-        },
-      }
-    );
-  } catch {
-    return {
-      error: 'meta_code_exchange_failed',
-      status: 502,
-      meta_error_code: null,
-    };
-  }
-
-  const payload = await response.json().catch(() => ({}));
-  if (!response.ok) {
-    return {
-      error: 'meta_code_exchange_failed',
-      status: response.status,
-      meta_error_code: payload?.error?.code || null,
-    };
-  }
-
-  return { tokenPayload: payload };
-}
-
-async function forwardToSovereignBackend({ body, env }) {
+async function forwardToProvider(payload, env) {
   const response = await fetch(env.META_EMBEDDED_SIGNUP_FORWARD_URL, {
     method: 'POST',
     headers: {
       Authorization: `Bearer ${env.META_EMBEDDED_SIGNUP_FORWARD_SECRET}`,
       'Content-Type': 'application/json',
     },
-    body: JSON.stringify(body),
+    body: JSON.stringify(payload),
   });
 
+  const body = await response.json().catch(() => ({}));
   if (!response.ok) {
-    return { error: 'sovereign_backend_rejected', status: response.status };
+    return {
+      body: {
+        ok: false,
+        error: body.error || 'provider_rejected_embedded_signup',
+      },
+      status: response.status >= 400 && response.status < 500 ? 400 : 502,
+    };
   }
 
-  return { ok: true };
+  return {
+    body,
+    status: response.status,
+  };
 }
 
 export async function onRequestOptions() {
@@ -124,101 +57,37 @@ export async function onRequestOptions() {
   });
 }
 
-export async function onRequestPost(context) {
-  const { env, request } = context;
-  let body;
+export async function onRequestPost({ request, env }) {
+  if (
+    !env.META_EMBEDDED_SIGNUP_FORWARD_URL ||
+    !env.META_EMBEDDED_SIGNUP_FORWARD_SECRET
+  ) {
+    return json({ ok: false, error: 'embedded_signup_provider_not_configured' }, 503);
+  }
 
+  let body;
   try {
     body = await request.json();
   } catch {
     return json({ ok: false, error: 'invalid_json' }, 400);
   }
 
-  const code = typeof body.code === 'string' ? body.code.trim() : '';
-  if (!code || code.length > 4096) {
+  const authorizationCode = String(body.code || body.authorization_code || '').trim();
+  if (!authorizationCode || authorizationCode.length > 4096) {
     return json({ ok: false, error: 'invalid_authorization_code' }, 400);
   }
 
-  const connectionId = crypto.randomUUID();
-  const receivedAt = new Date().toISOString();
-  const normalized = {
-    connection_id: connectionId,
-    event: 'meta.embedded_signup.code_received',
-    code,
-    granted_scopes:
-      typeof body.grantedScopes === 'string' ? body.grantedScopes : '',
-    requested_scopes:
-      typeof body.requestedScopes === 'string' ? body.requestedScopes : '',
-    received_at: receivedAt,
-    source: 'neo-flw-landing',
+  const payload = {
+    authorization_code: authorizationCode,
+    connection_id:
+      typeof body.connection_id === 'string' && body.connection_id
+        ? body.connection_id
+        : crypto.randomUUID(),
+    granted_scopes: parseScopes(body.grantedScopes || body.granted_scopes),
+    ...(body.phone_number_id ? { phone_number_id: String(body.phone_number_id) } : {}),
+    ...(body.waba_id ? { waba_id: String(body.waba_id) } : {}),
   };
 
-  if (
-    env.META_EMBEDDED_SIGNUP_FORWARD_URL &&
-    env.META_EMBEDDED_SIGNUP_FORWARD_SECRET
-  ) {
-    const forwarded = await forwardToSovereignBackend({
-      body: normalized,
-      env,
-    });
-    if (forwarded.error) {
-      return json({ ok: false, error: forwarded.error }, 502);
-    }
-
-    return json(
-      { ok: true, connection_id: connectionId, status: 'forwarded' },
-      202
-    );
-  }
-
-  const kv = env.META_CONNECTIONS;
-  if (!kv?.put || !env.META_TOKEN_ENCRYPTION_KEY) {
-    return json({ ok: false, error: 'secure_storage_not_configured' }, 503);
-  }
-
-  const exchange = await exchangeCode({ code, env, request });
-  if (exchange.error) {
-    const status = exchange.status && exchange.status < 500 ? 400 : 502;
-    return json(
-      {
-        ok: false,
-        error: exchange.error,
-        meta_error_code: exchange.meta_error_code || null,
-      },
-      status
-    );
-  }
-
-  const keyVersion = env.META_TOKEN_ENCRYPTION_KEY_VERSION || 'v1';
-  const securePayload = {
-    connection_id: connectionId,
-    event: 'meta.embedded_signup.token_stored',
-    granted_scopes: normalized.granted_scopes,
-    requested_scopes: normalized.requested_scopes,
-    received_at: receivedAt,
-    exchanged_at: new Date().toISOString(),
-    source: normalized.source,
-    token_payload: exchange.tokenPayload,
-  };
-
-  const encrypted = await encryptJson(
-    securePayload,
-    env.META_TOKEN_ENCRYPTION_KEY,
-    keyVersion
-  );
-
-  await kv.put(
-    `meta:embedded-signup:${connectionId}`,
-    JSON.stringify(encrypted),
-    {
-      expirationTtl: 60 * 60 * 24 * 30,
-      metadata: {
-        source: 'neo-flw-landing',
-        received_at: receivedAt,
-        key_version: keyVersion,
-      },
-    }
-  );
-
-  return json({ ok: true, connection_id: connectionId, status: 'stored' }, 202);
+  const forwarded = await forwardToProvider(payload, env);
+  return json(forwarded.body, forwarded.status);
 }

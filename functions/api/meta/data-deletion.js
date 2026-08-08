@@ -148,6 +148,13 @@ export async function onRequestOptions() {
   });
 }
 
+export async function onRequestHead() {
+  return new Response(null, {
+    status: 200,
+    headers: JSON_HEADERS,
+  });
+}
+
 export async function onRequestGet(context) {
   return json({
     status: 'ok',

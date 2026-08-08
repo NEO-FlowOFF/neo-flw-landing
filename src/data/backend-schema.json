@@ -157,7 +157,7 @@
           "Meta Embedded Signup"
         ],
         "summary": "Recebe authorization code do Meta Embedded Signup",
-        "description": "Adapter server-side estreito para encaminhar o code ao backend soberano ou trocar o code imediatamente e armazenar somente o payload de token criptografado quando KV e chave de criptografia estiverem configurados. O authorization code nao deve ser persistido no fallback KV.",
+        "description": "Adapter server-side estreito para encaminhar o authorization code ao backend soberano neo-provider-messaging. Este endpoint nao troca code, nao armazena token e nao possui armazenamento local alternativo.",
         "requestBody": {
           "required": true,
           "content": {
@@ -170,7 +170,7 @@
         },
         "responses": {
           "202": {
-            "description": "Code encaminhado ou armazenado com segurança",
+            "description": "Code encaminhado ao provider soberano",
             "content": {
               "application/json": {
                 "schema": {
@@ -190,7 +190,7 @@
             }
           },
           "502": {
-            "description": "Falha ao trocar code com Meta ou backend soberano rejeitou encaminhamento",
+            "description": "Backend soberano rejeitou ou nao respondeu ao encaminhamento",
             "content": {
               "application/json": {
                 "schema": {
@@ -200,7 +200,7 @@
             }
           },
           "503": {
-            "description": "Storage seguro não configurado",
+            "description": "Provider soberano nao configurado",
             "content": {
               "application/json": {
                 "schema": {
@@ -211,8 +211,9 @@
           }
         },
         "x-security-notes": [
-          "Authorization codes and access tokens must be processed server-side.",
+          "Authorization codes and access tokens must be processed only by neo-provider-messaging.",
           "Access tokens must not be exposed to the browser.",
+          "neo-flw-landing must not exchange authorization codes.",
           "This adapter does not make neo-flw-landing the sovereign WhatsApp backend."
         ]
       }

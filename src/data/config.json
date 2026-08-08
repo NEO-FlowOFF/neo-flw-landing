@@ -23,7 +23,7 @@
         "business_management"
       ],
       "webhook_official": "https://whatsapp.neoflowoff.agency/webhook",
-      "webhook_public_status": "pending_cloud_run_domain_mapping",
+      "webhook_public_status": "pending_railway_domain_mapping",
       "webhook_rollback": "",
       "data_deletion_callback": "https://neoflowoff.agency/api/meta/data-deletion"
     },

@@ -65,12 +65,11 @@ Qualquer agente que atuar neste repositório DEVE seguir estas regras.
   outro nó do ecossistema ou por integração externa.
 - **Embedded Signup Meta:** `functions/api/meta/embedded-signup.js`
   existe apenas como adapter server-side para receber o authorization
-  code do browser. Ele deve encaminhar para backend soberano ou usar
-  storage seguro configurado; se storage/forward não existir, deve
-  falhar fechado e a UI não deve exibir sucesso.
-  A troca do code usa Graph API `v25.0` fixa; não reintroduzir override
-  por variável de ambiente para `v26.0` ou versões futuras sem revisão
-  explícita.
+  code do browser e encaminhar para o backend soberano
+  `neo-provider-messaging`. Se o forward não existir, deve falhar
+  fechado e a UI não deve exibir sucesso. Este repositório não deve
+  trocar code na Graph API, armazenar token, criar vault KV de conexões
+  Meta ou persistir `authorization_code`.
 - **Facebook Login for Business:** o Configuration ID publico canonico e
   `1322930417561011`. A fonte consumida pelo Astro e
   `src/data/config.json` em
@@ -85,19 +84,14 @@ Qualquer agente que atuar neste repositório DEVE seguir estas regras.
   HMAC SHA-256 com `META_APP_SECRET`, nunca logar segredo ou
   `signed_request` completo, e retornar URL pública em `/excluir-dados`
   com `confirmation_code`.
-- **Webhook Meta:** `functions/api/meta-webhook.js` é o callback público
-  atual usado no App Review. O GET deve validar `hub.verify_token` e
-  retornar o `hub.challenge` puro. O POST deve validar
-  `X-Hub-Signature-256` com `META_APP_SECRET` quando configurado,
-  parsear `messages.value.statuses` e os campos assinados:
-  `message_template_status_update`, `message_template_quality_update`,
-  `phone_number_quality_update`, `business_status_update`,
-  `business_capability_update`, `flows` e `account_alerts`.
-- **Rotas de demonstração Meta:** `/api/whatsapp/send`,
-  `/api/whatsapp/templates` e `/api/health/meta` são Functions
-  server-side para App Review. Envio/listagem exigem Bearer via
-  `META_REVIEW_DEMO_SECRET` e System User Token server-side. Nunca
-  expor tokens no frontend.
+- **Webhook Meta:** `functions/api/meta-webhook.js` não é mais o callback
+  canônico. Ele deve responder como rota legada/migrada e apontar para
+  `https://whatsapp.neoflowoff.agency/webhook`. O webhook público de
+  App Review pertence ao `neo-provider-messaging`.
+- **Rotas de demonstração Meta:** `/api/whatsapp/send` e
+  `/api/whatsapp/templates` não devem chamar Graph API a partir do
+  landing. Envio, templates e operações WhatsApp pertencem ao
+  `neo-provider-messaging`.
 - **Segurança de API:** Nenhuma credencial ou token privado
   (`FLOWPAY_INTERNAL_API_KEY`, `META_APP_SECRET`, chaves OpenAI, etc.) deve ser exposta
   no front-end. Qualquer cobrança real deve passar por backend
