@@ -12,6 +12,11 @@ type MetaLoginResponse = {
   authResponse?: MetaAuthResponse;
 };
 
+type EmbeddedSignupSession = {
+  phone_number_id?: string;
+  waba_id?: string;
+};
+
 type MetaSdk = {
   init(options: {
     appId: string;
@@ -23,6 +28,9 @@ type MetaSdk = {
     callback: (response: MetaLoginResponse) => void,
     options: {
       config_id: string;
+      extras: {
+        version: 'v4';
+      };
       override_default_response_type: true;
       response_type: 'code';
     }
@@ -46,6 +54,7 @@ const spinner = spinnerHost
 const metaAppId = button?.dataset.metaAppId || '';
 const metaConfigId = button?.dataset.metaConfigId || '';
 const graphApiVersion = button?.dataset.graphApiVersion || '';
+let latestEmbeddedSignupSession: EmbeddedSignupSession = {};
 
 function setSignupStatus(message: string, tone: SignupTone = 'info') {
   const statusDiv = document.getElementById('signup-status');
@@ -70,6 +79,25 @@ function setButtonLoading(isLoading: boolean) {
   spinnerHost?.classList.remove('is-active');
 }
 
+function parseEmbeddedSignupSession(data: unknown): EmbeddedSignupSession {
+  if (!data || typeof data !== 'object') return {};
+
+  const payload = data as {
+    data?: {
+      phone_number_id?: unknown;
+      waba_id?: unknown;
+    };
+  };
+  const session = payload.data || {};
+  const phoneNumberId = String(session.phone_number_id || '').replace(/\D/g, '');
+  const wabaId = String(session.waba_id || '').replace(/\D/g, '');
+
+  return {
+    ...(phoneNumberId ? { phone_number_id: phoneNumberId } : {}),
+    ...(wabaId ? { waba_id: wabaId } : {}),
+  };
+}
+
 async function confirmEmbeddedSignup(authResponse: MetaAuthResponse) {
   const code = authResponse?.code;
   if (!code) {
@@ -84,6 +112,7 @@ async function confirmEmbeddedSignup(authResponse: MetaAuthResponse) {
     body: JSON.stringify({
       code,
       grantedScopes: authResponse.grantedScopes || authResponse.granted_scopes || '',
+      ...latestEmbeddedSignupSession,
     }),
   });
 
@@ -94,6 +123,26 @@ async function confirmEmbeddedSignup(authResponse: MetaAuthResponse) {
 
   return payload;
 }
+
+window.addEventListener('message', (event) => {
+  if (!/^https:\/\/(www\.)?(facebook|business)\.facebook\.com$/.test(event.origin)) {
+    return;
+  }
+
+  let data: unknown = event.data;
+  if (typeof data === 'string') {
+    try {
+      data = JSON.parse(data);
+    } catch {
+      return;
+    }
+  }
+
+  latestEmbeddedSignupSession = {
+    ...latestEmbeddedSignupSession,
+    ...parseEmbeddedSignupSession(data),
+  };
+});
 
 window.fbAsyncInit = function () {
   if (!window.FB) return;
@@ -142,6 +191,9 @@ window.launchWhatsAppSignup = function () {
     },
     {
       config_id: metaConfigId,
+      extras: {
+        version: 'v4',
+      },
       response_type: 'code',
       override_default_response_type: true,
     }
