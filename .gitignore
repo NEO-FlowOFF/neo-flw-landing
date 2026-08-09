@@ -29,5 +29,8 @@ package-lock.json
 
 # Local operator notes (not tracked)
 .local/
+.playwright-mcp/
+.playwright-cli/
+docs/Neo-Flow-V4-Minimal.html
 
 .personal_neomello

@@ -18,6 +18,49 @@ Nao implementar ainda.
 
 ────────────────────────────────────────
 
+## ⧆ Meta Ads / Pixel: decisao aprovada
+
+Status: aprovado para validacao final no Gerenciador de Eventos.
+
+Manter o clique no WhatsApp como conversao forte:
+
+```text
+Meta Pixel: Purchase
+TikTok Pixel: CompletePayment
+```
+
+Motivo: o clique no WhatsApp e o ponto de entrada real do atendimento,
+onde o NEO:one entra por portas de entrada como Agent SDR.
+
+Validacao final deve usar apenas o dominio canonico:
+
+```text
+https://neoflowoff.agency/planos/agente-sdr/
+```
+
+Nao usar `pages.dev` como URL final de configuracao, revisao ou
+mensuracao canonica. `pages.dev` pode ser usado somente como preview
+temporario.
+
+Eventos esperados no Test Events da Meta:
+
+- `PageView`
+- `ViewContent`
+- `InitiateCheckout`
+- `Purchase` no clique do WhatsApp
+
+Ordem recomendada para Mensuracao de Eventos Agregados:
+
+1. `Purchase`
+2. `InitiateCheckout`
+3. `ViewContent`
+
+Observacao operacional: Pixel/AEM pertence a trilha de Ads. Isso nao
+substitui nem bloqueia a trilha de App Review / Tech Provider, que segue
+separada com webhook, data deletion, screencast e permissoes.
+
+────────────────────────────────────────
+
 ## ⟠ Decisao Recomendada
 
 Adotar chat no formato `Drawer Inline` dentro do menu hamburguer.
@@ -138,7 +181,7 @@ Retomar apos aprovacao:
 - avaliar headers `Link` via Cloudflare Transform Rules ou Worker
 - avaliar Markdown for Agents / `Accept: text/markdown`
 - validar com ferramenta de agent readiness somente em ambiente de teste
-- garantir que `/privacy/`, `/terms/`, `/data-deletion/` e Embedded Signup
+- garantir que `/privacy/`, `/terms/`, `/excluir-dados/` e Embedded Signup
   continuem sendo as superficies canonicas para revisao e compliance
 
 ────────────────────────────────────────
