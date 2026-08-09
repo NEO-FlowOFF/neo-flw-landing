@@ -64,3 +64,21 @@ forward Embedded Signup codes. They must not become the WhatsApp backend.
 Secrets stay in Cloudflare Pages environment variables/secrets and must never
 be printed, committed or exposed to frontend bundles.
 
+## Runtime Checkpoint — 2026-08-09
+
+The landing is not the WhatsApp runtime owner. Current operational state for
+dev agents:
+
+- `/conectar-whatsapp/` is the public Embedded Signup entry.
+- `/api/meta/embedded-signup` only forwards the browser authorization code to
+  `neo-provider-messaging`.
+- The canonical WhatsApp webhook is
+  `https://whatsapp.neoflowoff.agency/webhook`.
+- Runtime debugging, Railway variables, WABA state, phone registration and
+  inbound webhook logs belong to
+  `/Users/nettomello/neomello/neo-growth-system`, service
+  `neo-provider-messaging`.
+- Current external blocker is the WhatsApp phone/WABA operational state after
+  removing an old Zernio/Social Media Connector integration. Do not add
+  fallback Graph API logic or token persistence to this landing to work around
+  that state.
