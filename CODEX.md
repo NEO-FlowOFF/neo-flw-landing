@@ -270,7 +270,7 @@ estiverem configurados.
 O adapter Meta usa Graph API `v25.0` fixa.
 Nao reintroduza override por env para `v26.0` sem decisao explicita.
 
-O endpoint local `/api/meta-webhook` e legado/migrado. O webhook canônico,
+O endpoint local `/api/meta-webhook` é legado/migrado. O webhook canônico,
 envio, templates e diagnóstico operacional pertencem ao
 `neo-provider-messaging` em `neo-growth-system`.
 
