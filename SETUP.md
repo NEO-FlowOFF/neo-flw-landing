@@ -213,10 +213,11 @@ button[data-meta-config-id]
 ```mermaid
 flowchart TD
   A["DNS resolves to neo_provider_messaging and public /health responds"] --> B["Wait for Meta propagation"]
-  B --> C["Confirm phone leaves Offline / ON_PREMISE / Cloud API incompatible state"]
+  B --> C["Confirm phone leaves Offline / ON_PREMISE / Cloud API incompatible state and has compatible verification"]
   C --> D["Send real inbound WhatsApp message"]
   D --> E["Require inbound_received in Railway logs for neo_provider_messaging"]
   E --> F["Declare WhatsApp runtime ready"]
+  C -->|"state persists"| G["Release or recreate asset, or use backup SIM; no landing workaround"]
 ```
 
 Nao adicionar `scope` paralelo ao `FB.login` enquanto a configuracao do Login

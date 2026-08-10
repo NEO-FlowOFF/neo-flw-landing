@@ -83,9 +83,12 @@ dev agents:
   fallback Graph API logic or token persistence to this landing to work around
   that state.
 - Wait for Meta propagation and confirm that the phone leaves the
-  `Offline`/`ON_PREMISE` legacy or Cloud API-incompatible state.
+  `Offline`/`ON_PREMISE` legacy or Cloud API-incompatible state and has a
+  verification status compatible with Cloud API.
 - Then send a real inbound message. Declare the WhatsApp runtime ready only
   when Railway logs for `neo-provider-messaging` show `inbound_received`.
+- If the legacy/incompatible state persists, release or recreate the asset, or
+  use a backup SIM. Do not add a frontend workaround to the landing.
 - The operational source of truth and next-test procedure are
   `../../neo-growth-system/CONTEXT.md` and
   `../../neo-growth-system/NEXTSTEPS.md`.

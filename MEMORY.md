@@ -4,7 +4,7 @@
 ```text
 Status: ACTIVE
 Scope: repository-local
-Last reviewed: 2026-08-08
+Last reviewed: 2026-08-10
 ```
 
 ## Current Decisions
@@ -33,8 +33,11 @@ The landing must not:
 - `META_EMBEDDED_SIGNUP_FORWARD_SECRET` is a Cloudflare Pages secret.
 - DNS and public `/health` prove ingress, not WhatsApp readiness.
 - After Meta propagation, confirm that the phone leaves the
-  `Offline`/`ON_PREMISE` legacy or Cloud API-incompatible state. Then send a
-  real inbound message and require `inbound_received` in Railway logs for
+  `Offline`/`ON_PREMISE` legacy or Cloud API-incompatible state and has a
+  verification status compatible with Cloud API. Then send a real inbound
+  message and require `inbound_received` in Railway logs for
   `neo-provider-messaging` before declaring the runtime ready.
+- If the state persists, release or recreate the asset, or use a backup SIM.
+  Do not add a frontend workaround to the landing.
 - Follow `../../neo-growth-system/CONTEXT.md` and
   `../../neo-growth-system/NEXTSTEPS.md` for the operational source of truth.
