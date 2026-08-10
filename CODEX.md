@@ -54,17 +54,17 @@ Astro SSG
 
 Cloudflare Pages Functions
 ├── functions/api/meta-webhook.js
-│   └── webhook Meta com challenge, assinatura e parsing de statuses
+│   └── endpoint legado/migrado; nao e o webhook canonico
 ├── functions/api/meta/embedded-signup.js
 │   └── server-side adapter for Meta Embedded Signup code handling
 ├── functions/api/meta/data-deletion.js
 │   └── validates Meta signed_request and queues/forwards deletion requests
 ├── functions/api/whatsapp/send.js
-│   └── demonstra whatsapp_business_messaging com Bearer interno
+│   └── rota legada de demonstracao; nao opera envio canonico
 ├── functions/api/whatsapp/templates.js
-│   └── demonstra whatsapp_business_management com Bearer interno
+│   └── rota legada de demonstracao; nao opera templates canonicos
 └── functions/api/health/meta.js
-    └── diagnostico sanitizado de WABA, app association e webhooks
+    └── diagnostico local legado; runtime pertence ao provider
 ```
 
 Google Tag Gateway ativo na zona Cloudflare:
@@ -270,15 +270,13 @@ estiverem configurados.
 O adapter Meta usa Graph API `v25.0` fixa.
 Nao reintroduza override por env para `v26.0` sem decisao explicita.
 
-O webhook publico atual e `/api/meta-webhook`.
-Ele deve validar challenge no GET, validar `X-Hub-Signature-256`
-no POST quando `META_APP_SECRET` existir e classificar `statuses`
-dentro de `messages.value.statuses`.
+O endpoint local `/api/meta-webhook` e legado/migrado. O webhook canônico,
+envio, templates e diagnóstico operacional pertencem ao
+`neo-provider-messaging` em `neo-growth-system`.
 
-As rotas `/api/whatsapp/send` e `/api/whatsapp/templates`
-existem para demonstracao de App Review.
-Elas exigem Bearer via `META_REVIEW_DEMO_SECRET`
-e token de System User server-side.
+As rotas locais `/api/whatsapp/send` e `/api/whatsapp/templates` são
+superfícies legadas de demonstração e não devem chamar a Graph API a partir
+da landing.
 
 O callback publico de exclusao de dados e
 `/api/meta/data-deletion`; a pagina publica de instrucoes e

@@ -181,14 +181,9 @@ O endpoint `functions/api/meta/data-deletion.js` exige `META_APP_SECRET`
 no ambiente server-side para validar `signed_request` HMAC SHA-256.
 Não exponha esse valor em HTML, logs ou scripts públicos.
 
-O webhook Meta publico atual e `functions/api/meta-webhook.js`.
-Ele exige `META_WEBHOOK_VERIFY_TOKEN` para o handshake GET
-e usa `META_APP_SECRET` para validar `X-Hub-Signature-256` no POST
-quando configurado.
-O POST deve reconhecer `statuses` dentro de `messages.value.statuses`.
-
-As rotas de demonstracao para App Review usam System User Token
-somente server-side:
+O endpoint local `functions/api/meta-webhook.js` e as rotas abaixo são
+superfícies legadas de migração/App Review. Não configurá-las como runtime
+WhatsApp canônico nem usá-las para chamadas Graph API a partir da landing:
 
 ```text
 /api/whatsapp/send       exige Bearer e whatsapp_business_messaging
@@ -196,8 +191,8 @@ somente server-side:
 /api/health/meta         diagnostico sanitizado de WABA/App/webhooks
 ```
 
-Configure `META_SYSTEM_USER_TOKEN` e `META_REVIEW_DEMO_SECRET`
-como secrets na Cloudflare antes de testar envio/listagem real.
+Webhook, envio, templates, diagnóstico operacional e testes reais pertencem ao
+`neo-provider-messaging` em `neo-growth-system`.
 
 `META_LOGIN_CONFIGURATION_ID=1322930417561011` e publico e representa a
 configuracao oficial do Facebook Login for Business. No build Astro, a fonte

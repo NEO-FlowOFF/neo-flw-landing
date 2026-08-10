@@ -31,7 +31,10 @@ The landing must not:
 
 - `META_EMBEDDED_SIGNUP_FORWARD_URL` is configured in `wrangler.jsonc`.
 - `META_EMBEDDED_SIGNUP_FORWARD_SECRET` is a Cloudflare Pages secret.
-- Do not deploy the forward-only adapter as final App Review surface until
-  `whatsapp.neoflowoff.agency` resolves to `neo-provider-messaging` and `/health`
-  responds publicly.
-
+- DNS and public `/health` prove ingress, not WhatsApp readiness.
+- After Meta propagation, confirm that the phone leaves the
+  `Offline`/`ON_PREMISE` legacy or Cloud API-incompatible state. Then send a
+  real inbound message and require `inbound_received` in Railway logs for
+  `neo-provider-messaging` before declaring the runtime ready.
+- Follow `../../neo-growth-system/CONTEXT.md` and
+  `../../neo-growth-system/NEXTSTEPS.md` for the operational source of truth.

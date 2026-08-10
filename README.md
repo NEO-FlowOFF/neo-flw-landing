@@ -48,13 +48,11 @@ authorization code do Embedded Signup e `functions/api/meta/data-deletion.js`
 recebe o callback Meta Data Deletion. Ambos devem falhar fechado quando
 não houver backend soberano, KV ou storage seguro configurado.
 
-O callback publico `/api/meta-webhook` existe para o App Review Meta.
-Ele valida challenge, assinatura HMAC e classifica `statuses` dentro de
-`messages.value.statuses`.
-
-As rotas `/api/whatsapp/send`, `/api/whatsapp/templates` e
-`/api/health/meta` demonstram permissoes de WhatsApp no App Review.
-Envio e templates exigem Bearer server-side via `META_REVIEW_DEMO_SECRET`.
+O callback local `/api/meta-webhook` e as rotas `/api/whatsapp/send`,
+`/api/whatsapp/templates` e `/api/health/meta` são superfícies legadas de
+migração/App Review. Não são o runtime WhatsApp canônico e não devem chamar a
+Graph API a partir da landing. Webhook, envio, templates e diagnóstico
+operacional pertencem ao `neo-provider-messaging` em `neo-growth-system`.
 
 O fluxo publico de `/conectar-whatsapp/` usa Facebook Login for Business com
 Configuration ID `1322930417561011`, mantido em `src/data/config.json` como
@@ -122,10 +120,10 @@ neo-flw-landing/
 /terms/                   termos de serviço
 /excluir-dados/           exclusão de dados
 /api/meta/data-deletion   callback Meta Data Deletion
-/api/meta-webhook         callback Meta Webhooks
-/api/whatsapp/send        demo App Review: envio
-/api/whatsapp/templates   demo App Review: templates
-/api/health/meta          diagnóstico sanitizado Meta
+/api/meta-webhook         endpoint legado/migrado
+/api/whatsapp/send        demo legada; envio pertence ao provider
+/api/whatsapp/templates   demo legada; templates pertencem ao provider
+/api/health/meta          diagnóstico local legado
 ```
 
 Rotas de `planos` e `checkout` são geradas a partir de `src/data/catalog.json`.

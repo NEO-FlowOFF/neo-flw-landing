@@ -82,3 +82,10 @@ dev agents:
   removing an old Zernio/Social Media Connector integration. Do not add
   fallback Graph API logic or token persistence to this landing to work around
   that state.
+- Wait for Meta propagation and confirm that the phone leaves the
+  `Offline`/`ON_PREMISE` legacy or Cloud API-incompatible state.
+- Then send a real inbound message. Declare the WhatsApp runtime ready only
+  when Railway logs for `neo-provider-messaging` show `inbound_received`.
+- The operational source of truth and next-test procedure are
+  `../../neo-growth-system/CONTEXT.md` and
+  `../../neo-growth-system/NEXTSTEPS.md`.
