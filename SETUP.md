@@ -208,6 +208,17 @@ button[data-meta-config-id]
   → backend soberano / storage seguro troca e guarda o token
 ```
 
+### Diagrama de Verificação de Prontidão do WhatsApp Runtime
+
+```mermaid
+flowchart TD
+  A["DNS resolves to neo_provider_messaging and public /health responds"] --> B["Wait for Meta propagation"]
+  B --> C["Confirm phone leaves Offline / ON_PREMISE / Cloud API incompatible state"]
+  C --> D["Send real inbound WhatsApp message"]
+  D --> E["Require inbound_received in Railway logs for neo_provider_messaging"]
+  E --> F["Declare WhatsApp runtime ready"]
+```
+
 Nao adicionar `scope` paralelo ao `FB.login` enquanto a configuracao do Login
 for Business for a fonte canonica de ativos e permissoes.
 
@@ -278,14 +289,14 @@ Para adicionar um plano ou checkout, edite `catalog.json` e rode `make build`.
 
 ### Pixels Configurados
 Tanto o TikTok Pixel quanto o Meta Pixel são inicializados dinamicamente a partir dos IDs definidos no `src/data/config.json`:
-* **Meta Pixel ID:** `2051453138833455` (configurado sob `integrations.meta.pixel_id`)
-* **TikTok Pixel ID:** `D9IQURBC77U84G6G883G` (configurado sob `integrations.tiktok.pixel_id`)
+- **Meta Pixel ID:** `2051453138833455` (configurado sob `integrations.meta.pixel_id`)
+- **TikTok Pixel ID:** `D9IQURBC77U84G6G883G` (configurado sob `integrations.tiktok.pixel_id`)
 
 ### Eventos Mapeados (Funil Dinâmico)
 Nas páginas `/planos/[slug]` e `/checkout/[slug]`, os seguintes eventos de conversão são disparados:
-* **Visualização:** `ViewContent` (Meta/TikTok) no carregamento.
-* **Clique no Botão de Contratação:** `InitiateCheckout` (Meta/TikTok) no clique do botão primário `.detail-action--primary`.
-* **Clique no WhatsApp:** `Purchase` (Meta) e `CompletePayment` (TikTok) no clique do botão `.detail-action--secondary`, representando a intenção real de contratação.
+- **Visualização:** `ViewContent` (Meta/TikTok) no carregamento.
+- **Clique no Botão de Contratação:** `InitiateCheckout` (Meta/TikTok) no clique do botão primário `.detail-action--primary`.
+- **Clique no WhatsApp:** `Purchase` (Meta) e `CompletePayment` (TikTok) no clique do botão `.detail-action--secondary`, representando a intenção real de contratação.
 
 ### Padrão Sugerido de UTMs
 Para garantir a rastreabilidade perfeita das campanhas pagas, siga o padrão de nomenclatura abaixo:
