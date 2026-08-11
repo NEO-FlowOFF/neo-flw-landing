@@ -16,8 +16,9 @@ products = catalog_data.get("products", [])
 
 # 1. Generate Meta Catalog Feed (CSV)
 meta_headers = [
-    "id", "title", "description", "availability", "condition", "price", 
-    "link", "image_link", "brand", "fb_product_category", "google_product_category", "custom_label_0"
+    "id", "title", "description", "availability", "condition", "price",
+    "link", "image_link", "brand", "fb_product_category",
+    "google_product_category", "custom_label_0"
 ]
 
 meta_rows = []
@@ -25,9 +26,8 @@ for p in products:
     slug = p["slug"]
     link = p["link"]
     meta_utm_link = f"{link}?utm_source=meta_catalog&utm_medium=dynamic_ads&utm_campaign=meta_dynamic_catalog"
-    
     price_str = f"{p['price']['value']:.2f} BRL"
-    
+
     row = {
         "id": p["id"],
         "title": p["title"],
@@ -52,11 +52,10 @@ with open(meta_feed_path, "w", encoding="utf-8", newline="") as f:
 print(f"Generated Meta Feed: {meta_feed_path} ({len(meta_rows)} items)")
 
 # 2. Generate TikTok Ads Generic Catalog Feed (CSV)
-# Vertical: Other products and services
-# Required fields: item_id, title, image_link
-# Optional useful fields: description, price, link, availability, brand, custom_label_0
+# Vertical: Other products and services (with E-commerce fallback compatibility)
+# Required fields: item_id, id, title, image_link, condition
 tiktok_headers = [
-    "item_id", "title", "description", "price", "link", "image_link", "availability", "brand", "custom_label_0"
+    "item_id", "id", "title", "description", "price", "link", "image_link", "availability", "condition", "brand", "custom_label_0"
 ]
 
 tiktok_rows = []
@@ -64,17 +63,19 @@ for p in products:
     slug = p["slug"]
     link = p["link"]
     tiktok_utm_link = f"{link}?utm_source=tiktok_catalog&utm_medium=dynamic_ads&utm_campaign=tiktok_generic_catalog"
-    
+
     price_str = f"{p['price']['value']:.2f} BRL"
-    
+
     row = {
         "item_id": p["id"],
+        "id": p["id"],
         "title": p["title"],
         "description": p["description"],
         "price": price_str,
         "link": tiktok_utm_link,
         "image_link": p["image_link"],
         "availability": p["availability"],
+        "condition": p["condition"],
         "brand": p["brand"],
         "custom_label_0": p["category"]
     }
