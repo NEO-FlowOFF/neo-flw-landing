@@ -36,6 +36,10 @@
   --mono: "DM Mono", monospace;
   --shadow-soft: 0 12px 40px rgb(18 20 18 / 10%);
   --shadow-float: 0 20px 60px rgb(18 20 18 / 16%);
+  --safe-top: max(0px, env(safe-area-inset-top));
+  --safe-right: max(0px, env(safe-area-inset-right));
+  --safe-bottom: max(0px, env(safe-area-inset-bottom));
+  --safe-left: max(0px, env(safe-area-inset-left));
 }
 
 *,
@@ -244,16 +248,20 @@ body::selection {
   transition: opacity 0.25s;
 }
 
-.lc:hover {
+.lc:hover,
+.lc:focus-visible {
   background: var(--card-h);
   transform: translateY(-2px) scale(1.015);
+  outline: 2px solid rgb(224 255 0 / 32%);
+  outline-offset: 3px;
   box-shadow:
     0 6px 20px rgb(0 0 0 / 50%),
     0 0 20px rgb(200 212 26 / 15%),
     inset 0 1px 0 rgb(255 255 255 / 8%);
 }
 
-.lc:hover::after {
+.lc:hover::after,
+.lc:focus-visible::after {
   background: linear-gradient(160deg,
       rgb(255 255 255 / 15%) 0%,
       rgb(200 212 26 / 10%) 40%,
@@ -261,7 +269,7 @@ body::selection {
 }
 
 .lc:active {
-  transform: translateY(0) scale(0.96);
+  transform: translateY(0) scale(0.985);
   transition-duration: 0.08s;
 }
 
@@ -433,7 +441,7 @@ body::selection {
   z-index: 1;
   width: min(100% - 1.5rem, 1120px);
   margin: 0 auto;
-  padding: max(1rem, env(safe-area-inset-top)) 0 4.5rem;
+  padding: max(1rem, var(--safe-top)) var(--safe-right) max(4.5rem, calc(var(--safe-bottom) + 3rem)) var(--safe-left);
 }
 
 .home-hero {
@@ -465,6 +473,57 @@ body::selection {
       rgb(9 9 11 / 85%) 35%,
       rgb(9 9 11 / 45%) 60%,
       rgb(9 9 11 / 10%) 85%);
+}
+
+.hero-acid-points {
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  overflow: hidden;
+  pointer-events: none;
+}
+
+.hero-acid-point {
+  position: absolute;
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background: var(--acid);
+  box-shadow:
+    0 0 8px rgb(224 255 0 / 58%),
+    0 0 18px rgb(224 255 0 / 24%);
+}
+
+.hero-acid-point--one {
+  top: 15%;
+  right: 8%;
+  opacity: 0.75;
+}
+
+.hero-acid-point--two {
+  right: 22%;
+  bottom: 18%;
+  width: 3px;
+  height: 3px;
+  opacity: 0.5;
+}
+
+.hero-acid-point--three {
+  top: 24%;
+  left: 48%;
+  width: 4px;
+  height: 4px;
+  opacity: 0.38;
+}
+
+.hero-acid-stroke {
+  position: absolute;
+  top: 36%;
+  right: 4%;
+  width: 1px;
+  height: 52px;
+  background: linear-gradient(180deg, transparent, rgb(224 255 0 / 48%), transparent);
+  opacity: 0.7;
 }
 
 .hero-banner-image {
@@ -588,6 +647,11 @@ body::selection {
   transform: translateY(-1px);
   outline: 2px solid rgb(224 255 0 / 42%);
   outline-offset: 3px;
+}
+
+.neo-button:active {
+  transform: translateY(0) scale(0.98);
+  transition-duration: 0.08s;
 }
 
 .neo-button--primary {
@@ -816,6 +880,26 @@ body::selection {
 /* stylelint-disable no-descending-specificity */
 
 /* ── Shared catalog cards ── */
+.link-grid .lc:nth-child(2) {
+  animation-delay: 60ms;
+}
+
+.link-grid .lc:nth-child(3) {
+  animation-delay: 120ms;
+}
+
+.link-grid .lc:nth-child(4) {
+  animation-delay: 180ms;
+}
+
+.link-grid .lc:nth-child(5) {
+  animation-delay: 240ms;
+}
+
+.link-grid .lc:nth-child(n + 6) {
+  animation-delay: 300ms;
+}
+
 .product-card-row,
 .product-card-top,
 .product-card-footer {
@@ -1911,6 +1995,11 @@ body::selection {
 
   .home-hero::before {
     display: none;
+  }
+
+  .hero-acid-point--three {
+    left: auto;
+    right: 38%;
   }
 
   .hero-banner-image {
