@@ -20,6 +20,7 @@ It owns:
 - Data Deletion callback: `/api/meta/data-deletion`.
 - Meta SDK browser flow on `/conectar-whatsapp/`.
 - A narrow Embedded Signup adapter at `/api/meta/embedded-signup`.
+- Catalog dynamic feeds: Meta feed (`public/meta_catalog_feed.csv`) and TikTok Generic feed (`public/tiktok_generic_catalog_feed.csv`) generated via `scripts/generate_feeds.py` on build.
 
 It does not own:
 

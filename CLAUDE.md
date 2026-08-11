@@ -148,14 +148,16 @@ sem antes combinar uma refatoracao de design system.
 
 ## ⍟ Dados
 
-`src/data/catalog.json` alimenta as rotas publicadas.
+`src/data/catalog.json` alimenta as rotas publicadas. Todos os IDs de serviços/planos devem ser em caixa alta e sem acentos para combinar com os pixels.
 
-`drafts/catalog_v2026_2.json` e insumo canonico do operador.
-Nao edite esse draft sem pedido explicito.
+`drafts/catalog_v2026_2.json` e insumo canonico do operador. Nao edite esse draft sem pedido explicito.
 
-Ao mexer em produtos,
-confirme home, rotas dinamicas, `sitemap.xml`
-e `llms.txt`.
+Feeds separados para Meta e TikTok são gerados a cada build via `scripts/generate_feeds.py`.
+
+Ao mexer em produtos, confirme:
+- a home e as rotas dinâmicas
+- os arquivos XML/TXT: `sitemap.xml` e `llms.txt`
+- os feeds de anúncios: `meta_catalog_feed.csv` e `tiktok_generic_catalog_feed.csv`
 
 ────────────────────────────────────────
 

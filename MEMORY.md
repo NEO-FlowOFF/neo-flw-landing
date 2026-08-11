@@ -16,6 +16,8 @@ Last reviewed: 2026-08-10
 - Data Deletion callback remains in this repo at `/api/meta/data-deletion`.
 - Embedded Signup adapter is forward-only to `neo-provider-messaging`.
 - Canonical webhook belongs to `https://whatsapp.neoflowoff.agency/webhook`.
+- Separate catalog feeds (`meta_catalog_feed.csv` and `tiktok_generic_catalog_feed.csv`) are generated on build using `scripts/generate_feeds.py`.
+- Catalog IDs (such as `SERVICO-API-WHATSAPP`) are unaccented and aligned across catalog.json, pixel events, and feeds for 100% matching.
 
 ## Removed Responsibilities
 

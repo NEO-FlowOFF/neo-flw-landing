@@ -44,13 +44,17 @@ Astro SSG
 ├── src/pages/excluir-dados.astro
 ├── src/server/meta-graph.js
 │   └── helpers server-side para Graph API Meta v25.0
+├── scripts/generate_feeds.py
+│   └── python script to dynamically build Meta and TikTok feeds on build
 └── public/
     ├── logo_transp.png
     ├── manifest.webmanifest
     ├── sw.js
     ├── llms.txt
     ├── robots.txt
-    └── sitemap.xml
+    ├── sitemap.xml
+    ├── meta_catalog_feed.csv
+    └── tiktok_generic_catalog_feed.csv
 
 Cloudflare Pages Functions
 ├── functions/api/meta-webhook.js
@@ -104,10 +108,12 @@ Astro em `src/pages/*.astro`.
 ## ⧉ Dados
 
 ```text
-src/data/catalog.json        catalogo publicado no site
-src/data/ui_texts.json       copy e textos de interface
-src/data/config.json         config publica segura
-drafts/catalog_v2026_2.json  insumo canonico do operador
+src/data/catalog.json                catalogo publicado no site (IDs limpos/unaccented)
+src/data/ui_texts.json               copy e textos de interface
+src/data/config.json                 config publica segura
+public/meta_catalog_feed.csv         Meta-specific feed generated on build
+public/tiktok_generic_catalog_feed.csv TikTok-specific feed generated on build
+drafts/catalog_v2026_2.json          insumo canonico do operador
 ```
 
 Nao edite `drafts/catalog_v2026_2.json` sem pedido explicito.

@@ -61,6 +61,8 @@ review geral ou scripts simples.
   quando o projeto ja tem alternativa local
 - mantenha `robots.txt`, `sitemap.xml` e `llms.txt`
   semanticamente alinhados
+- gere sempre os feeds separados (`meta_catalog_feed.csv` e `tiktok_generic_catalog_feed.csv`) a cada build usando `scripts/generate_feeds.py`
+- mantenha IDs de pixel e feeds unificados (unaccented uppercase) para correspondência perfeita de dados. No TikTok, use o fallback de frete 'Not applicable' e inclua 'id'/'condition' no feed.
 
 ────────────────────────────────────────
 

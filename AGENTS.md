@@ -55,9 +55,11 @@ Qualquer agente que atuar neste repositório DEVE seguir estas regras.
 - **Links da Planilha (`neo-digital-assets-book`):** Os serviços oferecidos no ecossistema estão divididos semanticamente em duas categorias de rotas:
   - **Planos (Pacotes Completos) em `/planos/<slug>`:** Ex: `/planos/agente-sdr`, `/planos/agents-ia`, `/planos/crm-inteligente`.
   - **Checkouts (Serviços Unitários) em `/checkout/<slug>`:** Ex: `/checkout/api-whatsapp`, `/checkout/app-meta`, `/checkout/webapp-lp`.
-- **Catálogo Publicado:** `src/data/catalog.json` alimenta a home e as rotas dinâmicas do site.
+- **Catálogo Publicado:** `src/data/catalog.json` alimenta a home e as rotas dinâmicas do site. Seus IDs devem ser limpos e sem acentos (ex: `SERVICO-API-WHATSAPP`) para coincidir 100% com o pixel.
 - **Catálogo Canônico Soberano:** `~/neomello/_standards/services_canonical.json` é a fonte soberana global do operador com todas as especificações técnicas, preços e escopos. Dev agents podem lê-lo para contexto cruzado, mas não devem editá-lo sem ordem explícita.
-- **Feed CSV Meta Commerce:** `public/meta_catalog_feed.csv` (servido ao vivo em `https://neoflowoff.agency/meta_catalog_feed.csv`) é o arquivo CSV público formatado nas especificações do Meta Commerce Manager para Anúncios Dinâmicos de Catálogo.
+- **Feeds Separados (Meta e TikTok):** Gerados a cada build via `python3 scripts/generate_feeds.py`.
+  - **Meta Commerce Manager:** `public/meta_catalog_feed.csv` formatado nas especificações do Commerce Manager.
+  - **TikTok Ads Manager:** `public/tiktok_generic_catalog_feed.csv` formatado para Generic Catalog (*Other products and services*), usando *E-commerce Industry* e *Shipping: Not applicable* como fallback de homologação. Contém `id` e `condition` no feed para evitar rejeições.
 - **Checkout/FlowPay Legado:** `js/payment.js` ainda existe com lógica
   de UTM, DataLayer e fallback de API, mas não há rota ativa de
   cobrança neste checkout Astro. Antes de prometer PIX, cobrança ou
