@@ -5,7 +5,7 @@
   "description": "Oficial Services Page for neoflowoff.agency",
   "scripts": {
     "dev": "astro dev",
-    "build": "astro build",
+    "build": "python3 scripts/generate_feeds.py && astro build",
     "preview": "astro preview",
     "lint": "stylelint --fix 'src/styles/**/*.css'",
     "deploy": "wrangler pages deploy dist --project-name=neoflowoff-agency",
