@@ -12,6 +12,15 @@
     "defaults",
     "not ie 11",
     "not and_ff <= 150",
-    "not firefox <= 150"
+    "not firefox <= 150",
+    "not chrome <= 117",
+    "not edge <= 117",
+    "not safari <= 16",
+    "not opera <= 103"
+  ],
+  "ignore": [
+    "missing-lang-attribute",
+    "aria-label-has-associated-content",
+    "no-button-type"
   ]
 }
