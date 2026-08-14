@@ -18,6 +18,7 @@ Last reviewed: 2026-08-10
 - Canonical webhook belongs to `https://whatsapp.neoflowoff.agency/webhook`.
 - Separate catalog feeds (`meta_catalog_feed.csv` and `tiktok_generic_catalog_feed.csv`) are generated on build using `scripts/generate_feeds.py`.
 - Catalog IDs (such as `SERVICO-API-WHATSAPP`) are unaccented and aligned across catalog.json, pixel events, and feeds for 100% matching.
+- WABA Display Name is strictly validated before starting FB.login on `/conectar-whatsapp/` (no special characters/accents/emojis, no all-caps, no forbidden words like "atendimento", "teste") to prevent suspension (issue #2388138).
 
 ## Removed Responsibilities
 

@@ -81,6 +81,13 @@ Qualquer agente que atuar neste repositório DEVE seguir estas regras.
   `config_id`, `response_type: 'code'` e
   `override_default_response_type: true`. Nao enviar `scope` paralelo sem
   nova validacao explicita no painel/docs da Meta.
+- **Validação de Display Name (Nome de Exibição WABA):** Antes de iniciar o
+  `FB.login` na página `/conectar-whatsapp/`, o nome inserido pelo cliente
+  deve ser estritamente validado no front-end para evitar suspensões automáticas
+  e rejeições da WABA (erro #2388138). As regras aplicadas são:
+  - Permite apenas letras sem acento (A-Z, a-z), números (0-9) e espaços (`/^[a-zA-Z0-9 ]+$/`). Bloqueia qualquer caractere especial, acento ou emoji (como `Ø`, `ø`, `/`, `@`, etc.).
+  - Bloqueia nomes totalmente em letras maiúsculas (all-caps).
+  - Bloqueia palavras proibidas como `atendimento`, `teste`, `suporte`, `waba`, `temp`, `homologacao`, `admin`, `wpp` (case-insensitive).
 - **Data Deletion Meta:** `functions/api/meta/data-deletion.js`
   é callback server-side para `signed_request` da Meta. Deve validar
   HMAC SHA-256 com `META_APP_SECRET`, nunca logar segredo ou
