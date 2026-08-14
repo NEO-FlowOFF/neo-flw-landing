@@ -67,6 +67,20 @@ const graphApiVersion = metaConfig.graph_api_version;
           Autorize os canais comerciais da sua empresa para integração com o <strong>NEØ Growth System</strong>.
         </p>
 
+        <!-- INPUT DE NOME DE EXIBIÇÃO -->
+        <div class="input-wrapper">
+          <label for="display-name-input" class="input-label">Nome de Exibição do WhatsApp (Display Name)</label>
+          <input
+            type="text"
+            id="display-name-input"
+            class="input-display-name"
+            placeholder="Ex: Flowoff Agency"
+            autocomplete="off"
+            required
+          />
+          <div id="validation-error" class="validation-message" hidden></div>
+        </div>
+
         <!-- BOTÃO AZUL OFICIAL META -->
         <div class="cta-wrapper">
           <button
@@ -388,6 +402,52 @@ const graphApiVersion = metaConfig.graph_api_version;
       max-width: 320px;
       margin-left: auto;
       margin-right: auto;
+    }
+
+    /* ─── INPUT DE DISPLAY NAME ─── */
+    .input-wrapper {
+      margin-bottom: 1.8rem;
+      text-align: left;
+      position: relative;
+      z-index: 1;
+      max-width: 320px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    .input-label {
+      display: block;
+      font-size: 0.73rem;
+      font-weight: 700;
+      color: rgba(255, 255, 255, 0.5);
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      margin-bottom: 0.5rem;
+    }
+
+    .input-display-name {
+      width: 100%;
+      background: rgba(14, 15, 14, 0.95);
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      border-radius: 10px;
+      padding: 12px 14px;
+      color: #ffffff;
+      font-size: 0.9rem;
+      outline: none;
+      transition: border-color 0.2s ease, box-shadow 0.2s ease;
+    }
+
+    .input-display-name:focus {
+      border-color: rgba(24, 119, 242, 0.5);
+      box-shadow: 0 0 0 2px rgba(24, 119, 242, 0.18);
+    }
+
+    .validation-message {
+      font-size: 0.75rem;
+      color: #ff5252;
+      margin-top: 0.5rem;
+      line-height: 1.4;
+      font-weight: 500;
     }
 
     /* ─── BOTÃO META ─── */

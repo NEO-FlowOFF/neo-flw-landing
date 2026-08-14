@@ -137,7 +137,25 @@ test('6. HTML compilado de /conectar-whatsapp/ contém os metadados e textos SSR
     'Configuration ID e App ID devem ser atributos distintos'
   );
   assert.ok(!html.includes('data-requested-scopes='), 'O HTML nao deve enviar scope paralelo ao fluxo configurado');
-  assert.ok(html.includes('stroke-dasharray'), 'O bundle deve incluir o spinner SVG animado');
+  
+  // O spinner SVG animado pode estar inlined no HTML ou em um arquivo JS externo no diretório _astro/
+  let hasSpinner = html.includes('stroke-dasharray');
+  if (!hasSpinner) {
+    const astroDir = path.resolve('dist/_astro');
+    if (fs.existsSync(astroDir)) {
+      const files = fs.readdirSync(astroDir);
+      for (const file of files) {
+        if (file.endsWith('.js')) {
+          const content = fs.readFileSync(path.join(astroDir, file), 'utf8');
+          if (content.includes('stroke-dasharray')) {
+            hasSpinner = true;
+            break;
+          }
+        }
+      }
+    }
+  }
+  assert.ok(hasSpinner, 'O bundle deve incluir o spinner SVG animado');
   
   // Asserções para explicação detalhada
   assert.ok(normalizedHtml.includes('empresas clientes conectam seus próprios ativos meta'), 'O HTML deve explicar que clientes conectam ativos Meta');
@@ -164,4 +182,23 @@ test('7. Script Meta usa config_id do Login for Business sem scope paralelo', ()
   assert.ok(script.includes('override_default_response_type: true'), 'FB.login deve forcar response_type=code');
   assert.ok(!script.includes('scope: requestedScopes'), 'FB.login nao deve enviar scope paralelo');
   assert.ok(!script.includes('data.requestedScopes'), 'O script nao deve depender de data-requested-scopes');
+});
+
+test('8. Script de signup valida o Nome de Exibição (WABA Display Name) antes de enviar à Meta', () => {
+  const scriptPath = path.resolve('src/scripts/meta-signup.ts');
+  const script = fs.readFileSync(scriptPath, 'utf8');
+
+  // Verifica se há referências aos seletores corretos
+  assert.ok(script.includes('display-name-input'), 'O script deve acessar o input display-name-input');
+  assert.ok(script.includes('validation-error'), 'O script deve acessar a div de erro validation-error');
+
+  // Verifica se há o validador regex contra caracteres especiais
+  assert.ok(script.includes('/^[a-zA-Z0-9 ]+$/'), 'O script deve conter o validador regex alfanumérico com espaço');
+  assert.ok(script.includes('Use só letras e números, sem caracteres especiais. Ex: Flowoff Agency'), 'O script deve exibir a mensagem de erro em PT correta');
+
+  // Verifica se há a validação contra texto totalmente em maiúsculas
+  assert.ok(script.includes('toUpperCase()'), 'O script deve barrar nomes escritos apenas em letras maiúsculas');
+
+  // Verifica a lista de palavras proibidas (como "atendimento", "teste")
+  assert.ok(script.includes('atendimento') && script.includes('teste'), 'O script deve barrar as palavras proibidas "atendimento" e "teste"');
 });
