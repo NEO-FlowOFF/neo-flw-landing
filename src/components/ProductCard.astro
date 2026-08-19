@@ -9,20 +9,24 @@ const targetHref = slug
 const href = isSoon ? '#' : targetHref;
 
 const isFeaturedCard = featured && !forceGrid;
-const isFullRow = !forceGrid && (featured || fullWidth || slug === 'trafego-meta');
+const isFullRow = !forceGrid && (featured || fullWidth || slug === 'aquisicao-multicanal' || slug === 'operacao-custom-enterprise');
 const baseCardClass = isFeaturedCard ? 'lc lc-featured' : (isFullRow ? 'lc lc-fullwidth' : (isSoon ? 'lc section-soon' : 'lc'));
 
 const getIcon = (itemSlug: string, itemCategory: string) => {
   if (itemSlug?.includes('whatsapp')) return 'message-square';
+  if (itemSlug?.includes('tiktok')) return 'box';
+  if (itemSlug?.includes('auditoria')) return 'shield-check';
   if (itemSlug?.includes('meta') && itemSlug?.includes('app')) return 'layers';
   if (itemSlug?.includes('dashboard')) return 'bar-chart-3';
   if (itemSlug?.includes('webapp') || itemSlug?.includes('landing')) return 'layout';
   if (itemSlug?.includes('a2m') || itemSlug?.includes('poi')) return 'shield-check';
   if (itemSlug?.includes('sdr')) return 'bot';
-  if (itemSlug?.includes('agents')) return 'cpu';
+  if (itemSlug?.includes('agents') || itemSlug?.includes('agente-ia')) return 'cpu';
   if (itemSlug?.includes('crm')) return 'git-branch';
   if (itemSlug?.includes('fluxo') || itemSlug?.includes('automacao')) return 'zap';
+  if (itemSlug?.includes('aquisicao') || itemSlug?.includes('trafego')) return 'share-2';
   if (itemSlug?.includes('google')) return 'search';
+  if (itemSlug?.includes('custom') || itemSlug?.includes('enterprise')) return 'layers';
   if (itemSlug?.includes('regularizacao')) return 'shield-check';
   if (itemSlug?.includes('meta')) return 'share-2';
   return itemCategory === 'Serviço' ? 'terminal' : 'box';

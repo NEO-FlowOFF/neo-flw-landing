@@ -1,40 +1,40 @@
 # neoflowoff.agency
 
-> neoflowoff.agency presents NEØ FlowOFF, also written as Neo FlowOFF Agency or NeoFlowOFF, as a commercial infrastructure agency based in Goiânia, GO. Its services include AI agents, WhatsApp Business API, CRM, automations, dashboards, landing pages, and paid traffic operations.
+> neoflowoff.agency apresenta a NEØ FlowOFF (também referida como Neo FlowOFF Agency ou NeoFlowOFF), agência de infraestrutura comercial sediada em Goiânia, GO. Suas soluções incluem agentes de IA, WhatsApp Business API, CRM, automações, dashboards executivos, landing pages e operações de aquisição multicanal.
 
-This is a public landing and service catalog for agents and humans. Treat the pages below as the canonical public surface for browsing, citation, and summarization. Do not infer private backend behavior, credentials, pricing exceptions, or internal operating procedures from this static site.
+Esta é a superfície pública de catálogo e páginas de serviços para agentes e humanos. Trate as rotas abaixo como a fonte pública canônica para navegação, citação e sumarização. Não infira comportamentos privados de backend, credenciais, exceções comerciais ou procedimentos internos a partir deste site estático.
 
 ## Primary Pages
 
-- [Home](https://neoflowoff.agency/): Overview of the agency, product categories, method, and primary WhatsApp contact route.
-- [Sitemap](https://neoflowoff.agency/sitemap.xml): XML index of public routes generated for this landing page.
-- [Robots Policy](https://neoflowoff.agency/robots.txt): Crawler access policy for search and AI agents.
+- [Home](https://neoflowoff.agency/): Visão geral da agência, categorias de produto, método e contato oficial WhatsApp.
+- [Sitemap](https://neoflowoff.agency/sitemap.xml): Índice XML das rotas públicas geradas para este site.
+- [Robots Policy](https://neoflowoff.agency/robots.txt): Política de acesso de crawlers para busca e agentes de IA.
 
-## Plans
+## Plans (Operações Conectadas)
 
-- [Agente SDR IA Plug & Play](https://neoflowoff.agency/planos/agente-sdr/): AI SDR operation for qualification, routing, and commercial follow-up.
-- [Agentes de IA para Operações](https://neoflowoff.agency/planos/agents-ia/): AI agents designed around operational roles, integrations, logs, and human escalation.
-- [CRM e Operação Comercial](https://neoflowoff.agency/planos/crm-inteligente/): CRM structure for pipeline, records, follow-up, and sales visibility.
-- [Automações e Fluxos Comerciais](https://neoflowoff.agency/planos/fluxos-automacao/): Connected workflows across forms, WhatsApp, CRM, email, data, and APIs.
-- [Google Ads para Demanda de Alta Intenção](https://neoflowoff.agency/planos/trafego-google/): Google Ads operation focused on high-intent demand and measurable conversion flows.
-- [Meta Ads com Server-Side CAPI](https://neoflowoff.agency/planos/trafego-meta/): Meta Ads operation with data quality, Pixel, and Conversions API support.
+- [SDR IA Conectado](https://neoflowoff.agency/planos/agente-sdr/): Operação de SDR inteligente para qualificação ativa, agendamento e transbordo humano real.
+- [Agente de IA — Implantação Starter](https://neoflowoff.agency/planos/agents-ia/): Agente de IA corporativo treinado com regras e conhecimento proprietário da empresa.
+- [Aquisição Multicanal — Estruturação Inicial](https://neoflowoff.agency/planos/aquisicao-multicanal/): Estruturação de canais de tráfego pago com rastreamento de servidor (CAPI) e GA4.
+- [Operação Custom / Enterprise](https://neoflowoff.agency/planos/operacao-custom-enterprise/): Engenharia sob medida de dados, múltiplos agentes e infraestrutura comercial para escala.
 
-## Services
+## Services (Implementações Unitárias)
 
-- [A2M-PoI Standard](https://neoflowoff.agency/checkout/a2m-poi-standard/): Public service page for Proof-of-Intention validation and licensing.
-- [WhatsApp Business API Oficial](https://neoflowoff.agency/checkout/api-whatsapp/): WhatsApp Cloud API implementation with templates, webhooks, and governance.
-- [Meta Developers: Apps, APIs e Webhooks](https://neoflowoff.agency/checkout/app-meta/): Meta app setup, API permissions, webhook configuration, and compliance support.
-- [Regularização Meta + WABA](https://neoflowoff.agency/checkout/regularizacao-meta-waba/): Audit, Business Manager verification, display name approval, number validation, template organization, and 30 days of support.
-- [Dashboards e Gestão de Dados](https://neoflowoff.agency/checkout/dashboard-dados/): Dashboards and data organization for commercial visibility.
-- [Landing Pages e WebApps Conectados](https://neoflowoff.agency/checkout/webapp-lp/): Landing pages and connected web applications for campaigns and operations.
+- [TikTok Shop — Diagnóstico Express](https://neoflowoff.agency/checkout/tiktok-shop-diagnostico-express/): Diagnóstico técnico e de conformidade para destravar vendas no TikTok Shop.
+- [Operação Digital — Auditoria Inicial](https://neoflowoff.agency/checkout/operacao-digital-auditoria/): Auditoria completa de gargalos, taxas de conversão e rastreamento digital.
+- [TikTok Shop — Setup Inicial](https://neoflowoff.agency/checkout/tiktok-shop-setup-inicial/): Abertura, configuração e sincronização de catálogo oficial no TikTok Shop.
+- [WhatsApp Business Oficial — Setup](https://neoflowoff.agency/checkout/api-whatsapp/): Implantação oficial da Meta Cloud API com templates, webhooks e governança.
+- [Landing Page Comercial Express](https://neoflowoff.agency/checkout/webapp-lp/): Página de alta velocidade e conversão pronta para receber tráfego de anúncios.
+- [CRM Comercial — Implantação Inicial](https://neoflowoff.agency/checkout/crm-inteligente/): Estruturação de pipeline, etapas e regras de atendimento no CRM.
+- [Automação Comercial — Primeiro Fluxo](https://neoflowoff.agency/checkout/fluxos-automacao/): Conexão automatizada entre formulários, CRM e WhatsApp sem erro manual.
+- [Dashboard Executivo — Starter](https://neoflowoff.agency/checkout/dashboard-dados/): Painel executivo consolidando métricas comerciais e receita em tempo real.
 
-## Compliance
+## Compliance & Integrations
 
-- [Privacy Policy](https://neoflowoff.agency/privacy/): Public privacy policy for Meta, WhatsApp Cloud API, and data governance.
-- [Terms of Service](https://neoflowoff.agency/terms/): Terms for services, integrations, and Meta platform usage.
-- [Data Deletion (pt-BR)](https://neoflowoff.agency/excluir-dados/): User data deletion instructions for Meta and LGPD compliance.
-- [WhatsApp Connection](https://neoflowoff.agency/conectar-whatsapp/): Meta Embedded Signup connector — authorizes WhatsApp Business channels into the NEØ Growth System.
+- [Privacy Policy](https://neoflowoff.agency/privacy/): Política de privacidade pública para Meta, WhatsApp Cloud API e governança de dados.
+- [Terms of Service](https://neoflowoff.agency/terms/): Termos de serviço, escopo e diretrizes de uso.
+- [Data Deletion (pt-BR)](https://neoflowoff.agency/excluir-dados/): Instruções e formulário público para exclusão de dados e conformidade LGPD/Meta.
+- [WhatsApp Connection](https://neoflowoff.agency/conectar-whatsapp/): Conector de Embedded Signup da Meta para autorização de canais de WhatsApp Business no NEØ Growth System.
 
 ## Ecosystem
 
-- [neoflowoff agency](https://neoflowoff.agency/): Agency in the management and automation services for Meta, WhatsApp Cloud API, CRM, dashboards, landing pages, and paid traffic operations, within the NEØ Growth System.
+- [neoflowoff.agency](https://neoflowoff.agency/): Agência em serviços de gestão, automação comercial, mensageria oficial Meta, CRM, dashboards e agentes de IA no NEØ Growth System.

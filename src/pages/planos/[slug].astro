@@ -36,7 +36,7 @@ const { plano } = Astro.props;
       </div>
       <aside class="detail-price-panel" aria-label="Resumo de preço">
         {plano.price_label && <span>{plano.price_label}</span>}
-        <strong>R$ {plano.price.value.toLocaleString('pt-BR', { minimumFractionDigits: 2 })}</strong>
+        <strong>{plano.price_display || (plano.price.value > 0 ? `R$ ${plano.price.value.toLocaleString('pt-BR', { minimumFractionDigits: 2 })}` : 'Sob consulta')}</strong>
         <small>Pacote completo com diagnóstico e implantação.</small>
       </aside>
     </article>

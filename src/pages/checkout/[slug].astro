@@ -31,7 +31,7 @@ const { servico } = Astro.props;
       </div>
       <aside class="detail-price-panel" aria-label="Resumo de preço">
         {servico.price_label && <span>{servico.price_label}</span>}
-        <strong>R$ {servico.price.value.toLocaleString('pt-BR', { minimumFractionDigits: 2 })}</strong>
+        <strong>{servico.price_display || (servico.price.value > 0 ? `R$ ${servico.price.value.toLocaleString('pt-BR', { minimumFractionDigits: 2 })}` : 'Sob consulta')}</strong>
         <small>Escopo validado antes da ativação.</small>
       </aside>
     </article>
