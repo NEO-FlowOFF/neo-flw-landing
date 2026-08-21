@@ -46,7 +46,7 @@ please do not open a public GitHub issue.
 
 Preferred reporting channel:
 
-- Email: <security@neoflowoff.agency>
+- Email: [EMAIL_ADDRESS]
 - Subject: `[SECURITY] neo-flw-landing - brief description`
 
 If the security mailbox is not available or does not respond,
