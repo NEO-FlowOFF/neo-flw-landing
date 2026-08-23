@@ -70,6 +70,7 @@ const { servico } = Astro.props;
       <div class="detail-actions">
         {servico.flowpay_url ? (
           <a
+            id="btn-checkout-pay"
             href={servico.flowpay_url}
             target="_blank"
             rel="noopener noreferrer"
@@ -80,6 +81,7 @@ const { servico } = Astro.props;
           </a>
         ) : (
           <a
+            id="btn-checkout-pay"
             href={`https://wa.me/556282705594?text=Olá!%20Gostaria%20de%20contratar%20o%20serviço%20${encodeURIComponent(servico.title)}.%20[utm:checkout-${encodeURIComponent(servico.slug)}]`}
             target="_blank"
             rel="noopener noreferrer"
@@ -90,7 +92,7 @@ const { servico } = Astro.props;
           </a>
         )}
 
-        <a href={`https://wa.me/556282705594?text=Olá!%20Gostaria%20de%20validar%20o%20escopo%20do%20serviço%20${encodeURIComponent(servico.title)}.%20[utm:checkout-${encodeURIComponent(servico.slug)}]`} target="_blank" rel="noopener noreferrer" class="detail-action detail-action--secondary">
+        <a id="btn-checkout-consult" href={`https://wa.me/556282705594?text=Olá!%20Gostaria%20de%20validar%20o%20escopo%20do%20serviço%20${encodeURIComponent(servico.title)}.%20[utm:checkout-${encodeURIComponent(servico.slug)}]`} target="_blank" rel="noopener noreferrer" class="detail-action detail-action--secondary">
           <i data-lucide="message-circle"></i>
           <span>{uiTexts.product_page.contact_button}</span>
         </a>
@@ -147,8 +149,8 @@ const { servico } = Astro.props;
 
     // 2. Click tracking for CTA buttons
     document.addEventListener('DOMContentLoaded', () => {
-      const checkoutBtn = document.querySelector('.detail-action--primary');
-      const whatsappBtn = document.querySelector('.detail-action--secondary');
+      const checkoutBtn = document.getElementById('btn-checkout-pay');
+      const whatsappBtn = document.getElementById('btn-checkout-consult');
 
       if (checkoutBtn) {
         checkoutBtn.addEventListener('click', () => {
@@ -208,25 +210,14 @@ const { servico } = Astro.props;
       if (whatsappBtn) {
         whatsappBtn.addEventListener('click', () => {
           if (typeof ttq !== 'undefined') {
-            ttq.track('CompletePayment', {
+            ttq.track('Contact', {
               content_id: id,
               content_type: 'product',
-              content_name: title,
-              quantity: 1,
-              price: price,
-              value: price,
-              currency: 'BRL',
-              contents: [{
-                content_id: id,
-                content_name: title,
-                content_type: 'product',
-                quantity: 1,
-                price: price
-              }]
+              content_name: title
             });
           }
           if (typeof fbq !== 'undefined') {
-            fbq('track', 'Purchase', {
+            fbq('track', 'Lead', {
               content_name: title,
               content_ids: [id],
               content_type: 'product',
