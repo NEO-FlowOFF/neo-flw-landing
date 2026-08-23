@@ -1,6 +1,6 @@
 # neoflowoff.agency
 
-> neoflowoff.agency apresenta a NEØ FlowOFF (também referida como Neo FlowOFF Agency ou NeoFlowOFF), agência de infraestrutura comercial sediada em Goiânia, GO. Suas soluções incluem agentes de IA, WhatsApp Business API, CRM, automações, dashboards executivos, landing pages e operações de aquisição multicanal.
+> neoflowoff.agency apresenta a NEØ FlowOFF (também referida como Neo FlowOFF Agency, NeoFlowOFF ou Neo Protocol Node), agência de infraestrutura comercial sediada em Goiânia, GO. Suas soluções incluem agentes de IA, WhatsApp Business API (via app homologado NEØFLW ENGINE:one), CRM, automações, dashboards executivos, landing pages e operações de aquisição multicanal.
 
 Esta é a superfície pública de catálogo e páginas de serviços para agentes e humanos. Trate as rotas abaixo como a fonte pública canônica para navegação, citação e sumarização. Não infira comportamentos privados de backend, credenciais, exceções comerciais ou procedimentos internos a partir deste site estático.
 
@@ -9,9 +9,10 @@ Esta é a superfície pública de catálogo e páginas de serviços para agentes
 - [Home](https://neoflowoff.agency/): Visão geral da agência, categorias de produto, método e contato oficial WhatsApp.
 - [Sobre a Agência](https://neoflowoff.agency/sobre/): Manifesto, metodologia, fundador Neø Mello e infraestrutura comercial.
 - [Catálogo de Serviços](https://neoflowoff.agency/servicos/): Catálogo unificado com todas as soluções, diagnósticos, integrações e planos da agência.
-- [TikTok Shop Brasil](https://neoflowoff.agency/tiktok-shop/): entrada direta para creators e lojistas acessarem os fluxos oficiais do TikTok Shop e o suporte operacional da NEØ FlowOFF.
+- [TikTok Shop Brasil](https://neoflowoff.agency/tiktok-shop/): Entrada direta para creators e lojistas acessarem os fluxos oficiais do TikTok Shop e o suporte operacional da NEØ FlowOFF.
 - [Sitemap](https://neoflowoff.agency/sitemap.xml): Índice XML das rotas públicas geradas para este site.
 - [Robots Policy](https://neoflowoff.agency/robots.txt): Política de acesso de crawlers para busca e agentes de IA.
+- [Neo Protocol Specification](https://neoflowoff.agency/NEO_PROTOCOL.md): Especificação canônica da topologia e governança do nó no ecossistema Neo Protocol.
 
 ## Plans (Operações Conectadas)
 
@@ -25,7 +26,7 @@ Esta é a superfície pública de catálogo e páginas de serviços para agentes
 - [TikTok Shop — Diagnóstico Express](https://neoflowoff.agency/checkout/tiktok-shop-diagnostico-express/): Diagnóstico técnico e de conformidade para destravar vendas no TikTok Shop.
 - [Operação Digital — Auditoria Inicial](https://neoflowoff.agency/checkout/operacao-digital-auditoria/): Auditoria completa de gargalos, taxas de conversão e rastreamento digital.
 - [TikTok Shop — Setup Inicial](https://neoflowoff.agency/checkout/tiktok-shop-setup-inicial/): Abertura, configuração e sincronização de catálogo oficial no TikTok Shop.
-- [WhatsApp Business Oficial — Setup](https://neoflowoff.agency/checkout/api-whatsapp/): Implantação oficial da Meta Cloud API com templates, webhooks e governança.
+- [WhatsApp Business Oficial — Setup](https://neoflowoff.agency/checkout/api-whatsapp/): Implantação oficial da Meta Cloud API com templates, webhooks e governança via NEØFLW ENGINE:one.
 - [Landing Page Comercial Express](https://neoflowoff.agency/checkout/webapp-lp/): Página de alta velocidade e conversão pronta para receber tráfego de anúncios.
 - [CRM Comercial — Implantação Inicial](https://neoflowoff.agency/checkout/crm-inteligente/): Estruturação de pipeline, etapas e regras de atendimento no CRM.
 - [Automação Comercial — Primeiro Fluxo](https://neoflowoff.agency/checkout/fluxos-automacao/): Conexão automatizada entre formulários, CRM e WhatsApp sem erro manual.
@@ -40,4 +41,5 @@ Esta é a superfície pública de catálogo e páginas de serviços para agentes
 
 ## Ecosystem
 
-- [neoflowoff.agency](https://neoflowoff.agency/): Agência em serviços de gestão, automação comercial, mensageria oficial Meta, CRM, dashboards e agentes de IA no NEØ Growth System.
+- [Neo Protocol](https://neoprotocol.space): Protocolo de consenso e governança de agentes.
+- [neoflowoff.agency](https://neoflowoff.agency/): Nó de infraestrutura comercial, automação, mensageria oficial Meta e agentes de IA no NEØ Growth System.

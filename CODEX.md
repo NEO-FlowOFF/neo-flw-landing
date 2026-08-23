@@ -35,6 +35,12 @@ Astro SSG
 │   ├── home comercial alimentada por catalogo
 │   ├── ticker editorial TOP TELENOTICIAS com status operacional atual
 │   └── hero com imagem estatica /logo_transp.png
+├── src/pages/servicos.astro
+│   └── catalogo unificado de servicos com filtros dinamicos de categoria
+├── src/pages/sobre.astro
+│   └── manifesto institucional, founder Neo Mello e busto 3D de papel origami
+├── src/pages/tiktok-shop.astro
+│   └── porta de entrada para creators e lojistas no TikTok Shop
 ├── src/pages/planos/[slug].astro
 │   └── paginas de planos
 ├── src/pages/checkout/[slug].astro
@@ -42,10 +48,14 @@ Astro SSG
 ├── src/pages/privacy.astro
 ├── src/pages/terms.astro
 ├── src/pages/excluir-dados.astro
+├── src/pages/conectar-whatsapp.astro
+│   └── conector de Embedded Signup Meta com app NEØFLW ENGINE:one
 ├── src/server/meta-graph.js
 │   └── helpers server-side para Graph API Meta v25.0
 ├── scripts/generate_feeds.py
 │   └── python script to dynamically build Meta and TikTok feeds on build
+├── NEO_PROTOCOL.md
+│   └── especificacao canonica do no no ecossistema Neo Protocol
 └── public/
     ├── logo_transp.png
     ├── manifest.webmanifest

@@ -11,7 +11,7 @@ const canonicalUrl = new URL(Astro.url.pathname, platformBaseUrl).toString();
 const ogImageUrl = new URL('/assets/og-image.png', platformBaseUrl).toString();
 const brandOfficialName = 'NEØ FlowOFF';
 const brandSearchName = 'Neo FlowOFF Agency';
-const brandAlternateNames = [brandOfficialName, 'NeoFlowOFF', 'NEO FlowOFF', 'neoflowoff.agency'];
+const brandAlternateNames = [brandOfficialName, 'NeoFlowOFF', 'NEO FlowOFF', 'neoflowoff.agency', 'Neo Protocol Node', 'Neo Protocol'];
 const brandCategoryDescription = 'Infraestrutura Comercial, Automação de Processos, Integração de CRM e Agentes de IA Customizados em Goiânia, GO.';
 const title = Astro.props.title || uiTexts.meta.default_title;
 const description = Astro.props.description || uiTexts.meta.default_description;
@@ -139,6 +139,7 @@ const jsonLd = {
       ],
       sameAs: [
         'https://neoflowoff.agency',
+        'https://neoprotocol.space',
         'https://wa.me/556282705594'
       ],
       contactPoint: {

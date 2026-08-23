@@ -27,13 +27,15 @@ para tráfego pago, busca, crawlers e agentes de IA.
 - adapter server-side mínimo em `functions/`
 - helpers server-side compartilhados em `src/server/`, nunca dentro de
   `functions/`
-- catálogo publicado em `src/data/catalog.json`
+- catálogo publicado em `src/data/catalog.json` e hub `/servicos/`
+- página dedicada sobre a agência em `/sobre/`
+- app oficial homologado na Meta `NEØFLW ENGINE:one` (App ID `1500002841696407`)
 - textos de interface em `src/data/ui_texts.json`
 - ticker editorial no topo da home com notícias operacionais atuais
 - build de produção em `dist/`
 - deploy em Cloudflare Pages via Wrangler
 - superfícies públicas para agentes: `public/llms.txt`,
-  `public/robots.txt` e `public/sitemap.xml`
+  `public/robots.txt`, `public/sitemap.xml` e `NEO_PROTOCOL.md`
 - Google Analytics GA4 carregado por Cloudflare Google Tag Gateway:
   measurement `G-EQRKXQD7FW`, endpoint first-party `/n4py`,
   `hideOriginalIp=true` e `setUpTag=false`

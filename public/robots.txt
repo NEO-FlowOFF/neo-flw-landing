@@ -1,5 +1,5 @@
 # robots.txt for neoflowoff.agency
-# Premium SEO/AEO Configuration - NEØ Protocol
+# Premium SEO/AEO Configuration - Neo Protocol Node
 
 User-agent: *
 Content-Signal: search=yes, ai-input=yes, ai-train=no, use=reference
@@ -8,22 +8,27 @@ Allow: /index.html
 Allow: /manifest.webmanifest
 Allow: /sitemap.xml
 Allow: /llms.txt
+Allow: /NEO_PROTOCOL.md
 Allow: /sw.js
 
-# Security & Privacy - Block sensitive/technical paths
+# Security & Technical Endpoints
 Disallow: /cdn-cgi/
 Disallow: /api/
-Disallow: /*?checkout=success
-Disallow: /*?utm_*
 
 # AI & LLM Crawlers
 User-agent: GPTBot
 Allow: /
+
 User-agent: ClaudeBot
 Allow: /
+
 User-agent: PerplexityBot
 Allow: /
+
 User-agent: Google-Extended
+Allow: /
+
+User-agent: Applebot-Extended
 Allow: /
 
 Sitemap: https://neoflowoff.agency/sitemap.xml

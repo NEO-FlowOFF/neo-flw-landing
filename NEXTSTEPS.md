@@ -487,6 +487,44 @@ Definir especificacao e contratos antes de implementar:
 
 ────────────────────────────────────────
 
+────────────────────────────────────────
+
+## ⧆ Meta / Instagram Business API Setup
+
+Status: Registrado / Configurado no .env
+App ID Meta: `1500002841696407` (NEØFLW ENGINE:one)
+Instagram Business Account ID: `17841408872279531`
+Business ID: `227957544965390`
+Painel Meta Setup: `https://developers.facebook.com/apps/1500002841696407/instagram-business/API-Setup/?business_id=227957544965390#`
+Env Key: `INSTAGRAM_TOKEN`
+
+Especificações futuras:
+- Configurar login empresarial com Instagram Graph API.
+- Recebimento de Webhooks de Direct Messages (DMs), menções e comentários para roteamento aos Agentes SDR IA.
+- Sincronização de catálogo com Instagram Shopping.
+
+────────────────────────────────────────
+
+## ⧆ Gate de Acesso & Pagamento FlowPay para `/conectar-whatsapp`
+
+Status: Planejamento de Integração FlowPay
+Escopo: Proteger a conexão oficial WABA
+
+Fluxo Operacional:
+1. **Gate Imediato:** A página `/conectar-whatsapp/` opera com bloqueio por padrão (Access Gate). Para liberar o conector do `FB.login`, o cliente precisa de autorização ativa via chave de sessão (`?auth=...` ou token salvo) ou solicitar ativação ao operador via WhatsApp `+55 62 8270-5594`.
+2. **Integração FlowPay:**
+   - Cliente contrata o setup do WhatsApp Business (`SERVICO-API-WHATSAPP` ou taxa de homologação).
+   - Ao confirmar o pagamento no FlowPay, o webhook autoritativo gera uma chave única de conexão assinada (`flw_auth_<uuid>`).
+   - Cliente é redirecionado para `https://neoflowoff.agency/conectar-whatsapp/?auth=flw_auth_<uuid>` onde o `FB.login` é liberado.
+3. **Página Exclusiva do Produto de Conexão WhatsApp API:**
+   - Criação/expansão de página dedicada explicando:
+     - Diferença entre WhatsApp Business comum e WhatsApp Cloud API oficial.
+     - Vantagens de utilizar o app aprovado `NEØFLW ENGINE:one` (sem risco de banimentos).
+     - Passo a passo detalhado de implementação (documentação exigida pela Meta, verificação de empresa, número limpo e Display Name).
+     - Contratação direta com atendimento consultivo via `+55 62 8270-5594`.
+
+────────────────────────────────────────
+
 ## ⧇ Riscos
 
 - drawer virar app pesado dentro da landing
@@ -517,6 +555,7 @@ Considerar pronto apenas quando:
 
 ```text
 ────────────────────────────
-NEXTSTEPS · CHAT NO SITE
+NEXTSTEPS · CHAT NO SITE & METAS
 ────────────────────────────
 ```
+

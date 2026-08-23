@@ -76,16 +76,19 @@ pnpm run build
 
 O Astro gera rotas estáticas. O `dist/` é artefato — não edite como fonte.
 
-Rotas geradas no build atual:
+Rotas geradas no build atual (21 páginas estáticas):
 
 ```text
 /                            home
-/planos/[slug]/              6 planos completos
-/checkout/[slug]/            6 serviços unitários
-/conectar-whatsapp/          conector WhatsApp via Meta
-/privacy/                    política de privacidade única
-/terms/                      termos de serviço único
-/excluir-dados/              instruções de exclusão de dados
+/servicos/                   catálogo unificado de serviços e soluções
+/sobre/                      página institucional da agência e fundador
+/tiktok-shop/                porta de entrada para creators e lojistas
+/planos/[slug]/              4 planos de operações conectadas
+/checkout/[slug]/            8 serviços de implementação unitária
+/conectar-whatsapp/          conector WhatsApp via Meta (app NEØFLW ENGINE:one)
+/privacy/                    política de privacidade pública
+/terms/                      termos de serviço
+/excluir-dados/              instruções de exclusão de dados e LGPD
 /404.html
 ```
 
