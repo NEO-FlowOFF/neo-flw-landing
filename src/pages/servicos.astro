@@ -34,9 +34,37 @@ const getMetalIcon = (slug: string) => {
   if (s.includes('whatsapp') || s.includes('meta')) return { src: '/assets/meta_metal.png', alt: 'Meta Tech Provider' };
   return { src: '/assets/NEO_metal.png', alt: 'NEØ Protocol' };
 };
+const servicosSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'CollectionPage',
+  'name': title,
+  'description': description,
+  'url': 'https://neoflowoff.agency/servicos/',
+  'mainEntity': {
+    '@type': 'ItemList',
+    'itemListElement': products.map((p, idx) => ({
+      '@type': 'ListItem',
+      'position': idx + 1,
+      'name': p.title,
+      'url': p.category === 'Serviço' ? `https://neoflowoff.agency/checkout/${p.slug}/` : `https://neoflowoff.agency/planos/${p.slug}/`,
+      'description': p.description,
+      ...(p.price.value > 0 ? {
+        'offers': {
+          '@type': 'Offer',
+          'price': p.price.value.toString(),
+          'priceCurrency': 'BRL',
+          'availability': 'https://schema.org/InStock'
+        }
+      } : {})
+    }))
+  }
+};
 ---
 
 <Base title={title} description={description}>
+  <Fragment slot="head">
+    <script type="application/ld+json" set:html={JSON.stringify(servicosSchema)} />
+  </Fragment>
   <div class="services-hub-page">
     <HubHeader homeHref="/" anchorBase="/" />
 
@@ -173,7 +201,7 @@ const getMetalIcon = (slug: string) => {
         </div>
         <div class="custom-cta-actions">
           <a
-            href="https://wa.me/556282705594?text=Ol%C3%A1%2C%20gostaria%20de%20conversar%20sobre%20um%20projeto%20sob%20medida%20para%20minha%20empresa."
+            href="https://wa.me/556282705594?text=Ol%C3%A1%2C%20gostaria%20de%20conversar%20sobre%20um%20projeto%20sob%20medida%20para%20minha%20empresa.%20[utm:servicos-custom]"
             target="_blank"
             rel="noopener noreferrer"
             class="neo-button neo-button--primary"

@@ -6,9 +6,29 @@ import uiTexts from '../data/ui_texts.json';
 
 const title = 'Sobre a Agência · Infraestrutura Comercial & IA | NEØ FlowOFF';
 const description = 'Conheça a NEØ FlowOFF, agência de tecnologia e infraestrutura comercial em Goiânia fundada por Neø Mello. Agentes de IA, WhatsApp Business API e CRM.';
+
+const aboutSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'AboutPage',
+  'name': title,
+  'description': description,
+  'mainEntity': {
+    '@type': 'Person',
+    'name': 'Neø Mello',
+    'jobTitle': 'Founder & Arquiteto de Sistemas',
+    'worksFor': {
+      '@type': 'Organization',
+      'name': 'NEØ FlowOFF',
+      'url': 'https://neoflowoff.agency'
+    }
+  }
+};
 ---
 
 <Base title={title} description={description}>
+  <Fragment slot="head">
+    <script type="application/ld+json" set:html={JSON.stringify(aboutSchema)} />
+  </Fragment>
   <div class="about-page">
     <HubHeader homeHref="/" anchorBase="/" />
 
@@ -123,7 +143,7 @@ const description = 'Conheça a NEØ FlowOFF, agência de tecnologia e infraestr
 
           <div class="closing-actions">
             <a
-              href="https://wa.me/556282705594"
+              href="https://wa.me/556282705594?text=Ol%C3%A1!%20Estava%20lendo%20sobre%20a%20ag%C3%AAncia%20no%20site%20e%20gostaria%20de%20conversar%20sobre%20minha%20opera%C3%A7%C3%A3o.%20[utm:sobre-closing]"
               target="_blank"
               rel="noopener noreferrer"
               class="neo-button neo-button--dark"

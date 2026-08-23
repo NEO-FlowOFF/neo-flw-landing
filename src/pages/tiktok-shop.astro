@@ -7,11 +7,24 @@ const description =
 const creatorUrl = 'https://business.tiktokshop.com/pt/creator';
 const sellerUrl = 'https://seller-br.tiktok.com/account/register';
 const creatorSupportUrl =
-  'https://wa.me/556282705594?text=Ol%C3%A1%2C%20sou%20creator%20e%20quero%20entrar%20no%20TikTok%20Shop.';
+  'https://wa.me/556282705594?text=Ol%C3%A1%2C%20sou%20creator%20e%20quero%20entrar%20no%20TikTok%20Shop.%20[utm:tiktok-shop-creator]';
 const sellerSupportUrl =
-  'https://wa.me/556282705594?text=Ol%C3%A1%2C%20sou%20lojista%20e%20quero%20acelerar%20minha%20entrada%20no%20TikTok%20Shop.';
+  'https://wa.me/556282705594?text=Ol%C3%A1%2C%20sou%20lojista%20e%20quero%20acelerar%20minha%20entrada%20no%20TikTok%20Shop.%20[utm:tiktok-shop-lojista]';
 
 const currentYear = new Date().getFullYear();
+
+const tiktokShopSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'WebPage',
+  'name': title,
+  'description': description,
+  'url': 'https://neoflowoff.agency/tiktok-shop/',
+  'publisher': {
+    '@type': 'Organization',
+    'name': 'NEØ FlowOFF',
+    'url': 'https://neoflowoff.agency'
+  }
+};
 
 const benefits = [
   [
@@ -33,6 +46,9 @@ const benefits = [
 ---
 
 <Base title={title} description={description}>
+  <Fragment slot="head">
+    <script type="application/ld+json" set:html={JSON.stringify(tiktokShopSchema)} />
+  </Fragment>
   <main class="shop-entry-page">
     <header class="shop-nav">
       <a class="shop-brand" href="/" aria-label="Voltar para neoflowoff.agency">
