@@ -174,6 +174,37 @@ PROVIDER CONNECTOR  Meta Business Messaging
 
 ---
 
+## ⧆ Fluxo de Acesso & Conexão WhatsApp (Access Gate)
+
+```mermaid
+sequenceDiagram
+    actor Client
+    participant Connector as conectar-whatsapp
+    participant Session as sessionStorage
+    participant Meta as Meta
+
+    Client->>Connector: Open connector page
+    Connector->>Session: Read neo_waba_auth
+    alt Valid auth query or session key
+        Connector->>Connector: unlockGateUI
+        Client->>Connector: Enter display name
+        Client->>Meta: launchWhatsAppSignup
+    else No valid key
+        Connector->>Connector: lockGateUI
+        Client->>Connector: Submit access key
+        Connector->>Connector: isValidAccessKey
+        alt Key accepted
+            Connector->>Session: Store neo_waba_auth
+            Connector->>Connector: unlockGateUI
+            Client->>Meta: launchWhatsAppSignup
+        else Key rejected
+            Connector->>Connector: Show validation error
+        end
+    end
+```
+
+---
+
 ## ⦿ Referências
 
 - [SETUP](./SETUP.md)
@@ -182,6 +213,7 @@ PROVIDER CONNECTOR  Meta Business Messaging
 - [CLAUDE](./CLAUDE.md)
 - [GEMINI](./GEMINI.md)
 - [NEO Protocol](./NEO_PROTOCOL.md)
+- [NEXTSTEPS](./NEXTSTEPS.md)
 
 ```text
 ──────────────────────────────
