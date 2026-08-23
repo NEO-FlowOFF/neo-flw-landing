@@ -37,7 +37,7 @@ e os **próximos passos de arquitetura**.
 - [x] **1.3. Correção de Diagnóstico Crítico do TikTok Pixel:**
   - Inclusão do parâmetro `content_id` no **nível raiz** do payload do `ttq.track` com o ID Canônico do Catálogo (`SERVICO-...` / `PLANO-...`).
   - Ativação de cookies primários (`ttq.enableCookie()`) no snippet global do [`src/layouts/Base.astro`](file:///Users/nettomello/neomello/NEO-FlowOFF/neo-flw-landing/src/layouts/Base.astro) para Advanced Matching.
-  - Implementação dos eventos completos do funil: `ViewContent` (ao carregar), `AddToCart` e `InitiateCheckout` (ao clicar em Pagar via PIX), e `CompletePayment` / `Purchase` (ao clicar no WhatsApp de fechamento).
+  - Implementação dos eventos completos do funil: `ViewContent` (ao carregar), `AddToCart` e `InitiateCheckout` (ao clicar em Pagar via PIX), e `Contact` / `Lead` (ao clicar no WhatsApp de fechamento).
 - [•] **1.4. Monitoramento da Telemetria TikTok & Meta Events Manager:**
   - Aguardar a janela de propagação dos novos eventos disparados em `neoflowoff.agency` para confirmação da queda das sinalizações de diagnóstico no painel do TikTok Ads.
 
