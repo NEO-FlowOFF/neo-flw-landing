@@ -1719,6 +1719,10 @@ body::selection {
     transform 0.16s ease,
     border-color 0.18s ease,
     background 0.18s ease;
+  touch-action: manipulation;
+  -webkit-tap-highlight-color: transparent;
+  appearance: none;
+  appearance: none;
 }
 
 .detail-action [data-lucide] {

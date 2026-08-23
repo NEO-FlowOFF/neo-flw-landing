@@ -62,7 +62,7 @@ review geral ou scripts simples.
 - mantenha `robots.txt`, `sitemap.xml` e `llms.txt`
   semanticamente alinhados
 - gere sempre os feeds separados (`meta_catalog_feed.csv` e `tiktok_generic_catalog_feed.csv`) a cada build usando `scripts/generate_feeds.py`
-- mantenha IDs de pixel e feeds unificados (unaccented uppercase) para correspondência perfeita de dados. No TikTok, use o fallback de frete 'Not applicable' e inclua 'id'/'condition' no feed.
+- mantenha IDs de pixel e feeds unificados (unaccented uppercase) para correspondência perfeita de dados. Use ID numérico 503254 no Meta, fallback de frete 'Not applicable' no TikTok e flowpay_url no catalog.json para checkouts.
 
 ────────────────────────────────────────
 

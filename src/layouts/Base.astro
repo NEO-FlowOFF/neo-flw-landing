@@ -12,7 +12,7 @@ const ogImageUrl = new URL('/assets/og-image.png', platformBaseUrl).toString();
 const brandOfficialName = 'NEØ FlowOFF';
 const brandSearchName = 'Neo FlowOFF Agency';
 const brandAlternateNames = [brandOfficialName, 'NeoFlowOFF', 'NEO FlowOFF', 'neoflowoff.agency', 'Neo Protocol Node', 'Neo Protocol'];
-const brandCategoryDescription = 'Infraestrutura Comercial, Automação de Processos, Integração de CRM e Agentes de IA Customizados em Goiânia, GO.';
+const brandCategoryDescription = 'Infraestrutura Comercial, Automação de Processos, Integração de CRM e Agentes de IA Customizados para Empresas no Brasil e no Exterior.';
 const title = Astro.props.title || uiTexts.meta.default_title;
 const description = Astro.props.description || uiTexts.meta.default_description;
 const keywords = uiTexts.meta.keywords.join(', ');
@@ -23,6 +23,7 @@ var e=ttq._i[t]||[],n=0;n<ttq.methods.length;n++)ttq.setAndDefer(e,ttq.methods[n
 ;n.type="text/javascript",n.async=!0,n.src=r+"?sdkid="+e+"&lib="+t;e=document.getElementsByTagName("script")[0];e.parentNode.insertBefore(n,e)};
 
   ttq.load(${JSON.stringify(tiktokPixelId)});
+  ttq.enableCookie();
   ttq.page();
 }(window, document, 'ttq');
 ` : '';
@@ -115,18 +116,16 @@ const jsonLd = {
       priceRange: '$$',
       address: {
         '@type': 'PostalAddress',
-        addressLocality: 'Goiânia',
-        addressRegion: 'GO',
         addressCountry: 'BR'
       },
       areaServed: [
         {
-          '@type': 'City',
-          name: 'Goiânia'
-        },
-        {
           '@type': 'Country',
           name: 'Brasil'
+        },
+        {
+          '@type': 'AdministrativeArea',
+          name: 'Global'
         }
       ],
       knowsAbout: [
@@ -198,7 +197,7 @@ const jsonLd = {
     <meta property="og:image:type" content="image/png" />
     <meta property="og:image:width" content="1731" />
     <meta property="og:image:height" content="909" />
-    <meta property="og:image:alt" content="Neo FlowOFF Agency - Infraestrutura Comercial, CRM e IA em Goiânia" />
+    <meta property="og:image:alt" content="Neo FlowOFF Agency - Infraestrutura Comercial, CRM e Agentes de IA" />
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:title" content={title} />
     <meta name="twitter:description" content={description} />

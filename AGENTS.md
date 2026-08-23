@@ -64,11 +64,9 @@ Qualquer agente que atuar neste repositório DEVE seguir estas regras.
 - **Feeds Separados (Meta e TikTok):** Gerados a cada build via `python3 scripts/generate_feeds.py`.
   - **Meta Commerce Manager:** `public/meta_catalog_feed.csv` formatado nas especificações do Commerce Manager com UTM tags.
   - **TikTok Ads Manager:** `public/tiktok_generic_catalog_feed.csv` formatado para Generic Catalog (*Other products and services*), usando *E-commerce Industry* e *Shipping: Not applicable* como fallback de homologação. Contém `id`, `condition` e UTM tags.
-- **Checkout/FlowPay Legado:** `js/payment.js` ainda existe com lógica
-  de UTM, DataLayer e fallback de API, mas não há rota ativa de
-  cobrança neste checkout Astro. Antes de prometer PIX, cobrança ou
-  `/api/create-charge-landing`, verificar se a rota é servida por
-  outro nó do ecossistema ou por integração externa.
+- **Integração FlowPay (Links Diretos de Checkout):** Os produtos em `src/data/catalog.json` contêm o campo `flowpay_url` apontando para checkouts compartilháveis da FlowPay (`https://app.flowpay.cash/checkout/...`). O botão `.detail-action--primary` em `/checkout/<slug>` e `/planos/<slug>` abre esses links em nova aba, disparando eventos de Pixel (`AddToCart` e `InitiateCheckout`). O botão `.detail-action--secondary` mantém o contato consultivo via WhatsApp oficial `+55 62 8270-5594`.
+- **Rastreamento de Pixels e Funil:** `Base.astro` inicializa Meta Pixel e TikTok Pixel (`ttq.enableCookie()`). Rotas de checkout e planos disparam `ViewContent`, `AddToCart`, `InitiateCheckout` e `CompletePayment`/`Purchase` com `content_id` canônico (`SERVICO-...` / `PLANO-...`) correspondente 100% aos feeds CSV.
+- **Taxonomia de Feeds:** `scripts/generate_feeds.py` padroniza `fb_product_category: 503254` e `google_product_category: 503254` para evitar avisos no Meta Commerce Manager.
 - **Embedded Signup Meta:** `functions/api/meta/embedded-signup.js`
   existe apenas como adapter server-side para receber o authorization
   code do browser e encaminhar para o backend soberano

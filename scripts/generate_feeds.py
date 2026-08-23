@@ -38,7 +38,7 @@ for p in products:
         "link": meta_utm_link,
         "image_link": p["image_link"],
         "brand": p["brand"],
-        "fb_product_category": "Business & Industrial > Business Services",
+        "fb_product_category": "503254",
         "google_product_category": "503254",
         "custom_label_0": p["category"]
     }
