@@ -4,15 +4,19 @@
 ```text
 Status: ACTIVE
 Scope: repository-local
-Last reviewed: 2026-08-10
+Last reviewed: 2026-08-23
 ```
 
 ## Current Decisions
 
-- App ID canônico: `1500002841696407`.
+- App ID canônico Meta: `1500002841696407` (`NEØFLW ENGINE:one`), com avaliação anual e renovação de acesso a dados aprovadas.
+- Instagram Business API Account ID: `17841408872279531`, Business ID `227957544965390`.
 - Graph API public SDK version: `v25.0`.
 - Facebook Login for Business Configuration ID: `1322930417561011`.
 - Legal/App Review public pages are `/privacy/`, `/terms/` and `/excluir-dados/`.
+- Catálogo unificado em `/servicos/` e página institucional em `/sobre/`.
+- Nó canônico no ecossistema Neo Protocol: `NEO_PROTOCOL.md`.
+- Rastreamento UTM obrigatório em todos os CTAs externos (`wa.me`) e feeds de anúncios.
 - Data Deletion callback remains in this repo at `/api/meta/data-deletion`.
 - Embedded Signup adapter is forward-only to `neo-provider-messaging`.
 - Canonical webhook belongs to `https://whatsapp.neoflowoff.agency/webhook`.

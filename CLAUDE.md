@@ -154,9 +154,12 @@ sem antes combinar uma refatoracao de design system.
 
 Feeds separados para Meta e TikTok são gerados a cada build via `scripts/generate_feeds.py`.
 
-Ao mexer em produtos, confirme:
-- a home e as rotas dinâmicas
-- os arquivos XML/TXT: `sitemap.xml` e `llms.txt`
+Ao mexer em produtos ou navegação, confirme:
+- o catálogo unificado `/servicos/` e a página `/sobre/`
+- a home e as rotas dinâmicas (`/planos/` e `/checkout/`)
+- o app homologado Meta `NEØFLW ENGINE:one` e conector `/conectar-whatsapp/`
+- o rastreamento UTM explícito em todos os CTAs externos (`wa.me`)
+- os arquivos XML/TXT: `sitemap.xml`, `robots.txt`, `llms.txt` e `NEO_PROTOCOL.md`
 - os feeds de anúncios: `meta_catalog_feed.csv` e `tiktok_generic_catalog_feed.csv`
 
 ────────────────────────────────────────

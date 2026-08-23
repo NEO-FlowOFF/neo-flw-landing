@@ -36,7 +36,9 @@ Qualquer agente que atuar neste repositório DEVE seguir estas regras.
 - **Verificação de Domínio Meta:** O token ativo é `zq0xygs8v9s714m5039mijjh0wowyj`. Ele é carregado em `src/layouts/Base.astro` a partir de `src/data/config.json` e deve permanecer no `<head>` das rotas Astro.
 - **Rastreamento de Pixels:** Meta Pixel ID (`2051453138833455`) e TikTok Pixel ID (`D9IQURBC77U84G6G883G`) são carregados em `src/layouts/Base.astro` a partir de `src/data/config.json`. Eventos do funil de conversão (`ViewContent`, `InitiateCheckout`, `CompletePayment`/`Purchase`) nas rotas dinâmicas de planos e serviços são disparados via tags de script inline no cliente.
 - **Safe Page Legada Removida:** `middleware.js` foi removido deste checkout. Não reativar fluxo de crawler/safe-page, renderização condicional por User-Agent ou proxy silencioso sem decisão explícita de arquitetura e revisão de compliance.
-- **WhatsApp do Agent:** O contato oficial ativo é o **`+55 62 8270-5594`**. Em links de redirecionamento, use estritamente o formato internacional limpo: `https://wa.me/556282705594` (sem o caractere `+`).
+- **WhatsApp do Agent & Rastreamento UTM:** O contato oficial ativo é o **`+55 62 8270-5594`** (formato limpo `https://wa.me/556282705594`). Todos os CTAs externos de WhatsApp e links de conversão DEVEM conter parâmetros UTM explícitos no corpo da mensagem ou query string (ex: `[utm:home-hero]`, `[utm:checkout-<slug>]`, `[utm:servicos-custom]`) para rastreabilidade no CRM.
+- **App Homologado Meta NEØFLW ENGINE:one:** O aplicativo oficial da agência na Meta é o **`NEØFLW ENGINE:one`** (App ID `1500002841696407`), homologado com renovação anual de acesso a dados concluída. O asset visual oficial é `public/assets/EngineOne.png`.
+- **Instagram Business API:** Configurado sob o mesmo App ID com a conta empresarial `17841408872279531` e Business ID `227957544965390`. Token mapeado como `INSTAGRAM_TOKEN` no `.env`.
 - **URLs para aprovação Meta:** para submissão/App Review use estritamente as rotas Astro
   públicas `https://neoflowoff.agency/privacy/`,
   `https://neoflowoff.agency/terms/` e
@@ -52,14 +54,16 @@ Qualquer agente que atuar neste repositório DEVE seguir estas regras.
 ---
 
 ## 3. Arquitetura de Conversão & Checkout
-- **Links da Planilha (`neo-digital-assets-book`):** Os serviços oferecidos no ecossistema estão divididos semanticamente em duas categorias de rotas:
+- **Rotas de Catálogo e Produtos:**
+  - **Catálogo Unificado em `/servicos/`:** Hub visual com filtros dinâmicos de categoria e selos de tecnologia.
+  - **Página Institucional em `/sobre/`:** Manifesto, engenharia comercial, founder Neø Mello e busto 3D de papel.
   - **Planos (Pacotes Completos) em `/planos/<slug>`:** Ex: `/planos/agente-sdr`, `/planos/agents-ia`, `/planos/crm-inteligente`.
   - **Checkouts (Serviços Unitários) em `/checkout/<slug>`:** Ex: `/checkout/api-whatsapp`, `/checkout/app-meta`, `/checkout/webapp-lp`.
 - **Catálogo Publicado:** `src/data/catalog.json` alimenta a home e as rotas dinâmicas do site. Seus IDs devem ser limpos e sem acentos (ex: `SERVICO-API-WHATSAPP`) para coincidir 100% com o pixel.
 - **Catálogo Canônico Soberano:** `~/neomello/_standards/services_canonical.json` é a fonte soberana global do operador com todas as especificações técnicas, preços e escopos. Dev agents podem lê-lo para contexto cruzado, mas não devem editá-lo sem ordem explícita.
 - **Feeds Separados (Meta e TikTok):** Gerados a cada build via `python3 scripts/generate_feeds.py`.
-  - **Meta Commerce Manager:** `public/meta_catalog_feed.csv` formatado nas especificações do Commerce Manager.
-  - **TikTok Ads Manager:** `public/tiktok_generic_catalog_feed.csv` formatado para Generic Catalog (*Other products and services*), usando *E-commerce Industry* e *Shipping: Not applicable* como fallback de homologação. Contém `id` e `condition` no feed para evitar rejeições.
+  - **Meta Commerce Manager:** `public/meta_catalog_feed.csv` formatado nas especificações do Commerce Manager com UTM tags.
+  - **TikTok Ads Manager:** `public/tiktok_generic_catalog_feed.csv` formatado para Generic Catalog (*Other products and services*), usando *E-commerce Industry* e *Shipping: Not applicable* como fallback de homologação. Contém `id`, `condition` e UTM tags.
 - **Checkout/FlowPay Legado:** `js/payment.js` ainda existe com lógica
   de UTM, DataLayer e fallback de API, mas não há rota ativa de
   cobrança neste checkout Astro. Antes de prometer PIX, cobrança ou
@@ -160,15 +164,16 @@ Qualquer agente que atuar neste repositório DEVE seguir estas regras.
 
 ---
 
-## 6. Superfícies Públicas para Agentes
+## 6. Superfícies Públicas, SEO e AEO
 
-- `public/llms.txt` deve ser Markdown com H1 e links públicos.
-- `public/sitemap.xml` deve listar apenas rotas públicas reais.
-- `public/robots.txt` deve estar semanticamente alinhado ao sitemap
-  e ao `llms.txt`.
+- `public/llms.txt` deve ser Markdown com H1 e links públicos apontando para `/NEO_PROTOCOL.md`.
+- `NEO_PROTOCOL.md` na raiz define a topologia canônica do nó Neo Protocol.
+- `public/sitemap.xml` deve listar todas as 21 rotas públicas reais sincronizadas.
+- `public/robots.txt` deve estar semanticamente alinhado ao sitemap, `llms.txt` e crawlers de IA.
+- Marcação Schema.org JSON-LD obrigatória em todas as páginas com `@graph` estruturado.
 - As superfícies legais públicas são `/privacy/`, `/terms/` e `/excluir-dados/`.
   `/api/meta/data-deletion` é callback de API para a Meta.
-- Rotas públicas de produto incluem `/planos/<slug>/`
+- Rotas públicas de produto incluem `/servicos/`, `/sobre/`, `/planos/<slug>/`
   e `/checkout/<slug>/`.
 - Nunca publicar segredos, critérios internos, fluxos privados,
   exceções comerciais ou credenciais nessas superfícies.

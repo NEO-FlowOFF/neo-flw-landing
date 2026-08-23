@@ -1,0 +1,634 @@
+---
+import Base from '../layouts/Base.astro';
+import HubHeader from '../components/HubHeader.astro';
+import BrandFooter from '../components/BrandFooter.astro';
+import catalogData from '../data/catalog.json';
+
+const title = 'Catálogo de Serviços & Soluções | NEØ FlowOFF';
+const description = 'Catálogo completo de serviços de infraestrutura comercial, WhatsApp Business API, CRM, automações, landing pages e agentes de IA da neoflowoff.agency.';
+
+const products = catalogData.products;
+
+const categories = [
+  { id: 'todos', label: 'Todos os Serviços' },
+  { id: 'diagnostico', label: 'Diagnósticos & Setups' },
+  { id: 'meta', label: 'WhatsApp & Meta' },
+  { id: 'automacao', label: 'CRM & Automações' },
+  { id: 'ia', label: 'Agentes de IA' },
+  { id: 'midia', label: 'Mídia & Performance' },
+];
+
+const getCategoryFilter = (slug: string, category: string, displayCategory: string = '') => {
+  const s = slug.toLowerCase();
+  if (s.includes('diagnostico') || s.includes('auditoria') || s.includes('setup-inicial')) return 'diagnostico';
+  if (s.includes('whatsapp') || s.includes('meta')) return 'meta';
+  if (s.includes('crm') || s.includes('fluxo') || s.includes('automacao') || s.includes('dashboard')) return 'automacao';
+  if (s.includes('agent') || s.includes('sdr') || s.includes('ia')) return 'ia';
+  if (s.includes('aquisicao') || s.includes('trafego') || s.includes('google')) return 'midia';
+  return 'diagnostico';
+};
+
+const getMetalIcon = (slug: string) => {
+  const s = slug.toLowerCase();
+  if (s.includes('tiktok')) return { src: '/assets/tiktok_metal.png', alt: 'TikTok Partner' };
+  if (s.includes('whatsapp') || s.includes('meta')) return { src: '/assets/meta_metal.png', alt: 'Meta Tech Provider' };
+  return { src: '/assets/NEO_metal.png', alt: 'NEØ Protocol' };
+};
+const servicosSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'CollectionPage',
+  'name': title,
+  'description': description,
+  'url': 'https://neoflowoff.agency/servicos/',
+  'mainEntity': {
+    '@type': 'ItemList',
+    'itemListElement': products.map((p, idx) => ({
+      '@type': 'ListItem',
+      'position': idx + 1,
+      'item': {
+        '@type': p.category === 'Serviço' ? 'Service' : 'Product',
+        'name': p.title,
+        'url': p.category === 'Serviço' ? `https://neoflowoff.agency/checkout/${p.slug}/` : `https://neoflowoff.agency/planos/${p.slug}/`,
+        'description': p.description,
+        ...(p.price.value > 0 ? {
+          'offers': {
+            '@type': 'Offer',
+            'price': p.price.value.toString(),
+            'priceCurrency': 'BRL',
+            'availability': 'https://schema.org/InStock'
+          }
+        } : {})
+      }
+    }))
+  }
+};
+---
+
+<Base title={title} description={description}>
+  <Fragment slot="head">
+    <script type="application/ld+json" set:html={JSON.stringify(servicosSchema)} />
+  </Fragment>
+  <div class="services-hub-page">
+    <HubHeader homeHref="/" anchorBase="/" />
+
+    <!-- HERO DO CATÁLOGO -->
+    <header class="services-hero">
+      <div class="services-hero-inner">
+        <!-- BARRA METÁLICA DE PLATAFORMAS INTEGRADAS -->
+        <div class="metal-pillars-bar" aria-label="Plataformas e Ecossistemas">
+          <div class="metal-pillar-item">
+            <img src="/assets/NEO_metal.png" alt="NEØ Core" width="34" height="34" loading="eager" decoding="async" />
+            <span>NEØ Core &amp; IA</span>
+          </div>
+          <span class="pillar-dot" aria-hidden="true">◆</span>
+          <div class="metal-pillar-item">
+            <img src="/assets/EngineOne.png" alt="NEØFLW ENGINE:one" width="26" height="26" loading="eager" decoding="async" style="border-radius: 6px;" />
+            <span>NEØFLW ENGINE:one</span>
+          </div>
+          <span class="pillar-dot" aria-hidden="true">◆</span>
+          <div class="metal-pillar-item">
+            <img src="/assets/meta_metal.png" alt="Meta Tech Provider" width="34" height="34" loading="eager" decoding="async" />
+            <span>Meta Tech Provider</span>
+          </div>
+          <span class="pillar-dot" aria-hidden="true">◆</span>
+          <div class="metal-pillar-item">
+            <img src="/assets/tiktok_metal.png" alt="TikTok Partner" width="34" height="34" loading="eager" decoding="async" />
+            <span>TikTok Partner</span>
+          </div>
+        </div>
+
+        <div class="hero-kicker">
+          <span class="kicker-dot" aria-hidden="true"></span>
+          <span>Catálogo Oficial de Serviços · neoflowoff.agency</span>
+        </div>
+
+        <h1>Serviços &amp; Infraestrutura Comercial</h1>
+        <p class="hero-lead">
+          Diagnósticos ágeis, setups oficiais de mensageria, CRM, páginas de alta conversão e agentes de IA.
+          Cada solução possui escopo validado, entrega transparente e contratação modular.
+        </p>
+
+        <!-- FILTROS DE CATEGORIA -->
+        <div class="filter-bar" role="tablist" aria-label="Filtrar serviços por categoria">
+          {categories.map((cat, idx) => (
+            <button
+              class={`filter-pill ${idx === 0 ? 'is-active' : ''}`}
+              data-filter={cat.id}
+              role="tab"
+              aria-selected={idx === 0 ? 'true' : 'false'}
+            >
+              {cat.label}
+            </button>
+          ))}
+        </div>
+      </div>
+    </header>
+
+    <!-- GRID DE PRODUTOS/SERVIÇOS -->
+    <main class="services-container">
+      <div class="services-grid" id="services-grid">
+        {products.map((p) => {
+          const filterGroup = getCategoryFilter(p.slug, p.category, p.display_category);
+          const targetUrl = p.category === 'Serviço' ? `/checkout/${p.slug}` : `/planos/${p.slug}`;
+          const isFeatured = p.featured;
+          const metalIcon = getMetalIcon(p.slug);
+
+          return (
+            <article
+              class={`service-card ${isFeatured ? 'service-card--featured' : ''}`}
+              data-category={filterGroup}
+            >
+              <div class="service-card-top">
+                <div class="service-category-group">
+                  <img
+                    src={metalIcon.src}
+                    alt={metalIcon.alt}
+                    class="card-metal-icon"
+                    width="28"
+                    height="28"
+                    loading="lazy"
+                    decoding="async"
+                  />
+                  <span class="service-category-badge">{p.display_category || p.category}</span>
+                </div>
+
+                {p.price_display && (
+                  <div class="service-price-tag">
+                    <small>{p.price_label || 'A partir de'}</small>
+                    <strong>{p.price_display}</strong>
+                  </div>
+                )}
+              </div>
+
+              <div class="service-card-body">
+                {p.headline && <span class="service-headline">{p.headline}</span>}
+                <h2>
+                  <a href={targetUrl} class="service-title-link">
+                    {p.title}
+                  </a>
+                </h2>
+                <p class="service-desc">{p.description}</p>
+
+                {p.features && p.features.length > 0 && (
+                  <ul class="service-features-list">
+                    {p.features.slice(0, 3).map((f) => (
+                      <li>
+                        <i data-lucide="check" aria-hidden="true"></i>
+                        <span>{f}</span>
+                      </li>
+                    ))}
+                  </ul>
+                )}
+              </div>
+
+              <div class="service-card-footer">
+                <a href={targetUrl} class="neo-button neo-button--service">
+                  <span>Ver Especificação Completa</span>
+                  <i data-lucide="arrow-up-right" aria-hidden="true"></i>
+                </a>
+              </div>
+            </article>
+          );
+        })}
+      </div>
+
+      <!-- BANNER DE PROJETOS CUSTOM / ENTERPRISE -->
+      <section class="custom-cta-band">
+        <div class="custom-cta-copy">
+          <span class="custom-kicker">DEMANDAS ESPECÍFICAS</span>
+          <h3>Precisa de uma arquitetura sob medida?</h3>
+          <p>
+            Desenvolvemos integrações corporativas complexas, data lakehouses, ecossistemas multi-agente
+            e pipelines dedicadas de mensageria para operações em escala.
+          </p>
+        </div>
+        <div class="custom-cta-actions">
+          <a
+            href="https://wa.me/556282705594?text=Ol%C3%A1%2C%20gostaria%20de%20conversar%20sobre%20um%20projeto%20sob%20medida%20para%20minha%20empresa.%20[utm:servicos-custom]"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="neo-button neo-button--primary"
+          >
+            <i data-lucide="message-circle" aria-hidden="true"></i>
+            <span>Validar Escopo com Especialista</span>
+          </a>
+        </div>
+      </section>
+    </main>
+
+    <BrandFooter />
+  </div>
+
+  <script>
+    // Filtro interativo no client-side
+    const filterButtons = document.querySelectorAll<HTMLButtonElement>('.filter-pill');
+    const cards = document.querySelectorAll<HTMLElement>('.service-card');
+
+    filterButtons.forEach((btn) => {
+      btn.addEventListener('click', () => {
+        const filter = btn.dataset.filter || 'todos';
+
+        filterButtons.forEach((b) => {
+          b.classList.remove('is-active');
+          b.setAttribute('aria-selected', 'false');
+        });
+        btn.classList.add('is-active');
+        btn.setAttribute('aria-selected', 'true');
+
+        cards.forEach((card) => {
+          const cardCat = card.dataset.category;
+          if (filter === 'todos' || cardCat === filter) {
+            card.style.display = 'flex';
+          } else {
+            card.style.display = 'none';
+          }
+        });
+      });
+    });
+  </script>
+</Base>
+
+<style>
+  .services-hub-page {
+    min-height: 100vh;
+    background: #09090b;
+    color: #f4f4f5;
+  }
+
+  .services-hero {
+    padding: clamp(6rem, 12vw, 9rem) 1.25rem 3rem;
+    background:
+      radial-gradient(circle at 50% 0%, rgba(224, 255, 0, 0.08) 0%, transparent 60%),
+      linear-gradient(180deg, #111114 0%, #09090b 100%);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  }
+
+  .services-hero-inner {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  /* BARRA METÁLICA DE PILARES */
+  .metal-pillars-bar {
+    display: inline-flex;
+    align-items: center;
+    gap: 1.25rem;
+    padding: 0.6rem 1.2rem;
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    border-radius: 9999px;
+    margin-bottom: 1.75rem;
+    flex-wrap: wrap;
+    backdrop-filter: blur(12px);
+  }
+
+  .metal-pillar-item {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.6rem;
+  }
+
+  .metal-pillar-item img {
+    width: 24px;
+    height: 24px;
+    object-fit: contain;
+    filter: drop-shadow(0 2px 8px rgba(0, 0, 0, 0.6));
+  }
+
+  .metal-pillar-item span {
+    font-family: var(--mono);
+    font-size: 0.74rem;
+    font-weight: 800;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: #e4e4e7;
+  }
+
+  .pillar-dot {
+    color: var(--acid);
+    font-size: 0.55rem;
+  }
+
+  .hero-kicker {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.6rem;
+    font-family: var(--mono);
+    font-size: 0.76rem;
+    font-weight: 800;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--acid);
+    margin-bottom: 1.25rem;
+  }
+
+  .kicker-dot {
+    width: 0.5rem;
+    height: 0.5rem;
+    border-radius: 50%;
+    background: var(--acid);
+    box-shadow: 0 0 12px var(--acid);
+  }
+
+  .services-hero h1 {
+    font-size: clamp(2.5rem, 6vw, 4.8rem);
+    line-height: 1;
+    font-weight: 900;
+    letter-spacing: -0.04em;
+    text-transform: uppercase;
+    margin: 0 0 1.2rem;
+    color: #ffffff;
+  }
+
+  .hero-lead {
+    max-width: 780px;
+    font-size: clamp(1rem, 2vw, 1.2rem);
+    line-height: 1.65;
+    color: #a1a1aa;
+    margin: 0 0 2.5rem;
+  }
+
+  .filter-bar {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.6rem;
+    width: 100%;
+    margin-top: 0.5rem;
+  }
+
+  .filter-pill {
+    background: rgba(255, 255, 255, 0.04);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    color: #d4d4d8;
+    padding: 0.65rem 1.15rem;
+    border-radius: 9999px;
+    font-family: var(--mono);
+    font-size: 0.78rem;
+    font-weight: 700;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    cursor: pointer;
+    transition: all 0.2s ease;
+  }
+
+  .filter-pill:hover {
+    background: rgba(255, 255, 255, 0.08);
+    border-color: rgba(255, 255, 255, 0.25);
+    color: #ffffff;
+  }
+
+  .filter-pill.is-active {
+    background: var(--acid);
+    border-color: var(--acid);
+    color: #000000;
+    font-weight: 900;
+  }
+
+  .services-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 4rem 1.25rem 6rem;
+  }
+
+  .services-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
+    gap: 1.5rem;
+  }
+
+  .service-card {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    background: #131316;
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 1.25rem;
+    padding: 2rem;
+    transition: transform 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease;
+  }
+
+  .service-card:hover {
+    transform: translateY(-4px);
+    border-color: rgba(224, 255, 0, 0.35);
+    box-shadow: 0 16px 40px rgba(0, 0, 0, 0.4);
+  }
+
+  .service-card--featured {
+    border-color: rgba(224, 255, 0, 0.3);
+    background: linear-gradient(180deg, #18181d 0%, #131316 100%);
+  }
+
+  .service-card-top {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 1rem;
+    margin-bottom: 1.5rem;
+  }
+
+  .service-category-group {
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+  }
+
+  .card-metal-icon {
+    width: 24px;
+    height: 24px;
+    object-fit: contain;
+    filter: drop-shadow(0 2px 6px rgba(0, 0, 0, 0.5));
+    flex-shrink: 0;
+  }
+
+  .service-category-badge {
+    display: inline-block;
+    font-family: var(--mono);
+    font-size: 0.68rem;
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--acid);
+    background: rgba(224, 255, 0, 0.08);
+    border: 1px solid rgba(224, 255, 0, 0.2);
+    padding: 0.3rem 0.65rem;
+    border-radius: 0.4rem;
+  }
+
+  .service-price-tag {
+    text-align: right;
+    flex-shrink: 0;
+  }
+
+  .service-price-tag small {
+    display: block;
+    font-size: 0.65rem;
+    font-family: var(--mono);
+    color: #71717a;
+    text-transform: uppercase;
+  }
+
+  .service-price-tag strong {
+    font-size: 1.15rem;
+    font-weight: 900;
+    color: #ffffff;
+    font-family: var(--mono);
+  }
+
+  .service-headline {
+    display: block;
+    font-family: var(--mono);
+    font-size: 0.72rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    color: #a1a1aa;
+    margin-bottom: 0.4rem;
+    letter-spacing: 0.05em;
+  }
+
+  .service-card h2 {
+    font-size: 1.35rem;
+    line-height: 1.25;
+    font-weight: 800;
+    margin: 0 0 0.85rem;
+  }
+
+  .service-title-link {
+    color: #ffffff;
+    text-decoration: none;
+  }
+
+  .service-title-link:hover {
+    color: var(--acid);
+  }
+
+  .service-desc {
+    font-size: 0.9rem;
+    line-height: 1.6;
+    color: #a1a1aa;
+    margin-bottom: 1.5rem;
+  }
+
+  .service-features-list {
+    list-style: none;
+    padding: 0;
+    margin: 0 0 2rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.6rem;
+  }
+
+  .service-features-list li {
+    display: flex;
+    align-items: flex-start;
+    gap: 0.6rem;
+    font-size: 0.82rem;
+    color: #d4d4d8;
+    line-height: 1.45;
+  }
+
+  .service-features-list i {
+    width: 0.95rem;
+    height: 0.95rem;
+    color: var(--acid);
+    flex-shrink: 0;
+    margin-top: 0.15rem;
+  }
+
+  .service-card-footer {
+    margin-top: auto;
+    padding-top: 1.25rem;
+    border-top: 1px solid rgba(255, 255, 255, 0.06);
+  }
+
+  .neo-button--service {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: rgba(255, 255, 255, 0.04);
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    color: #ffffff;
+    padding: 0.75rem 1rem;
+    border-radius: 0.65rem;
+    font-weight: 800;
+    font-size: 0.82rem;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    text-decoration: none;
+    transition: all 0.2s ease;
+  }
+
+  .neo-button--service:hover {
+    background: var(--acid);
+    border-color: var(--acid);
+    color: #000000;
+  }
+
+  .custom-cta-band {
+    margin-top: 4rem;
+    background: radial-gradient(circle at 10% 50%, rgba(224, 255, 0, 0.08) 0%, transparent 60%), #131316;
+    border: 1px solid rgba(224, 255, 0, 0.25);
+    border-radius: 1.5rem;
+    padding: clamp(2rem, 5vw, 3.5rem);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 2rem;
+  }
+
+  .custom-cta-copy {
+    max-width: 650px;
+  }
+
+  .custom-kicker {
+    display: block;
+    font-family: var(--mono);
+    font-size: 0.72rem;
+    font-weight: 800;
+    letter-spacing: 0.12em;
+    color: var(--acid);
+    margin-bottom: 0.5rem;
+  }
+
+  .custom-cta-copy h3 {
+    font-size: clamp(1.6rem, 3.5vw, 2.4rem);
+    font-weight: 900;
+    margin: 0 0 0.75rem;
+    line-height: 1.15;
+    text-transform: uppercase;
+  }
+
+  .custom-cta-copy p {
+    font-size: 0.95rem;
+    line-height: 1.6;
+    color: #a1a1aa;
+    margin: 0;
+  }
+
+  .custom-cta-actions .neo-button {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.6rem;
+    white-space: nowrap;
+    padding: 1rem 1.5rem;
+  }
+
+  @media (max-width: 768px) {
+    .services-grid {
+      grid-template-columns: 1fr;
+    }
+    .custom-cta-band {
+      flex-direction: column;
+      align-items: flex-start;
+    }
+    .custom-cta-actions,
+    .custom-cta-actions .neo-button {
+      width: 100%;
+      justify-content: center;
+    }
+  }
+</style>
