@@ -15,7 +15,60 @@ Este documento cobre ambiente local, build, deploy e validação.
 
 ---
 
-## 1. Pré-requisitos
+## 1. Stack & Tecnologias
+
+```text
+Astro        v7       static site generator
+TypeScript   v7       Astro/component scripts
+CSS                   src/styles/global.css (design system)
+Icons                 local data-lucide SVG subset
+Fonts                 Figtree + DM Mono via Google Fonts
+PWA                   public/manifest.webmanifest + public/sw.js
+Hosting               Cloudflare Pages
+Serverless            Cloudflare Pages Functions (functions/)
+Deploy CLI            wrangler v4 (pnpm exec)
+Analytics             GA4 via Cloudflare Google Tag Gateway (/n4py)
+Feeds                 Python scripts/generate_feeds.py (Meta e TikTok)
+```
+
+---
+
+## 2. Estrutura do Repositório
+
+```text
+neo-flw-landing/
+├── src/
+│   ├── components/          # HubHeader, BrandFooter, ProductCard
+│   ├── data/                # catálogo (catalog.json), config e textos
+│   ├── layouts/             # Base.astro com SEO, PWA, schema e pixels
+│   ├── pages/               # rotas: /, /servicos/, /sobre/, /tiktok-shop/, /planos/, /checkout/, /conectar-whatsapp/, compliance
+│   ├── server/              # helpers server-side compartilhados
+│   └── styles/              # design system global (global.css, spinner.css)
+├── public/
+│   ├── assets/              # imagens otimizadas, logos, selos e EngineOne.png
+│   ├── llms.txt             # mapa público para agentes de IA
+│   ├── manifest.webmanifest # manifesto PWA
+│   ├── robots.txt           # política de crawlers e IA
+│   ├── sitemap.xml          # sitemap XML com as 21 rotas públicas
+│   ├── meta_catalog_feed.csv
+│   ├── tiktok_generic_catalog_feed.csv
+│   └── sw.js                # service worker conservador
+├── functions/
+│   └── api/                 # endpoints server-side Cloudflare Pages Functions
+├── scripts/
+│   └── generate_feeds.py    # gerador dinâmico de feeds de catálogo
+├── tests/                   # testes unitários e de conformidade SSR
+├── drafts/                  # insumos canônicos do operador
+├── docs/                    # documentação de suporte
+├── pnpm-workspace.yaml      # workspace local vazio: packages: []
+├── pnpm-lock.yaml           # lockfile soberano deste child repo
+├── wrangler.jsonc           # config Cloudflare Pages
+└── Makefile                 # automação de tarefas e governança
+```
+
+---
+
+## 3. Pré-requisitos
 
 ```text
 pnpm        >= 11
@@ -28,7 +81,7 @@ wrangler    >= 4.115 (devDependency, usar via pnpm exec)
 
 ---
 
-## 2. Instalação isolada
+## 4. Instalação isolada
 
 Este checkout é um child repo soberano. O `pnpm-workspace.yaml` local usa
 `packages: []`, o `pnpm-lock.yaml` local deve ser versionado e o Makefile

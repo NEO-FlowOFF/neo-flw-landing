@@ -64,101 +64,33 @@ authorization code permanece exclusivamente server-side.
 
 ---
 
-## ⧉ Stack
+## ◬ Rotas & Superfícies Públicas
 
 ```text
-Astro        v7       static site generator
-TypeScript   v7       Astro/component scripts
-CSS                   src/styles/global.css
-Icons                 local data-lucide SVG subset
-Fonts                 Figtree + DM Mono via Google Fonts
-PWA                   public/manifest.webmanifest + public/sw.js
-Hosting               Cloudflare Pages
-Serverless            Cloudflare Pages Functions
-Deploy CLI            wrangler v4
-Analytics             GA4 via Cloudflare Google Tag Gateway
+/                            home comercial com ticker operacional
+/servicos/                   catálogo unificado de serviços e soluções
+/sobre/                      página institucional da agência e fundador
+/tiktok-shop/                porta de entrada para creators e lojistas
+/planos/[slug]/              4 planos de operações conectadas
+/checkout/[slug]/            8 serviços de implementação unitária
+/conectar-whatsapp/          conector WhatsApp via Meta com Access Gate
+/privacy/                    política de privacidade pública
+/terms/                      termos de serviço
+/excluir-dados/              instruções de exclusão de dados e LGPD
+/api/meta/data-deletion      callback técnico server-side Meta
 ```
 
----
-
-## ⧇ Estrutura
-
-```text
-neo-flw-landing/
-├── src/
-│   ├── components/          # HubHeader, ProductCard, chips
-│   ├── data/                # catálogo, config e textos
-│   ├── layouts/             # Base Astro compartilhado
-│   ├── pages/               # home, planos, checkout, compliance
-│   ├── server/              # helpers server-side usados por Functions
-│   └── styles/              # design system global
-├── public/
-│   ├── assets/              # assets estáticos otimizados
-│   ├── llms.txt             # mapa público para agentes
-│   ├── manifest.webmanifest # PWA manifest
-│   ├── robots.txt           # política crawler
-│   ├── sitemap.xml          # rotas públicas
-│   └── sw.js                # service worker conservador
-├── functions/
-│   └── api/                 # endpoints Cloudflare Pages Functions
-├── drafts/                  # insumos canônicos do operador
-├── docs/                    # documentação de suporte
-├── pnpm-workspace.yaml      # workspace local vazio: packages: []
-├── pnpm-lock.yaml           # lockfile soberano deste child repo
-├── wrangler.jsonc           # config Cloudflare Pages
-└── Makefile                 # comandos locais
-```
-
----
-
-## ◬ Rotas
-
-```text
-/                         home
-/planos/[slug]/           planos completos
-/checkout/[slug]/         serviços unitários públicos
-/conectar-whatsapp/       conector WhatsApp via Meta
-/privacy/                 privacy policy
-/terms/                   termos de serviço
-/excluir-dados/           exclusão de dados
-/api/meta/data-deletion   callback Meta Data Deletion
-/api/meta-webhook         endpoint legado/migrado
-/api/whatsapp/send        demo legada; envio pertence ao provider
-/api/whatsapp/templates   demo legada; templates pertencem ao provider
-/api/health/meta          diagnóstico local legado
-```
-
-Rotas de `planos` e `checkout` são geradas a partir de `src/data/catalog.json`.
-
-O ticker superior da home deve comunicar o que está em andamento agora,
-como App Review Meta, Meta Tech Provider, WhatsApp Business, Graph API,
-webhooks e NEØ Growth System.
-Não use esse espaço para tutorial ou copy genérica.
+Rotas de catálogo são alimentadas por `src/data/catalog.json`.
 
 ---
 
 ## ◯ Identidade Visual
 
 - azul restrito ao bloco Meta no topo
-- demais seções usam acid, cinza, preto e branco
-- cards devem manter contraste AA quando possível
-- logo principal do header vem de `public/assets/`
-- logo steel do footer vem de `src/assets/images/steel_flw.webp`
-
----
-
-## ⨷ Início rápido
-
-```bash
-make install   # instala dependências no lockfile local
-make dev       # servidor local → http://localhost:4321/
-make build     # build de produção → ./dist/
-make verify    # audit/docs/lint local
-make deploy    # wrangler pages deploy
-```
-
-→ Ver [SETUP.md](./SETUP.md) para detalhe completo de ambiente,
-  variáveis, deploy e catálogo.
+- demais seções usam acid (`#e0ff00`), cinza, preto e branco
+- cards devem manter contraste acessível
+- elemento do fundador em `/sobre/`: busto 3D de papel origami (`neo-3d-paper.gif`) com sombra elíptica de chão
+- ticker superior da home: letreiro de notícias operacionais vivas e auditáveis
 
 ---
 
