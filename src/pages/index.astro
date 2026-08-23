@@ -5,33 +5,50 @@ import HubHeader from '../components/HubHeader.astro';
 import BrandFooter from '../components/BrandFooter.astro';
 import catalogData from '../data/catalog.json';
 import uiTexts from '../data/ui_texts.json';
-import nodeneoImage from '../assets/images/nodeneo.webp';
 
-const isMeta = (slug: string) => slug?.includes('meta') || slug?.includes('whatsapp');
+const isMeta = (slug: string) =>
+  slug?.includes('meta') || slug?.includes('whatsapp');
 
-const metaProdutos = catalogData.products.filter(p => isMeta(p.slug));
-const planos = catalogData.products.filter(p => p.category === 'Plano' && !isMeta(p.slug));
-const servicos = catalogData.products.filter(p => p.category === 'Serviço' && !isMeta(p.slug));
+const metaProdutos = catalogData.products.filter((p) => isMeta(p.slug));
+const planos = catalogData.products.filter(
+  (p) => p.category === 'Plano' && !isMeta(p.slug)
+);
+const servicos = catalogData.products.filter(
+  (p) => p.category === 'Serviço' && !isMeta(p.slug)
+);
 const tickerItems = [
   'App Review Meta: ajustes finais do NEØFLW ENGINE:one em validação para submissão.',
   'Meta Tech Provider: infraestrutura WhatsApp Business, Graph API e webhooks em operação.',
 ];
 const tickerLoopItems = [...tickerItems, ...tickerItems];
-
 ---
+
 <Base>
   <div class="home-page">
     <!-- TOP TELENOTÍCIAS TICKER BAR (Mídia & Infraestrutura) -->
-    <div class="top-telenoticias-bar" style="width: 100vw; position: relative; left: 50%; right: 50%; margin-left: -50vw; margin-right: -50vw; background: #0b0b0e; color: #ffffff; padding: 7px 0; border-bottom: 1px solid rgba(255, 255, 255, 0.12); overflow: hidden; z-index: 1000;">
-      <div class="digital-ticker-portal" style="position: relative; width: 100%; overflow: hidden; -webkit-mask-image: linear-gradient(90deg, transparent 0px, transparent 1px, #000 2px, #000 calc(100% - 2px), transparent calc(100% - 1px), transparent 100%); mask-image: linear-gradient(90deg, transparent 0px, transparent 1px, #000 2px, #000 calc(100% - 2px), transparent calc(100% - 1px), transparent 100%);">
-        <div class="ticker-track" style="display: flex; width: max-content; animation: ticker-loop 24s linear infinite; gap: 2.5rem;">
-          {tickerLoopItems.map((item) => (
-            <span style="font-family: var(--mono); font-size: 0.72rem; font-weight: 800; color: #ffffff; text-transform: uppercase; letter-spacing: 0.05em; white-space: nowrap; display: inline-flex; align-items: center; gap: 0.7rem;">
-              <span style="background: var(--acid); color: #000; font-size: 0.58rem; padding: 2px 6px; border-radius: 4px; font-weight: 900; letter-spacing: 0.08em;">AO VIVO</span>
-              <span>{item}</span>
-              <span style="color: var(--acid); font-size: 0.6rem;">◆</span>
-            </span>
-          ))}
+    <div
+      class="top-telenoticias-bar"
+      style="width: 100vw; position: relative; left: 50%; right: 50%; margin-left: -50vw; margin-right: -50vw; background: #0b0b0e; color: #ffffff; padding: 7px 0; border-bottom: 1px solid rgba(255, 255, 255, 0.12); overflow: hidden; z-index: 1000;"
+    >
+      <div
+        class="digital-ticker-portal"
+        style="position: relative; width: 100%; overflow: hidden; -webkit-mask-image: linear-gradient(90deg, transparent 0px, transparent 1px, #000 2px, #000 calc(100% - 2px), transparent calc(100% - 1px), transparent 100%); mask-image: linear-gradient(90deg, transparent 0px, transparent 1px, #000 2px, #000 calc(100% - 2px), transparent calc(100% - 1px), transparent 100%);"
+      >
+        <div
+          class="ticker-track"
+          style="display: flex; width: max-content; animation: ticker-loop 24s linear infinite; gap: 2.5rem;"
+        >
+          {
+            tickerLoopItems.map((item) => (
+              <span style="font-family: var(--mono); font-size: 0.72rem; font-weight: 800; color: #ffffff; text-transform: uppercase; letter-spacing: 0.05em; white-space: nowrap; display: inline-flex; align-items: center; gap: 0.7rem;">
+                <span style="background: var(--acid); color: #000; font-size: 0.58rem; padding: 2px 6px; border-radius: 4px; font-weight: 900; letter-spacing: 0.08em;">
+                  AO VIVO
+                </span>
+                <span>{item}</span>
+                <span style="color: var(--acid); font-size: 0.6rem;">◆</span>
+              </span>
+            ))
+          }
         </div>
       </div>
     </div>
@@ -61,7 +78,12 @@ const tickerLoopItems = [...tickerItems, ...tickerItems];
           <span class="hero-status-dot" aria-hidden="true"></span>
           {uiTexts.header.eyebrow}
         </div>
-        <div id="home-title" class="hero-title hero-title-logo" role="img" aria-label="NEØ FlowOFF">
+        <div
+          id="home-title"
+          class="hero-title hero-title-logo"
+          role="img"
+          aria-label="NEØ FlowOFF"
+        >
           <img
             src="/logo_transp.svg"
             alt="Logotipo Neo FlowOFF Agency - Infraestrutura de IA em Goiânia"
@@ -76,12 +98,16 @@ const tickerLoopItems = [...tickerItems, ...tickerItems];
           <a class="neo-button neo-button--primary" href="#solucoes">
             {uiTexts.header.primary_cta}
           </a>
-          <a class="neo-button neo-button--secondary" href="https://wa.me/556282705594" target="_blank" rel="noopener noreferrer">
+          <a
+            class="neo-button neo-button--secondary"
+            href="https://wa.me/556282705594"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
             {uiTexts.header.secondary_cta}
           </a>
         </div>
       </div>
-
     </section>
 
     <div class="hero-bottom-bar" aria-hidden="true">
@@ -103,7 +129,6 @@ const tickerLoopItems = [...tickerItems, ...tickerItems];
       <section class="section section-band section-band--meta">
         <!-- CONTAINER INTERNO ALINHADO AO MOBILE -->
         <div class="section-inner">
-
           <div class="section-heading meta-section-heading">
             <!-- CRISP ULTRA-CLEAN GLASS CAPSULE BADGE -->
             <div class="section-kicker section-kicker--meta">
@@ -111,26 +136,31 @@ const tickerLoopItems = [...tickerItems, ...tickerItems];
               <span>ECOSSISTEMA & TECNOLOGIA META</span>
             </div>
 
-            <p class="section-copy">Infraestrutura oficial da Meta para WhatsApp, APIs, webhooks e Meta Ads com Conversions API (CAPI).</p>
+            <p class="section-copy">
+              Infraestrutura oficial da Meta para WhatsApp, APIs, webhooks e
+              Meta Ads com Conversions API (CAPI).
+            </p>
           </div>
           <div class="link-grid meta-link-grid">
-            {metaProdutos.map((produto) => (
-              <ProductCard
-                id={produto.id}
-                slug={produto.slug}
-                title={produto.title}
-                short_title={produto.short_title}
-                description={produto.description}
-                link={produto.link}
-                price={produto.price}
-                price_label={produto.price_label}
-                category={produto.category}
-                display_category={produto.display_category}
-                featured={produto.featured}
-                features={produto.features.slice(0, 4)}
-                forceGrid={true}
-              />
-            ))}
+            {
+              metaProdutos.map((produto) => (
+                <ProductCard
+                  id={produto.id}
+                  slug={produto.slug}
+                  title={produto.title}
+                  short_title={produto.short_title}
+                  description={produto.description}
+                  link={produto.link}
+                  price={produto.price}
+                  price_label={produto.price_label}
+                  category={produto.category}
+                  display_category={produto.display_category}
+                  featured={produto.featured}
+                  features={produto.features.slice(0, 4)}
+                  forceGrid={true}
+                />
+              ))
+            }
           </div>
 
           <!-- BADGE META TECH PROVIDER -->
@@ -154,22 +184,24 @@ const tickerLoopItems = [...tickerItems, ...tickerItems];
           <p class="section-copy">{uiTexts.home.plans_description}</p>
         </div>
         <div class="link-grid">
-          {planos.map((plano) => (
-            <ProductCard
-              id={plano.id}
-              slug={plano.slug}
-              title={plano.title}
-              short_title={plano.short_title}
-              description={plano.description}
-              link={plano.link}
-              price={plano.price}
-              price_label={plano.price_label}
-              category={plano.category}
-              display_category={plano.display_category}
-              featured={plano.featured}
-              features={plano.features.slice(0, 4)}
-            />
-          ))}
+          {
+            planos.map((plano) => (
+              <ProductCard
+                id={plano.id}
+                slug={plano.slug}
+                title={plano.title}
+                short_title={plano.short_title}
+                description={plano.description}
+                link={plano.link}
+                price={plano.price}
+                price_label={plano.price_label}
+                category={plano.category}
+                display_category={plano.display_category}
+                featured={plano.featured}
+                features={plano.features.slice(0, 4)}
+              />
+            ))
+          }
         </div>
       </section>
 
@@ -177,27 +209,38 @@ const tickerLoopItems = [...tickerItems, ...tickerItems];
       <section class="section section-band">
         <div class="section-inner">
           <div class="section-heading">
-            <div class="section-label section-label--light">{uiTexts.home.services_label}</div>
+            <div class="section-label section-label--light">
+              {uiTexts.home.services_label}
+            </div>
             <p class="section-copy">{uiTexts.home.services_description}</p>
           </div>
           <div class="link-grid">
-            {servicos.map((servico) => (
-              <ProductCard
-                id={servico.id}
-                slug={servico.slug}
-                title={servico.title}
-                short_title={servico.short_title}
-                description={servico.description}
-                link={servico.link}
-                price={servico.price}
-                price_label={servico.price_label}
-                category={servico.category}
-                display_category={servico.display_category}
-                featured={servico.featured}
-                features={servico.features.slice(0, 3)}
-                isLightSection={true}
-              />
-            ))}
+            {
+              servicos.map((servico) => (
+                <ProductCard
+                  id={servico.id}
+                  slug={servico.slug}
+                  title={servico.title}
+                  short_title={servico.short_title}
+                  description={servico.description}
+                  link={servico.link}
+                  price={servico.price}
+                  price_label={servico.price_label}
+                  category={servico.category}
+                  display_category={servico.display_category}
+                  featured={servico.featured}
+                  features={servico.features.slice(0, 3)}
+                  isLightSection={true}
+                />
+              ))
+            }
+          </div>
+
+          <div class="services-hub-link-wrapper" style="margin-top: 2.75rem; text-align: center; display: flex; justify-content: center;">
+            <a href="/servicos/" class="neo-button neo-button--dark" style="padding: 0.95rem 1.85rem; font-weight: 900; font-size: 0.88rem; letter-spacing: 0.04em; display: inline-flex; align-items: center; gap: 0.6rem;">
+              <span>Ver Todos os Serviços &amp; Diagnósticos</span>
+              <i data-lucide="arrow-right" aria-hidden="true"></i>
+            </a>
           </div>
         </div>
       </section>
@@ -211,86 +254,28 @@ const tickerLoopItems = [...tickerItems, ...tickerItems];
       </h2>
 
       <div class="method-grid">
-        {uiTexts.home.method.steps.map((step, index) => {
-          const stepIcons = ['search', 'layers', 'zap', 'activity'];
-          return (
-            <div class="method-card">
-              <div class="method-card-head">
-                <span>
-                  0{index + 1}
-                </span>
-                <i data-lucide={stepIcons[index] || 'zap'}></i>
+        {
+          uiTexts.home.method.steps.map((step, index) => {
+            const stepIcons = ['search', 'layers', 'zap', 'activity'];
+            return (
+              <div class="method-card">
+                <div class="method-card-head">
+                  <span>0{index + 1}</span>
+                  <i data-lucide={stepIcons[index] || 'zap'} />
+                </div>
+                <h3>{step.title}</h3>
+                <p>{step.description}</p>
               </div>
-              <h3>{step.title}</h3>
-              <p>{step.description}</p>
-            </div>
-          );
-        })}
+            );
+          })
+        }
       </div>
       <p class="method-summary">{uiTexts.header.body}</p>
     </section>
 
-    <!-- SEÇÃO SOBRE & CLOSING (SEÇÃO CLARA FULL-BLEED FULL RHYTHM) -->
+    <!-- SEÇÃO CLOSING (SEÇÃO CLARA FULL-BLEED) -->
     <section class="section section-band about-band">
       <div class="about-inner">
-
-        <!-- CARD SOBRE A AGÊNCIA & FOUNDER -->
-        <div id="sobre" class="about-card">
-          <div class="section-label section-label--light">{uiTexts.home.about.eyebrow}</div>
-          <h2>
-            {uiTexts.home.about.title}
-          </h2>
-
-          <!-- BUSTO 3D ORIGAMI DO FOUNDER -->
-          <div class="founder-block">
-            <div class="founder-avatar founder-bust-wrapper">
-              <img
-                src="/assets/neo-3d-paper.gif"
-                width="1000"
-                height="1250"
-                alt="Neo Mello - Busto 3D Origami em Papel - Fundador da Neo FlowOFF Agency"
-                loading="lazy"
-                decoding="async"
-                class="founder-bust-img"
-              />
-            </div>
-
-            <!-- FALA DO FOUNDER -->
-            <div class="founder-note">
-              <div class="founder-name">
-                Neø Mello
-              </div>
-              <blockquote class="founder-quote">
-                "Tecnologia só vale quando simplifica a operação de quem vende, atende e decide."
-              </blockquote>
-              <div class="founder-stack">
-                Arquiteto de sistemas para operações comerciais com IA.
-              </div>
-              <p class="founder-contact-copy">
-                Salve meu contato e me chame quando quiser conversar sobre sua operação.
-              </p>
-              <a
-                href="/Neo_Mello.vcf"
-                download="Neo_Mello.vcf"
-                class="founder-contact"
-                aria-label="Salvar o contato de Neø Mello na agenda"
-              >
-                <i data-lucide="contact"></i>
-                Salvar Contato
-              </a>
-            </div>
-          </div>
-
-          <!-- TEXTOS SOBRE A AGÊNCIA -->
-          {uiTexts.home.about.paragraphs.length > 0 && (
-            <div class="about-copy">
-              {uiTexts.home.about.paragraphs.map(p => (
-                <p>{p}</p>
-              ))}
-            </div>
-          )}
-        </div>
-
         <!-- CLOSING / CTA FINAL -->
         <div class="closing-block">
           <div class="closing-kicker">
@@ -306,13 +291,17 @@ const tickerLoopItems = [...tickerItems, ...tickerItems];
           </p>
 
           <div class="closing-actions">
-            <a href="https://wa.me/556282705594" target="_blank" rel="noopener noreferrer" class="neo-button neo-button--dark">
+            <a
+              href="https://wa.me/556282705594"
+              target="_blank"
+              rel="noopener noreferrer"
+              class="neo-button neo-button--dark"
+            >
               <i data-lucide="message-square"></i>
               {uiTexts.home.closing.primary_cta}
             </a>
           </div>
         </div>
-
       </div>
     </section>
 

@@ -1,0 +1,299 @@
+---
+import Base from '../layouts/Base.astro';
+import HubHeader from '../components/HubHeader.astro';
+import BrandFooter from '../components/BrandFooter.astro';
+import uiTexts from '../data/ui_texts.json';
+
+const title = 'Sobre a Agência · Infraestrutura Comercial & IA | NEØ FlowOFF';
+const description = 'Conheça a NEØ FlowOFF, agência de tecnologia e infraestrutura comercial em Goiânia fundada por Neø Mello. Agentes de IA, WhatsApp Business API e CRM.';
+---
+
+<Base title={title} description={description}>
+  <div class="about-page">
+    <HubHeader homeHref="/" anchorBase="/" />
+
+    <!-- HERO SOBRE A AGÊNCIA -->
+    <header class="about-hero">
+      <div class="about-hero-inner">
+        <div class="hero-kicker">
+          <span class="kicker-dot" aria-hidden="true"></span>
+          <span>Manifesto &amp; Engenharia Comercial · neoflowoff.agency</span>
+        </div>
+        <h1>Sobre a Agência</h1>
+        <p class="hero-lead">
+          Marketing com infraestrutura. Construímos agentes de IA, fluxos comerciais e sistemas de mensageria
+          oficial para empresas que exigem previsibilidade, segurança e escala.
+        </p>
+      </div>
+    </header>
+
+    <!-- CONTEÚDO PRINCIPAL (SEÇÃO CLARA COM A IDENTIDADE VISUAL SOVEREIGN) -->
+    <main class="about-main-container">
+      <div class="about-card-wrapper">
+        <article class="about-card">
+          <div class="section-label section-label--light">
+            {uiTexts.home.about.eyebrow}
+          </div>
+          <h2>
+            {uiTexts.home.about.title}
+          </h2>
+
+          <!-- BUSTO 3D ORIGAMI DO FOUNDER -->
+          <div class="founder-block">
+            <div class="founder-avatar founder-bust-wrapper">
+              <img
+                src="/assets/neo-3d-paper.gif"
+                width="1000"
+                height="1250"
+                alt="Neo Mello - Busto 3D Origami em Papel - Fundador da neoflowoff.agency"
+                loading="eager"
+                decoding="async"
+                class="founder-bust-img"
+              />
+            </div>
+
+            <!-- FALA DO FOUNDER -->
+            <div class="founder-note">
+              <div class="founder-name">Neø Mello</div>
+              <blockquote class="founder-quote">
+                "Tecnologia só vale quando simplifica a operação de quem vende, atende e decide."
+              </blockquote>
+              <div class="founder-stack">
+                Arquiteto de sistemas para operações comerciais com IA.
+              </div>
+              <p class="founder-contact-copy">
+                Salve meu contato direto e me chame quando quiser analisar a infraestrutura da sua empresa.
+              </p>
+              <a
+                href="/Neo_Mello.vcf"
+                download="Neo_Mello.vcf"
+                class="founder-contact"
+                aria-label="Salvar o contato de Neø Mello na agenda"
+              >
+                <i data-lucide="contact"></i>
+                Salvar Contato
+              </a>
+            </div>
+          </div>
+
+          <!-- TEXTOS SOBRE A AGÊNCIA -->
+          {uiTexts.home.about.paragraphs && uiTexts.home.about.paragraphs.length > 0 && (
+            <div class="about-copy">
+              {uiTexts.home.about.paragraphs.map((p) => (
+                <p>{p}</p>
+              ))}
+            </div>
+          )}
+
+          <!-- PILARES E MÉTODO OPERACIONAL -->
+          <div class="about-method-band">
+            <div class="section-label section-label--light">
+              {uiTexts.home.method.eyebrow}
+            </div>
+            <h3>{uiTexts.home.method.title}</h3>
+
+            <div class="about-steps-grid">
+              {uiTexts.home.method.steps.map((step, index) => {
+                const stepIcons = ['search', 'layers', 'zap', 'activity'];
+                return (
+                  <div class="about-step-item">
+                    <div class="step-num">0{index + 1}</div>
+                    <div class="step-content">
+                      <div class="step-head">
+                        <i data-lucide={stepIcons[index] || 'zap'} aria-hidden="true"></i>
+                        <h4>{step.title}</h4>
+                      </div>
+                      <p>{step.description}</p>
+                    </div>
+                  </div>
+                );
+              })}
+            </div>
+          </div>
+        </article>
+
+        <!-- CLOSING / CTA FINAL -->
+        <section class="closing-block">
+          <div class="closing-kicker">
+            <span>{uiTexts.home.closing.eyebrow}</span>
+          </div>
+
+          <h2>{uiTexts.home.closing.title}</h2>
+          <p>{uiTexts.home.closing.body}</p>
+
+          <div class="closing-actions">
+            <a
+              href="https://wa.me/556282705594"
+              target="_blank"
+              rel="noopener noreferrer"
+              class="neo-button neo-button--dark"
+            >
+              <i data-lucide="message-square"></i>
+              <span>{uiTexts.home.closing.primary_cta}</span>
+            </a>
+          </div>
+        </section>
+      </div>
+    </main>
+
+    <BrandFooter />
+  </div>
+</Base>
+
+<style>
+  .about-page {
+    min-height: 100vh;
+    background: #09090b;
+    color: #f4f4f5;
+  }
+
+  .about-hero {
+    padding: clamp(6rem, 12vw, 8.5rem) 1.25rem 3.5rem;
+    background:
+      radial-gradient(circle at 50% 0%, rgba(224, 255, 0, 0.08) 0%, transparent 60%),
+      linear-gradient(180deg, #111114 0%, #09090b 100%);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  }
+
+  .about-hero-inner {
+    max-width: 1100px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .hero-kicker {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.6rem;
+    font-family: var(--mono);
+    font-size: 0.76rem;
+    font-weight: 800;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--acid);
+    margin-bottom: 1.25rem;
+  }
+
+  .kicker-dot {
+    width: 0.5rem;
+    height: 0.5rem;
+    border-radius: 50%;
+    background: var(--acid);
+    box-shadow: 0 0 12px var(--acid);
+  }
+
+  .about-hero h1 {
+    font-size: clamp(2.5rem, 6vw, 4.5rem);
+    line-height: 1;
+    font-weight: 900;
+    letter-spacing: -0.04em;
+    text-transform: uppercase;
+    margin: 0 0 1.2rem;
+    color: #ffffff;
+  }
+
+  .hero-lead {
+    max-width: 760px;
+    font-size: clamp(1.05rem, 2vw, 1.2rem);
+    line-height: 1.65;
+    color: #a1a1aa;
+    margin: 0;
+  }
+
+  .about-main-container {
+    padding: clamp(3rem, 6vw, 5rem) 1.25rem 6rem;
+    background: #e7e2d7;
+  }
+
+  .about-card-wrapper {
+    max-width: 1040px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    gap: 3.5rem;
+  }
+
+  .about-card {
+    background: #fbf9f4;
+    border: 1px solid rgba(0, 0, 0, 0.08);
+    border-radius: 1.5rem;
+    padding: clamp(2rem, 5vw, 3.5rem);
+    box-shadow: 0 12px 40px rgba(0, 0, 0, 0.06);
+  }
+
+  .about-method-band {
+    margin-top: 3.5rem;
+    padding-top: 2.5rem;
+    border-top: 1px solid rgba(0, 0, 0, 0.1);
+  }
+
+  .about-method-band h3 {
+    font-size: clamp(1.4rem, 3vw, 1.9rem);
+    color: var(--neo-carbon);
+    margin: 0.5rem 0 1.75rem;
+    font-weight: 900;
+    letter-spacing: -0.02em;
+  }
+
+  .about-steps-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 1.25rem;
+  }
+
+  .about-step-item {
+    background: #ffffff;
+    border: 1px solid rgba(0, 0, 0, 0.08);
+    border-radius: 0.85rem;
+    padding: 1.25rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+  }
+
+  .step-num {
+    font-family: var(--mono);
+    font-size: 0.72rem;
+    font-weight: 900;
+    color: var(--neo-acid-ink);
+    background: rgba(85, 102, 0, 0.1);
+    padding: 0.2rem 0.5rem;
+    border-radius: 0.3rem;
+    align-self: flex-start;
+  }
+
+  .step-head {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    margin-bottom: 0.35rem;
+  }
+
+  .step-head i {
+    width: 1rem;
+    height: 1rem;
+    color: var(--neo-carbon);
+  }
+
+  .step-head h4 {
+    font-size: 0.95rem;
+    font-weight: 800;
+    color: var(--neo-carbon);
+    margin: 0;
+  }
+
+  .about-step-item p {
+    font-size: 0.82rem;
+    line-height: 1.5;
+    color: rgba(11, 12, 11, 0.72);
+    margin: 0;
+  }
+
+  @media (max-width: 768px) {
+    .about-steps-grid {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>

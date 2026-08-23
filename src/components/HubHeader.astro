@@ -6,7 +6,6 @@ interface Props {
 
 const { anchorBase = '', homeHref = '#' } = Astro.props;
 const solutionsHref = `${anchorBase}#solucoes`;
-const aboutHref = `${anchorBase}#sobre`;
 ---
 <header class="hub-header">
   <!-- FLOATING STICKY GLASSBAR -->
@@ -55,11 +54,11 @@ const aboutHref = `${anchorBase}#sobre`;
           <small>Planos e serviços</small>
         </span>
       </a>
-      <a href={aboutHref} class="menu-item">
-        <span class="menu-icon"><i data-lucide="shield"></i></span>
+      <a href="/servicos/" class="menu-item">
+        <span class="menu-icon"><i data-lucide="layers"></i></span>
         <span class="menu-copy">
-          <span>Sobre a Agência</span>
-          <small>Arquitetura e método</small>
+          <span>Catálogo de Serviços</span>
+          <small>Todos os serviços</small>
         </span>
       </a>
       <a href="https://wa.me/556282705594" target="_blank" rel="noopener noreferrer" class="menu-item cta-item">

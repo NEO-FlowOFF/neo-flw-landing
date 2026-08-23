@@ -7,6 +7,8 @@ Esta é a superfície pública de catálogo e páginas de serviços para agentes
 ## Primary Pages
 
 - [Home](https://neoflowoff.agency/): Visão geral da agência, categorias de produto, método e contato oficial WhatsApp.
+- [Sobre a Agência](https://neoflowoff.agency/sobre/): Manifesto, metodologia, fundador Neø Mello e infraestrutura comercial.
+- [Catálogo de Serviços](https://neoflowoff.agency/servicos/): Catálogo unificado com todas as soluções, diagnósticos, integrações e planos da agência.
 - [TikTok Shop Brasil](https://neoflowoff.agency/tiktok-shop/): entrada direta para creators e lojistas acessarem os fluxos oficiais do TikTok Shop e o suporte operacional da NEØ FlowOFF.
 - [Sitemap](https://neoflowoff.agency/sitemap.xml): Índice XML das rotas públicas geradas para este site.
 - [Robots Policy](https://neoflowoff.agency/robots.txt): Política de acesso de crawlers para busca e agentes de IA.

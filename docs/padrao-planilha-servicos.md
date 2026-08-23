@@ -23,6 +23,7 @@ graph TD
 ---
 
 ## 2. Automação e Geração de Feeds
+
 Os feeds são gerados dinamicamente a cada build por meio do script [generate_feeds.py](file:///Users/nettomello/neomello/NEO-FlowOFF/neo-flw-landing/scripts/generate_feeds.py). O processo foi automatizado no `package.json` de modo que rodar `pnpm run build` ou `make deploy` automaticamente atualize e publique os arquivos CSV na pasta `public/`.
 
 ---
@@ -51,18 +52,21 @@ Para garantir a correspondência de 100% (*match score*) entre os eventos do Pix
 ## 4. Especificações dos Adapters de Distribuição
 
 ### A. Meta Commerce Manager Feed (`meta_catalog_feed.csv`)
-- **Objetivo:** Alimentar campanhas dinâmicas e o WhatsApp Business Shop no Commerce Manager.
-- **Cabeçalhos:** `id`, `title`, `description`, `availability`, `condition`, `price`, `link`, `image_link`, `brand`, `fb_product_category`, `google_product_category`, `custom_label_0`
-- **Regras específicas:**
-  - `price` é formatado com duas casas decimais e moeda (`5000.00 BRL`).
-  - `fb_product_category` e `google_product_category` são mantidos como `Business & Industrial > Business Services` (`503254`) para indicar a natureza B2B profissional.
-  - O link de destino contém a tag UTM específica da Meta: `?utm_source=meta_catalog&utm_medium=dynamic_ads&utm_campaign=meta_dynamic_catalog`.
+
+* **Objetivo:** Alimentar campanhas dinâmicas e o WhatsApp Business Shop no Commerce Manager.
+
+* **Cabeçalhos:** `id`, `title`, `description`, `availability`, `condition`, `price`, `link`, `image_link`, `brand`, `fb_product_category`, `google_product_category`, `custom_label_0`
+* **Regras específicas:**
+  * `price` é formatado com duas casas decimais e moeda (`5000.00 BRL`).
+  * `fb_product_category` e `google_product_category` são mantidos como `Business & Industrial > Business Services` (`503254`) para indicar a natureza B2B profissional.
+  * O link de destino contém a tag UTM específica da Meta: `?utm_source=meta_catalog&utm_medium=dynamic_ads&utm_campaign=meta_dynamic_catalog`.
 
 ### B. TikTok Ads Generic Catalog Feed (`tiktok_generic_catalog_feed.csv`)
-- **Objetivo:** Alimentar campanhas de tráfego de catálogo dinâmico no TikTok Ads Manager.
-- **Cabeçalhos:** `item_id`, `id`, `title`, `description`, `price`, `link`, `image_link`, `availability`, `condition`, `brand`, `custom_label_0`
-- **Regras específicas de Homologação no TikTok:**
-  - Como o TikTok Ads Manager força a seleção de uma indústria (e não possui a opção "Generic Catalog" avulsa em algumas telas), a conta de anúncio deve criar o catálogo sob o setor **`E-commerce`**, mas configurar o campo **`Shipping`** como **`Not applicable (Products won't be shipped)`**. Isso marca os itens como serviços não-físicos.
-  - Para atender às regras rígidas de validação de E-commerce do TikTok, o feed exporta a coluna redundante `id` (mapeada como SKU ID no TikTok) e `condition` (com valor `new`), além do `item_id` exigido pela especificação Genérica.
-  - O link de destino contém a tag UTM específica do TikTok: `?utm_source=tiktok_catalog&utm_medium=dynamic_ads&utm_campaign=tiktok_generic_catalog`.
 
+* **Objetivo:** Alimentar campanhas de tráfego de catálogo dinâmico no TikTok Ads Manager.
+
+* **Cabeçalhos:** `item_id`, `id`, `title`, `description`, `price`, `link`, `image_link`, `availability`, `condition`, `brand`, `custom_label_0`
+* **Regras específicas de Homologação no TikTok:**
+  * Como o TikTok Ads Manager força a seleção de uma indústria (e não possui a opção "Generic Catalog" avulsa em algumas telas), a conta de anúncio deve criar o catálogo sob o setor **`E-commerce`**, mas configurar o campo **`Shipping`** como **`Not applicable (Products won't be shipped)`**. Isso marca os itens como serviços não-físicos.
+  * Para atender às regras rígidas de validação de E-commerce do TikTok, o feed exporta a coluna redundante `id` (mapeada como SKU ID no TikTok) e `condition` (com valor `new`), além do `item_id` exigido pela especificação Genérica.
+  * O link de destino contém a tag UTM específica do TikTok: `?utm_source=tiktok_catalog&utm_medium=dynamic_ads&utm_campaign=tiktok_generic_catalog`.
