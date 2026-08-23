@@ -68,10 +68,27 @@ const { servico } = Astro.props;
       </p>
 
       <div class="detail-actions">
-        <button class="detail-action detail-action--primary">
-          <i data-lucide="credit-card"></i>
-          <span>{uiTexts.product_page.checkout_button}</span>
-        </button>
+        {servico.flowpay_url ? (
+          <a
+            href={servico.flowpay_url}
+            target="_blank"
+            rel="noopener noreferrer"
+            class="detail-action detail-action--primary"
+          >
+            <i data-lucide="credit-card"></i>
+            <span>Pagar via PIX ({servico.price_display})</span>
+          </a>
+        ) : (
+          <a
+            href={`https://wa.me/556282705594?text=Olá!%20Gostaria%20de%20contratar%20o%20serviço%20${encodeURIComponent(servico.title)}.%20[utm:checkout-${encodeURIComponent(servico.slug)}]`}
+            target="_blank"
+            rel="noopener noreferrer"
+            class="detail-action detail-action--primary"
+          >
+            <i data-lucide="credit-card"></i>
+            <span>{uiTexts.product_page.checkout_button}</span>
+          </a>
+        )}
 
         <a href={`https://wa.me/556282705594?text=Olá!%20Gostaria%20de%20validar%20o%20escopo%20do%20serviço%20${encodeURIComponent(servico.title)}.%20[utm:checkout-${encodeURIComponent(servico.slug)}]`} target="_blank" rel="noopener noreferrer" class="detail-action detail-action--secondary">
           <i data-lucide="message-circle"></i>

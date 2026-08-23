@@ -86,6 +86,15 @@ const graphApiVersion = metaConfig.graph_api_version;
 
           <div class="gate-action-primary">
             <a
+              href="https://app.flowpay.cash/checkout/8ab89a0712f3d6fb"
+              target="_blank"
+              rel="noopener noreferrer"
+              class="gate-flowpay-btn"
+            >
+              <i data-lucide="credit-card"></i>
+              <span>Adquirir Chave de Ativação via PIX (FlowPay)</span>
+            </a>
+            <a
               href="https://wa.me/556282705594?text=Ol%C3%A1!%20Gostaria%20de%20solicitar%20a%20chave%20de%20ativa%C3%A7%C3%A3o%20para%20conectar%20o%20WhatsApp%20Business.%20[utm:conectar-whatsapp-gate]"
               target="_blank"
               rel="noopener noreferrer"
@@ -913,7 +922,32 @@ const graphApiVersion = metaConfig.graph_api_version;
     }
 
     .gate-action-primary {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
       margin-bottom: 1.4rem;
+    }
+
+    .gate-flowpay-btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      width: 100%;
+      padding: 14px 20px;
+      border-radius: 12px;
+      background: var(--neo-acid, #e0ff00);
+      color: #000;
+      font-size: 0.9rem;
+      font-weight: 800;
+      text-decoration: none;
+      box-shadow: 0 4px 16px rgba(224, 255, 0, 0.25);
+      transition: transform 0.18s ease, filter 0.18s ease;
+    }
+
+    .gate-flowpay-btn:hover {
+      filter: brightness(1.08);
+      transform: translateY(-1px);
     }
 
     .gate-whatsapp-btn {
