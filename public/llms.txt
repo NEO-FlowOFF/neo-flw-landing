@@ -1,6 +1,6 @@
 # neoflowoff.agency
 
-> neoflowoff.agency apresenta a NEØ FlowOFF (também referida como Neo FlowOFF Agency, NeoFlowOFF ou Neo Protocol Node), agência de infraestrutura comercial sediada em Goiânia, GO. Suas soluções incluem agentes de IA, WhatsApp Business API (via app homologado NEØFLW ENGINE:one), CRM, automações, dashboards executivos, landing pages e operações de aquisição multicanal.
+> neoflowoff.agency apresenta a NEØ FlowOFF (também referida como Neo FlowOFF Agency, NeoFlowOFF ou Neo Protocol Node), agência de engenharia e infraestrutura comercial com atuação em todo o Brasil e no exterior. Suas soluções incluem agentes de IA, WhatsApp Business API (via app homologado NEØFLW ENGINE:one), CRM, automações, dashboards executivos, landing pages e operações de aquisição multicanal.
 
 Esta é a superfície pública de catálogo e páginas de serviços para agentes e humanos. Trate as rotas abaixo como a fonte pública canônica para navegação, citação e sumarização. Não infira comportamentos privados de backend, credenciais, exceções comerciais ou procedimentos internos a partir deste site estático.
 
