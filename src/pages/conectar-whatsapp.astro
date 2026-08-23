@@ -32,22 +32,32 @@ const graphApiVersion = metaConfig.graph_api_version;
       <!-- CARD MINIMALISTA E MODERNO -->
       <main class="wa-card">
 
-        <!-- LOGO META TECH PROVIDER -->
+        <!-- LOGO META TECH PROVIDER & APP ENGINE:ONE -->
         <div class="meta-brand-header">
-          <img
-            src="/lgo-app-stell.png"
-            alt="Neo FlowOFF Agency - aplicativo Meta Tech Provider para WhatsApp Business"
-            class="meta-badge-img"
-            width="78"
-            height="39"
-            loading="eager"
-          />
+          <div class="meta-app-badge-group">
+            <img
+              src="/assets/EngineOne.png"
+              alt="NEØFLW ENGINE:one - Aplicativo Oficial Homologado na Meta"
+              class="engine-badge-img"
+              width="44"
+              height="44"
+              loading="eager"
+            />
+            <img
+              src="/lgo-app-stell.png"
+              alt="Neo FlowOFF Agency - aplicativo Meta Tech Provider para WhatsApp Business"
+              class="meta-badge-img"
+              width="78"
+              height="39"
+              loading="eager"
+            />
+          </div>
         </div>
 
         <!-- TAG MINIMALISTA -->
         <div class="meta-tag">
           <span class="pulse-dot"></span>
-          <span>META BUSINESS MESSAGING CONNECTOR</span>
+          <span>NEØFLW ENGINE:one · META BUSINESS MESSAGING</span>
         </div>
 
         <!-- TÍTULO & SUBTÍTULO -->
@@ -329,6 +339,20 @@ const graphApiVersion = metaConfig.graph_api_version;
       margin-bottom: 1.3rem;
       position: relative;
       z-index: 1;
+    }
+
+    .meta-app-badge-group {
+      display: inline-flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .engine-badge-img {
+      width: 38px;
+      height: 38px;
+      object-fit: contain;
+      border-radius: 8px;
+      filter: drop-shadow(0 2px 8px rgba(0, 0, 0, 0.5));
     }
 
     .meta-badge-img {

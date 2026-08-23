@@ -17,8 +17,8 @@ const servicos = catalogData.products.filter(
   (p) => p.category === 'Serviço' && !isMeta(p.slug)
 );
 const tickerItems = [
-  'App Review Meta: ajustes finais do NEØFLW ENGINE:one em validação para submissão.',
-  'Meta Tech Provider: infraestrutura WhatsApp Business, Graph API e webhooks em operação.',
+  'Meta App: NEØFLW ENGINE:one homologado com renovação de acesso a dados e avaliação anual concluídas.',
+  'Meta Tech Provider: infraestrutura oficial WhatsApp Business, Graph API v25.0 e webhooks em operação.',
 ];
 const tickerLoopItems = [...tickerItems, ...tickerItems];
 ---
@@ -161,6 +161,41 @@ const tickerLoopItems = [...tickerItems, ...tickerItems];
                 />
               ))
             }
+
+            <!-- CARD OFICIAL DO APP NEØFLW ENGINE:one -->
+            <a href="/conectar-whatsapp/" class="lc lc--meta lc-engine-app">
+              <div class="product-card-top">
+                <div class="lc-icon">
+                  <img
+                    src="/assets/EngineOne.png"
+                    alt="NEØFLW ENGINE:one - App Oficial Meta"
+                    class="engine-app-logo-img"
+                    width="32"
+                    height="32"
+                    loading="lazy"
+                    decoding="async"
+                  />
+                </div>
+                <span class="engine-approved-pill">
+                  <span class="engine-pulse-dot" aria-hidden="true"></span>
+                  APP META APROVADO
+                </span>
+              </div>
+
+              <div class="lc-body product-card-body product-card-body--stack">
+                <div class="lc-title">NEØFLW ENGINE:one</div>
+                <div class="lc-sub">App Oficial Homologado · Meta Tech Provider</div>
+                <p class="lc-desc">
+                  Aplicativo oficial aprovado pela Meta com renovação de acesso a dados concluída para WhatsApp Cloud API, webhooks e Login for Business.
+                </p>
+              </div>
+
+              <div class="product-card-footer">
+                <span class="card-action">
+                  Conectar WhatsApp <i data-lucide="chevron-right"></i>
+                </span>
+              </div>
+            </a>
           </div>
 
           <!-- BADGE META TECH PROVIDER -->
@@ -325,3 +360,37 @@ const tickerLoopItems = [...tickerItems, ...tickerItems];
     });
   </script>
 </Base>
+
+<style>
+  .engine-app-logo-img {
+    width: 32px;
+    height: 32px;
+    object-fit: contain;
+    border-radius: 6px;
+    filter: drop-shadow(0 2px 6px rgba(0, 0, 0, 0.4));
+  }
+
+  .engine-approved-pill {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    font-family: var(--mono);
+    font-size: 0.65rem;
+    font-weight: 800;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: #4ade80;
+    background: rgba(74, 222, 128, 0.1);
+    border: 1px solid rgba(74, 222, 128, 0.25);
+    padding: 0.25rem 0.55rem;
+    border-radius: 0.35rem;
+  }
+
+  .engine-pulse-dot {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: #4ade80;
+    box-shadow: 0 0 8px #4ade80;
+  }
+</style>
