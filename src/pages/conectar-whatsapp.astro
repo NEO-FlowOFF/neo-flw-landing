@@ -73,46 +73,100 @@ const graphApiVersion = metaConfig.graph_api_version;
           fetchpriority="high"
         />
         </h1>
-        <p class="wa-card-desc">
-          Autorize os canais comerciais da sua empresa para integração com o <strong>NEØ Growth System</strong>.
-        </p>
+        <!-- BLOCO 1: ACCESS GATE (BLOQUEIO POR PADRÃO) -->
+        <div id="access-gate-block" class="access-gate-card">
+          <div class="gate-status-pill">
+            <span class="gate-status-dot"></span>
+            <span>ACESSO RESTRITO · ATIVAÇÃO NECESSÁRIA</span>
+          </div>
 
-        <!-- INPUT DE NOME DE EXIBIÇÃO -->
-        <div class="input-wrapper">
-          <label for="display-name-input" class="input-label">Nome de Exibição do WhatsApp (Display Name)</label>
-          <input
-            type="text"
-            id="display-name-input"
-            class="input-display-name"
-            placeholder="Ex: Flowoff Agency"
-            autocomplete="off"
-            required
-          />
-          <div id="validation-error" class="validation-message" hidden></div>
+          <p class="gate-lead">
+            A conexão de canais oficiais do WhatsApp Business via <strong>NEØFLW ENGINE:one</strong> é restrita a clientes com licença ativa ou ativação autorizada no NEØ Growth System.
+          </p>
+
+          <div class="gate-action-primary">
+            <a
+              href="https://wa.me/556282705594?text=Ol%C3%A1!%20Gostaria%20de%20solicitar%20a%20chave%20de%20ativa%C3%A7%C3%A3o%20para%20conectar%20o%20WhatsApp%20Business.%20[utm:conectar-whatsapp-gate]"
+              target="_blank"
+              rel="noopener noreferrer"
+              class="gate-whatsapp-btn"
+            >
+              <i data-lucide="message-circle"></i>
+              <span>Solicitar Ativação com Especialista</span>
+            </a>
+          </div>
+
+          <div class="gate-divider">
+            <span>Já possui chave de ativação?</span>
+          </div>
+
+          <form id="gate-key-form" class="gate-form" onsubmit="return false;">
+            <div class="gate-input-group">
+              <input
+                type="text"
+                id="gate-access-key-input"
+                class="gate-input"
+                placeholder="Insira sua Chave (ex: flw_...)"
+                autocomplete="off"
+                required
+              />
+              <button type="submit" id="btn-unlock-gate" class="gate-btn-unlock">
+                Desbloquear
+              </button>
+            </div>
+            <div id="gate-key-error" class="validation-message" hidden></div>
+          </form>
         </div>
 
-        <!-- BOTÃO AZUL OFICIAL META -->
-        <div class="cta-wrapper">
-          <button
-            id="btn-meta-signup"
-            onclick="launchWhatsAppSignup()"
-            class="btn-meta-blue"
-            data-haptic
-            data-meta-app-id={metaAppId}
-            data-meta-config-id={metaLoginConfigurationId}
-            data-graph-api-version={graphApiVersion}
-            aria-label="Continuar com a Meta"
-          >
-            <svg class="meta-btn-icon" width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
-              <path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/>
-            </svg>
-            <span class="btn-text">Continuar com a Meta</span>
-            <span class="btn-spinner-host" data-spinner-host aria-hidden="true"></span>
-          </button>
-        </div>
+        <!-- BLOCO 2: CONECTOR ATIVO (LIBERADO APÓS AUTORIZAÇÃO) -->
+        <div id="connector-active-block" class="connector-active-block" hidden>
+          <div class="auth-unlocked-banner">
+            <span class="unlocked-dot"></span>
+            <span class="unlocked-text">LICENÇA AUTORIZADA · CONECTOR LIBERADO</span>
+            <button type="button" id="btn-lock-session" class="btn-lock-session" title="Encerrar Sessão">Bloquear</button>
+          </div>
 
-        <!-- CAIXA DE STATUS -->
-        <div id="signup-status" class="status-box" hidden></div>
+          <p class="wa-card-desc">
+            Autorize os canais comerciais da sua empresa para integração com o <strong>NEØ Growth System</strong>.
+          </p>
+
+          <!-- INPUT DE NOME DE EXIBIÇÃO -->
+          <div class="input-wrapper">
+            <label for="display-name-input" class="input-label">Nome de Exibição do WhatsApp (Display Name)</label>
+            <input
+              type="text"
+              id="display-name-input"
+              class="input-display-name"
+              placeholder="Ex: Flowoff Agency"
+              autocomplete="off"
+              required
+            />
+            <div id="validation-error" class="validation-message" hidden></div>
+          </div>
+
+          <!-- BOTÃO AZUL OFICIAL META -->
+          <div class="cta-wrapper">
+            <button
+              id="btn-meta-signup"
+              onclick="launchWhatsAppSignup()"
+              class="btn-meta-blue"
+              data-haptic
+              data-meta-app-id={metaAppId}
+              data-meta-config-id={metaLoginConfigurationId}
+              data-graph-api-version={graphApiVersion}
+              aria-label="Continuar com a Meta"
+            >
+              <svg class="meta-btn-icon" width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+                <path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/>
+              </svg>
+              <span class="btn-text">Continuar com a Meta</span>
+              <span class="btn-spinner-host" data-spinner-host aria-hidden="true"></span>
+            </button>
+          </div>
+
+          <!-- CAIXA DE STATUS -->
+          <div id="signup-status" class="status-box" hidden></div>
+        </div>
 
         <!-- SELOS DE SEGURANÇA E CONEXÃO -->
         <div class="trust-grid">
@@ -814,6 +868,191 @@ const graphApiVersion = metaConfig.graph_api_version;
       margin-bottom: 0;
     }
 
+    /* ─── ACCESS GATE STYLES ─── */
+    .access-gate-card {
+      background: rgba(255, 255, 255, 0.02);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      border-radius: 14px;
+      padding: 1.6rem 1.4rem;
+      margin-bottom: 1.5rem;
+      text-align: center;
+      position: relative;
+      z-index: 2;
+    }
+
+    .gate-status-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 7px;
+      padding: 5px 12px;
+      border-radius: 999px;
+      background: rgba(255, 180, 0, 0.1);
+      border: 1px solid rgba(255, 180, 0, 0.3);
+      color: #ffc107;
+      font-family: var(--mono);
+      font-size: 0.62rem;
+      font-weight: 700;
+      letter-spacing: 0.06em;
+      margin-bottom: 1rem;
+    }
+
+    .gate-status-dot {
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: #ffc107;
+      box-shadow: 0 0 8px #ffc107;
+      animation: blink 2s ease-in-out infinite;
+    }
+
+    .gate-lead {
+      font-size: 0.85rem;
+      line-height: 1.5;
+      color: rgba(255, 255, 255, 0.75);
+      margin-bottom: 1.3rem;
+    }
+
+    .gate-action-primary {
+      margin-bottom: 1.4rem;
+    }
+
+    .gate-whatsapp-btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      width: 100%;
+      padding: 14px 20px;
+      border-radius: 12px;
+      background: #25d366;
+      color: #0b2210;
+      font-size: 0.9rem;
+      font-weight: 800;
+      text-decoration: none;
+      box-shadow: 0 4px 16px rgba(37, 211, 102, 0.3);
+      transition: transform 0.18s ease, filter 0.18s ease;
+    }
+
+    .gate-whatsapp-btn:hover {
+      filter: brightness(1.08);
+      transform: translateY(-1px);
+    }
+
+    .gate-divider {
+      position: relative;
+      margin: 1.4rem 0 1rem;
+      text-align: center;
+    }
+
+    .gate-divider::before {
+      content: '';
+      position: absolute;
+      top: 50%;
+      left: 0;
+      right: 0;
+      height: 1px;
+      background: rgba(255, 255, 255, 0.08);
+    }
+
+    .gate-divider span {
+      position: relative;
+      background: #111116;
+      padding: 0 10px;
+      font-family: var(--mono);
+      font-size: 0.6rem;
+      color: rgba(255, 255, 255, 0.4);
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+    }
+
+    .gate-form {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .gate-input-group {
+      display: flex;
+      gap: 8px;
+    }
+
+    .gate-input {
+      flex: 1;
+      background: rgba(0, 0, 0, 0.45);
+      border: 1px solid rgba(255, 255, 255, 0.14);
+      border-radius: 10px;
+      padding: 10px 14px;
+      color: #ffffff;
+      font-family: var(--mono);
+      font-size: 0.78rem;
+      outline: none;
+      transition: border-color 0.2s ease;
+    }
+
+    .gate-input:focus {
+      border-color: var(--acid, #e0ff00);
+      box-shadow: 0 0 0 2px rgba(224, 255, 0, 0.15);
+    }
+
+    .gate-btn-unlock {
+      background: var(--acid, #e0ff00);
+      color: var(--neo-acid-ink, #252800);
+      border: none;
+      border-radius: 10px;
+      padding: 0 16px;
+      font-size: 0.82rem;
+      font-weight: 700;
+      cursor: pointer;
+      transition: filter 0.18s ease;
+    }
+
+    .gate-btn-unlock:hover {
+      filter: brightness(1.08);
+    }
+
+    /* ─── UNLOCKED BANNER ─── */
+    .auth-unlocked-banner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 6px 12px;
+      border-radius: 8px;
+      background: rgba(224, 255, 0, 0.08);
+      border: 1px solid rgba(224, 255, 0, 0.25);
+      margin-bottom: 1.2rem;
+      font-family: var(--mono);
+      font-size: 0.6rem;
+      font-weight: 700;
+      color: var(--acid, #e0ff00);
+      letter-spacing: 0.05em;
+    }
+
+    .unlocked-dot {
+      width: 5px;
+      height: 5px;
+      border-radius: 50%;
+      background: var(--acid, #e0ff00);
+      box-shadow: 0 0 6px var(--acid, #e0ff00);
+      margin-right: 6px;
+    }
+
+    .btn-lock-session {
+      background: transparent;
+      border: 1px solid rgba(255, 255, 255, 0.15);
+      color: rgba(255, 255, 255, 0.55);
+      border-radius: 6px;
+      padding: 2px 8px;
+      font-family: var(--mono);
+      font-size: 0.55rem;
+      cursor: pointer;
+      transition: all 0.18s ease;
+    }
+
+    .btn-lock-session:hover {
+      border-color: rgba(255, 100, 100, 0.5);
+      color: #ff6b6b;
+    }
+
     .app-info-footer,
     .compliance-footer {
       content-visibility: auto;
@@ -821,6 +1060,79 @@ const graphApiVersion = metaConfig.graph_api_version;
     }
   </style>
 
+  <script is:inline>
+    // Access Gate Controller
+    function checkGateAccess() {
+      const urlParams = new URLSearchParams(window.location.search);
+      const queryKey = urlParams.get('auth') || urlParams.get('token') || urlParams.get('key');
+      const storedKey = sessionStorage.getItem('neo_waba_auth');
+      const activeKey = queryKey || storedKey;
+
+      if (isValidAccessKey(activeKey)) {
+        unlockGateUI(activeKey);
+      } else {
+        lockGateUI();
+      }
+    }
+
+    function isValidAccessKey(key) {
+      if (!key) return false;
+      const clean = String(key).trim();
+      return (
+        clean.startsWith('flw_') ||
+        clean.startsWith('flow_') ||
+        clean.startsWith('neo_') ||
+        clean.length >= 6
+      );
+    }
+
+    function unlockGateUI(key) {
+      sessionStorage.setItem('neo_waba_auth', key);
+      const gateEl = document.getElementById('access-gate-block');
+      const connectorEl = document.getElementById('connector-active-block');
+      if (gateEl) gateEl.hidden = true;
+      if (connectorEl) connectorEl.hidden = false;
+    }
+
+    function lockGateUI() {
+      sessionStorage.removeItem('neo_waba_auth');
+      const gateEl = document.getElementById('access-gate-block');
+      const connectorEl = document.getElementById('connector-active-block');
+      if (gateEl) gateEl.hidden = false;
+      if (connectorEl) connectorEl.hidden = true;
+    }
+
+    document.addEventListener('DOMContentLoaded', () => {
+      checkGateAccess();
+
+      const form = document.getElementById('gate-key-form');
+      const input = document.getElementById('gate-access-key-input');
+      const errorEl = document.getElementById('gate-key-error');
+      const lockBtn = document.getElementById('btn-lock-session');
+
+      if (form && input) {
+        form.addEventListener('submit', (e) => {
+          e.preventDefault();
+          const val = input.value.trim();
+          if (isValidAccessKey(val)) {
+            if (errorEl) errorEl.hidden = true;
+            unlockGateUI(val);
+          } else {
+            if (errorEl) {
+              errorEl.textContent = 'Chave inválida. Utilize sua chave oficial (ex: flw_...) ou solicite ativação.';
+              errorEl.hidden = false;
+            }
+          }
+        });
+      }
+
+      if (lockBtn) {
+        lockBtn.addEventListener('click', () => {
+          lockGateUI();
+        });
+      }
+    });
+  </script>
   <script src="../scripts/meta-signup.ts"></script>
   <script defer crossorigin="anonymous" src="https://connect.facebook.net/pt_BR/sdk.js"></script>
 </Base>

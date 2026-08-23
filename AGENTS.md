@@ -215,4 +215,3 @@ node --test tests/data-deletion-and-ssr.test.js tests/embedded-signup-storage.te
 
 Se `pnpm exec astro check` falhar por erro interno do language server,
 registre a falha e não declare typecheck aprovado.
-
