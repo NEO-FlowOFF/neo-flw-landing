@@ -1118,14 +1118,34 @@ const graphApiVersion = metaConfig.graph_api_version;
   </style>
 
   <script is:inline>
-    // Access Gate Controller
+    // Access Gate Controller — server-side validated
     var _gateAttempts = 0;
     var _gateLockedUntil = 0;
+    var _validatingKey = false;
 
     function sanitizeKey(raw) {
       if (!raw || typeof raw !== 'string') return '';
-      // Strip control chars, HTML, and limit length
       return raw.replace(/[<>"'&\x00-\x1f]/g, '').trim().slice(0, 128);
+    }
+
+    /** Quick client-side pre-filter (not authoritative) */
+    function hasValidKeyFormat(key) {
+      if (!key) return false;
+      var clean = sanitizeKey(key);
+      if (!/^[a-zA-Z0-9_]+$/.test(clean)) return false;
+      return clean.startsWith('flw_') && clean.length >= 10 && clean.length <= 128;
+    }
+
+    /** Authoritative server-side validation */
+    function validateKeyOnServer(key) {
+      return fetch('/api/validate-key', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ key: key })
+      })
+      .then(function(res) { return res.json(); })
+      .then(function(data) { return data && data.valid === true; })
+      .catch(function() { return false; }); // fail closed on network error
     }
 
     function checkGateAccess() {
@@ -1135,31 +1155,26 @@ const graphApiVersion = metaConfig.graph_api_version;
       var storedKey = sanitizeKey(sessionStorage.getItem('neo_waba_auth'));
       var activeKey = queryKey || storedKey;
 
-      // Clean URL params after reading (don't leak auth in address bar)
+      // Clean URL params after reading
       if (rawKey && window.history.replaceState) {
-        var cleanUrl = window.location.pathname;
-        window.history.replaceState(null, '', cleanUrl);
+        window.history.replaceState(null, '', window.location.pathname);
       }
 
-      if (isValidAccessKey(activeKey)) {
-        unlockGateUI(activeKey);
-      } else {
+      if (!activeKey || !hasValidKeyFormat(activeKey)) {
         lockGateUI();
+        return;
       }
-    }
 
-    function isValidAccessKey(key) {
-      if (!key) return false;
-      var clean = sanitizeKey(key);
-      // Only allow safe alphanumeric + underscores in key
-      if (!/^[a-zA-Z0-9_]+$/.test(clean)) return false;
-      var hasValidPrefix =
-        clean.startsWith('flw_sec_') ||
-        clean.startsWith('flw_auth_') ||
-        clean.startsWith('flw_') ||
-        clean.startsWith('flow_') ||
-        clean.startsWith('neo_');
-      return hasValidPrefix && clean.length >= 10 && clean.length <= 128;
+      // Validate stored/URL key server-side
+      validateKeyOnServer(activeKey).then(function(valid) {
+        if (valid) {
+          unlockGateUI(activeKey);
+        } else {
+          // Stored key is no longer valid — clear it
+          sessionStorage.removeItem('neo_waba_auth');
+          lockGateUI();
+        }
+      });
     }
 
     function unlockGateUI(key) {
@@ -1178,6 +1193,13 @@ const graphApiVersion = metaConfig.graph_api_version;
       if (connectorEl) connectorEl.hidden = true;
     }
 
+    function setUnlockLoading(isLoading) {
+      var btn = document.getElementById('btn-unlock-gate');
+      if (!btn) return;
+      btn.disabled = isLoading;
+      btn.textContent = isLoading ? 'Validando...' : 'Desbloquear';
+    }
+
     document.addEventListener('DOMContentLoaded', function() {
       checkGateAccess();
 
@@ -1187,13 +1209,12 @@ const graphApiVersion = metaConfig.graph_api_version;
       var lockBtn = document.getElementById('btn-lock-session');
       var metaBtn = document.getElementById('btn-meta-signup');
 
-      // Bind Meta signup button (replaces inline onclick)
+      // Bind Meta signup button
       if (metaBtn && typeof window.launchWhatsAppSignup === 'function') {
         metaBtn.addEventListener('click', function() {
           window.launchWhatsAppSignup();
         });
       } else if (metaBtn) {
-        // Script may load after DOMContentLoaded; defer binding
         var _metaBindInterval = setInterval(function() {
           if (typeof window.launchWhatsAppSignup === 'function') {
             metaBtn.addEventListener('click', function() {
@@ -1202,7 +1223,6 @@ const graphApiVersion = metaConfig.graph_api_version;
             clearInterval(_metaBindInterval);
           }
         }, 200);
-        // Safety: stop trying after 10s
         setTimeout(function() { clearInterval(_metaBindInterval); }, 10000);
       }
 
@@ -1210,7 +1230,7 @@ const graphApiVersion = metaConfig.graph_api_version;
         form.addEventListener('submit', function(e) {
           e.preventDefault();
 
-          // Rate limiting: block after 5 failed attempts for 30s
+          // Rate limiting
           if (Date.now() < _gateLockedUntil) {
             if (errorEl) {
               var remaining = Math.ceil((_gateLockedUntil - Date.now()) / 1000);
@@ -1220,22 +1240,48 @@ const graphApiVersion = metaConfig.graph_api_version;
             return;
           }
 
+          if (_validatingKey) return;
+
           var val = sanitizeKey(input.value);
-          if (isValidAccessKey(val)) {
-            _gateAttempts = 0;
-            if (errorEl) errorEl.hidden = true;
-            unlockGateUI(val);
-          } else {
+
+          // Quick format check before hitting the server
+          if (!hasValidKeyFormat(val)) {
             _gateAttempts++;
             if (_gateAttempts >= 5) {
               _gateLockedUntil = Date.now() + 30000;
               _gateAttempts = 0;
             }
             if (errorEl) {
-              errorEl.textContent = 'Chave inválida. Utilize sua chave oficial (ex: flw_...) ou solicite ativação.';
+              errorEl.textContent = 'Formato inválido. Utilize sua chave oficial (ex: flw_...).';
               errorEl.hidden = false;
             }
+            return;
           }
+
+          // Server-side validation
+          _validatingKey = true;
+          setUnlockLoading(true);
+          if (errorEl) errorEl.hidden = true;
+
+          validateKeyOnServer(val).then(function(valid) {
+            _validatingKey = false;
+            setUnlockLoading(false);
+
+            if (valid) {
+              _gateAttempts = 0;
+              unlockGateUI(val);
+            } else {
+              _gateAttempts++;
+              if (_gateAttempts >= 5) {
+                _gateLockedUntil = Date.now() + 30000;
+                _gateAttempts = 0;
+              }
+              if (errorEl) {
+                errorEl.textContent = 'Chave não reconhecida. Verifique ou solicite uma nova chave de ativação.';
+                errorEl.hidden = false;
+              }
+            }
+          });
         });
       }
 
