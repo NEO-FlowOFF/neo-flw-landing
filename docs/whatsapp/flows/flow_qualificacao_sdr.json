@@ -1,0 +1,207 @@
+{
+  "version": "5.1",
+  "data_api_version": "3.0",
+  "routing_model": {
+    "QUALIFICACAO_LEAD": ["DIAGNOSTICO_DIGITAL"],
+    "DIAGNOSTICO_DIGITAL": ["CONFIRMACAO_RESUMO"],
+    "CONFIRMACAO_RESUMO": []
+  },
+  "screens": [
+    {
+      "id": "QUALIFICACAO_LEAD",
+      "title": "Diagnóstico Inicial NEØ",
+      "terminal": false,
+      "layout": {
+        "type": "SingleColumnLayout",
+        "children": [
+          {
+            "type": "TextHeading",
+            "text": "Qualificação de Operação Commercial"
+          },
+          {
+            "type": "TextBody",
+            "text": "Seja bem-vindo à neøflow agency. Responda às perguntas abaixo para direcionarmos o melhor agente de IA ou especialista para o seu negócio."
+          },
+          {
+            "type": "TextInput",
+            "name": "nome_empresa",
+            "label": "Nome da sua empresa / marca",
+            "required": true,
+            "input-type": "text"
+          },
+          {
+            "type": "RadioButtonsGroup",
+            "name": "tamanho_equipe",
+            "label": "Tamanho da equipe comercial / atendimento",
+            "required": true,
+            "data-source": [
+              {
+                "id": "1_3",
+                "title": "1 a 3 pessoas (Operação enxuta)"
+              },
+              {
+                "id": "4_10",
+                "title": "4 a 10 pessoas (Em expansão)"
+              },
+              {
+                "id": "11_plus",
+                "title": "Mais de 10 pessoas (Enterprise)"
+              }
+            ]
+          },
+          {
+            "type": "RadioButtonsGroup",
+            "name": "faturamento_faixa",
+            "label": "Faixa de Faturamento Mensal Estimado",
+            "required": true,
+            "data-source": [
+              {
+                "id": "ate_30k",
+                "title": "Até R$ 30.000 / mês"
+              },
+              {
+                "id": "30k_100k",
+                "title": "R$ 30.000 a R$ 100.000 / mês"
+              },
+              {
+                "id": "100k_500k",
+                "title": "R$ 100.000 a R$ 500.000 / mês"
+              },
+              {
+                "id": "acima_500k",
+                "title": "Acima de R$ 500.000 / mês"
+              }
+            ]
+          },
+          {
+            "type": "Footer",
+            "label": "Próximo Passo",
+            "on-click-action": {
+              "name": "navigate",
+              "next": {
+                "type": "screen",
+                "name": "DIAGNOSTICO_DIGITAL"
+              },
+              "payload": {}
+            }
+          }
+        ]
+      }
+    },
+    {
+      "id": "DIAGNOSTICO_DIGITAL",
+      "title": "Gargalo & Infraestrutura",
+      "terminal": false,
+      "layout": {
+        "type": "SingleColumnLayout",
+        "children": [
+          {
+            "type": "TextHeading",
+            "text": "Identificação de Gargalos"
+          },
+          {
+            "type": "TextSubheading",
+            "text": "Qual é o principal desafio no seu atendimento ou canal comercial hoje?"
+          },
+          {
+            "type": "CheckboxGroup",
+            "name": "gargalos_identificados",
+            "label": "Selecione os desafios atuais:",
+            "required": true,
+            "data-source": [
+              {
+                "id": "demora_resposta",
+                "title": "Demora para responder leads (Demora > 5 min)"
+              },
+              {
+                "id": "falta_crm",
+                "title": "Leads perdidos sem acompanhamento ou CRM"
+              },
+              {
+                "id": "whatsapp_bloqueios",
+                "title": "Queda ou bloqueio de números no WhatsApp"
+              },
+              {
+                "id": "sem_agente_ia",
+                "title": "Falta de automação inteligente ou SDR 24/7"
+              },
+              {
+                "id": "meta_ads_ruim",
+                "title": "Tráfego pago com custo alto e lead desqualificado"
+              }
+            ]
+          },
+          {
+            "type": "RadioButtonsGroup",
+            "name": "urgencia_implementacao",
+            "label": "Prazo desejado para entrada em operação",
+            "required": true,
+            "data-source": [
+              {
+                "id": "imediato",
+                "title": "Imediato (Nas próximas 48h)"
+              },
+              {
+                "id": "7_dias",
+                "title": "Em até 7 dias"
+              },
+              {
+                "id": "30_dias",
+                "title": "Planejamento para este mês"
+              }
+            ]
+          },
+          {
+            "type": "Footer",
+            "label": "Revisar e Enviar",
+            "on-click-action": {
+              "name": "navigate",
+              "next": {
+                "type": "screen",
+                "name": "CONFIRMACAO_RESUMO"
+              },
+              "payload": {}
+            }
+          }
+        ]
+      }
+    },
+    {
+      "id": "CONFIRMACAO_RESUMO",
+      "title": "Confirmação do Envio",
+      "terminal": true,
+      "sensitive": ["faturamento_faixa"],
+      "layout": {
+        "type": "SingleColumnLayout",
+        "children": [
+          {
+            "type": "TextHeading",
+            "text": "Diagnóstico Concluído!"
+          },
+          {
+            "type": "TextBody",
+            "text": "Obrigado por responder. Nossos agentes de IA e engenheiros comerciais analisarão seu perfil imediatamente."
+          },
+          {
+            "type": "TextCaption",
+            "text": "Sua solicitação foi registrada sob o ecossistema NEØ Growth System."
+          },
+          {
+            "type": "Footer",
+            "label": "Finalizar e Receber Contato",
+            "on-click-action": {
+              "name": "complete",
+              "payload": {
+                "nome_empresa": "${screen.QUALIFICACAO_LEAD.form.nome_empresa}",
+                "tamanho_equipe": "${screen.QUALIFICACAO_LEAD.form.tamanho_equipe}",
+                "faturamento_faixa": "${screen.QUALIFICACAO_LEAD.form.faturamento_faixa}",
+                "gargalos": "${screen.DIAGNOSTICO_DIGITAL.form.gargalos_identificados}",
+                "urgencia": "${screen.DIAGNOSTICO_DIGITAL.form.urgencia_implementacao}"
+              }
+            }
+          }
+        ]
+      }
+    }
+  ]
+}

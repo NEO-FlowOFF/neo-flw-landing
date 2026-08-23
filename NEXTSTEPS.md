@@ -66,6 +66,12 @@ e os **próximos passos de arquitetura**.
 - [x] **3.3. Embedded Signup & Meta Login for Business:**
   - Config ID canônico `1322930417561011` carregado de `config.json`.
   - Adapter server-side em `functions/api/meta/embedded-signup.js` encaminhando code com política fail-closed.
+- [x] **3.4. Arquitetura e Esquemas de WhatsApp Flow JSON (Meta Spec v5.1):**
+  - Guia técnico completo de arquitetura em [`docs/whatsapp/FLOW_JSON_GUIDE.md`](file:///Users/nettomello/neomello/NEO-FlowOFF/neo-flw-landing/docs/whatsapp/FLOW_JSON_GUIDE.md).
+  - 3 esquemas Flow JSON prontos para importação no Meta WhatsApp Manager (App `NEØFLW ENGINE:one` `1500002841696407`):
+    - [`flow_qualificacao_sdr.json`](file:///Users/nettomello/neomello/NEO-FlowOFF/neo-flw-landing/docs/whatsapp/flows/flow_qualificacao_sdr.json) (Qualificação comercial e SDR IA)
+    - [`flow_agendamento_reuniao.json`](file:///Users/nettomello/neomello/NEO-FlowOFF/neo-flw-landing/docs/whatsapp/flows/flow_agendamento_reuniao.json) (Agendamento de reuniões e conferências)
+    - [`flow_checkout_servico.json`](file:///Users/nettomello/neomello/NEO-FlowOFF/neo-flw-landing/docs/whatsapp/flows/flow_checkout_servico.json) (Seleção de serviços do catálogo comercial NEØ)
 
 ---
 

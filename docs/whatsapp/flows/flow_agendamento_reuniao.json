@@ -1,0 +1,179 @@
+{
+  "version": "5.1",
+  "data_api_version": "3.0",
+  "routing_model": {
+    "SELECAO_DATA_HORA": ["DETALHES_REUNIAO"],
+    "DETALHES_REUNIAO": ["CONFIRMACAO_AGENDAMENTO"],
+    "CONFIRMACAO_AGENDAMENTO": []
+  },
+  "screens": [
+    {
+      "id": "SELECAO_DATA_HORA",
+      "title": "Agendar Reunião NEØ",
+      "terminal": false,
+      "layout": {
+        "type": "SingleColumnLayout",
+        "children": [
+          {
+            "type": "TextHeading",
+            "text": "Escolha o melhor horário"
+          },
+          {
+            "type": "TextBody",
+            "text": "Agende uma demonstração ao vivo ou reunião diagnóstica com nosso especialista comercial."
+          },
+          {
+            "type": "DatePicker",
+            "name": "data_reuniao",
+            "label": "Data preferencial para a reunião",
+            "required": true
+          },
+          {
+            "type": "RadioButtonsGroup",
+            "name": "turno_preferencial",
+            "label": "Turno de sua preferência",
+            "required": true,
+            "data-source": [
+              {
+                "id": "manha",
+                "title": "Manhã (09:00 - 12:00)"
+              },
+              {
+                "id": "tarde",
+                "title": "Tarde (14:00 - 18:00)"
+              },
+              {
+                "id": "noite",
+                "title": "Noite (18:00 - 20:00)"
+              }
+            ]
+          },
+          {
+            "type": "Footer",
+            "label": "Continuar",
+            "on-click-action": {
+              "name": "navigate",
+              "next": {
+                "type": "screen",
+                "name": "DETALHES_REUNIAO"
+              },
+              "payload": {}
+            }
+          }
+        ]
+      }
+    },
+    {
+      "id": "DETALHES_REUNIAO",
+      "title": "Detalhes da Reunião",
+      "terminal": false,
+      "layout": {
+        "type": "SingleColumnLayout",
+        "children": [
+          {
+            "type": "TextHeading",
+            "text": "Tópico & Preferências"
+          },
+          {
+            "type": "Dropdown",
+            "name": "assunto_principal",
+            "label": "Assunto Principal da Reunião",
+            "required": true,
+            "data-source": [
+              {
+                "id": "implantacao_agente_ia",
+                "title": "Implantação de Agente SDR IA no WhatsApp"
+              },
+              {
+                "id": "api_whatsapp_oficial",
+                "title": "Setup & Homologação WABA Meta Official"
+              },
+              {
+                "id": "tiktok_shop_ads",
+                "title": "Entrada e Gestão TikTok Shop"
+              },
+              {
+                "id": "crm_automacao",
+                "title": "CRM Comercial Inteligente & Funil Neon"
+              },
+              {
+                "id": "custom_enterprise",
+                "title": "Projeto Customizado Enterprise"
+              }
+            ]
+          },
+          {
+            "type": "RadioButtonsGroup",
+            "name": "canal_reuniao",
+            "label": "Canal preferencial da conferência",
+            "required": true,
+            "data-source": [
+              {
+                "id": "google_meet",
+                "title": "Google Meet (Vídeochamada)"
+              },
+              {
+                "id": "whatsapp_call",
+                "title": "Ligação via WhatsApp"
+              },
+              {
+                "id": "telefone",
+                "title": "Ligação Telefônica Tradicional"
+              }
+            ]
+          },
+          {
+            "type": "TextArea",
+            "name": "observacoes",
+            "label": "Observações ou perguntas prévias (opcional)",
+            "required": false
+          },
+          {
+            "type": "Footer",
+            "label": "Revisar Agendamento",
+            "on-click-action": {
+              "name": "navigate",
+              "next": {
+                "type": "screen",
+                "name": "CONFIRMACAO_AGENDAMENTO"
+              },
+              "payload": {}
+            }
+          }
+        ]
+      }
+    },
+    {
+      "id": "CONFIRMACAO_AGENDAMENTO",
+      "title": "Confirmar Agendamento",
+      "terminal": true,
+      "layout": {
+        "type": "SingleColumnLayout",
+        "children": [
+          {
+            "type": "TextHeading",
+            "text": "Solicitação Pronta!"
+          },
+          {
+            "type": "TextBody",
+            "text": "Ao clicar no botão abaixo, sua solicitação de agendamento será confirmada e o convite enviado para você no WhatsApp."
+          },
+          {
+            "type": "Footer",
+            "label": "Confirmar Agendamento",
+            "on-click-action": {
+              "name": "complete",
+              "payload": {
+                "data_reuniao": "${screen.SELECAO_DATA_HORA.form.data_reuniao}",
+                "turno": "${screen.SELECAO_DATA_HORA.form.turno_preferencial}",
+                "assunto": "${screen.DETALHES_REUNIAO.form.assunto_principal}",
+                "canal": "${screen.DETALHES_REUNIAO.form.canal_reuniao}",
+                "observacoes": "${screen.DETALHES_REUNIAO.form.observacoes}"
+              }
+            }
+          }
+        ]
+      }
+    }
+  ]
+}

@@ -1,0 +1,155 @@
+{
+  "version": "5.1",
+  "data_api_version": "3.0",
+  "routing_model": {
+    "SELECAO_SERVICO": ["ESCOPO_PERSONALIZADO"],
+    "ESCOPO_PERSONALIZADO": ["FINALIZAR_PEDIDO"],
+    "FINALIZAR_PEDIDO": []
+  },
+  "screens": [
+    {
+      "id": "SELECAO_SERVICO",
+      "title": "Catálogo de Serviços NEØ",
+      "terminal": false,
+      "layout": {
+        "type": "SingleColumnLayout",
+        "children": [
+          {
+            "type": "TextHeading",
+            "text": "Escolha o Serviço Desejado"
+          },
+          {
+            "type": "TextBody",
+            "text": "Selecione uma das soluções do nosso catálogo oficial para solicitar proposta ou contrato imediato."
+          },
+          {
+            "type": "RadioButtonsGroup",
+            "name": "servico_id",
+            "label": "Serviço / Pacote Comercial",
+            "required": true,
+            "data-source": [
+              {
+                "id": "SERVICO-AGENTE-IA-STARTER",
+                "title": "Implantação Agente SDR IA (R$ 1.990)"
+              },
+              {
+                "id": "SERVICO-API-WHATSAPP",
+                "title": "Setup Oficial WhatsApp Business WABA (R$ 990)"
+              },
+              {
+                "id": "SERVICO-CRM-COMERCIAL",
+                "title": "CRM Comercial Inteligente (R$ 1.490)"
+              },
+              {
+                "id": "SERVICO-WEBAPP-LP",
+                "title": "WebApp LP Comercial Express (R$ 2.490)"
+              },
+              {
+                "id": "SERVICO-TIKTOK-SHOP",
+                "title": "Setup Inicial TikTok Shop (R$ 1.290)"
+              },
+              {
+                "id": "SERVICO-CUSTOM-ENTERPRISE",
+                "title": "Operação Custom Enterprise (Sob Consulta)"
+              }
+            ]
+          },
+          {
+            "type": "Footer",
+            "label": "Configurar Escopo",
+            "on-click-action": {
+              "name": "navigate",
+              "next": {
+                "type": "screen",
+                "name": "ESCOPO_PERSONALIZADO"
+              },
+              "payload": {}
+            }
+          }
+        ]
+      }
+    },
+    {
+      "id": "ESCOPO_PERSONALIZADO",
+      "title": "Personalizar Escopo",
+      "terminal": false,
+      "layout": {
+        "type": "SingleColumnLayout",
+        "children": [
+          {
+            "type": "TextHeading",
+            "text": "Requisitos da Operação"
+          },
+          {
+            "type": "RadioButtonsGroup",
+            "name": "forma_pagamento_preferida",
+            "label": "Forma de pagamento pretendida",
+            "required": true,
+            "data-source": [
+              {
+                "id": "pix_avista",
+                "title": "PIX à Vista (com 5% de desconto)"
+              },
+              {
+                "id": "cartao_parcelado",
+                "title": "Cartão de Crédito em até 12x"
+              },
+              {
+                "id": "faturamento_cnpj",
+                "title": "Faturamento via Boleto CNPJ"
+              }
+            ]
+          },
+          {
+            "type": "OptIn",
+            "name": "aceita_termos",
+            "label": "Declaro que concordo com os Termos de Serviço e Política de Privacidade da neøflow agency.",
+            "required": true
+          },
+          {
+            "type": "Footer",
+            "label": "Revisar Proposta",
+            "on-click-action": {
+              "name": "navigate",
+              "next": {
+                "type": "screen",
+                "name": "FINALIZAR_PEDIDO"
+              },
+              "payload": {}
+            }
+          }
+        ]
+      }
+    },
+    {
+      "id": "FINALIZAR_PEDIDO",
+      "title": "Enviar Solicitação",
+      "terminal": true,
+      "layout": {
+        "type": "SingleColumnLayout",
+        "children": [
+          {
+            "type": "TextHeading",
+            "text": "Tudo Pronto!"
+          },
+          {
+            "type": "TextBody",
+            "text": "Clique no botão abaixo para confirmar seu interesse. Um consultor entrará em contato com o link direto de checkout e contrato."
+          },
+          {
+            "type": "Footer",
+            "label": "Gerar Proposta & Checkout",
+            "on-click-action": {
+              "name": "complete",
+              "payload": {
+                "servico_id": "${screen.SELECAO_SERVICO.form.servico_id}",
+                "pagamento": "${screen.ESCOPO_PERSONALIZADO.form.forma_pagamento_preferida}",
+                "aceitou_termos": "${screen.ESCOPO_PERSONALIZADO.form.aceita_termos}"
+              }
+            }
+          }
+        ]
+      }
+    }
+  ]
+}
