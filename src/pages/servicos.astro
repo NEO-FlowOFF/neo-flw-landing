@@ -45,17 +45,20 @@ const servicosSchema = {
     'itemListElement': products.map((p, idx) => ({
       '@type': 'ListItem',
       'position': idx + 1,
-      'name': p.title,
-      'url': p.category === 'Serviço' ? `https://neoflowoff.agency/checkout/${p.slug}/` : `https://neoflowoff.agency/planos/${p.slug}/`,
-      'description': p.description,
-      ...(p.price.value > 0 ? {
-        'offers': {
-          '@type': 'Offer',
-          'price': p.price.value.toString(),
-          'priceCurrency': 'BRL',
-          'availability': 'https://schema.org/InStock'
-        }
-      } : {})
+      'item': {
+        '@type': p.category === 'Serviço' ? 'Service' : 'Product',
+        'name': p.title,
+        'url': p.category === 'Serviço' ? `https://neoflowoff.agency/checkout/${p.slug}/` : `https://neoflowoff.agency/planos/${p.slug}/`,
+        'description': p.description,
+        ...(p.price.value > 0 ? {
+          'offers': {
+            '@type': 'Offer',
+            'price': p.price.value.toString(),
+            'priceCurrency': 'BRL',
+            'availability': 'https://schema.org/InStock'
+          }
+        } : {})
+      }
     }))
   }
 };

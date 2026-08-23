@@ -1078,12 +1078,13 @@ const graphApiVersion = metaConfig.graph_api_version;
     function isValidAccessKey(key) {
       if (!key) return false;
       const clean = String(key).trim();
-      return (
+      const hasValidPrefix =
+        clean.startsWith('flw_sec_') ||
+        clean.startsWith('flw_auth_') ||
         clean.startsWith('flw_') ||
         clean.startsWith('flow_') ||
-        clean.startsWith('neo_') ||
-        clean.length >= 6
-      );
+        clean.startsWith('neo_');
+      return hasValidPrefix && clean.length >= 10;
     }
 
     function unlockGateUI(key) {
