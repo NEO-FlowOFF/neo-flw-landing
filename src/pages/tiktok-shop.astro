@@ -8,6 +8,8 @@ const sellerUrl = 'https://seller-br.tiktok.com/account/register';
 const creatorSupportUrl = 'https://wa.me/556282705594?text=Ol%C3%A1%2C%20sou%20creator%20e%20quero%20entrar%20no%20TikTok%20Shop.';
 const sellerSupportUrl = 'https://wa.me/556282705594?text=Ol%C3%A1%2C%20sou%20lojista%20e%20quero%20acelerar%20minha%20entrada%20no%20TikTok%20Shop.';
 
+const currentYear = new Date().getFullYear();
+
 const benefits = [
   ['Creators', 'Produtos para divulgar', 'Acesse o marketplace de produtos, campanhas, convites de colaboração e oportunidades de comissão.'],
   ['Lojistas', 'Venda onde a descoberta acontece', 'Abra sua loja, conecte conteúdo ao catálogo e prepare a operação para vídeos compráveis e LIVE.'],
@@ -90,7 +92,7 @@ const benefits = [
       </div>
       <div class="benefit-grid">
         {benefits.map(([label, heading, body], index) => (
-          <article class="benefit-card">
+          <article class="benefit-card" key={label}>
             <div class="benefit-meta"><b>0{index + 1}</b><span>{label}</span></div>
             <h3>{heading}</h3>
             <p>{body}</p>
@@ -125,7 +127,7 @@ const benefits = [
     </section>
 
     <footer class="shop-footer">
-      <span>© 2026 NEØ FlowOFF · TikTok Shop Connector</span>
+      <span>© {currentYear} NEØ FlowOFF · TikTok Shop Connector</span>
       <nav aria-label="Links legais">
         <a href="/privacy/">Privacidade</a>
         <a href="/terms/">Termos</a>
