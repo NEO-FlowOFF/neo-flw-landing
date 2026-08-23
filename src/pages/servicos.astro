@@ -2,10 +2,11 @@
 import Base from '../layouts/Base.astro';
 import HubHeader from '../components/HubHeader.astro';
 import BrandFooter from '../components/BrandFooter.astro';
+import BadgeChip from '../components/BadgeChip.astro';
 import catalogData from '../data/catalog.json';
 
 const title = 'Catálogo de Serviços & Soluções | NEØ FlowOFF';
-const description = 'Catálogo completo de serviços de infraestrutura comercial, WhatsApp Business API, CRM, automações, landing pages e agentes de IA da neoflowoff.agency.';
+const description = 'Catálogo oficial de serviços de infraestrutura comercial, WhatsApp Business API oficial, CRM, automações, landing pages e agentes de IA da neoflowoff.agency.';
 
 const products = catalogData.products;
 
@@ -13,19 +14,32 @@ const categories = [
   { id: 'todos', label: 'Todos os Serviços' },
   { id: 'diagnostico', label: 'Diagnósticos & Setups' },
   { id: 'meta', label: 'WhatsApp & Meta' },
-  { id: 'automacao', label: 'CRM & Automações' },
   { id: 'ia', label: 'Agentes de IA' },
+  { id: 'automacao', label: 'CRM & Automações' },
   { id: 'midia', label: 'Mídia & Performance' },
 ];
 
-const getCategoryFilter = (slug: string, category: string, displayCategory: string = '') => {
+const getCategoryFilter = (slug: string) => {
   const s = slug.toLowerCase();
-  if (s.includes('diagnostico') || s.includes('auditoria') || s.includes('setup-inicial')) return 'diagnostico';
+  if (s.includes('diagnostico') || s.includes('auditoria') || s.includes('setup-inicial') || s.includes('webapp')) return 'diagnostico';
   if (s.includes('whatsapp') || s.includes('meta')) return 'meta';
+  if (s.includes('agent') || s.includes('sdr') || s.includes('ia') || s.includes('custom')) return 'ia';
   if (s.includes('crm') || s.includes('fluxo') || s.includes('automacao') || s.includes('dashboard')) return 'automacao';
-  if (s.includes('agent') || s.includes('sdr') || s.includes('ia')) return 'ia';
   if (s.includes('aquisicao') || s.includes('trafego') || s.includes('google')) return 'midia';
   return 'diagnostico';
+};
+
+const getProductImagePath = (imageLink?: string) => {
+  if (!imageLink) return '/assets/og-image.png';
+  if (imageLink.startsWith('http')) {
+    try {
+      const url = new URL(imageLink);
+      return url.pathname;
+    } catch {
+      return imageLink;
+    }
+  }
+  return imageLink;
 };
 
 const getMetalIcon = (slug: string) => {
@@ -34,6 +48,15 @@ const getMetalIcon = (slug: string) => {
   if (s.includes('whatsapp') || s.includes('meta')) return { src: '/assets/meta_metal.png', alt: 'Meta Tech Provider' };
   return { src: '/assets/NEO_metal.png', alt: 'NEØ Protocol' };
 };
+
+const tickerItems = [
+  'Catálogo Oficial: Soluções modulares de infraestrutura comercial e agentes de IA prontos para implementação.',
+  'Meta Tech Provider: WhatsApp Cloud API homologado, Graph API v25.0 e webhooks em tempo real.',
+  'TikTok Shop Brasil: Catálogo sincronizado, verificação de seller e integrações de checkout.',
+  'Engenharia Comercial: CRM inteligente, automações sem fricção e páginas com taxa máxima de conversão.',
+];
+const tickerLoopItems = [...tickerItems, ...tickerItems];
+
 const servicosSchema = {
   '@context': 'https://schema.org',
   '@type': 'CollectionPage',
@@ -48,6 +71,7 @@ const servicosSchema = {
       'item': {
         '@type': p.category === 'Serviço' ? 'Service' : 'Product',
         'name': p.title,
+        'image': p.image_link,
         'url': p.category === 'Serviço' ? `https://neoflowoff.agency/checkout/${p.slug}/` : `https://neoflowoff.agency/planos/${p.slug}/`,
         'description': p.description,
         ...(p.price.value > 0 ? {
@@ -68,107 +92,161 @@ const servicosSchema = {
   <Fragment slot="head">
     <script type="application/ld+json" set:html={JSON.stringify(servicosSchema)} />
   </Fragment>
+
   <div class="services-hub-page">
-    <HubHeader homeHref="/" anchorBase="/" />
+    <!-- TOP TELENOTÍCIAS TICKER BAR (Mídia & Infraestrutura) -->
+    <div class="top-telenoticias-bar">
+      <div class="digital-ticker-portal">
+        <div class="ticker-track">
+          {
+            tickerLoopItems.map((item) => (
+              <span class="ticker-item">
+                <span class="ticker-live-badge">AO VIVO</span>
+                <span>{item}</span>
+                <span class="ticker-dot">◆</span>
+              </span>
+            ))
+          }
+        </div>
+      </div>
+    </div>
+
+    <!-- HUB HEADER (STICKY BLURRED) -->
+    <div class="header-container">
+      <HubHeader homeHref="/" anchorBase="/" />
+    </div>
 
     <!-- HERO DO CATÁLOGO -->
     <header class="services-hero">
       <div class="services-hero-inner">
-        <!-- BARRA METÁLICA DE PLATAFORMAS INTEGRADAS -->
-        <div class="metal-pillars-bar" aria-label="Plataformas e Ecossistemas">
-          <div class="metal-pillar-item">
-            <img src="/assets/NEO_metal.png" alt="NEØ Core" width="34" height="34" loading="eager" decoding="async" />
-            <span>NEØ Core &amp; IA</span>
-          </div>
-          <span class="pillar-dot" aria-hidden="true">◆</span>
-          <div class="metal-pillar-item">
-            <img src="/assets/EngineOne.png" alt="NEØFLW ENGINE:one" width="26" height="26" loading="eager" decoding="async" style="border-radius: 6px;" />
-            <span>NEØFLW ENGINE:one</span>
-          </div>
-          <span class="pillar-dot" aria-hidden="true">◆</span>
-          <div class="metal-pillar-item">
-            <img src="/assets/meta_metal.png" alt="Meta Tech Provider" width="34" height="34" loading="eager" decoding="async" />
-            <span>Meta Tech Provider</span>
-          </div>
-          <span class="pillar-dot" aria-hidden="true">◆</span>
-          <div class="metal-pillar-item">
-            <img src="/assets/tiktok_metal.png" alt="TikTok Partner" width="34" height="34" loading="eager" decoding="async" />
-            <span>TikTok Partner</span>
+        <!-- BARRA METÁLICA DE PLATAFORMAS INTEGRADAS (MOBILE HORIZONTAL SCROLL) -->
+        <div class="metal-pillars-wrapper">
+          <div class="metal-pillars-bar" aria-label="Plataformas e Ecossistemas Oficiais">
+            <div class="metal-pillar-item">
+              <img src="/assets/NEO_metal.png" alt="NEØ Core" width="22" height="22" loading="eager" decoding="async" />
+              <span>NEØ Core &amp; IA</span>
+            </div>
+            <span class="pillar-dot" aria-hidden="true">◆</span>
+            <div class="metal-pillar-item">
+              <img src="/assets/EngineOne.png" alt="NEØFLW ENGINE:one" width="20" height="20" loading="eager" decoding="async" class="engine-mini-logo" />
+              <span>NEØFLW ENGINE:one</span>
+            </div>
+            <span class="pillar-dot" aria-hidden="true">◆</span>
+            <div class="metal-pillar-item">
+              <img src="/assets/meta_metal.png" alt="Meta Tech Provider" width="22" height="22" loading="eager" decoding="async" />
+              <span>Meta Tech Provider</span>
+            </div>
+            <span class="pillar-dot" aria-hidden="true">◆</span>
+            <div class="metal-pillar-item">
+              <img src="/assets/tiktok_metal.png" alt="TikTok Partner" width="22" height="22" loading="eager" decoding="async" />
+              <span>TikTok Partner</span>
+            </div>
           </div>
         </div>
 
         <div class="hero-kicker">
           <span class="kicker-dot" aria-hidden="true"></span>
-          <span>Catálogo Oficial de Serviços · neoflowoff.agency</span>
+          <span>Catálogo de Soluções · neoflowoff.agency</span>
         </div>
 
-        <h1>Serviços &amp; Infraestrutura Comercial</h1>
+        <h1>Serviços &amp; Infraestrutura</h1>
         <p class="hero-lead">
-          Diagnósticos ágeis, setups oficiais de mensageria, CRM, páginas de alta conversão e agentes de IA.
-          Cada solução possui escopo validado, entrega transparente e contratação modular.
+          Setups oficiais de mensageria, automações comerciais, CRM, landing pages ultra-rápidas e agentes de IA integrados.
         </p>
 
-        <!-- FILTROS DE CATEGORIA -->
-        <div class="filter-bar" role="tablist" aria-label="Filtrar serviços por categoria">
-          {categories.map((cat, idx) => (
-            <button
-              class={`filter-pill ${idx === 0 ? 'is-active' : ''}`}
-              data-filter={cat.id}
-              role="tab"
-              aria-selected={idx === 0 ? 'true' : 'false'}
-            >
-              {cat.label}
-            </button>
-          ))}
+        <!-- FILTROS DE CATEGORIA (MOBILE-FIRST SCROLL COM CHIPS) -->
+        <div class="filter-wrapper">
+          <div class="filter-bar" role="tablist" aria-label="Filtrar serviços por categoria">
+            {categories.map((cat, idx) => {
+              const count = cat.id === 'todos'
+                ? products.length
+                : products.filter(p => getCategoryFilter(p.slug) === cat.id).length;
+
+              return (
+                <button
+                  class={`filter-pill ${idx === 0 ? 'is-active' : ''}`}
+                  data-filter={cat.id}
+                  role="tab"
+                  aria-selected={idx === 0 ? 'true' : 'false'}
+                >
+                  <span class="filter-pill-label">{cat.label}</span>
+                  <span class="filter-pill-count">{count}</span>
+                </button>
+              );
+            })}
+          </div>
         </div>
       </div>
     </header>
 
-    <!-- GRID DE PRODUTOS/SERVIÇOS -->
+    <!-- GRID DE PRODUTOS/SERVIÇOS COM IMAGENS DEDICADAS -->
     <main class="services-container">
       <div class="services-grid" id="services-grid">
         {products.map((p) => {
-          const filterGroup = getCategoryFilter(p.slug, p.category, p.display_category);
-          const targetUrl = p.category === 'Serviço' ? `/checkout/${p.slug}` : `/planos/${p.slug}`;
+          const filterGroup = getCategoryFilter(p.slug);
+          const targetUrl = p.category === 'Serviço' ? `/checkout/${p.slug}/` : `/planos/${p.slug}/`;
           const isFeatured = p.featured;
           const metalIcon = getMetalIcon(p.slug);
+          const imagePath = getProductImagePath(p.image_link);
 
           return (
             <article
               class={`service-card ${isFeatured ? 'service-card--featured' : ''}`}
               data-category={filterGroup}
             >
-              <div class="service-card-top">
-                <div class="service-category-group">
+              <!-- IMAGEM DO PRODUTO (3D RENDER / PREVIEW) -->
+              <div class="service-card-media">
+                <a href={targetUrl} class="service-media-link" tabindex="-1" aria-hidden="true">
                   <img
-                    src={metalIcon.src}
-                    alt={metalIcon.alt}
-                    class="card-metal-icon"
-                    width="28"
-                    height="28"
+                    src={imagePath}
+                    alt={`${p.title} - ${p.headline || p.display_category}`}
+                    class="service-media-img"
+                    width="600"
+                    height="338"
                     loading="lazy"
                     decoding="async"
                   />
-                  <span class="service-category-badge">{p.display_category || p.category}</span>
+                  <div class="service-media-overlay"></div>
+                </a>
+
+                <!-- BADGES SOBREPOSTAS À IMAGEM -->
+                <div class="service-media-badges">
+                  <span class="service-category-badge">
+                    {p.display_category || p.category}
+                  </span>
+                  
+                  <div class="service-partner-badge" title={metalIcon.alt}>
+                    <img
+                      src={metalIcon.src}
+                      alt={metalIcon.alt}
+                      width="20"
+                      height="20"
+                      loading="lazy"
+                      decoding="async"
+                    />
+                  </div>
                 </div>
 
-                {p.price_display && (
-                  <div class="service-price-tag">
-                    <small>{p.price_label || 'A partir de'}</small>
-                    <strong>{p.price_display}</strong>
+                {isFeatured && (
+                  <div class="service-featured-pill">
+                    <BadgeChip label="OPERAÇÃO PRINCIPAL" color="acid" pulse={true} />
                   </div>
                 )}
               </div>
 
+              <!-- CORPO DO CARD -->
               <div class="service-card-body">
                 {p.headline && <span class="service-headline">{p.headline}</span>}
-                <h2>
+                
+                <h2 class="service-title">
                   <a href={targetUrl} class="service-title-link">
                     {p.title}
                   </a>
                 </h2>
+
                 <p class="service-desc">{p.description}</p>
 
+                <!-- CHECKLIST DE ENTREGÁVEIS PRINCIPAIS -->
                 {p.features && p.features.length > 0 && (
                   <ul class="service-features-list">
                     {p.features.slice(0, 3).map((f) => (
@@ -181,9 +259,15 @@ const servicosSchema = {
                 )}
               </div>
 
+              <!-- FOOTER COM PREÇO E BOTÃO TOUCH-TARGET -->
               <div class="service-card-footer">
-                <a href={targetUrl} class="neo-button neo-button--service">
-                  <span>Ver Especificação Completa</span>
+                <div class="service-price-block">
+                  <span class="service-price-label">{p.price_label || 'A partir de'}</span>
+                  <span class="service-price-val">{p.price_display || (p.price.value > 0 ? `R$ ${p.price.value.toLocaleString('pt-BR', { minimumFractionDigits: 2 })}` : 'Sob consulta')}</span>
+                </div>
+
+                <a href={targetUrl} class="service-action-btn">
+                  <span>Ver Especificação</span>
                   <i data-lucide="arrow-up-right" aria-hidden="true"></i>
                 </a>
               </div>
@@ -192,14 +276,14 @@ const servicosSchema = {
         })}
       </div>
 
-      <!-- BANNER DE PROJETOS CUSTOM / ENTERPRISE -->
+      <!-- BANNER DE PROJETOS CUSTOM / ENTERPRISE (MOBILE-FIRST) -->
       <section class="custom-cta-band">
         <div class="custom-cta-copy">
-          <span class="custom-kicker">DEMANDAS ESPECÍFICAS</span>
+          <span class="custom-kicker">DEMANDAS ESPECÍFICAS &amp; ENTERPRISE</span>
           <h3>Precisa de uma arquitetura sob medida?</h3>
           <p>
             Desenvolvemos integrações corporativas complexas, data lakehouses, ecossistemas multi-agente
-            e pipelines dedicadas de mensageria para operações em escala.
+            e pipelines dedicadas de mensageria para operações com alta volumetria.
           </p>
         </div>
         <div class="custom-cta-actions">
@@ -207,10 +291,10 @@ const servicosSchema = {
             href="https://wa.me/556282705594?text=Ol%C3%A1%2C%20gostaria%20de%20conversar%20sobre%20um%20projeto%20sob%20medida%20para%20minha%20empresa.%20[utm:servicos-custom]"
             target="_blank"
             rel="noopener noreferrer"
-            class="neo-button neo-button--primary"
+            class="custom-whatsapp-btn"
           >
             <i data-lucide="message-circle" aria-hidden="true"></i>
-            <span>Validar Escopo com Especialista</span>
+            <span>Validar Escopo no WhatsApp</span>
           </a>
         </div>
       </section>
@@ -220,7 +304,7 @@ const servicosSchema = {
   </div>
 
   <script>
-    // Filtro interativo no client-side
+    // Filtro interativo no client-side com transição suave
     const filterButtons = document.querySelectorAll<HTMLButtonElement>('.filter-pill');
     const cards = document.querySelectorAll<HTMLElement>('.service-card');
 
@@ -249,16 +333,88 @@ const servicosSchema = {
 </Base>
 
 <style>
+  /* ════════════════════════════════════════════════════════════
+     PÁGINA /SERVICOS · 99% MOBILE-FIRST CSS ARCHITECTURE
+     ════════════════════════════════════════════════════════════ */
+
   .services-hub-page {
     min-height: 100vh;
     background: #09090b;
     color: #f4f4f5;
+    position: relative;
+    overflow-x: hidden;
   }
 
+  /* ── TOP TICKER BAR (AO VIVO) ── */
+  .top-telenoticias-bar {
+    width: 100%;
+    background: #0b0b0e;
+    color: #ffffff;
+    padding: 6px 0;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.12);
+    overflow: hidden;
+    position: relative;
+    z-index: 101;
+  }
+
+  .digital-ticker-portal {
+    position: relative;
+    width: 100%;
+    overflow: hidden;
+    -webkit-mask-image: linear-gradient(90deg, transparent 0px, #000 16px, #000 calc(100% - 16px), transparent 100%);
+    mask-image: linear-gradient(90deg, transparent 0px, #000 16px, #000 calc(100% - 16px), transparent 100%);
+  }
+
+  .ticker-track {
+    display: flex;
+    width: max-content;
+    animation: ticker-loop 36s linear infinite;
+    gap: 2rem;
+  }
+
+  .ticker-item {
+    font-family: var(--mono);
+    font-size: 0.7rem;
+    font-weight: 800;
+    color: #ffffff;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    white-space: nowrap;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.6rem;
+  }
+
+  .ticker-live-badge {
+    background: var(--acid);
+    color: #000000;
+    font-size: 0.56rem;
+    padding: 2px 6px;
+    border-radius: 4px;
+    font-weight: 900;
+    letter-spacing: 0.08em;
+  }
+
+  .ticker-dot {
+    color: var(--acid);
+    font-size: 0.55rem;
+  }
+
+  /* ── HEADER CONTAINER ── */
+  .header-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0.75rem 1rem 0;
+    position: sticky;
+    top: max(8px, env(safe-area-inset-top));
+    z-index: 100;
+  }
+
+  /* ── HERO SECTION ── */
   .services-hero {
-    padding: clamp(6rem, 12vw, 9rem) 1.25rem 3rem;
+    padding: 1.5rem 1rem 2rem;
     background:
-      radial-gradient(circle at 50% 0%, rgba(224, 255, 0, 0.08) 0%, transparent 60%),
+      radial-gradient(ellipse 70% 40% at 50% 0%, rgba(224, 255, 0, 0.09) 0%, transparent 70%),
       linear-gradient(180deg, #111114 0%, #09090b 100%);
     border-bottom: 1px solid rgba(255, 255, 255, 0.08);
   }
@@ -271,107 +427,148 @@ const servicosSchema = {
     align-items: flex-start;
   }
 
-  /* BARRA METÁLICA DE PILARES */
+  /* BARRA METÁLICA DE PILARES COM SCROLL HORIZONTAL MOBILE */
+  .metal-pillars-wrapper {
+    width: 100%;
+    overflow-x: auto;
+    scrollbar-width: none;
+    -webkit-overflow-scrolling: touch;
+    padding-bottom: 0.35rem;
+    margin-bottom: 1.25rem;
+  }
+
+  .metal-pillars-wrapper::-webkit-scrollbar {
+    display: none;
+  }
+
   .metal-pillars-bar {
     display: inline-flex;
     align-items: center;
-    gap: 1.25rem;
-    padding: 0.6rem 1.2rem;
-    background: rgba(255, 255, 255, 0.03);
+    gap: 0.85rem;
+    padding: 0.45rem 0.9rem;
+    background: rgba(255, 255, 255, 0.04);
     border: 1px solid rgba(255, 255, 255, 0.12);
     border-radius: 9999px;
-    margin-bottom: 1.75rem;
-    flex-wrap: wrap;
     backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    white-space: nowrap;
   }
 
   .metal-pillar-item {
     display: inline-flex;
     align-items: center;
-    gap: 0.6rem;
+    gap: 0.45rem;
   }
 
   .metal-pillar-item img {
-    width: 24px;
-    height: 24px;
     object-fit: contain;
-    filter: drop-shadow(0 2px 8px rgba(0, 0, 0, 0.6));
+    filter: drop-shadow(0 2px 6px rgba(0, 0, 0, 0.6));
+    flex-shrink: 0;
+  }
+
+  .engine-mini-logo {
+    border-radius: 4px;
   }
 
   .metal-pillar-item span {
     font-family: var(--mono);
-    font-size: 0.74rem;
+    font-size: 0.68rem;
     font-weight: 800;
-    letter-spacing: 0.06em;
+    letter-spacing: 0.05em;
     text-transform: uppercase;
     color: #e4e4e7;
   }
 
   .pillar-dot {
     color: var(--acid);
-    font-size: 0.55rem;
+    font-size: 0.5rem;
+    opacity: 0.8;
   }
 
   .hero-kicker {
     display: inline-flex;
     align-items: center;
-    gap: 0.6rem;
+    gap: 0.5rem;
     font-family: var(--mono);
-    font-size: 0.76rem;
+    font-size: 0.72rem;
     font-weight: 800;
-    letter-spacing: 0.1em;
+    letter-spacing: 0.08em;
     text-transform: uppercase;
     color: var(--acid);
-    margin-bottom: 1.25rem;
+    margin-bottom: 0.75rem;
   }
 
   .kicker-dot {
-    width: 0.5rem;
-    height: 0.5rem;
+    width: 0.45rem;
+    height: 0.45rem;
     border-radius: 50%;
     background: var(--acid);
-    box-shadow: 0 0 12px var(--acid);
+    box-shadow: 0 0 10px var(--acid);
   }
 
   .services-hero h1 {
-    font-size: clamp(2.5rem, 6vw, 4.8rem);
-    line-height: 1;
+    font-size: clamp(2rem, 7.5vw, 3.8rem);
+    line-height: 1.05;
     font-weight: 900;
     letter-spacing: -0.04em;
     text-transform: uppercase;
-    margin: 0 0 1.2rem;
+    margin: 0 0 0.85rem;
     color: #ffffff;
   }
 
   .hero-lead {
-    max-width: 780px;
-    font-size: clamp(1rem, 2vw, 1.2rem);
-    line-height: 1.65;
+    font-size: clamp(0.92rem, 3.2vw, 1.12rem);
+    line-height: 1.55;
     color: #a1a1aa;
-    margin: 0 0 2.5rem;
+    margin: 0 0 1.75rem;
+    max-width: 720px;
+  }
+
+  /* BARRA DE FILTROS HORIZONTAIS MOBILE-FIRST */
+  .filter-wrapper {
+    width: 100%;
+    overflow-x: auto;
+    scrollbar-width: none;
+    -webkit-overflow-scrolling: touch;
+    margin: 0 -1rem;
+    padding: 0.25rem 1rem;
+  }
+
+  .filter-wrapper::-webkit-scrollbar {
+    display: none;
   }
 
   .filter-bar {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 0.6rem;
-    width: 100%;
-    margin-top: 0.5rem;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    white-space: nowrap;
+    padding-bottom: 0.25rem;
   }
 
   .filter-pill {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.45rem;
     background: rgba(255, 255, 255, 0.04);
     border: 1px solid rgba(255, 255, 255, 0.1);
     color: #d4d4d8;
-    padding: 0.65rem 1.15rem;
+    padding: 0.55rem 0.95rem;
+    min-height: 40px;
     border-radius: 9999px;
     font-family: var(--mono);
-    font-size: 0.78rem;
+    font-size: 0.74rem;
     font-weight: 700;
-    letter-spacing: 0.04em;
+    letter-spacing: 0.03em;
     text-transform: uppercase;
     cursor: pointer;
-    transition: all 0.2s ease;
+    transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+    user-select: none;
+    -webkit-tap-highlight-color: transparent;
+  }
+
+  .filter-pill:active {
+    transform: scale(0.96);
   }
 
   .filter-pill:hover {
@@ -385,119 +582,202 @@ const servicosSchema = {
     border-color: var(--acid);
     color: #000000;
     font-weight: 900;
+    box-shadow: 0 4px 16px rgba(224, 255, 0, 0.2);
   }
 
+  .filter-pill-count {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 18px;
+    height: 18px;
+    padding: 0 4px;
+    border-radius: 9999px;
+    font-size: 0.62rem;
+    font-weight: 900;
+    background: rgba(255, 255, 255, 0.1);
+    color: currentColor;
+  }
+
+  .filter-pill.is-active .filter-pill-count {
+    background: #000000;
+    color: var(--acid);
+  }
+
+  /* ── MAIN CONTAINER & GRID ── */
   .services-container {
     max-width: 1200px;
     margin: 0 auto;
-    padding: 4rem 1.25rem 6rem;
+    padding: 2rem 1rem 5rem;
   }
 
   .services-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
-    gap: 1.5rem;
+    grid-template-columns: 1fr;
+    gap: 1.25rem;
   }
 
+  @media (min-width: 640px) {
+    .services-grid {
+      grid-template-columns: repeat(2, 1fr);
+      gap: 1.5rem;
+    }
+  }
+
+  @media (min-width: 1024px) {
+    .services-grid {
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1.75rem;
+    }
+  }
+
+  /* ── CARD DO PRODUTO (BENTO / MOBILE-FIRST) ── */
   .service-card {
     display: flex;
     flex-direction: column;
-    justify-content: space-between;
-    background: #131316;
+    background: #121215;
     border: 1px solid rgba(255, 255, 255, 0.08);
-    border-radius: 1.25rem;
-    padding: 2rem;
-    transition: transform 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease;
+    border-radius: 1.15rem;
+    overflow: hidden;
+    position: relative;
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.35);
+    transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.25s ease, box-shadow 0.25s ease;
   }
 
   .service-card:hover {
     transform: translateY(-4px);
-    border-color: rgba(224, 255, 0, 0.35);
-    box-shadow: 0 16px 40px rgba(0, 0, 0, 0.4);
+    border-color: rgba(224, 255, 0, 0.32);
+    box-shadow: 0 16px 36px rgba(0, 0, 0, 0.5), 0 0 24px rgba(224, 255, 0, 0.06);
   }
 
   .service-card--featured {
-    border-color: rgba(224, 255, 0, 0.3);
-    background: linear-gradient(180deg, #18181d 0%, #131316 100%);
+    border-color: rgba(224, 255, 0, 0.35);
+    background: linear-gradient(180deg, #17181c 0%, #111215 100%);
+    box-shadow: 0 8px 24px rgba(224, 255, 0, 0.08);
   }
 
-  .service-card-top {
+  /* ── CARD MEDIA (IMAGEM DO PRODUTO) ── */
+  .service-card-media {
+    position: relative;
+    width: 100%;
+    aspect-ratio: 16 / 9;
+    background: #0a0a0c;
+    overflow: hidden;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+  }
+
+  .service-media-link {
+    display: block;
+    width: 100%;
+    height: 100%;
+    position: relative;
+  }
+
+  .service-media-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+    transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+
+  .service-card:hover .service-media-img {
+    transform: scale(1.05);
+  }
+
+  .service-media-overlay {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(180deg, rgba(0, 0, 0, 0.1) 0%, rgba(18, 18, 21, 0.85) 100%);
+    pointer-events: none;
+  }
+
+  .service-media-badges {
+    position: absolute;
+    top: 0.75rem;
+    left: 0.75rem;
+    right: 0.75rem;
     display: flex;
     justify-content: space-between;
-    align-items: flex-start;
-    gap: 1rem;
-    margin-bottom: 1.5rem;
-  }
-
-  .service-category-group {
-    display: flex;
     align-items: center;
-    gap: 0.6rem;
-  }
-
-  .card-metal-icon {
-    width: 24px;
-    height: 24px;
-    object-fit: contain;
-    filter: drop-shadow(0 2px 6px rgba(0, 0, 0, 0.5));
-    flex-shrink: 0;
+    gap: 0.5rem;
+    pointer-events: none;
   }
 
   .service-category-badge {
-    display: inline-block;
+    display: inline-flex;
+    align-items: center;
     font-family: var(--mono);
-    font-size: 0.68rem;
+    font-size: 0.65rem;
     font-weight: 800;
     text-transform: uppercase;
-    letter-spacing: 0.08em;
+    letter-spacing: 0.06em;
     color: var(--acid);
-    background: rgba(224, 255, 0, 0.08);
-    border: 1px solid rgba(224, 255, 0, 0.2);
-    padding: 0.3rem 0.65rem;
-    border-radius: 0.4rem;
+    background: rgba(10, 10, 12, 0.85);
+    border: 1px solid rgba(224, 255, 0, 0.28);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    padding: 0.25rem 0.55rem;
+    border-radius: 0.35rem;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.4);
   }
 
-  .service-price-tag {
-    text-align: right;
+  .service-partner-badge {
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    background: rgba(10, 10, 12, 0.85);
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.4);
     flex-shrink: 0;
   }
 
-  .service-price-tag small {
-    display: block;
-    font-size: 0.65rem;
-    font-family: var(--mono);
-    color: #71717a;
-    text-transform: uppercase;
+  .service-partner-badge img {
+    object-fit: contain;
   }
 
-  .service-price-tag strong {
-    font-size: 1.15rem;
-    font-weight: 900;
-    color: #ffffff;
-    font-family: var(--mono);
+  .service-featured-pill {
+    position: absolute;
+    bottom: 0.75rem;
+    left: 0.75rem;
+    pointer-events: none;
+  }
+
+  /* ── CARD BODY ── */
+  .service-card-body {
+    padding: 1.25rem 1.25rem 1rem;
+    display: flex;
+    flex-direction: column;
+    flex: 1;
   }
 
   .service-headline {
     display: block;
     font-family: var(--mono);
-    font-size: 0.72rem;
+    font-size: 0.68rem;
     font-weight: 700;
     text-transform: uppercase;
     color: #a1a1aa;
-    margin-bottom: 0.4rem;
+    margin-bottom: 0.35rem;
     letter-spacing: 0.05em;
   }
 
-  .service-card h2 {
-    font-size: 1.35rem;
+  .service-title {
+    font-size: 1.2rem;
     line-height: 1.25;
     font-weight: 800;
-    margin: 0 0 0.85rem;
+    margin: 0 0 0.65rem;
   }
 
   .service-title-link {
     color: #ffffff;
     text-decoration: none;
+    transition: color 0.2s ease;
   }
 
   .service-title-link:hover {
@@ -505,130 +785,213 @@ const servicosSchema = {
   }
 
   .service-desc {
-    font-size: 0.9rem;
-    line-height: 1.6;
+    font-size: 0.86rem;
+    line-height: 1.55;
     color: #a1a1aa;
-    margin-bottom: 1.5rem;
+    margin-bottom: 1.15rem;
   }
 
+  /* ── FEATURES LIST ── */
   .service-features-list {
     list-style: none;
     padding: 0;
-    margin: 0 0 2rem;
+    margin: auto 0 0;
     display: flex;
     flex-direction: column;
-    gap: 0.6rem;
+    gap: 0.5rem;
+    padding-top: 0.75rem;
+    border-top: 1px solid rgba(255, 255, 255, 0.05);
   }
 
   .service-features-list li {
     display: flex;
     align-items: flex-start;
-    gap: 0.6rem;
-    font-size: 0.82rem;
+    gap: 0.5rem;
+    font-size: 0.78rem;
     color: #d4d4d8;
-    line-height: 1.45;
+    line-height: 1.4;
   }
 
-  .service-features-list i {
-    width: 0.95rem;
-    height: 0.95rem;
+  .service-features-list [data-lucide] {
+    width: 0.9rem;
+    height: 0.9rem;
     color: var(--acid);
     flex-shrink: 0;
     margin-top: 0.15rem;
   }
 
+  /* ── CARD FOOTER ── */
   .service-card-footer {
-    margin-top: auto;
-    padding-top: 1.25rem;
+    padding: 1rem 1.25rem 1.25rem;
+    background: rgba(0, 0, 0, 0.2);
     border-top: 1px solid rgba(255, 255, 255, 0.06);
+    display: flex;
+    flex-direction: column;
+    gap: 0.85rem;
   }
 
-  .neo-button--service {
-    width: 100%;
+  .service-price-block {
     display: flex;
     justify-content: space-between;
-    align-items: center;
-    background: rgba(255, 255, 255, 0.04);
-    border: 1px solid rgba(255, 255, 255, 0.12);
+    align-items: baseline;
+    gap: 0.5rem;
+  }
+
+  .service-price-label {
+    font-family: var(--mono);
+    font-size: 0.65rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    color: #71717a;
+    letter-spacing: 0.04em;
+  }
+
+  .service-price-val {
+    font-family: var(--mono);
+    font-size: 1.15rem;
+    font-weight: 900;
     color: #ffffff;
+  }
+
+  .service-action-btn {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    min-height: 46px;
     padding: 0.75rem 1rem;
+    background: rgba(255, 255, 255, 0.04);
+    border: 1px solid rgba(255, 255, 255, 0.14);
     border-radius: 0.65rem;
+    color: #ffffff;
+    font-family: var(--display);
     font-weight: 800;
     font-size: 0.82rem;
     text-transform: uppercase;
     letter-spacing: 0.04em;
     text-decoration: none;
-    transition: all 0.2s ease;
+    transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+    -webkit-tap-highlight-color: transparent;
   }
 
-  .neo-button--service:hover {
+  .service-action-btn [data-lucide] {
+    width: 16px;
+    height: 16px;
+    color: var(--acid);
+    transition: transform 0.2s ease;
+  }
+
+  .service-action-btn:active {
+    transform: scale(0.97);
+  }
+
+  .service-action-btn:hover {
     background: var(--acid);
     border-color: var(--acid);
     color: #000000;
   }
 
+  .service-action-btn:hover [data-lucide] {
+    color: #000000;
+    transform: translate(2px, -2px);
+  }
+
+  /* ── BANNER PROJETOS CUSTOM / ENTERPRISE ── */
   .custom-cta-band {
-    margin-top: 4rem;
-    background: radial-gradient(circle at 10% 50%, rgba(224, 255, 0, 0.08) 0%, transparent 60%), #131316;
-    border: 1px solid rgba(224, 255, 0, 0.25);
-    border-radius: 1.5rem;
-    padding: clamp(2rem, 5vw, 3.5rem);
+    margin-top: 3.5rem;
+    background:
+      radial-gradient(circle at 10% 50%, rgba(224, 255, 0, 0.08) 0%, transparent 60%),
+      #121215;
+    border: 1px solid rgba(224, 255, 0, 0.28);
+    border-radius: 1.25rem;
+    padding: clamp(1.5rem, 5vw, 2.75rem);
     display: flex;
-    justify-content: space-between;
-    align-items: center;
-    flex-wrap: wrap;
-    gap: 2rem;
+    flex-direction: column;
+    gap: 1.5rem;
+  }
+
+  @media (min-width: 768px) {
+    .custom-cta-band {
+      flex-direction: row;
+      align-items: center;
+      justify-content: space-between;
+    }
   }
 
   .custom-cta-copy {
-    max-width: 650px;
+    max-width: 620px;
   }
 
   .custom-kicker {
     display: block;
     font-family: var(--mono);
-    font-size: 0.72rem;
+    font-size: 0.7rem;
     font-weight: 800;
-    letter-spacing: 0.12em;
+    letter-spacing: 0.1em;
     color: var(--acid);
-    margin-bottom: 0.5rem;
+    margin-bottom: 0.45rem;
   }
 
   .custom-cta-copy h3 {
-    font-size: clamp(1.6rem, 3.5vw, 2.4rem);
+    font-size: clamp(1.4rem, 4vw, 2.2rem);
     font-weight: 900;
-    margin: 0 0 0.75rem;
     line-height: 1.15;
     text-transform: uppercase;
+    margin: 0 0 0.65rem;
+    color: #ffffff;
   }
 
   .custom-cta-copy p {
-    font-size: 0.95rem;
+    font-size: 0.9rem;
     line-height: 1.6;
     color: #a1a1aa;
     margin: 0;
   }
 
-  .custom-cta-actions .neo-button {
-    display: inline-flex;
-    align-items: center;
-    gap: 0.6rem;
-    white-space: nowrap;
-    padding: 1rem 1.5rem;
+  .custom-cta-actions {
+    width: 100%;
   }
 
-  @media (max-width: 768px) {
-    .services-grid {
-      grid-template-columns: 1fr;
+  @media (min-width: 768px) {
+    .custom-cta-actions {
+      width: auto;
+      flex-shrink: 0;
     }
-    .custom-cta-band {
-      flex-direction: column;
-      align-items: flex-start;
-    }
-    .custom-cta-actions,
-    .custom-cta-actions .neo-button {
-      width: 100%;
-      justify-content: center;
-    }
+  }
+
+  .custom-whatsapp-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.6rem;
+    width: 100%;
+    min-height: 50px;
+    padding: 0.85rem 1.4rem;
+    background: var(--acid);
+    color: #000000;
+    border-radius: 0.75rem;
+    font-family: var(--display);
+    font-weight: 900;
+    font-size: 0.88rem;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    text-decoration: none;
+    box-shadow: 0 8px 24px rgba(224, 255, 0, 0.2);
+    transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+    -webkit-tap-highlight-color: transparent;
+  }
+
+  .custom-whatsapp-btn:active {
+    transform: scale(0.97);
+  }
+
+  .custom-whatsapp-btn:hover {
+    background: #eaff33;
+    box-shadow: 0 12px 30px rgba(224, 255, 0, 0.35);
+  }
+
+  .custom-whatsapp-btn [data-lucide] {
+    width: 18px;
+    height: 18px;
   }
 </style>

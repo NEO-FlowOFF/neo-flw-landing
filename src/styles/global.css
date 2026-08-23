@@ -1722,7 +1722,6 @@ body::selection {
   touch-action: manipulation;
   -webkit-tap-highlight-color: transparent;
   appearance: none;
-  appearance: none;
 }
 
 .detail-action [data-lucide] {
@@ -2096,7 +2095,6 @@ body::selection {
 }
 
 @media (prefers-reduced-motion: reduce) {
-
   *,
   *::before,
   *::after {
