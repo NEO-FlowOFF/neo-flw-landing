@@ -1028,6 +1028,7 @@ const graphApiVersion = metaConfig.graph_api_version;
 
     .gate-input {
       flex: 1;
+      min-width: 0;
       background: rgba(0, 0, 0, 0.45);
       border: 1px solid rgba(255, 255, 255, 0.14);
       border-radius: 10px;
@@ -1056,11 +1057,22 @@ const graphApiVersion = metaConfig.graph_api_version;
       font-size: 0.85rem;
       font-weight: 700;
       cursor: pointer;
+      flex-shrink: 0;
+      white-space: nowrap;
       transition: filter 0.18s ease;
       touch-action: manipulation;
       -webkit-tap-highlight-color: transparent;
       -webkit-appearance: none;
       appearance: none;
+    }
+
+    @media (max-width: 380px) {
+      .gate-input-group {
+        flex-direction: column;
+      }
+      .gate-btn-unlock {
+        width: 100%;
+      }
     }
 
     .gate-btn-unlock:hover {
