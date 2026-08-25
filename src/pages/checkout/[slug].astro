@@ -227,6 +227,33 @@ const { servico } = Astro.props;
           }
         });
       }
+
+      // 3. Purchase / CompletePayment se o cliente retornar do checkout com confirmação de pagamento
+      const urlParams = new URLSearchParams(window.location.search);
+      const isPaid = urlParams.get('status') === 'success' || urlParams.get('status') === 'completed' || urlParams.get('paid') === 'true';
+
+      if (isPaid) {
+        if (typeof ttq !== 'undefined') {
+          ttq.track('CompletePayment', {
+            content_id: id,
+            content_type: 'product',
+            content_name: title,
+            quantity: 1,
+            price: price,
+            value: price,
+            currency: 'BRL'
+          });
+        }
+        if (typeof fbq !== 'undefined') {
+          fbq('track', 'Purchase', {
+            content_name: title,
+            content_ids: [id],
+            content_type: 'product',
+            value: price,
+            currency: 'BRL'
+          });
+        }
+      }
     });
   </script>
 </Base>

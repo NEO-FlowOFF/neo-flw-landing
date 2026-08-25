@@ -40,6 +40,9 @@ e os **próximos passos de arquitetura**.
   - Implementação dos eventos completos do funil: `ViewContent` (ao carregar), `AddToCart` e `InitiateCheckout` (ao clicar em Pagar via PIX), e `Contact` / `Lead` (ao clicar no WhatsApp de fechamento).
 - [•] **1.4. Monitoramento da Telemetria TikTok & Meta Events Manager:**
   - Aguardar a janela de propagação dos novos eventos disparados em `neoflowoff.agency` para confirmação da queda das sinalizações de diagnóstico no painel do TikTok Ads.
+- [x] **1.5. Mapa Canônico de Rastreabilidade UTM:**
+  - Criado o documento soberano [`docs/UTM_MAP.md`](file:///Users/nettomello/neomello/NEO-FlowOFF/neo-flw-landing/docs/UTM_MAP.md) com todas as 10+ tags de rastreamento de WhatsApp (`[utm:home-hero]`, `[utm:checkout-<slug>]`, `[utm:plano-<slug>]`, etc.).
+  - Mencionadas e fixadas as referências obrigatórias nas diretrizes de agentes em [`AGENTS.md`](file:///Users/nettomello/neomello/NEO-FlowOFF/neo-flw-landing/AGENTS.md) e [`GEMINI.md`](file:///Users/nettomello/neomello/NEO-FlowOFF/neo-flw-landing/GEMINI.md).
 
 ---
 
