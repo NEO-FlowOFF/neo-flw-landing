@@ -13,20 +13,17 @@ Deploy: Cloudflare Pages
 
 Landing comercial independente da `neoflowoff.agency`.
 
-Publica vitrine estática de serviços, planos e rotas de conformidade
-para tráfego pago, busca, crawlers e agentes de IA.
+Publica vitrine estática de serviços, planos e rotas de conformidade para tráfego pago, busca, crawlers e agentes de IA.
 
----
+────────────────────────────────────────
 
 ## ⟠ Contrato
 
 - child repo soberano dentro do workspace `NEO-FlowOFF`
-- lockfile pnpm local versionado; `.npmrc` define `ignore-workspace=true`
-  para não herdar o workspace pai
+- lockfile pnpm local versionado; `.npmrc` define `ignore-workspace=true` para não herdar o workspace pai
 - frontend estático em Astro, sem SSR
 - adapter server-side mínimo em `functions/`
-- helpers server-side compartilhados em `src/server/`, nunca dentro de
-  `functions/`
+- helpers server-side compartilhados em `src/server/`, nunca dentro de `functions/`
 - catálogo publicado em `src/data/catalog.json` e hub `/servicos/`
 - página dedicada sobre a agência em `/sobre/`
 - app oficial homologado na Meta `NEØFLW ENGINE:one` (App ID `1500002841696407`)
@@ -34,35 +31,20 @@ para tráfego pago, busca, crawlers e agentes de IA.
 - ticker editorial no topo da home com notícias operacionais atuais
 - build de produção em `dist/`
 - deploy em Cloudflare Pages via Wrangler
-- superfícies públicas para agentes: `public/llms.txt`,
-  `public/robots.txt`, `public/sitemap.xml` e `NEO_PROTOCOL.md`
-- Google Analytics GA4 carregado por Cloudflare Google Tag Gateway:
-  measurement `G-EQRKXQD7FW`, endpoint first-party `/n4py`,
-  `hideOriginalIp=true` e `setUpTag=false`
+- superfícies públicas para agentes: `public/llms.txt`, `public/robots.txt`, `public/sitemap.xml` e `NEO_PROTOCOL.md`
+- Google Analytics GA4 carregado por Cloudflare Google Tag Gateway: measurement `G-EQRKXQD7FW`, endpoint first-party `/n4py`, `hideOriginalIp=true` e `setUpTag=false`
 
 Não trate este repositório como backend autoritativo.
 
-Credenciais, cobranças, webhooks e dados privados devem
-ficar fora do bundle público.
+Credenciais, cobranças, webhooks e dados privados devem ficar fora do bundle público.
 
-Exceções atuais: `functions/api/meta/embedded-signup.js` recebe o
-authorization code do Embedded Signup e `functions/api/meta/data-deletion.js`
-recebe o callback Meta Data Deletion. Ambos devem falhar fechado quando
-não houver backend soberano, KV ou storage seguro configurado.
+Exceções atuais: `functions/api/meta/embedded-signup.js` recebe o authorization code do Embedded Signup e `functions/api/meta/data-deletion.js` recebe o callback Meta Data Deletion. Ambos devem falhar fechado quando não houver backend soberano, KV ou storage seguro configurado.
 
-O callback local `/api/meta-webhook` e as rotas `/api/whatsapp/send`,
-`/api/whatsapp/templates` e `/api/health/meta` são superfícies legadas de
-migração/App Review. Não são o runtime WhatsApp canônico e não devem chamar a
-Graph API a partir da landing. Webhook, envio, templates e diagnóstico
-operacional pertencem ao `neo-provider-messaging` em `neo-growth-system`.
+O callback local `/api/meta-webhook` e as rotas `/api/whatsapp/send`, `/api/whatsapp/templates` e `/api/health/meta` são superfícies legadas de migração/App Review. Não são o runtime WhatsApp canônico e não devem chamar a Graph API a partir da landing. Webhook, envio, templates e diagnóstico operacional pertencem ao `neo-provider-messaging` em `neo-growth-system`.
 
-O fluxo publico de `/conectar-whatsapp/` usa Facebook Login for Business com
-Configuration ID `1322930417561011`, mantido em `src/data/config.json` como
-`integrations.meta.login_configuration_id`. Esse ID nao e secreto. O navegador
-deve solicitar `response_type: "code"` via `config_id`; a troca do
-authorization code permanece exclusivamente server-side.
+O fluxo publico de `/conectar-whatsapp/` usa Facebook Login for Business com Configuration ID `1322930417561011`, mantido em `src/data/config.json` como `integrations.meta.login_configuration_id`. Esse ID nao e secreto. O navegador deve solicitar `response_type: "code"` via `config_id`; a troca do authorization code permanece exclusivamente server-side.
 
----
+────────────────────────────────────────
 
 ## ◬ Rotas & Superfícies Públicas
 
@@ -82,7 +64,7 @@ authorization code permanece exclusivamente server-side.
 
 Rotas de catálogo são alimentadas por `src/data/catalog.json`.
 
----
+────────────────────────────────────────
 
 ## ◯ Identidade Visual
 
@@ -92,7 +74,7 @@ Rotas de catálogo são alimentadas por `src/data/catalog.json`.
 - elemento do fundador em `/sobre/`: busto 3D de papel origami (`neo-3d-paper.gif`) com sombra elíptica de chão
 - ticker superior da home: letreiro de notícias operacionais vivas e auditáveis
 
----
+────────────────────────────────────────
 
 ## ⬡ Especificação do Portal
 
@@ -104,7 +86,7 @@ ARCHITECTURE        NEØ Protocol
 PROVIDER CONNECTOR  Meta Business Messaging
 ```
 
----
+────────────────────────────────────────
 
 ## ⧆ Fluxo de Acesso & Conexão WhatsApp (Access Gate)
 
@@ -135,7 +117,7 @@ sequenceDiagram
     end
 ```
 
----
+────────────────────────────────────────
 
 ## ⦿ Referências
 
@@ -148,7 +130,7 @@ sequenceDiagram
 - [NEXTSTEPS](./NEXTSTEPS.md)
 
 ```text
-──────────────────────────────
+────────────────────────────────────────
 NΞØ Protocol · FlowOFF Landing
-──────────────────────────────
+────────────────────────────────────────
 ```
